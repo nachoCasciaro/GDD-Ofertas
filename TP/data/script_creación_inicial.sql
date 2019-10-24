@@ -97,3 +97,29 @@ CREATE TABLE POR_COLECTORA.Compras(
 	Compra_Codigo Numeric,
 	Compra_Id_Factura Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Facturas(Fact_Id))
 GO
+
+CREATE TABLE POR_COLECTORA.Cupones(
+	Cupon_Id Numeric PRIMARY KEY,
+	Cupon_Fecha_Venc DATETIME,
+	Cupon_Fecha_Consumo DATETIME,
+	--Cupon_Nro_Compra Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Compras(Compra_Id),
+	Cupon_Id_Cliente_Consumidor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id))
+GO
+
+CREATE TABLE POR_COLECTORA.Tarjetas(
+	Tarjeta_Numero Numeric PRIMARY KEY,
+	Tarjeta_Tipo nvarchar(50),
+	Tarjeta_Fecha_Venc DATETIME,
+	Cupon_Id_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id))
+GO
+
+CREATE TABLE POR_COLECTORA.Cargas(
+	Carga_Id Numeric PRIMARY KEY,
+	Carga_Fecha DATETIME,
+	Carga_Id_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
+	Carga_Tipo_Pago nvarchar(20),
+	Carga_Monto NUMERIC,
+	Carga_Id_Tarjeta Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Tarjetas(Tarjeta_Numero),
+	Carga_Forma_Pago VARCHAR(8))
+GO
+
