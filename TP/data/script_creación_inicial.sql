@@ -42,3 +42,13 @@ CREATE TABLE POR_COLECTORA.Roles(
 	Rol_Nombre VARCHAR,
 	Rol_Habilitado BIT DEFAULT 1)
 GO
+
+CREATE TABLE POR_COLECTORA.Funcionalidades(
+	Func_Id Numeric PRIMARY KEY,
+	Func_Descripcion VARCHAR)
+GO
+
+CREATE TABLE POR_COLECTORA.Rubros(
+	Rubro_Id Numeric PRIMARY KEY,
+	Rubro_Detalle VARCHAR)
+GO
