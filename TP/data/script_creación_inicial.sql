@@ -88,3 +88,12 @@ CREATE TABLE POR_COLECTORA.Ofertas(
 	Oferta_Restriccion_Compra Numeric,
 	Oferta_Proveedor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id))
 GO
+
+CREATE TABLE POR_COLECTORA.Compras(
+	Compra_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
+	Compra_Oferta Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Ofertas(Oferta_Id),
+	Compra_Cantidad Numeric,
+	Compra_Fecha DATETIME,
+	Compra_Codigo Numeric,
+	Compra_Id_Factura Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Facturas(Fact_Id))
+GO
