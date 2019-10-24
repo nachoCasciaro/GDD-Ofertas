@@ -15,11 +15,11 @@ CREATE TABLE POR_COLECTORA.Direcciones(
 GO
 
 CREATE TABLE POR_COLECTORA.Usuarios(
-	Direccion_Id Numeric PRIMARY KEY,
-	Direccion_Nombre VARCHAR,
-	Direccion_Password VARCHAR,
-	Direccion_Intentos Numeric,
-	Direccion_Habilitado BIT DEFAULT 1)
+	User_Id Numeric PRIMARY KEY,
+	User_Nombre VARCHAR,
+	User_Password VARCHAR,
+	User_Intentos Numeric,
+	User_Habilitado BIT DEFAULT 1)
 GO
 
 CREATE TABLE POR_COLECTORA.Clientes(
