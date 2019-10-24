@@ -34,7 +34,7 @@ CREATE TABLE POR_COLECTORA.Clientes(
 	Clie_Fecha_Nac DATETIME,
 	Clie_Habilitado BIT DEFAULT 1,
 	Clie_Saldo Numeric,
-	Clie_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.usuarios(Usuario_Id))
+	Clie_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id))
 GO
 
 CREATE TABLE POR_COLECTORA.Roles(
@@ -51,4 +51,19 @@ GO
 CREATE TABLE POR_COLECTORA.Rubros(
 	Rubro_Id Numeric PRIMARY KEY,
 	Rubro_Detalle VARCHAR)
+GO
+
+CREATE TABLE POR_COLECTORA.Proveedores(
+	Provee_Id Numeric PRIMARY KEY,
+	Provee_RS VARCHAR,
+	Provee_Mail VARCHAR,
+	Provee_Telefono Numeric,
+	Provee_CUIT NVARCHAR(13),
+	Provee_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
+	Provee_CP Numeric,
+	Provee_Ciudad Numeric,
+	Provee_Rubro Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Rubros(Rubro_Id),
+	Provee_Nombre_Contacto NVARCHAR(20),
+	Provee_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id),
+	Provee_Habilitado BIT DEFAULT 1)
 GO
