@@ -53,6 +53,11 @@ CREATE TABLE POR_COLECTORA.Funcionalidades(
 	Func_Descripcion VARCHAR)
 GO
 
+CREATE TABLE POR_COLECTORA.FuncionalidadxRol(
+	Id_Rol Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Roles(Rol_Id),
+	Id_Func Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Funcionalidades(Func_Id))
+GO
+
 CREATE TABLE POR_COLECTORA.Rubros(
 	Rubro_Id Numeric PRIMARY KEY,
 	Rubro_Detalle VARCHAR)
