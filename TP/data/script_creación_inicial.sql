@@ -15,11 +15,11 @@ CREATE TABLE POR_COLECTORA.Direcciones(
 GO
 
 CREATE TABLE POR_COLECTORA.Usuarios(
-	User_Id Numeric PRIMARY KEY,
-	User_Nombre VARCHAR,
-	User_Password VARCHAR,
-	User_Intentos Numeric,
-	User_Habilitado BIT DEFAULT 1)
+	Usuario_Id Numeric PRIMARY KEY,
+	Usuario_Nombre VARCHAR,
+	Usuario_Password VARCHAR,
+	Usuario_Intentos Numeric,
+	Usuario_Habilitado BIT DEFAULT 1)
 GO
 
 CREATE TABLE POR_COLECTORA.Clientes(
@@ -41,6 +41,11 @@ CREATE TABLE POR_COLECTORA.Roles(
 	Rol_Id Numeric PRIMARY KEY,
 	Rol_Nombre VARCHAR,
 	Rol_Habilitado BIT DEFAULT 1)
+GO
+
+CREATE TABLE POR_COLECTORA.RolxUsario(
+	Id_Rol Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Roles(Rol_Id),
+	Id_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id))
 GO
 
 CREATE TABLE POR_COLECTORA.Funcionalidades(
