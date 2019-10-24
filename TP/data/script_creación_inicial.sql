@@ -67,3 +67,12 @@ CREATE TABLE POR_COLECTORA.Proveedores(
 	Provee_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id),
 	Provee_Habilitado BIT DEFAULT 1)
 GO
+
+CREATE TABLE POR_COLECTORA.Facturas(
+	Fact_Id Numeric PRIMARY KEY,
+	Fact_Numero Numeric,
+	Fact_Fecha_Desde DATETIME,
+	Fact_Fecha_Hasta DATETIME,
+	Fact_Importe Numeric,
+	Fact_Proveedor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id))
+GO
