@@ -76,3 +76,15 @@ CREATE TABLE POR_COLECTORA.Facturas(
 	Fact_Importe Numeric,
 	Fact_Proveedor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id))
 GO
+
+CREATE TABLE POR_COLECTORA.Ofertas(
+	Oferta_Id Numeric PRIMARY KEY,
+	Oferta_Descripcion VARCHAR,
+	Oferta_Fecha DATETIME,
+	Oferta_Fecha_Venc DATETIME,
+	Oferta_Precio Numeric,
+	Oferta_Precio_Ficticio Numeric,
+	Oferta_Cantidad Numeric,
+	Oferta_Restriccion_Compra Numeric,
+	Oferta_Proveedor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id))
+GO
