@@ -36,3 +36,9 @@ CREATE TABLE POR_COLECTORA.Clientes(
 	Clie_Saldo Numeric,
 	Clie_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.usuarios(Usuario_Id))
 GO
+
+CREATE TABLE POR_COLECTORA.Roles(
+	Rol_Id Numeric PRIMARY KEY,
+	Rol_Nombre VARCHAR,
+	Rol_Habilitado BIT DEFAULT 1)
+GO
