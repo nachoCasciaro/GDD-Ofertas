@@ -77,14 +77,14 @@ GO
 CREATE TABLE POR_COLECTORA.Proveedores(
 	Provee_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Provee_RS VARCHAR NOT NULL,
-	Provee_Mail VARCHAR NOT NULL,
+	Provee_Mail VARCHAR,
 	Provee_Telefono Numeric NOT NULL,
 	Provee_CUIT NVARCHAR(13) NOT NULL,
 	Provee_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
-	Provee_CP Numeric NOT NULL,
+	Provee_CP Numeric,
 	Provee_Ciudad Numeric NOT NULL,
 	Provee_Rubro Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Rubros(Rubro_Id),
-	Provee_Nombre_Contacto NVARCHAR(20) NOT NULL,
+	Provee_Nombre_Contacto NVARCHAR(20),
 	Provee_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id),
 	Provee_Habilitado BIT NOT NULL DEFAULT 1)
 GO
@@ -155,9 +155,22 @@ GO
 
 --FIN CREACION TABLAS
 
---Migracion
 
+
+--COMIENZO MIGRACION TABLAS
+
+--MIGRACION TABLA CLIENTES
 INSERT INTO POR_COLECTORA.Clientes
 (Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Direccion, Clie_Telefono, Clie_Mail, Clie_Fecha_Nac)
 SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, (SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Cli_Direccion), Cli_Telefono, Cli_Mail, Cli_Fecha_Nac
 FROM gd_esquema.Maestra
+
+--MIGRACION TABLA PROVEEDORES
+INSERT INTO POR_COLECTORA.Proveedores
+(Provee_RS, Provee_Telefono, Provee_CUIT, Provee_Direccion, Provee_Ciudad, Provee_Rubro)
+SELECT DISTINCT Provee_RS, Provee_Telefono, Provee_CUIT, (SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Provee_Dom), Provee_Ciudad, Provee_Rubro
+FROM gd_esquema.Maestra
+
+
+
+
