@@ -192,9 +192,6 @@ FROM gd_esquema.Maestra
 --MIGRACION FUNCIONALIDADxROL
 
 
---MIGRACION RUBROS
-
-
 --MIGRACION TABLA PROVEEDORES
 INSERT INTO POR_COLECTORA.Proveedores
 ( Provee_RS, Provee_Mail, Provee_Telefono, Provee_CUIT, Provee_Direccion, Provee_CP, Provee_Ciudad, 
