@@ -7,7 +7,7 @@ CREATE SCHEMA POR_COLECTORA AUTHORIZATION gdCupon2019;
 GO
 
 CREATE TABLE POR_COLECTORA.Direcciones(
-	Direccion_Id Numeric PRIMARY KEY,
+	Direccion_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Direccion_Calle VARCHAR,
 	Direccion_Nro_Piso VARCHAR,
 	Direccion_Depto VARCHAR,
@@ -15,7 +15,7 @@ CREATE TABLE POR_COLECTORA.Direcciones(
 GO
 
 CREATE TABLE POR_COLECTORA.Usuarios(
-	Usuario_Id Numeric PRIMARY KEY,
+	Usuario_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Usuario_Nombre VARCHAR,
 	Usuario_Password VARCHAR,
 	Usuario_Intentos Numeric,
@@ -23,7 +23,7 @@ CREATE TABLE POR_COLECTORA.Usuarios(
 GO
 
 CREATE TABLE POR_COLECTORA.Clientes(
-	Clie_Id Numeric PRIMARY KEY,
+	Clie_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Clie_Nombre VARCHAR,
 	Clie_Apellido VARCHAR,
 	Clie_DNI Numeric(18,0) UNIQUE,
@@ -38,7 +38,7 @@ CREATE TABLE POR_COLECTORA.Clientes(
 GO
 
 CREATE TABLE POR_COLECTORA.Roles(
-	Rol_Id Numeric PRIMARY KEY,
+	Rol_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Rol_Nombre VARCHAR,
 	Rol_Habilitado BIT DEFAULT 1)
 GO
@@ -49,7 +49,7 @@ CREATE TABLE POR_COLECTORA.RolxUsario(
 GO
 
 CREATE TABLE POR_COLECTORA.Funcionalidades(
-	Func_Id Numeric PRIMARY KEY,
+	Func_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Func_Descripcion VARCHAR)
 GO
 
@@ -59,12 +59,12 @@ CREATE TABLE POR_COLECTORA.FuncionalidadxRol(
 GO
 
 CREATE TABLE POR_COLECTORA.Rubros(
-	Rubro_Id Numeric PRIMARY KEY,
+	Rubro_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Rubro_Detalle VARCHAR)
 GO
 
 CREATE TABLE POR_COLECTORA.Proveedores(
-	Provee_Id Numeric PRIMARY KEY,
+	Provee_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Provee_RS VARCHAR,
 	Provee_Mail VARCHAR,
 	Provee_Telefono Numeric,
@@ -79,7 +79,7 @@ CREATE TABLE POR_COLECTORA.Proveedores(
 GO
 
 CREATE TABLE POR_COLECTORA.Facturas(
-	Fact_Id Numeric PRIMARY KEY,
+	Fact_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Fact_Numero Numeric,
 	Fact_Fecha_Desde DATETIME,
 	Fact_Fecha_Hasta DATETIME,
@@ -90,7 +90,7 @@ CREATE TABLE POR_COLECTORA.Facturas(
 GO
 
 CREATE TABLE POR_COLECTORA.Ofertas(
-	Oferta_Id Numeric PRIMARY KEY,
+	Oferta_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Oferta_Descripcion VARCHAR,
 	Oferta_Fecha DATETIME,
 	Oferta_Fecha_Venc DATETIME,
@@ -112,7 +112,7 @@ CREATE TABLE POR_COLECTORA.Compras(
 GO
 
 CREATE TABLE POR_COLECTORA.Cupones(
-	Cupon_Id Numeric PRIMARY KEY,
+	Cupon_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Cupon_Fecha_Venc DATETIME,
 	Cupon_Fecha_Consumo DATETIME,
 	--Cupon_Nro_Compra Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Compras(Compra_Id),
@@ -127,7 +127,7 @@ CREATE TABLE POR_COLECTORA.Tarjetas(
 GO
 
 CREATE TABLE POR_COLECTORA.Cargas(
-	Carga_Id Numeric PRIMARY KEY,
+	Carga_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Carga_Fecha DATETIME,
 	Carga_Id_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
 	Carga_Tipo_Pago nvarchar(20),
