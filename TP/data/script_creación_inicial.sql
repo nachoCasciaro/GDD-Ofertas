@@ -171,6 +171,15 @@ INSERT INTO POR_COLECTORA.Proveedores
 SELECT DISTINCT Provee_RS, Provee_Telefono, Provee_CUIT, (SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Provee_Dom), Provee_Ciudad, Provee_Rubro
 FROM gd_esquema.Maestra
 
+--MIGRACION TABLA OFERTAS // VERIFICAR!!
+INSERT INTO POR_COLECTORA.Ofertas
+(	Oferta_Descripcion,	Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio,	Oferta_Precio_Ficticio,
+	Oferta_Cantidad, Oferta_Restriccion_Compra,	Oferta_Proveed	)
+SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, 1,
+				(SELECT Provee_Id FROM POR_COLECTORA.Proveedores WHERE Provee_Id = Oferta_Proveed)
+FROM gd_esquema.Maestra
+
+
 
 
 
