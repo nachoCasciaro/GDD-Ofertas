@@ -86,7 +86,7 @@ CREATE TABLE POR_COLECTORA.Facturas(
 	Fact_Importe Numeric,
 	Fact_Proveedor_ID Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id)),
 	Fact_Proveedor_CUIT NVARCHAR(13),
-	Fact_Proveedor_RS VARCHAR
+	Fact_Proveedor_RS VARCHAR)
 GO
 
 CREATE TABLE POR_COLECTORA.Ofertas(
@@ -108,7 +108,7 @@ CREATE TABLE POR_COLECTORA.Compras(
 	Compra_Fecha DATETIME,
 	Compra_Codigo Numeric,
 	Compra_Id_Factura Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Facturas(Fact_Id)),
-	Compra_Oferta_Precio Numeric
+	Compra_Oferta_Precio Numeric)
 GO
 
 CREATE TABLE POR_COLECTORA.Cupones(
