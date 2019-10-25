@@ -70,7 +70,7 @@ GO
 --CREACIÓN DE TABLA RUBROS
 CREATE TABLE POR_COLECTORA.Rubros(
 	Rubro_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Rubro_Detalle VARCHAR NOT NULL)
+	Rubro_Detalle NVARCHAR NOT NULL)
 GO
 
 --CREACIÓN DE TABLA PROVEEDORES
@@ -174,12 +174,16 @@ FROM gd_esquema.Maestra
 --MIGRACION TABLA OFERTAS // VERIFICAR!!
 INSERT INTO POR_COLECTORA.Ofertas
 (	Oferta_Descripcion,	Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio,	Oferta_Precio_Ficticio,
-	Oferta_Cantidad, Oferta_Restriccion_Compra,	Oferta_Proveed	)
+	Oferta_Cantidad, Oferta_Restriccion_Compra,	Oferta_Proveedor)
 SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, 1,
-				(SELECT Provee_Id FROM POR_COLECTORA.Proveedores WHERE Provee_Id = Oferta_Proveed)
+				(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
+FROM gd_esquema.Maestra As Maestra
+
+
+--MIGRACION TABLA RUBROS
+INSERT INTO POR_COLECTORA.Rubros
+(Rubro_Detalle)
+SELECT DISTINCT Provee_Rubro
 FROM gd_esquema.Maestra
-
-
-
 
 
