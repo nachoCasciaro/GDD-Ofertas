@@ -177,9 +177,7 @@ FROM gd_esquema.Maestra
 INSERT INTO POR_COLECTORA.Clientes
 (Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Telefono, Clie_Mail, Clie_CP, Clie_Fecha_Nac, Clie_Direccion, Clie_Usuario)
 SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Telefono, Cli_Mail, NULL, Cli_Fecha_Nac,
-				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Cli_Direccion),
-				(SELECT Usuario_Id FROM POR_COLECTORA.Usuarios WHERE Usuario_Id = Cli_Usuario) 
-				--este subselect esta mal porque cli_usuario no existe en tabla maestra pero no se que hacer ( lo mismo pasa en (2) )
+				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Cli_Direccion), NULL
 FROM gd_esquema.Maestra
 
 --MIGRACION TABLA ROLES
@@ -204,7 +202,6 @@ INSERT INTO POR_COLECTORA.Proveedores
 SELECT DISTINCT Provee_RS, NULL, Provee_Telefono, Provee_CUIT, 
 				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Provee_Dom), 
 				NULL, Provee_Ciudad, Provee_Rubro, NULL, NULL
-				--(2) mismo problema de usuario. Este lo puse en NULL
 FROM gd_esquema.Maestra
 
 --MIGRACION FACTURAS
@@ -222,9 +219,6 @@ FROM gd_esquema.Maestra
 
 
 --MIGRACION CUPONES
-
-
---MIGRACION TARJETAS
 
 
 --MIGRACION CARGAS
