@@ -6,7 +6,7 @@ CREATE SCHEMA POR_COLECTORA AUTHORIZATION gdCupon2019;
 
 GO
 
---INICIO CREACION TABLAS
+--			INICIO CREACION TABLAS
 
 --CREACIÓN DE TABLA DIRECCIONES
 CREATE TABLE POR_COLECTORA.Direcciones(
@@ -84,7 +84,7 @@ CREATE TABLE POR_COLECTORA.Proveedores(
 	Provee_CP Numeric,
 	Provee_Ciudad Numeric NOT NULL,
 	Provee_Rubro Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Rubros(Rubro_Id),
-	Provee_Nombre_Contacto NVARCHAR(20),
+	Provee_Nombre_Contacto VARCHAR,
 	Provee_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id),
 	Provee_Habilitado BIT NOT NULL DEFAULT 1)
 GO
@@ -153,33 +153,80 @@ CREATE TABLE POR_COLECTORA.Cargas(
 	Carga_Medio_Pago VARCHAR(8) NOT NULL)
 GO
 
---FIN CREACION TABLAS
+--			FIN CREACION TABLAS
 
 
 
---COMIENZO MIGRACION TABLAS
+--			COMIENZO MIGRACION TABLAS
+
+--MIGRACION DIRECCIONES
+INSERT INTO POR_COLECTORA.Direcciones
+( Direccion_Calle, Direccion_Nro_Piso, Direccion_Depto, Direccion_Ciudad )
+SELECT DISTINCT Cli_Direccion, NULL, NULL, Cli_Ciudad
+FROM gd_esquema.Maestra
+-- hacer el insert en direcciones de proveedores
+
+--MIGRACION USUARIOS
+INSERT INTO POR_COLECTORA.Usuarios
+( Usuario_Nombre, Usuario_Password )
+SELECT DISTINCT Cli_Nombre, NULL
+FROM gd_esquema.Maestra
+-- hacer el insert en usuarios de proveedores
 
 --MIGRACION TABLA CLIENTES
 INSERT INTO POR_COLECTORA.Clientes
-(Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Direccion, Clie_Telefono, Clie_Mail, Clie_Fecha_Nac)
-SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, (SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Cli_Direccion), Cli_Telefono, Cli_Mail, Cli_Fecha_Nac
+(Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Telefono, Clie_Mail, Clie_CP, Clie_Fecha_Nac, Clie_Direccion, Clie_Usuario)
+SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Telefono, Cli_Mail, NULL, Cli_Fecha_Nac,
+				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Cli_Direccion),
+				(SELECT Usuario_Id FROM POR_COLECTORA.Usuarios WHERE Usuario_Id = Cli_Usuario) 
+				--este subselect esta mal porque cli_usuario no existe en tabla maestra pero no se que hacer ( lo mismo pasa en (2) )
 FROM gd_esquema.Maestra
+
+--MIGRACION TABLA ROLES
+
+
+--MIGRACION TABLA ROLXUSUARIO
+
+
+--MIGRACION FUNCIONALIDADES
+
+
+--MIGRACION FUNCIONALIDADxROL
+
+
+--MIGRACION RUBROS
+
 
 --MIGRACION TABLA PROVEEDORES
 INSERT INTO POR_COLECTORA.Proveedores
-(Provee_RS, Provee_Telefono, Provee_CUIT, Provee_Direccion, Provee_Ciudad, Provee_Rubro)
-SELECT DISTINCT Provee_RS, Provee_Telefono, Provee_CUIT, (SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Provee_Dom), Provee_Ciudad, Provee_Rubro
+( Provee_RS, Provee_Mail, Provee_Telefono, Provee_CUIT, Provee_Direccion, Provee_CP, Provee_Ciudad, 
+  Provee_Rubro, Provee_Nombre_Contacto, Provee_Usuario)
+SELECT DISTINCT Provee_RS, NULL, Provee_Telefono, Provee_CUIT, 
+				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Provee_Dom), 
+				NULL, Provee_Ciudad, Provee_Rubro, NULL, NULL
+				--(2) mismo problema de usuario. Este lo puse en NULL
 FROM gd_esquema.Maestra
 
---MIGRACION TABLA OFERTAS // VERIFICAR!!
+--MIGRACION FACTURAS
+
+
+--MIGRACION TABLA OFERTAS
 INSERT INTO POR_COLECTORA.Ofertas
-(	Oferta_Descripcion,	Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio,	Oferta_Precio_Ficticio,
-	Oferta_Cantidad, Oferta_Restriccion_Compra,	Oferta_Proveed	)
-SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, 1,
+( Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio,
+  Oferta_Cantidad, Oferta_Restriccion_Compra, Oferta_Proveed )
+SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, NULL,
 				(SELECT Provee_Id FROM POR_COLECTORA.Proveedores WHERE Provee_Id = Oferta_Proveed)
 FROM gd_esquema.Maestra
 
+--MIGRACION COMPRAS
 
 
+--MIGRACION CUPONES
+
+
+--MIGRACION TARJETAS
+
+
+--MIGRACION CARGAS
 
 
