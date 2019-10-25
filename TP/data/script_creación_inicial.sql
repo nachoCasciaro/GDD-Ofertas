@@ -96,7 +96,7 @@ CREATE TABLE POR_COLECTORA.Facturas(
 	Fact_Importe Numeric NOT NULL,
 	Fact_Proveedor_ID Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id),
 	Fact_Proveedor_CUIT NVARCHAR(13) NOT NULL,
-	Fact_Proveedor_RS VARCHAR) NOT NULL
+	Fact_Proveedor_RS VARCHAR NOT NULL)
 GO
 
 --CREACIÓN DE TABLA OFERTAS
@@ -120,7 +120,7 @@ CREATE TABLE POR_COLECTORA.Compras(
 	Compra_Fecha DATETIME NOT NULL,
 	Compra_Codigo Numeric NOT NULL,
 	Compra_Id_Factura Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Facturas(Fact_Id),
-	Compra_Oferta_Precio Numeric) NOT NULL
+	Compra_Oferta_Precio Numeric NOT NULL)
 GO
 
 --CREACIÓN DE TABLA CUPONES
