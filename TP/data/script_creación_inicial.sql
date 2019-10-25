@@ -6,133 +6,148 @@ CREATE SCHEMA POR_COLECTORA AUTHORIZATION gdCupon2019;
 
 GO
 
+--CREACIÓN DE TABLA DIRECCIONES
 CREATE TABLE POR_COLECTORA.Direcciones(
 	Direccion_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Direccion_Calle VARCHAR,
+	Direccion_Calle VARCHAR NOT NULL,
 	Direccion_Nro_Piso VARCHAR,
 	Direccion_Depto VARCHAR,
-	Direccion_Ciudad VARCHAR)
+	Direccion_Ciudad VARCHAR NOT NULL)
 GO
 
+--CREACIÓN DE TABLA USUARIOS
 CREATE TABLE POR_COLECTORA.Usuarios(
 	Usuario_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Usuario_Nombre VARCHAR,
-	Usuario_Password VARCHAR,
-	Usuario_Intentos Numeric,
-	Usuario_Habilitado BIT DEFAULT 1)
+	Usuario_Nombre VARCHAR NOT NULL,
+	Usuario_Password VARCHAR NOT NULL,
+	Usuario_Intentos Numeric DEFAULT 0,
+	Usuario_Habilitado BIT NOT NULL DEFAULT 1)
 GO
 
+--CREACIÓN DE TABLA CLIENTES
 CREATE TABLE POR_COLECTORA.Clientes(
 	Clie_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Clie_Nombre VARCHAR,
-	Clie_Apellido VARCHAR,
-	Clie_DNI Numeric(18,0) UNIQUE,
-	Clie_Mail NVARCHAR(50),
-	Clie_Telefono Numeric,
+	Clie_Nombre VARCHAR NOT NULL,
+	Clie_Apellido VARCHAR NOT NULL,
+	Clie_DNI Numeric(18,0) NOT NULL UNIQUE,
+	Clie_Mail NVARCHAR(50) NOT NULL,
+	Clie_Telefono Numeric NOT NULL,
 	Clie_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
-	Clie_CP Numeric,
-	Clie_Fecha_Nac DATETIME,
-	Clie_Habilitado BIT DEFAULT 1,
-	Clie_Saldo Numeric,
+	Clie_CP Numeric NOT NULL,
+	Clie_Fecha_Nac DATETIME NOT NULL,
+	Clie_Habilitado BIT NOT NULL DEFAULT 1,
+	Clie_Saldo Numeric NOT NULL DEFAULT 200,
 	Clie_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id))
 GO
 
+--CREACIÓN DE TABLA ROLES
 CREATE TABLE POR_COLECTORA.Roles(
 	Rol_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Rol_Nombre VARCHAR,
-	Rol_Habilitado BIT DEFAULT 1)
+	Rol_Nombre VARCHAR NOT NULL,
+	Rol_Habilitado BIT NOT NULL DEFAULT 1)
 GO
 
+--CREACIÓN DE TABLA ROLxUSUARIO
 CREATE TABLE POR_COLECTORA.RolxUsario(
 	Id_Rol Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Roles(Rol_Id),
 	Id_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id))
 GO
 
+--CREACIÓN DE TABLA FUNCIONALIDADES
 CREATE TABLE POR_COLECTORA.Funcionalidades(
 	Func_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Func_Descripcion VARCHAR)
+	Func_Descripcion VARCHAR NOT NULL)
 GO
 
+--CREACIÓN DE TABLA FUNCIONALIDADxROL
 CREATE TABLE POR_COLECTORA.FuncionalidadxRol(
 	Id_Rol Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Roles(Rol_Id),
 	Id_Func Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Funcionalidades(Func_Id))
 GO
 
+--CREACIÓN DE TABLA RUBROS
 CREATE TABLE POR_COLECTORA.Rubros(
 	Rubro_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Rubro_Detalle VARCHAR)
+	Rubro_Detalle VARCHAR NOT NULL)
 GO
 
+--CREACIÓN DE TABLA PROVEEDORES
 CREATE TABLE POR_COLECTORA.Proveedores(
 	Provee_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Provee_RS VARCHAR,
-	Provee_Mail VARCHAR,
-	Provee_Telefono Numeric,
-	Provee_CUIT NVARCHAR(13),
+	Provee_RS VARCHAR NOT NULL,
+	Provee_Mail VARCHAR NOT NULL,
+	Provee_Telefono Numeric NOT NULL,
+	Provee_CUIT NVARCHAR(13) NOT NULL,
 	Provee_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
-	Provee_CP Numeric,
-	Provee_Ciudad Numeric,
+	Provee_CP Numeric NOT NULL,
+	Provee_Ciudad Numeric NOT NULL,
 	Provee_Rubro Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Rubros(Rubro_Id),
-	Provee_Nombre_Contacto NVARCHAR(20),
+	Provee_Nombre_Contacto NVARCHAR(20) NOT NULL,
 	Provee_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id),
-	Provee_Habilitado BIT DEFAULT 1)
+	Provee_Habilitado BIT NOT NULL DEFAULT 1)
 GO
 
+--CREACIÓN DE TABLA FACTURAS
 CREATE TABLE POR_COLECTORA.Facturas(
 	Fact_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Fact_Numero Numeric,
-	Fact_Fecha_Desde DATETIME,
-	Fact_Fecha_Hasta DATETIME,
-	Fact_Importe Numeric,
+	Fact_Numero Numeric NOT NULL,
+	Fact_Fecha_Desde DATETIME NOT NULL,
+	Fact_Fecha_Hasta DATETIME NOT NULL,
+	Fact_Importe Numeric NOT NULL,
 	Fact_Proveedor_ID Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id),
-	Fact_Proveedor_CUIT NVARCHAR(13),
-	Fact_Proveedor_RS VARCHAR)
+	Fact_Proveedor_CUIT NVARCHAR(13) NOT NULL,
+	Fact_Proveedor_RS VARCHAR) NOT NULL
 GO
 
+--CREACIÓN DE TABLA OFERTAS
 CREATE TABLE POR_COLECTORA.Ofertas(
 	Oferta_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Oferta_Descripcion VARCHAR,
-	Oferta_Fecha DATETIME,
-	Oferta_Fecha_Venc DATETIME,
-	Oferta_Precio Numeric,
-	Oferta_Precio_Ficticio Numeric,
-	Oferta_Cantidad Numeric,
-	Oferta_Restriccion_Compra Numeric,
+	Oferta_Descripcion VARCHAR NOT NULL,
+	Oferta_Fecha DATETIME NOT NULL,
+	Oferta_Fecha_Venc DATETIME NOT NULL,
+	Oferta_Precio Numeric NOT NULL,
+	Oferta_Precio_Ficticio Numeric NOT NULL,
+	Oferta_Cantidad Numeric NOT NULL,
+	Oferta_Restriccion_Compra Numeric NOT NULL,
 	Oferta_Proveedor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id))
 GO
 
+--CREACIÓN DE TABLA COMPRAS
 CREATE TABLE POR_COLECTORA.Compras(
 	Compra_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
 	Compra_Oferta Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Ofertas(Oferta_Id),
-	Compra_Cantidad Numeric,
-	Compra_Fecha DATETIME,
-	Compra_Codigo Numeric,
+	Compra_Cantidad Numeric NOT NULL,
+	Compra_Fecha DATETIME NOT NULL,
+	Compra_Codigo Numeric NOT NULL,
 	Compra_Id_Factura Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Facturas(Fact_Id),
-	Compra_Oferta_Precio Numeric)
+	Compra_Oferta_Precio Numeric) NOT NULL
 GO
 
+--CREACIÓN DE TABLA CUPONES
 CREATE TABLE POR_COLECTORA.Cupones(
 	Cupon_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Cupon_Fecha_Venc DATETIME,
+	Cupon_Fecha_Venc DATETIME NOT NULL,
 	Cupon_Fecha_Consumo DATETIME,
 	--Cupon_Nro_Compra Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Compras(Compra_Id),
 	Cupon_Id_Cliente_Consumidor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id))
 GO
 
+--CREACIÓN DE TABLA TARJETAS
 CREATE TABLE POR_COLECTORA.Tarjetas(
 	Tarjeta_Numero Numeric PRIMARY KEY,
-	Tarjeta_Tipo nvarchar(50),
-	Tarjeta_Fecha_Venc DATETIME,
+	Tarjeta_Tipo nvarchar(50) NOT NULL,
+	Tarjeta_Fecha_Venc DATETIME NOT NULL,
 	Cupon_Id_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id))
 GO
 
+--CREACIÓN DE TABLA CARGAS
 CREATE TABLE POR_COLECTORA.Cargas(
 	Carga_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Carga_Fecha DATETIME,
+	Carga_Fecha DATETIME NOT NULL,
 	Carga_Id_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
-	Carga_Tipo_Pago nvarchar(20),
-	Carga_Monto NUMERIC,
+	Carga_Tipo_Pago nvarchar(20) NOT NULL, --Es el tipo de tarjeta
+	Carga_Monto NUMERIC NOT NULL,
 	Carga_Id_Tarjeta Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Tarjetas(Tarjeta_Numero),
-	Carga_Forma_Pago VARCHAR(8))
+	Carga_Medio_Pago VARCHAR(8) NOT NULL)
 GO
 
