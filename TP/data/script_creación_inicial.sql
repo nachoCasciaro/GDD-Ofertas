@@ -159,5 +159,5 @@ GO
 
 INSERT INTO POR_COLECTORA.Clientes
 (Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Direccion, Clie_Telefono, Clie_Mail, Clie_Fecha_Nac)
-SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Direccion, Cli_Telefono, Cli_Mail, Cli_Fecha_Nac
+SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, (SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Direccion_Id), Cli_Telefono, Cli_Mail, Cli_Fecha_Nac
 FROM gd_esquema.Maestra
