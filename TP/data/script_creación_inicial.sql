@@ -151,3 +151,9 @@ CREATE TABLE POR_COLECTORA.Cargas(
 	Carga_Medio_Pago VARCHAR(8) NOT NULL)
 GO
 
+--Migracion
+
+INSERT INTO POR_COLECTORA.Clientes
+(Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Direccion, Clie_Telefono, Clie_Mail, Clie_Fecha_Nac)
+SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Direccion, Cli_Telefono, Cli_Mail, Cli_Fecha_Nac
+FROM gd_esquema.Maestra
