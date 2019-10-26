@@ -181,7 +181,9 @@ SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Telefono, Cli_Mail, NULL,
 FROM gd_esquema.Maestra
 
 --MIGRACION TABLA ROLES
-
+INSERT INTO POR_COLECTORA.Roles
+( Rol_Nombre )
+ VALUES ('Proveedor','Cliente','Administrador')
 
 --MIGRACION TABLA ROLXUSUARIO
 
