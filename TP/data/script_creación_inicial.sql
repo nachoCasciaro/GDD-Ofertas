@@ -205,6 +205,13 @@ FROM gd_esquema.Maestra
 
 --MIGRACION FACTURAS
 
+INSERT INTO POR_COLECTORA.Facturas
+	(Fact_Numero,Fact_Fecha_Desde,Fact_Fecha_Hasta,Fact_Importe, Fact_Proveedor_ID,Fact_Proveedor_CUIT,Fact_Proveedor_RS )
+SELECT DISTINCT Factura_Nro,NULL,Factura_Fecha,NULL/*Como saber el importa de la factura? por la oferta?*/,
+	(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
+	(SELECT Provee_CUIT FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
+	(SELECT Provee_RS FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
+FROM gd_esquema.Maestra MAESTRA
 
 --MIGRACION TABLA OFERTAS
 INSERT INTO POR_COLECTORA.Ofertas
@@ -221,7 +228,13 @@ FROM gd_esquema.Maestra As Maestra
 
 
 --MIGRACION CARGAS
+INSERT INTO POR_COLECTORA.Cargas
+	(Carga_Fecha, Carga_Id_Cliente, Carga_Tipo_Pago, Carga_Monto, Carga_Id_Tarjeta, Carga_Medio_Pago)
+SELECT DISTINCT Carga_fecha, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS ClieColectora WHERE ClieColectora.Clie_DNI= MAESTRA.Cli_Dni),--charlar si este
+--matcheo esta bien,
+Tipo_Pago_Desc,Carga_Credito,NULL,NULL --Revisar bien la diferencia entre medio y tipo de pago porque no me acuerdo cual era cual(Perdon! jaja)
 
+FROM gd_esquema.Maestra AS MAESTRA
 
 --MIGRACION TABLA RUBROS
 INSERT INTO POR_COLECTORA.Rubros
