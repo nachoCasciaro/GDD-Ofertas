@@ -200,7 +200,8 @@ INSERT INTO POR_COLECTORA.Proveedores
   Provee_Rubro, Provee_Nombre_Contacto, Provee_Usuario)
 SELECT DISTINCT Provee_RS, NULL, Provee_Telefono, Provee_CUIT, 
 				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Provee_Dom), 
-				NULL, Provee_Ciudad, Provee_Rubro, NULL, NULL
+				NULL, Provee_Ciudad, (SELECT Rubro_Id FROM POR_COLECTORA.Rubros WHERE Rubro_Detalle = Provee_Rubro), 
+				NULL, NULL
 FROM gd_esquema.Maestra
 
 --MIGRACION FACTURAS
