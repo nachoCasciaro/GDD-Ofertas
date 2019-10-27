@@ -1,6 +1,6 @@
 USE [GD2C2019]
 
---DROP CONTRAINTS
+--DROP CONSTRAINTS
 --Hago un drop de las fk para despues poder hacer un drop de las tablas
 
 DECLARE cursor_tablas CURSOR FOR
@@ -176,7 +176,6 @@ CREATE TABLE POR_COLECTORA.Proveedores(
 	Provee_CUIT NVARCHAR(13),
 	Provee_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
 	Provee_CP Numeric,
-	Provee_Ciudad Numeric NOT NULL,
 	Provee_Rubro Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Rubros(Rubro_Id),
 	Provee_Nombre_Contacto NVARCHAR(50),
 	Provee_Usuario Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id),
@@ -198,7 +197,7 @@ GO
 --CREACIÓN DE TABLA OFERTAS
 CREATE TABLE POR_COLECTORA.Ofertas(
 	Oferta_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Oferta_Descripcion NVARCHAR(80) NOT NULL,
+	Oferta_Descripcion NVARCHAR(200) NOT NULL,
 	Oferta_Fecha DATETIME NOT NULL,
 	Oferta_Fecha_Venc DATETIME NOT NULL,
 	Oferta_Precio Numeric NOT NULL,
@@ -243,7 +242,7 @@ CREATE TABLE POR_COLECTORA.Cargas(
 	Carga_Id_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
 	Carga_Tipo_Pago nvarchar(20), --Es el tipo de tarjeta
 	Carga_Monto NUMERIC NOT NULL,
-	Carga_Id_Tarjeta Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Tarjetas(Tarjeta_Numero),
+	Carga_Id_Tarjeta Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Tarjetas(Tarjeta_Numero),
 	Carga_Medio_Pago VARCHAR(8))
 GO
 
@@ -253,10 +252,15 @@ GO
 
 --MIGRACION DIRECCIONES
 INSERT INTO POR_COLECTORA.Direcciones
-( Direccion_Calle,Direccion_Ciudad )
+( Direccion_Calle,Direccion_Ciudad)
 SELECT DISTINCT Cli_Direccion, Cli_Ciudad
 FROM gd_esquema.Maestra
--- hacer el insert en direcciones de proveedores
+
+INSERT INTO POR_COLECTORA.Direcciones
+( Direccion_Calle,Direccion_Ciudad)
+SELECT DISTINCT Provee_Dom, Provee_Ciudad
+FROM gd_esquema.Maestra
+where Provee_Dom is not null
 
 /*
 --MIGRACION USUARIOS
@@ -266,6 +270,7 @@ SELECT DISTINCT Cli_Nombre, NULL
 FROM gd_esquema.Maestra
 -- hacer el insert en usuarios de proveedores
 */
+
 --MIGRACION TABLA CLIENTES
 INSERT INTO POR_COLECTORA.Clientes
 (Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Telefono, Clie_Mail, Clie_CP, Clie_Fecha_Nac, Clie_Direccion, Clie_Usuario)
@@ -289,12 +294,13 @@ INSERT INTO POR_COLECTORA.Roles
 
 --MIGRACION TABLA PROVEEDORES
 INSERT INTO POR_COLECTORA.Proveedores
-( Provee_RS, Provee_Telefono, Provee_CUIT, Provee_Direccion, Provee_Ciudad, 
+( Provee_RS, Provee_Telefono, Provee_CUIT, Provee_Direccion, 
   Provee_Rubro)
 SELECT DISTINCT Maestra.Provee_RS, Maestra.Provee_Telefono, Maestra.Provee_CUIT, 
 				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Maestra.Provee_Dom), 
-				Maestra.Provee_Ciudad, (SELECT Rubro_Id FROM POR_COLECTORA.Rubros WHERE Rubro_Detalle = Maestra.Provee_Rubro)
+				(SELECT Rubro_Id FROM POR_COLECTORA.Rubros WHERE Rubro_Detalle = Maestra.Provee_Rubro)
 FROM gd_esquema.Maestra as Maestra
+where Maestra.Provee_RS is not null 
 
 
 --MIGRACION FACTURAS
@@ -317,6 +323,7 @@ SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Prec
 				(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
 FROM gd_esquema.Maestra As Maestra
 
+
 --MIGRACION COMPRAS
 
 
@@ -325,18 +332,18 @@ FROM gd_esquema.Maestra As Maestra
 
 --MIGRACION CARGAS
 INSERT INTO POR_COLECTORA.Cargas
-	(Carga_Fecha, Carga_Id_Cliente, Carga_Tipo_Pago, Carga_Monto, Carga_Id_Tarjeta, Carga_Medio_Pago)
+(Carga_Fecha, Carga_Id_Cliente, Carga_Tipo_Pago, Carga_Monto)
 SELECT DISTINCT Carga_fecha, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS ClieColectora WHERE ClieColectora.Clie_DNI= MAESTRA.Cli_Dni),--charlar si este
 --matcheo esta bien,
-Tipo_Pago_Desc,Carga_Credito,NULL,NULL --Revisar bien la diferencia entre medio y tipo de pago porque no me acuerdo cual era cual(Perdon! jaja)
-
-FROM gd_esquema.Maestra AS MAESTRA
+Tipo_Pago_Desc,Carga_Credito --Revisar bien la diferencia entre medio y tipo de pago porque no me acuerdo cual era cual(Perdon! jaja)
+FROM gd_esquema.Maestra AS Maestra
 
 --MIGRACION TABLA RUBROS
 INSERT INTO POR_COLECTORA.Rubros
 (Rubro_Detalle)
 SELECT DISTINCT Provee_Rubro
 FROM gd_esquema.Maestra
+
 
 
 
