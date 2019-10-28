@@ -287,7 +287,12 @@ INSERT INTO POR_COLECTORA.Roles
 
 
 --MIGRACION FUNCIONALIDADES
-
+INSERT INTO POR_COLECTORA.Funcionalidades(Func_Descripcion)
+VALUES	('Login y seguridad'), ('ABM Rol'), ('Registro de Usuario'),
+		('ABM Cliente'), ('ABM Proveedor'), ('Cargar Crédito'),
+		('Comprar Oferta'), ('Confección y publicación de Ofertas'),
+		('Facturación a Proveedor'), ('Listado Estadistico');
+GO
 
 --MIGRACION FUNCIONALIDADxROL
 
