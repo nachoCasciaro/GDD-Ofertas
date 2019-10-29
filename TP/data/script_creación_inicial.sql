@@ -152,7 +152,7 @@ GO
 --CREACIÓN DE TABLA FUNCIONALIDADES
 CREATE TABLE POR_COLECTORA.Funcionalidades(
 	Func_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Func_Descripcion VARCHAR(30) NOT NULL)
+	Func_Descripcion VARCHAR(80) NOT NULL)
 GO
 
 --CREACIÓN DE TABLA FUNCIONALIDADxROL
@@ -186,7 +186,7 @@ GO
 CREATE TABLE POR_COLECTORA.Facturas(
 	Fact_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Fact_Numero Numeric NOT NULL,
-	Fact_Fecha_Desde DATETIME NOT NULL,
+	Fact_Fecha_Desde DATETIME,
 	Fact_Fecha_Hasta DATETIME NOT NULL,
 	Fact_Importe Numeric NOT NULL,
 	Fact_Proveedor_ID Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id),
@@ -273,9 +273,9 @@ FROM gd_esquema.Maestra
 
 --MIGRACION TABLA CLIENTES
 INSERT INTO POR_COLECTORA.Clientes
-(Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Telefono, Clie_Mail, Clie_CP, Clie_Fecha_Nac, Clie_Direccion, Clie_Usuario)
+(Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Telefono, Clie_Mail, Clie_CP, Clie_Fecha_Nac, Clie_Direccion)
 SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Telefono, Cli_Mail, NULL, Cli_Fecha_Nac,
-				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Cli_Direccion), NULL
+				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Cli_Direccion)
 FROM gd_esquema.Maestra
 
 --MIGRACION TABLA ROLES
@@ -316,6 +316,13 @@ VALUES ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrado
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Listado Estadistico'));
 GO
 
+--MIGRACION TABLA RUBROS
+INSERT INTO POR_COLECTORA.Rubros
+(Rubro_Detalle)
+SELECT DISTINCT Provee_Rubro
+FROM gd_esquema.Maestra
+where Provee_Rubro is not null
+
 --MIGRACION TABLA PROVEEDORES
 INSERT INTO POR_COLECTORA.Proveedores
 ( Provee_RS, Provee_Telefono, Provee_CUIT, Provee_Direccion, 
@@ -324,12 +331,12 @@ SELECT DISTINCT Maestra.Provee_RS, Maestra.Provee_Telefono, Maestra.Provee_CUIT,
 				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Maestra.Provee_Dom), 
 				(SELECT Rubro_Id FROM POR_COLECTORA.Rubros WHERE Rubro_Detalle = Maestra.Provee_Rubro)
 FROM gd_esquema.Maestra as Maestra
-where Maestra.Provee_RS is not null 
+where Maestra.Provee_RS is not null
 
 
 --MIGRACION FACTURAS
 
-/*
+
 INSERT INTO POR_COLECTORA.Facturas
 	(Fact_Numero,Fact_Fecha_Desde,Fact_Fecha_Hasta,Fact_Importe, Fact_Proveedor_ID,Fact_Proveedor_CUIT,Fact_Proveedor_RS )
 SELECT DISTINCT Factura_Nro,NULL,Factura_Fecha,1/*Como saber el importa de la factura? por la oferta?*/,
@@ -337,7 +344,7 @@ SELECT DISTINCT Factura_Nro,NULL,Factura_Fecha,1/*Como saber el importa de la fa
 	(SELECT Provee_CUIT FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
 	(SELECT Provee_RS FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
 FROM gd_esquema.Maestra MAESTRA
-*/
+where Factura_Nro is not null 
 
 --MIGRACION TABLA OFERTAS
 INSERT INTO POR_COLECTORA.Ofertas
@@ -346,6 +353,7 @@ INSERT INTO POR_COLECTORA.Ofertas
 SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, 1,
 				(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
 FROM gd_esquema.Maestra As Maestra
+where Oferta_Descripcion is not null
 
 
 --MIGRACION COMPRAS
@@ -357,16 +365,13 @@ FROM gd_esquema.Maestra As Maestra
 --MIGRACION CARGAS
 INSERT INTO POR_COLECTORA.Cargas
 (Carga_Fecha, Carga_Id_Cliente, Carga_Tipo_Pago, Carga_Monto)
-SELECT DISTINCT Carga_fecha, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS ClieColectora WHERE ClieColectora.Clie_DNI= MAESTRA.Cli_Dni),--charlar si este
+SELECT DISTINCT Carga_fecha, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS ClieColectora WHERE ClieColectora.Clie_DNI = MAESTRA.Cli_Dni),--charlar si este
 --matcheo esta bien,
 Tipo_Pago_Desc,Carga_Credito --Revisar bien la diferencia entre medio y tipo de pago porque no me acuerdo cual era cual(Perdon! jaja)
 FROM gd_esquema.Maestra AS Maestra
+where Carga_Fecha is not null
 
---MIGRACION TABLA RUBROS
-INSERT INTO POR_COLECTORA.Rubros
-(Rubro_Detalle)
-SELECT DISTINCT Provee_Rubro
-FROM gd_esquema.Maestra
+
 
 
 
