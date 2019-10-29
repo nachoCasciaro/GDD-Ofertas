@@ -114,8 +114,8 @@ GO
 --CREACIÓN DE TABLA USUARIOS
 CREATE TABLE POR_COLECTORA.Usuarios(
 	Usuario_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Usuario_Nombre VARCHAR(30) NOT NULL,
-	Usuario_Password VARCHAR(30) NOT NULL,
+	Usuario_Nombre VARCHAR(100) NOT NULL,
+	Usuario_Password VARCHAR(100) NOT NULL,
 	Usuario_Intentos Numeric NOT NULL DEFAULT 0,
 	Usuario_Habilitado BIT NOT NULL DEFAULT 1)
 GO
@@ -248,6 +248,7 @@ GO
 
 --			FIN CREACION TABLAS
 
+
 --			COMIENZO MIGRACION TABLAS
 
 --MIGRACION DIRECCIONES
@@ -278,13 +279,29 @@ SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Telefono, Cli_Mail, NULL,
 				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Cli_Direccion)
 FROM gd_esquema.Maestra
 
+
 --MIGRACION TABLA ROLES
 INSERT INTO POR_COLECTORA.Roles
 ( Rol_Nombre )
  VALUES ('Administrador'),('Cliente'),('Proveedor')
 
---MIGRACION TABLA ROLXUSUARIO
+-- Inserto el usuario admin
 
+DECLARE @password [nvarchar](100)
+SET @password = 'w23e'
+
+INSERT INTO POR_COLECTORA.Usuarios(Usuario_Nombre,Usuario_Password)
+VALUES ('admin', HASHBYTES('SHA2_256', @password))
+GO
+
+--Inserto el usuario admin en RolxUsuario
+
+DECLARE @codigo_rol_administrador [NUMERIC]
+SET @codigo_rol_administrador= (SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador')
+
+INSERT INTO POR_COLECTORA.RolxUsuario(Id_Usuario, Id_Rol)
+VALUES ((SELECT Usuario_Id FROM POR_COLECTORA.Usuarios WHERE Usuario_Nombre = 'admin'), @codigo_rol_administrador)
+GO
 
 --MIGRACION FUNCIONALIDADES
 INSERT INTO POR_COLECTORA.Funcionalidades(Func_Descripcion)
@@ -360,6 +377,7 @@ where Oferta_Descripcion is not null
 
 
 --MIGRACION CUPONES
+
 
 
 --MIGRACION CARGAS
