@@ -285,7 +285,7 @@ INSERT INTO POR_COLECTORA.Roles
 ( Rol_Nombre )
  VALUES ('Administrador'),('Cliente'),('Proveedor')
 
--- Inserto el usuario admin
+--INSERTO EL USUARIO ADMIN
 
 DECLARE @password [nvarchar](100)
 SET @password = 'w23e'
@@ -294,7 +294,7 @@ INSERT INTO POR_COLECTORA.Usuarios(Usuario_Nombre,Usuario_Password)
 VALUES ('admin', HASHBYTES('SHA2_256', @password))
 GO
 
---Inserto el usuario admin en RolxUsuario
+--INSERTO EL USUARIO ADMIN EN ROLxUSUARIO
 
 DECLARE @codigo_rol_administrador [NUMERIC]
 SET @codigo_rol_administrador= (SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador')
@@ -367,7 +367,7 @@ where Factura_Nro is not null
 INSERT INTO POR_COLECTORA.Ofertas
 (Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio,
 	Oferta_Cantidad, Oferta_Restriccion_Compra,	Oferta_Proveedor)
-SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, 1,
+SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, 0,
 				(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
 FROM gd_esquema.Maestra As Maestra
 where Oferta_Descripcion is not null
@@ -383,9 +383,8 @@ where Oferta_Descripcion is not null
 --MIGRACION CARGAS
 INSERT INTO POR_COLECTORA.Cargas
 (Carga_Fecha, Carga_Id_Cliente, Carga_Tipo_Pago, Carga_Monto)
-SELECT DISTINCT Carga_fecha, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS ClieColectora WHERE ClieColectora.Clie_DNI = MAESTRA.Cli_Dni),--charlar si este
---matcheo esta bien,
-Tipo_Pago_Desc,Carga_Credito --Revisar bien la diferencia entre medio y tipo de pago porque no me acuerdo cual era cual(Perdon! jaja)
+SELECT DISTINCT Carga_fecha, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni and Colectora.Clie_Nombre + Colectora.Clie_Apellido = Maestra.Cli_Nombre + Maestra.Cli_Apellido),
+				Tipo_Pago_Desc,Carga_Credito 
 FROM gd_esquema.Maestra AS Maestra
 where Carga_Fecha is not null
 
