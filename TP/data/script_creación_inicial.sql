@@ -374,19 +374,18 @@ where Factura_Nro is not null
 GROUP BY Factura_Nro, Factura_Fecha, Provee_RS
 
 
---MIGRACION COMPRAS
+--MIGRACION COMPRAS - Revisar el jueves el matching de compra_oferta
 INSERT INTO POR_COLECTORA.Compras
-(Compra_Cliente, Compra_Oferta, Compra_Cantidad, Compra_Fecha, Compra_Codigo, Compra_Id_Factura, Compra_Oferta_Precio)
-SELECT DISTINCT		
-	(SELECT Clie_Id FROM POR_COLECTORA.Clientes as c WHERE c.Clie_DNI = maestra.Cli_Dni),
-	(SELECT Oferta_Id FROM POR_COLECTORA.Ofertas as c WHERE c.Oferta_Descripcion = maestra.Oferta_Descripcion),
-	--(SELECT COUNT(*) FROM gd_esquema.Maestra group by Cli_Dni),
-	1,
-	Oferta_Fecha_Compra,
-	Oferta_Codigo,
-	(SELECT Fact_Id FROM POR_COLECTORA.Facturas WHERE Fact_Numero = Factura_Nro),
-	(SELECT Oferta_Precio FROM POR_COLECTORA.Ofertas AS C WHERE C.Oferta_Descripcion = Oferta_Descripcion)
-FROM gd_esquema.Maestra as maestra
+(Compra_Cliente,Compra_Oferta,Compra_Cantidad,Compra_Fecha,Compra_Codigo,Compra_Id_Factura,Compra_Oferta_Precio)
+SELECT DISTINCT (SELECT Clie_Id FROM POR_COLECTORA.Clientes As Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni), 
+				(SELECT Oferta_id FROM POR_COLECTORA.Ofertas AS Colectora WHERE 
+					Colectora.Oferta_Fecha = Maestra.Oferta_Fecha AND Colectora.Oferta_Fecha_Venc = Maestra.Oferta_Fecha_Venc 
+					AND Colectora.Oferta_Descripcion = Maestra.Oferta_Descripcion),
+				1,Maestra.Oferta_Fecha_Compra,Maestra.Oferta_Codigo,
+				(SELECT Fact_Id FROM POR_COLECTORA.Facturas AS Colectora WHERE Colectora.Fact_Id = Maestra.Factura_Nro),
+				Maestra.Oferta_Precio
+FROM gd_esquema.Maestra As Maestra
+where Oferta_Descripcion is not null
 
 --MIGRACION CUPONES
 
