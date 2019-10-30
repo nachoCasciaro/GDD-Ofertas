@@ -350,19 +350,6 @@ SELECT DISTINCT Maestra.Provee_RS, Maestra.Provee_Telefono, Maestra.Provee_CUIT,
 FROM gd_esquema.Maestra as Maestra
 where Maestra.Provee_RS is not null
 
-
---MIGRACION FACTURAS
-
-
-INSERT INTO POR_COLECTORA.Facturas
-	(Fact_Numero,Fact_Fecha_Desde,Fact_Fecha_Hasta,Fact_Importe, Fact_Proveedor_ID,Fact_Proveedor_CUIT,Fact_Proveedor_RS )
-SELECT DISTINCT Factura_Nro,NULL,Factura_Fecha,1/*Como saber el importa de la factura? por la oferta?*/,
-	(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
-	(SELECT Provee_CUIT FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
-	(SELECT Provee_RS FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
-FROM gd_esquema.Maestra MAESTRA
-where Factura_Nro is not null 
-
 --MIGRACION TABLA OFERTAS
 INSERT INTO POR_COLECTORA.Ofertas
 (Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio,
@@ -372,9 +359,34 @@ SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Prec
 FROM gd_esquema.Maestra As Maestra
 where Oferta_Descripcion is not null
 
+--MIGRACION FACTURAS
+
+
+INSERT INTO POR_COLECTORA.Facturas
+	(Fact_Numero,Fact_Fecha_Desde,Fact_Fecha_Hasta,Fact_Importe, Fact_Proveedor_ID,Fact_Proveedor_CUIT,Fact_Proveedor_RS )
+SELECT DISTINCT Factura_Nro,NULL,Factura_Fecha,
+	SUM(Oferta_Precio),
+	(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
+	(SELECT Provee_CUIT FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
+	(SELECT Provee_RS FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
+FROM gd_esquema.Maestra MAESTRA
+where Factura_Nro is not null 
+GROUP BY Factura_Nro, Factura_Fecha, Provee_RS
+
 
 --MIGRACION COMPRAS
-
+INSERT INTO POR_COLECTORA.Compras
+(Compra_Cliente, Compra_Oferta, Compra_Cantidad, Compra_Fecha, Compra_Codigo, Compra_Id_Factura, Compra_Oferta_Precio)
+SELECT DISTINCT		
+	(SELECT Clie_Id FROM POR_COLECTORA.Clientes as c WHERE c.Clie_DNI = maestra.Cli_Dni),
+	(SELECT Oferta_Id FROM POR_COLECTORA.Ofertas as c WHERE c.Oferta_Descripcion = maestra.Oferta_Descripcion),
+	--(SELECT COUNT(*) FROM gd_esquema.Maestra group by Cli_Dni),
+	1,
+	Oferta_Fecha_Compra,
+	Oferta_Codigo,
+	(SELECT Fact_Id FROM POR_COLECTORA.Facturas WHERE Fact_Numero = Factura_Nro),
+	(SELECT Oferta_Precio FROM POR_COLECTORA.Ofertas AS C WHERE C.Oferta_Descripcion = Oferta_Descripcion)
+FROM gd_esquema.Maestra as maestra
 
 --MIGRACION CUPONES
 
