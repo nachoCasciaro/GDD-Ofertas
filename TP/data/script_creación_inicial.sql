@@ -426,6 +426,7 @@ CREATE PROCEDURE POR_COLECTORA.sp_alta_cliente (
 )
 AS
 BEGIN
+
 	IF not exists (select 1 from POR_COLECTORA.Direcciones where Direccion_Calle = @direCalle and Direccion_Nro_Piso = @nroPiso and Direccion_Depto = @depto and Direccion_Ciudad = @ciudad) 
 		BEGIN
 			INSERT INTO POR_COLECTORA.Direcciones (Direccion_Calle,Direccion_Nro_Piso,Direccion_Depto, Direccion_Ciudad) VALUES (@direCalle,@nroPiso,@depto,@ciudad)
@@ -439,6 +440,21 @@ BEGIN
 END
 
 GO
+
+
+CREATE PROCEDURE POR_COLECTORA.sp_baja_cliente (
+@id_clie numeric
+)
+AS
+BEGIN
+	UPDATE POR_COLECTORA.Clientes
+	SET Clie_Habilitado = 0
+	WHERE Clie_Id = @id_clie;
+END
+
+GO
+
+
 
 
 
