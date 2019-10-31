@@ -86,9 +86,18 @@ DROP TABLE POR_COLECTORA.Tarjetas
 IF OBJECT_ID('POR_COLECTORA.Cargas', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Cargas
 
---DROP SP CREAR ROL
+--DROP SP ALTA CLIENTE
 IF OBJECT_ID ('POR_COLECTORA.sp_alta_cliente') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_alta_cliente
+
+--DROP SP BAJA CLIENTE
+IF OBJECT_ID ('POR_COLECTORA.sp_baja_cliente') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_baja_cliente
+
+--DROP SP MODIFICAR CLIENTE
+IF OBJECT_ID ('POR_COLECTORA.sp_modificar_cliente') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_modificar_cliente
+
 
 GO
 
@@ -454,6 +463,35 @@ END
 
 GO
 
+
+CREATE PROCEDURE POR_COLECTORA.sp_modificar_cliente (
+@id_clie numeric,
+@nombre char(50),
+@apellido char(50),
+@dni numeric (18,0),
+@mail char(50),
+@telefono numeric(18,0),
+@direCalle char(80),
+@nroPiso numeric(10),
+@depto numeric(5),
+@ciudad char(50),
+@CP char(20),
+@fechaNacimiento datetime
+)
+AS
+BEGIN
+
+	UPDATE POR_COLECTORA.Direcciones
+	SET Direccion_Calle = @direCalle, Direccion_Nro_Piso = @nroPiso, Direccion_Depto = @depto, Direccion_Ciudad = @ciudad
+	WHERE Direccion_Id = (select Clie_Direccion from Clientes where Clie_Id = @id_clie)
+
+	UPDATE POR_COLECTORA.Clientes
+	SET Clie_Nombre = @nombre, Clie_Apellido = @apellido, Clie_DNI = @dni, Clie_Mail = @mail, Clie_Telefono = @telefono, Clie_CP = @CP, Clie_Fecha_Nac = @fechaNacimiento
+	WHERE Clie_Id = @id_clie;
+	
+END
+
+GO
 
 
 
