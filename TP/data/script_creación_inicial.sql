@@ -86,18 +86,19 @@ DROP TABLE POR_COLECTORA.Tarjetas
 IF OBJECT_ID('POR_COLECTORA.Cargas', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Cargas
 
+--DROP SP CREAR ROL
+IF OBJECT_ID ('POR_COLECTORA.sp_alta_cliente') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_alta_cliente
 
-IF EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'POR_COLECTORA')
-DROP SCHEMA POR_COLECTORA
+GO
+
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
+BEGIN
+	EXEC ('CREATE SCHEMA [POR_COLECTORA] AUTHORIZATION gdCruceros2019')
+END
+GO
 
 --			FIN DROPEO 
-
-
-GO
-
---			CREACION SCHEMA
-CREATE SCHEMA POR_COLECTORA AUTHORIZATION gdCupon2019;
-GO
 
 
 --			INICIO CREACION TABLAS
@@ -380,16 +381,19 @@ INSERT INTO POR_COLECTORA.Compras
 SELECT DISTINCT (SELECT Clie_Id FROM POR_COLECTORA.Clientes As Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni), 
 				(SELECT Oferta_id FROM POR_COLECTORA.Ofertas AS Colectora WHERE 
 					Colectora.Oferta_Fecha = Maestra.Oferta_Fecha AND Colectora.Oferta_Fecha_Venc = Maestra.Oferta_Fecha_Venc 
-					AND Colectora.Oferta_Descripcion = Maestra.Oferta_Descripcion),
+					AND Colectora.Oferta_Descripcion = Maestra.Oferta_Descripcion AND Colectora.Oferta_Precio = Maestra.Oferta_Precio),
 				1,Maestra.Oferta_Fecha_Compra,Maestra.Oferta_Codigo,
-				(SELECT Fact_Id FROM POR_COLECTORA.Facturas AS Colectora WHERE Colectora.Fact_Id = Maestra.Factura_Nro),
+				(SELECT Fact_Id FROM POR_COLECTORA.Facturas AS Colectora WHERE Colectora.Fact_Numero = Maestra.Factura_Nro),
 				Maestra.Oferta_Precio
 FROM gd_esquema.Maestra As Maestra
 where Oferta_Descripcion is not null
 
 --MIGRACION CUPONES
+/*
+INSERT INTO POR_COLECTORA.Cupones
+(Cupon_Fecha_Venc,Cupon_Fecha_Consumo,Cupon_Id_Cliente_Consumidor)
 
-
+*/
 
 --MIGRACION CARGAS
 INSERT INTO POR_COLECTORA.Cargas
@@ -399,8 +403,42 @@ SELECT DISTINCT Carga_fecha, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Cole
 FROM gd_esquema.Maestra AS Maestra
 where Carga_Fecha is not null
 
+GO
+
+--FIN MIGRACIONES
 
 
+--CREACION DE OBJETOS
+
+
+CREATE PROCEDURE POR_COLECTORA.sp_alta_cliente (
+@nombre char(50),
+@apellido char(50),
+@dni numeric (18,0),
+@mail char(50),
+@telefono numeric(18,0),
+@direCalle char(80),
+@nroPiso numeric(10),
+@depto numeric(5),
+@ciudad char(50),
+@CP char(20),
+@fechaNacimiento datetime
+)
+AS
+BEGIN
+	IF not exists (select 1 from POR_COLECTORA.Direcciones where Direccion_Calle = @direCalle and Direccion_Nro_Piso = @nroPiso and Direccion_Depto = @depto and Direccion_Ciudad = @ciudad) 
+		BEGIN
+			INSERT INTO POR_COLECTORA.Direcciones (Direccion_Calle,Direccion_Nro_Piso,Direccion_Depto, Direccion_Ciudad) VALUES (@direCalle,@nroPiso,@depto,@ciudad)
+		END
+
+	declare @dire_id numeric
+	set @dire_id = (select Direccion_Id from Direcciones where Direccion_Calle = @direCalle and Direccion_Nro_Piso = @nroPiso and Direccion_Depto = @depto and Direccion_Ciudad = @ciudad)
+	
+	INSERT INTO POR_COLECTORA.Clientes (Clie_Nombre,Clie_Apellido,Clie_DNI,Clie_Mail,Clie_Telefono,Clie_Direccion,Clie_CP,Clie_Fecha_Nac) 
+	VALUES (@nombre,@apellido,@dni,@mail,@telefono,@dire_id,@CP,@fechaNacimiento)
+END
+
+GO
 
 
 
