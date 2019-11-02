@@ -612,3 +612,79 @@ BEGIN
 END
 
 GO
+
+--TOP 5 de proveedores con mayor porcentaje de descuento ofrecido en sus ofertas en forma descendente por monto
+--La pantalla debe permitirnos seleccionar el semestre
+
+--Ofertas que se hayan lanzado en el semestre, o tambien tiene que entrar el vencimiento??
+CREATE PROCEDURE POR_COLECTORA.sp_prov_mas_descuento (@semestre numeric, @anio numeric)
+AS
+BEGIN
+
+	SELECT TOP 5 Provee_RS AS RAZON_SOCIAL_PROVEEDOR, Provee_Rubro AS RUBRO, AVG(Oferta_Precio_Ficticio - Oferta_Precio) AS PORCENTAJE_PROMEDIO_OFERTA
+	FROM POR_COLECTORA.Proveedores JOIN POR_COLECTORA.Ofertas ON Provee_Id = Oferta_Proveedor
+	WHERE YEAR(Oferta_Fecha) = @anio AND 
+								(MONTH(Oferta_Fecha) = (@semestre * 6) 
+								OR MONTH(Oferta_Fecha) = (@semestre * 6) - 1 
+								OR MONTH(Oferta_Fecha) = (@semestre * 6) - 2
+								OR MONTH(Oferta_Fecha) = (@semestre * 6) - 3
+								OR MONTH(Oferta_Fecha) = (@semestre * 6) - 4
+								OR MONTH(Oferta_Fecha) = (@semestre * 6) - 5) 
+	GROUP BY Provee_RS, Provee_Rubro
+	ORDER BY 3 DESC
+
+END
+
+GO
+
+--TOP 5 de proveedores con mayor facturacion
+--La pantalla debe permitirnos seleccionar el semestre
+CREATE PROCEDURE POR_COLECTORA.sp_prov_mayor_facturacion (@semestre numeric, @anio numeric)
+AS
+BEGIN
+
+	SELECT TOP 5 Provee_RS AS RAZON_SOCIAL_PROVEEDOR, Provee_Rubro AS RUBRO, AVG(Fact_Importe) AS PROMEDIO_FACTURACION
+	FROM POR_COLECTORA.Proveedores JOIN POR_COLECTORA.Facutras o1 ON Provee_Id = Fact_Proveedor_ID
+	WHERE YEAR(Fact_Fecha_Desde) = @anio AND 
+								(MONTH(Fact_Fecha_Desde) = (@semestre * 6) 
+								OR MONTH(Fact_Fecha_Desde) = (@semestre * 6) - 1 
+								OR MONTH(Fact_Fecha_Desde) = (@semestre * 6) - 2
+								OR MONTH(Fact_Fecha_Desde) = (@semestre * 6) - 3
+								OR MONTH(Fact_Fecha_Desde) = (@semestre * 6) - 4
+								OR MONTH(Fact_Fecha_Desde) = (@semestre * 6) - 5) 
+			AND YEAR(Fact_Fecha_Hasta) = @anio AND 
+								(MONTH(Fact_Fecha_Hasta) = (@semestre * 6) 
+								OR MONTH(Fact_Fecha_Hasta) = (@semestre * 6) - 1 
+								OR MONTH(Fact_Fecha_Hasta) = (@semestre * 6) - 2
+								OR MONTH(Fact_Fecha_Hasta) = (@semestre * 6) - 3
+								OR MONTH(Fact_Fecha_Hasta) = (@semestre * 6) - 4
+								OR MONTH(Fact_Fecha_Hasta) = (@semestre * 6) - 5) 
+	GROUP BY Provee_RS, Provee_Rubro
+	ORDER BY 3 DESC
+
+END
+
+GO
+
+
+--SP Alta ofertas proveedores ()
+CREATE PROCEDURE POR_COLECTORA.sp_alta_ofertas(
+@descripcion char(50), 
+@fecha DateTime, 
+@fecha_venc DateTime, 
+@precio_oferta numeric, 
+@precio_original numeric, 
+@stock numeric, 
+@max_compra numeric)
+
+AS
+BEGIN
+	--Chequeo fechas contra el sistema?? 
+	--El proveedor podrá ir cargando ofertas con diferentes fechas, esta fecha debe ser mayor o igual a la fecha actual del sistema.
+
+	INSERT INTO POR_COLECTORA.Ofertas(Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, Oferta_Restriccion_Compra, Oferta_Proveedor) 
+	VALUES (@descripcion, @fecha, @fecha_venc, @precio_original, @precio_oferta, @stock, @max_compra,) --id proveedor ??
+
+END
+
+GO
