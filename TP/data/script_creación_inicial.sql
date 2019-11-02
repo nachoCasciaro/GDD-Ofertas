@@ -110,6 +110,10 @@ DROP PROCEDURE POR_COLECTORA.sp_baja_proveedor
 IF OBJECT_ID ('POR_COLECTORA.sp_modificar_proveedor') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_modificar_proveedor
 
+--DROP SP CARGA CREDITO
+IF OBJECT_ID ('POR_COLECTORA.sp_carga_credito') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_carga_credito
+
 
 GO
 
@@ -195,7 +199,7 @@ CREATE TABLE POR_COLECTORA.Proveedores(
 	Provee_RS NVARCHAR(80) NOT NULL,
 	Provee_Mail NVARCHAR(50),
 	Provee_Telefono Numeric NOT NULL,
-	Provee_CUIT NVARCHAR(13),
+	Provee_CUIT NVARCHAR(13) UNIQUE,
 	Provee_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
 	Provee_CP Numeric,
 	Provee_Rubro Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Rubros(Rubro_Id),
@@ -251,7 +255,8 @@ GO
 
 --CREACIÓN DE TABLA TARJETAS
 CREATE TABLE POR_COLECTORA.Tarjetas(
-	Tarjeta_Numero Numeric PRIMARY KEY,
+	Tarjeta_Id Numeric IDENTITY(1,1) PRIMARY KEY,
+	Tarjeta_Numero Numeric NOT NULL,
 	Tarjeta_Tipo nvarchar(50) NOT NULL,
 	Tarjeta_Fecha_Venc DATETIME NOT NULL,
 	Tarjeta_Id_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id))
@@ -264,7 +269,7 @@ CREATE TABLE POR_COLECTORA.Cargas(
 	Carga_Id_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
 	Carga_Tipo_Pago nvarchar(20), --Es el tipo de tarjeta
 	Carga_Monto NUMERIC NOT NULL,
-	Carga_Id_Tarjeta Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Tarjetas(Tarjeta_Numero),
+	Carga_Id_Tarjeta Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Tarjetas(Tarjeta_Id),
 	Carga_Medio_Pago VARCHAR(8))
 GO
 
@@ -571,6 +576,39 @@ BEGIN
 	SET Provee_RS = @razonSocial, Provee_Mail = @mail, Provee_Telefono = @telefono, Provee_CP = @CP, Provee_CUIT = @cuit, Provee_Nombre_Contacto = @nombreContacto
 	WHERE Provee_Id = @id_prove;
 	
+END
+
+GO
+
+CREATE PROCEDURE POR_COLECTORA.sp_carga_credito (
+@id_cliente numeric,
+@fecha_carga datetime, --pasar la de archivo configuracion -> esto lo haces en la interfaz
+@monto int,
+@tipo_tarjeta nvarchar(50),
+@numero_tarjeta numeric,
+@fecha_venc datetime
+)
+
+--en el enunciado dice que el usuario elija el tipo de pago: tarjeta de credito o debito, 
+--chau efectivo?
+AS
+BEGIN
+	UPDATE POR_COLECTORA.Clientes
+	SET Clie_Saldo = Clie_Saldo + @monto
+	WHERE Clie_Id = @id_cliente;
+
+	IF not exists (select 1 from POR_COLECTORA.Tarjetas where Tarjeta_Tipo = @tipo_tarjeta and Tarjeta_Fecha_Venc = @tipo_tarjeta and Tarjeta_Id_Cliente = @id_cliente) 
+		BEGIN
+			INSERT INTO POR_COLECTORA.Tarjetas (Tarjeta_Numero,Tarjeta_Tipo,Tarjeta_Fecha_Venc, Tarjeta_Id_Cliente) VALUES (@numero_tarjeta,@tipo_tarjeta,@fecha_venc,@id_cliente)
+		END
+
+	declare @id_tarjeta numeric
+	set @id_tarjeta = (select Tarjeta_Id from Tarjetas where Tarjeta_Id_Cliente = @id_cliente and Tarjeta_Numero = @numero_tarjeta)
+
+	
+	INSERT INTO POR_COLECTORA.Cargas(Carga_Fecha,Carga_Id_Cliente,Carga_Monto,Carga_Tipo_Pago,Carga_Id_Tarjeta) 
+	VALUES (@fecha_carga,@id_cliente,@monto,@tipo_tarjeta,@id_tarjeta)
+
 END
 
 GO
