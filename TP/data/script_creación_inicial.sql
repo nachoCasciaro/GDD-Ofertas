@@ -98,6 +98,18 @@ DROP PROCEDURE POR_COLECTORA.sp_baja_cliente
 IF OBJECT_ID ('POR_COLECTORA.sp_modificar_cliente') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_modificar_cliente
 
+--DROP SP ALTA PROVEEDOR
+IF OBJECT_ID ('POR_COLECTORA.sp_alta_proveedor') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_alta_proveedor
+
+--DROP SP BAJA PROVEEDOR
+IF OBJECT_ID ('POR_COLECTORA.sp_baja_proveedor') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_baja_proveedor
+
+--DROP SP MODIFICAR PROVEEDOR
+IF OBJECT_ID ('POR_COLECTORA.sp_modificar_proveedor') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_modificar_proveedor
+
 
 GO
 
@@ -493,6 +505,72 @@ END
 
 GO
 
+CREATE PROCEDURE POR_COLECTORA.sp_alta_proveedor (
+@razonSocial char(50),
+@mail char(50),
+@telefono numeric(18,0),
+@direCalle char(80),
+@nroPiso numeric(10),
+@depto numeric(5),
+@ciudad char(50),
+@CP char(20),
+@cuit numeric(20),
+@nombreContacto char(20)
+)
+AS
+BEGIN
+
+	IF not exists (select 1 from POR_COLECTORA.Direcciones where Direccion_Calle = @direCalle and Direccion_Nro_Piso = @nroPiso and Direccion_Depto = @depto and Direccion_Ciudad = @ciudad) 
+		BEGIN
+			INSERT INTO POR_COLECTORA.Direcciones (Direccion_Calle,Direccion_Nro_Piso,Direccion_Depto, Direccion_Ciudad) VALUES (@direCalle,@nroPiso,@depto,@ciudad)
+		END
+
+	declare @dire_id numeric
+	set @dire_id = (select Direccion_Id from Direcciones where Direccion_Calle = @direCalle and Direccion_Nro_Piso = @nroPiso and Direccion_Depto = @depto and Direccion_Ciudad = @ciudad)
+	
+	INSERT INTO POR_COLECTORA.Proveedores(Provee_RS,Provee_Mail,Provee_Telefono,Provee_Direccion,Provee_CP,Provee_CUIT,Provee_Nombre_Contacto) 
+	VALUES (@razonSocial,@mail,@telefono,@dire_id,@CP,@cuit,@nombreContacto)
+END
+
+GO
 
 
+CREATE PROCEDURE POR_COLECTORA.sp_baja_proveedor (
+@id_prove numeric
+)
+AS
+BEGIN
+	UPDATE POR_COLECTORA.Proveedores
+	SET Provee_Habilitado = 0
+	WHERE Provee_Id = @id_prove;
+END
 
+GO
+
+CREATE PROCEDURE POR_COLECTORA.sp_modificar_proveedor (
+@id_prove numeric,
+@razonSocial char(50),
+@mail char(50),
+@telefono numeric(18,0),
+@direCalle char(80),
+@nroPiso numeric(10),
+@depto numeric(5),
+@ciudad char(50),
+@CP char(20),
+@cuit numeric(20),
+@nombreContacto char(20)
+)
+AS
+BEGIN
+
+	UPDATE POR_COLECTORA.Direcciones
+	SET Direccion_Calle = @direCalle, Direccion_Nro_Piso = @nroPiso, Direccion_Depto = @depto, Direccion_Ciudad = @ciudad
+	WHERE Direccion_Id = (select Provee_Direccion from Proveedores where Provee_Id = @id_prove)
+
+	UPDATE POR_COLECTORA.Proveedores
+	SET Provee_RS = @razonSocial, Provee_Mail = @mail, Provee_Telefono = @telefono, Provee_CP = @CP, Provee_CUIT = @cuit, Provee_Nombre_Contacto = @nombreContacto
+	WHERE Provee_Id = @id_prove;
+	
+END
+
+GO
