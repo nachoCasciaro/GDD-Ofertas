@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaOfertas.CrearOferta
+namespace FrbaOfertas.AbmProveedor
 {
-    public partial class Form1 : Form
+    public partial class AltaProveedor : Form
     {
-        public Form1()
+        public AltaProveedor()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

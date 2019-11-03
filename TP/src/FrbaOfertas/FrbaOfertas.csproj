@@ -51,11 +51,17 @@
     <Compile Include="AbmCliente\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmProveedor\Form1.cs">
+    <Compile Include="AbmProveedor\AltaProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmProveedor\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmProveedor\AltaProveedor.Designer.cs">
+      <DependentUpon>AltaProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmProveedor\BajaProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmProveedor\BajaProveedor.Designer.cs">
+      <DependentUpon>BajaProveedor.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\Form1.cs">
       <SubType>Form</SubType>
@@ -63,23 +69,23 @@
     <Compile Include="AbmRol\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="CragaCredito\ComprarOferta\Form1.cs">
+    <Compile Include="CargaCredito\ComprarOferta\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CragaCredito\ComprarOferta\Form1.Designer.cs">
+    <Compile Include="CargaCredito\ComprarOferta\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="CragaCredito\Form1.cs">
+    <Compile Include="CargaCredito\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CragaCredito\Form1.Designer.cs">
+    <Compile Include="CargaCredito\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="CrearOferta\Form1.cs">
+    <Compile Include="CrearOferta\CrearOferta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CrearOferta\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CrearOferta\CrearOferta.Designer.cs">
+      <DependentUpon>CrearOferta.cs</DependentUpon>
     </Compile>
     <Compile Include="DB.cs" />
     <Compile Include="Facturar\Form1.cs">
@@ -120,6 +126,13 @@
     <Compile Include="Registro\RegistroProveedor.Designer.cs">
       <DependentUpon>RegistroProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Validaciones.cs" />
+    <EmbeddedResource Include="AbmProveedor\AltaProveedor.resx">
+      <DependentUpon>AltaProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrearOferta\CrearOferta.resx">
+      <DependentUpon>CrearOferta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>

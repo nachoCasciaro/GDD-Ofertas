@@ -123,9 +123,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(36, 267);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 13);
+            this.label6.Size = new System.Drawing.Size(60, 13);
             this.label6.TabIndex = 7;
-            this.label6.Text = "CUIT";
+            this.label6.Text = "CUIT (sin -)";
             // 
             // label7
             // 
