@@ -775,8 +775,6 @@ END
 
 GO
 
-<<<<<<< HEAD
-=======
 --SP FACTURACION A PROVEEDOR
 --Listado ofertas adquiridas por clientes, no me dice que campos mostrar, muestro ID y descripcion
 CREATE PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor(@fecha_inicio DateTime, @fecha_fin DateTime, @proveedor numeric)
@@ -811,5 +809,3 @@ END
 
 GO
 
-
->>>>>>> 93247154f101d7e74189038cece9dc706e21d2e5
