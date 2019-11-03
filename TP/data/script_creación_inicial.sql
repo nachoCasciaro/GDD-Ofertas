@@ -775,3 +775,41 @@ END
 
 GO
 
+<<<<<<< HEAD
+=======
+--SP FACTURACION A PROVEEDOR
+--Listado ofertas adquiridas por clientes, no me dice que campos mostrar, muestro ID y descripcion
+CREATE PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor(@fecha_inicio DateTime, @fecha_fin DateTime, @proveedor numeric)
+AS
+BEGIN
+
+	SELECT DISTINCT(Compra_Oferta) AS OFERTA_CODIGO, Oferta_Descripcion AS OFERTA_DESCRIPCION 
+	FROM Compras JOIN Ofertas ON Compra_Oferta = Oferta_Id JOIN Proveedores ON Oferta_Proveedor = Provee_Id
+	WHERE Compra_Fecha >= @fecha_inicio AND Compra_Fecha <= @fecha_fin AND Provee_Id = @proveedor) 
+
+END
+
+GO
+
+--SP FACTURACION A PROVEEDOR
+--Importe factura y numero factura
+CREATE PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor(@fecha_inicio DateTime, @fecha_fin DateTime, @proveedor numeric)
+AS
+BEGIN
+	--Importe factura
+	declare @importe_total numeric
+	set @importe_total = (SELECT SUM(Compra_Oferta_Precio * Compra_Cantidad)
+						FROM Compras JOIN Ofertas ON Compra_Oferta = Oferta_Id JOIN Proveedores ON Oferta_Proveedor = Provee_Id
+						WHERE Compra_Fecha >= @fecha_inicio AND Compra_Fecha <= @fecha_fin AND Provee_Id = @proveedor) 
+ 
+	declare @fact_numero numeric
+	set @fact_numero = (SELECT TOP 1 fact_numero
+						FROM Facturas
+						ORDER BY fact_numero DESC) + 1
+
+END
+
+GO
+
+
+>>>>>>> 93247154f101d7e74189038cece9dc706e21d2e5
