@@ -114,6 +114,21 @@ DROP PROCEDURE POR_COLECTORA.sp_modificar_proveedor
 IF OBJECT_ID ('POR_COLECTORA.sp_carga_credito') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_carga_credito
 
+--DROP SP LISTADO PROVEEDORES MAS DESCUENTO
+IF OBJECT_ID ('POR_COLECTORA.sp_prov_mas_descuento') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_prov_mas_descuento
+
+--DROP SP ALTA OFERTAS
+IF OBJECT_ID ('POR_COLECTORA.sp_alta_ofertas') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_alta_ofertas
+
+--DROP SP LISTADO PROVEEDORES MAYOR FACTURACION
+IF OBJECT_ID ('POR_COLECTORA.sp_prov_mayor_facturacion') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_prov_mayor_facturacion
+
+--DROP SP COMPRAR OFERTA
+IF OBJECT_ID ('POR_COLECTORA.sp_comprar_oferta') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_comprar_oferta
 
 GO
 
@@ -239,14 +254,14 @@ CREATE TABLE POR_COLECTORA.Compras(
 	Compra_Oferta Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Ofertas(Oferta_Id),
 	Compra_Cantidad Numeric NOT NULL,
 	Compra_Fecha DATETIME NOT NULL,
-	Compra_Codigo Numeric NOT NULL,
-	Compra_Id_Factura Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Facturas(Fact_Id),
+	Compra_Id_Factura Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Facturas(Fact_Id),
 	Compra_Oferta_Precio Numeric NOT NULL)
 GO
 
 --CREACIÓN DE TABLA CUPONES
 CREATE TABLE POR_COLECTORA.Cupones(
 	Cupon_Id Numeric IDENTITY(1,1) PRIMARY KEY,
+	Cupon_Codigo Numeric NOT NULL,
 	Cupon_Fecha_Venc DATETIME NOT NULL,
 	Cupon_Fecha_Consumo DATETIME,
 	--Cupon_Nro_Compra Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Compras(Compra_Id),
@@ -388,7 +403,6 @@ where Oferta_Descripcion is not null
 
 --MIGRACION FACTURAS
 
-
 INSERT INTO POR_COLECTORA.Facturas
 	(Fact_Numero,Fact_Fecha_Desde,Fact_Fecha_Hasta,Fact_Importe, Fact_Proveedor_ID,Fact_Proveedor_CUIT,Fact_Proveedor_RS )
 SELECT DISTINCT Factura_Nro,NULL,Factura_Fecha,
@@ -403,12 +417,12 @@ GROUP BY Factura_Nro, Factura_Fecha, Provee_RS
 
 --MIGRACION COMPRAS - Revisar el jueves el matching de compra_oferta
 INSERT INTO POR_COLECTORA.Compras
-(Compra_Cliente,Compra_Oferta,Compra_Cantidad,Compra_Fecha,Compra_Codigo,Compra_Id_Factura,Compra_Oferta_Precio)
+(Compra_Cliente,Compra_Oferta,Compra_Cantidad,Compra_Fecha,Compra_Id_Factura,Compra_Oferta_Precio)
 SELECT DISTINCT (SELECT Clie_Id FROM POR_COLECTORA.Clientes As Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni), 
 				(SELECT Oferta_id FROM POR_COLECTORA.Ofertas AS Colectora WHERE 
 					Colectora.Oferta_Fecha = Maestra.Oferta_Fecha AND Colectora.Oferta_Fecha_Venc = Maestra.Oferta_Fecha_Venc 
 					AND Colectora.Oferta_Descripcion = Maestra.Oferta_Descripcion AND Colectora.Oferta_Precio = Maestra.Oferta_Precio),
-				1,Maestra.Oferta_Fecha_Compra,Maestra.Oferta_Codigo,
+				1,Maestra.Oferta_Fecha_Compra,
 				(SELECT Fact_Id FROM POR_COLECTORA.Facturas AS Colectora WHERE Colectora.Fact_Numero = Maestra.Factura_Nro),
 				Maestra.Oferta_Precio
 FROM gd_esquema.Maestra As Maestra
@@ -417,9 +431,12 @@ where Oferta_Descripcion is not null
 --MIGRACION CUPONES
 /*
 INSERT INTO POR_COLECTORA.Cupones
-(Cupon_Fecha_Venc,Cupon_Fecha_Consumo,Cupon_Id_Cliente_Consumidor)
-
+(Cupon_Fecha_Venc, Cupon_Codigo,Cupon_Fecha_Consumo,Cupon_Id_Cliente_Consumidor)
+SELECT DISTINCT 30, (select  ,
+FROM gd_esquema.Maestra AS Maestra
 */
+
+
 
 --MIGRACION CARGAS
 INSERT INTO POR_COLECTORA.Cargas
@@ -644,7 +661,7 @@ AS
 BEGIN
 
 	SELECT TOP 5 Provee_RS AS RAZON_SOCIAL_PROVEEDOR, Provee_Rubro AS RUBRO, AVG(Fact_Importe) AS PROMEDIO_FACTURACION
-	FROM POR_COLECTORA.Proveedores JOIN POR_COLECTORA.Facutras o1 ON Provee_Id = Fact_Proveedor_ID
+	FROM POR_COLECTORA.Proveedores JOIN POR_COLECTORA.Facturas o1 ON Provee_Id = Fact_Proveedor_ID
 	WHERE YEAR(Fact_Fecha_Desde) = @anio AND 
 								(MONTH(Fact_Fecha_Desde) = (@semestre * 6) 
 								OR MONTH(Fact_Fecha_Desde) = (@semestre * 6) - 1 
@@ -667,8 +684,9 @@ END
 GO
 
 
---SP Alta ofertas proveedores ()
+--SP Alta ofertas proveedores 
 CREATE PROCEDURE POR_COLECTORA.sp_alta_ofertas(
+@id_prove numeric,
 @descripcion char(50), 
 @fecha DateTime, 
 @fecha_venc DateTime, 
@@ -683,7 +701,36 @@ BEGIN
 	--El proveedor podrá ir cargando ofertas con diferentes fechas, esta fecha debe ser mayor o igual a la fecha actual del sistema.
 
 	INSERT INTO POR_COLECTORA.Ofertas(Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, Oferta_Restriccion_Compra, Oferta_Proveedor) 
-	VALUES (@descripcion, @fecha, @fecha_venc, @precio_original, @precio_oferta, @stock, @max_compra,) --id proveedor ??
+	VALUES (@descripcion, @fecha, @fecha_venc, @precio_original, @precio_oferta, @stock, @max_compra,@id_prove)
+
+END
+
+GO
+
+--SP COMPRA OFERTA 
+CREATE PROCEDURE POR_COLECTORA.sp_comprar_oferta(
+@id_oferta numeric,
+@id_cliente numeric,
+@fecha_compra datetime,
+@cantidad_compra numeric
+)
+
+AS
+BEGIN
+	
+	declare @precio_oferta numeric
+	set @precio_oferta = (select Oferta_Precio from Ofertas where Oferta_Id = @id_oferta)
+
+	declare @cantidad_maxima numeric
+	set @cantidad_maxima = (select Oferta_Restriccion_Compra from Ofertas where Oferta_Id = @id_oferta)
+
+
+	if ( (select Clie_Saldo from Clientes where Clie_Id = @id_cliente) >= @precio_oferta 
+			and ( (select count(*) from Compras where Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente group by Compra_Cliente) + @cantidad_compra ) <  @cantidad_maxima  )
+		begin
+			INSERT INTO POR_COLECTORA.Compras(Compra_Fecha, Compra_Oferta, Compra_Cliente, Compra_Cantidad, Compra_Oferta_Precio) 
+			VALUES (@fecha_compra,@id_oferta,@id_cliente,@cantidad_compra,@precio_oferta)
+		end	
 
 END
 
