@@ -17,7 +17,7 @@ namespace FrbaOfertas
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Login.Login());
-            Application.Run(new CrearOferta.CrearOferta());
+            Application.Run(new Registro.RegistroProveedor());
         }
     }
 }

@@ -24,5 +24,10 @@ namespace FrbaOfertas
             return unMail.Contains("@");
         }
 
+        public bool CargaCreditoValida(int unMonto)
+        {
+            return unMonto > 0; 
+        }
+
     }
 }
