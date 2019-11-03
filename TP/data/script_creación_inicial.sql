@@ -429,14 +429,12 @@ SELECT DISTINCT (SELECT Clie_Id FROM POR_COLECTORA.Clientes As Colectora WHERE C
 FROM gd_esquema.Maestra As Maestra
 where Oferta_Descripcion is not null
 
---MIGRACION CUPONES
-/*
+--MIGRACION CUPONES / REVISAR SI LA FECHA DE VENC ES LA MISMA DE LA FACUTURA O NO
+
 INSERT INTO POR_COLECTORA.Cupones
 (Cupon_Fecha_Venc, Cupon_Codigo,Cupon_Fecha_Consumo,Cupon_Id_Cliente_Consumidor)
-SELECT DISTINCT 30, (select  ,
+SELECT DISTINCT Oferta_Fecha_Venc,Oferta_Codigo,NULL,(SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni and Colectora.Clie_Nombre + Colectora.Clie_Apellido = Maestra.Cli_Nombre + Maestra.Cli_Apellido)
 FROM gd_esquema.Maestra AS Maestra
-*/
-
 
 
 --MIGRACION CARGAS
@@ -730,6 +728,13 @@ BEGIN
 	declare @numero_compra numeric
 	set @numero_compra = (select Compra_Nro from Compras where Compra_Oferta = @id_oferta)
 
+	declare @cupon_codigo nvarchar(50)
+	set @cupon_codigo = SUBSTRING(CONVERT(nvarchar(255), NEWID()), 0, 9)
+	WHILE ((SELECT COUNT(*) FROM Cupones WHERE Cupon_codigo = @cupon_codigo) = 1 --Este while checkearia si el string autogenerado no se repite
+	BEGIN
+		set @cupon_codigo = SUBSTRING(CONVERT(nvarchar(255), NEWID()), 0, 9)
+	ELSE
+		BREAK
 
 	if ( (select Clie_Saldo from Clientes where Clie_Id = @id_cliente) >= @precio_oferta 
 			and ( (select count(*) from Compras where Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente group by Compra_Cliente) + @cantidad_compra ) <  @cantidad_maxima  )
@@ -737,8 +742,8 @@ BEGIN
 			INSERT INTO POR_COLECTORA.Compras(Compra_Fecha, Compra_Oferta, Compra_Cliente, Compra_Cantidad, Compra_Oferta_Precio) 
 			VALUES (@fecha_compra,@id_oferta,@id_cliente,@cantidad_compra,@precio_oferta)
 
-			INSERT INTO POR_COLECTORA.Cupones(Cupon_Fecha_Venc,Cupon_Fecha_Consumo,Cupon_Nro_Compra,Cupon_Id_Cliente_Consumidor)
-			VALUES (@fecha_venc, NULL, @numero_compra,@id_cliente) --CODIGO DE CUPON DE DONDE SALE?
+			INSERT INTO POR_COLECTORA.Cupones(Cupon_Codigo,Cupon_Fecha_Venc,Cupon_Fecha_Consumo,Cupon_Nro_Compra,Cupon_Id_Cliente_Consumidor)
+			VALUES (@cupon_codigo,@fecha_venc, NULL, @numero_compra,@id_cliente)
 		end	
 
 END
@@ -753,6 +758,7 @@ CREATE PROCEDURE POR_COLECTORA.sp_consumir_oferta(
 
 
 )
+
 
 AS
 BEGIN
@@ -809,5 +815,3 @@ END
 
 GO
 
-
->>>>>>> 93247154f101d7e74189038cece9dc706e21d2e5
