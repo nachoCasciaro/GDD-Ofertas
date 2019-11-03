@@ -134,7 +134,7 @@ GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
 BEGIN
-	EXEC ('CREATE SCHEMA [POR_COLECTORA] AUTHORIZATION gdCruceros2019')
+	EXEC ('CREATE SCHEMA [POR_COLECTORA] AUTHORIZATION gdCupon2019')
 END
 GO
 
@@ -775,17 +775,15 @@ END
 
 GO
 
-<<<<<<< HEAD
-=======
 --SP FACTURACION A PROVEEDOR
 --Listado ofertas adquiridas por clientes, no me dice que campos mostrar, muestro ID y descripcion
-CREATE PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor(@fecha_inicio DateTime, @fecha_fin DateTime, @proveedor numeric)
+CREATE PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor_listado(@fecha_inicio DateTime, @fecha_fin DateTime, @proveedor numeric)
 AS
 BEGIN
 
 	SELECT DISTINCT(Compra_Oferta) AS OFERTA_CODIGO, Oferta_Descripcion AS OFERTA_DESCRIPCION 
-	FROM Compras JOIN Ofertas ON Compra_Oferta = Oferta_Id JOIN Proveedores ON Oferta_Proveedor = Provee_Id
-	WHERE Compra_Fecha >= @fecha_inicio AND Compra_Fecha <= @fecha_fin AND Provee_Id = @proveedor) 
+	FROM POR_COLECTORA.Compras JOIN POR_COLECTORA.Ofertas ON Compra_Oferta = Oferta_Id JOIN POR_COLECTORA.Proveedores ON Oferta_Proveedor = Provee_Id
+	WHERE Compra_Fecha >= @fecha_inicio AND Compra_Fecha <= @fecha_fin AND Provee_Id = @proveedor
 
 END
 
