@@ -250,6 +250,7 @@ GO
 
 --CREACIÓN DE TABLA COMPRAS
 CREATE TABLE POR_COLECTORA.Compras(
+	Compra_Nro Numeric IDENTITY(1,1) PRIMARY KEY,
 	Compra_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
 	Compra_Oferta Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Ofertas(Oferta_Id),
 	Compra_Cantidad Numeric NOT NULL,
@@ -264,7 +265,7 @@ CREATE TABLE POR_COLECTORA.Cupones(
 	Cupon_Codigo Numeric NOT NULL,
 	Cupon_Fecha_Venc DATETIME NOT NULL,
 	Cupon_Fecha_Consumo DATETIME,
-	--Cupon_Nro_Compra Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Compras(Compra_Id),
+	Cupon_Nro_Compra Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Compras(Compra_Nro),
 	Cupon_Id_Cliente_Consumidor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id))
 GO
 
@@ -712,7 +713,9 @@ CREATE PROCEDURE POR_COLECTORA.sp_comprar_oferta(
 @id_oferta numeric,
 @id_cliente numeric,
 @fecha_compra datetime,
-@cantidad_compra numeric
+@cantidad_compra numeric,
+
+@fecha_venc datetime --Revisar esto como se obtendria
 )
 
 AS
@@ -724,14 +727,51 @@ BEGIN
 	declare @cantidad_maxima numeric
 	set @cantidad_maxima = (select Oferta_Restriccion_Compra from Ofertas where Oferta_Id = @id_oferta)
 
+	declare @numero_compra numeric
+	set @numero_compra = (select Compra_Nro from Compras where Compra_Oferta = @id_oferta)
+
 
 	if ( (select Clie_Saldo from Clientes where Clie_Id = @id_cliente) >= @precio_oferta 
 			and ( (select count(*) from Compras where Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente group by Compra_Cliente) + @cantidad_compra ) <  @cantidad_maxima  )
 		begin
 			INSERT INTO POR_COLECTORA.Compras(Compra_Fecha, Compra_Oferta, Compra_Cliente, Compra_Cantidad, Compra_Oferta_Precio) 
 			VALUES (@fecha_compra,@id_oferta,@id_cliente,@cantidad_compra,@precio_oferta)
+
+			INSERT INTO POR_COLECTORA.Cupones(Cupon_Fecha_Venc,Cupon_Fecha_Consumo,Cupon_Nro_Compra,Cupon_Id_Cliente_Consumidor)
+			VALUES (@fecha_venc, NULL, @numero_compra,@id_cliente) --CODIGO DE CUPON DE DONDE SALE?
 		end	
 
 END
 
 GO
+
+--SP CONSUMO OFERTA 
+CREATE PROCEDURE POR_COLECTORA.sp_consumir_oferta(
+@id_cupon numeric,
+@fecha_actual datetime,
+@id_proveedor numeric
+
+
+)
+
+AS
+BEGIN
+
+	if ( (select Cupon_Fecha_Venc from Cupones where Cupon_Codigo = @id_cupon) < @fecha_actual 
+			and ( (select Cupon_Fecha_Consumo from Cupones where Cupon_Codigo = @id_cupon) IS NULL)
+			and ( (select Provee_ID from Prvoeedores P
+					JOIN Ofertas O
+						ON P.Provee_id = O.Oferta_Proveedor
+					JOIN Compras C
+						ON O.Oferta_Id = C.Compra_Oferta
+					JOIN Cupones CU
+						ON C.Compra_Nro = CU.Cupon_Nro_Compra
+					where CU.Cupon_Codigo = @id_cupon) = @id_proveedor) )
+		begin
+			UPDATE POR_COLECTORA.CUPONES SET Cupon_Fecha_Consumo = @fecha_actual WHERE Cupon_codigo = @id_cupon
+		end	
+
+END
+
+GO
+
