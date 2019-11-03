@@ -760,10 +760,11 @@ BEGIN
 	set @importe_total = (SELECT SUM(Compra_Oferta_Precio * Compra_Cantidad)
 						FROM Compras JOIN Ofertas ON Compra_Oferta = Oferta_Id JOIN Proveedores ON Oferta_Proveedor = Provee_Id
 						WHERE Compra_Fecha >= @fecha_inicio AND Compra_Fecha <= @fecha_fin AND Provee_Id = @proveedor) 
-
-
-	--Numero factura, de donde lo saco? 
+ 
 	declare @fact_numero numeric
+	set @fact_numero = (SELECT TOP 1 fact_numero
+						FROM Facturas
+						ORDER BY fact_numero DESC) + 1
 
 END
 
