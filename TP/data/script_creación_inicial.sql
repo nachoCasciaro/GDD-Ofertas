@@ -130,6 +130,19 @@ DROP PROCEDURE POR_COLECTORA.sp_prov_mayor_facturacion
 IF OBJECT_ID ('POR_COLECTORA.sp_comprar_oferta') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_comprar_oferta
 
+--DROP SP CONSUMIR OFERTA
+IF OBJECT_ID ('POR_COLECTORA.sp_consumir_oferta') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_consumir_oferta
+
+--DROP SP FACTURAR A PROVEEDOR
+IF OBJECT_ID ('POR_COLECTORA.sp_facturar_a_proveedor') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor
+
+--DROP SP FACTURAR A PROVEEDOR LISTADO
+IF OBJECT_ID ('POR_COLECTORA.sp_facturar_a_proveedor_listado') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor_listado
+
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -146,34 +159,34 @@ GO
 --CREACIÓN DE TABLA DIRECCIONES
 CREATE TABLE POR_COLECTORA.Direcciones(
 	Direccion_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Direccion_Calle NVARCHAR(80) NOT NULL,
-	Direccion_Nro_Piso VARCHAR(10),
-	Direccion_Depto VARCHAR(10),
+	Direccion_Calle NVARCHAR(250) NOT NULL,
+	Direccion_Nro_Piso INT,
+	Direccion_Depto NVARCHAR(10),
 	Direccion_Ciudad NVARCHAR(80) NOT NULL)
 GO
 
 --CREACIÓN DE TABLA USUARIOS
 CREATE TABLE POR_COLECTORA.Usuarios(
 	Usuario_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Usuario_Nombre VARCHAR(100) NOT NULL,
-	Usuario_Password VARCHAR(100) NOT NULL,
-	Usuario_Intentos Numeric NOT NULL DEFAULT 0,
+	Usuario_Nombre VARCHAR(250) NOT NULL,
+	Usuario_Password VARCHAR(250) NOT NULL,
+	Usuario_Intentos TINYINT NOT NULL DEFAULT 0,
 	Usuario_Habilitado BIT NOT NULL DEFAULT 1)
 GO
 
 --CREACIÓN DE TABLA CLIENTES
 CREATE TABLE POR_COLECTORA.Clientes(
 	Clie_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Clie_Nombre VARCHAR(30) NOT NULL,
-	Clie_Apellido VARCHAR(30) NOT NULL,
+	Clie_Nombre NVARCHAR(250) NOT NULL,
+	Clie_Apellido NVARCHAR(250) NOT NULL,
 	Clie_DNI Numeric(18,0) NOT NULL UNIQUE,
-	Clie_Mail NVARCHAR(50) NOT NULL,
-	Clie_Telefono Numeric NOT NULL,
-	Clie_Direccion Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
+	Clie_Mail NVARCHAR(250) NOT NULL,
+	Clie_Telefono Numeric(18,0) NOT NULL,
+	Clie_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
 	Clie_CP Numeric,
 	Clie_Fecha_Nac DATETIME NOT NULL,
 	Clie_Habilitado BIT NOT NULL DEFAULT 1,
-	Clie_Saldo Numeric NOT NULL DEFAULT 200,
+	Clie_Saldo Float NOT NULL DEFAULT 200,
 	Clie_Usuario Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id))
 GO
 
@@ -218,7 +231,7 @@ CREATE TABLE POR_COLECTORA.Proveedores(
 	Provee_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
 	Provee_CP Numeric,
 	Provee_Rubro Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Rubros(Rubro_Id),
-	Provee_Nombre_Contacto NVARCHAR(50),
+	Provee_Nombre_Contacto NVARCHAR(80),
 	Provee_Usuario Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id),
 	Provee_Habilitado BIT NOT NULL DEFAULT 1)
 GO
@@ -229,7 +242,7 @@ CREATE TABLE POR_COLECTORA.Facturas(
 	Fact_Numero Numeric NOT NULL,
 	Fact_Fecha_Desde DATETIME,
 	Fact_Fecha_Hasta DATETIME NOT NULL,
-	Fact_Importe Numeric NOT NULL,
+	Fact_Importe Float NOT NULL,
 	Fact_Proveedor_ID Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id),
 	Fact_Proveedor_CUIT NVARCHAR(13) NOT NULL,
 	Fact_Proveedor_RS NVARCHAR(80) NOT NULL)
@@ -241,10 +254,10 @@ CREATE TABLE POR_COLECTORA.Ofertas(
 	Oferta_Descripcion NVARCHAR(200) NOT NULL,
 	Oferta_Fecha DATETIME NOT NULL,
 	Oferta_Fecha_Venc DATETIME NOT NULL,
-	Oferta_Precio Numeric NOT NULL,
-	Oferta_Precio_Ficticio Numeric NOT NULL,
-	Oferta_Cantidad Numeric NOT NULL,
-	Oferta_Restriccion_Compra Numeric NOT NULL,
+	Oferta_Precio Float NOT NULL,
+	Oferta_Precio_Ficticio Float NOT NULL,
+	Oferta_Cantidad Int NOT NULL,
+	Oferta_Restriccion_Compra Int NOT NULL,
 	Oferta_Proveedor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id))
 GO
 
@@ -253,16 +266,16 @@ CREATE TABLE POR_COLECTORA.Compras(
 	Compra_Nro Numeric IDENTITY(1,1) PRIMARY KEY,
 	Compra_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
 	Compra_Oferta Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Ofertas(Oferta_Id),
-	Compra_Cantidad Numeric NOT NULL,
+	Compra_Cantidad Int NOT NULL,
 	Compra_Fecha DATETIME NOT NULL,
 	Compra_Id_Factura Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Facturas(Fact_Id),
-	Compra_Oferta_Precio Numeric NOT NULL)
+	Compra_Oferta_Precio Float NOT NULL)
 GO
 
 --CREACIÓN DE TABLA CUPONES
 CREATE TABLE POR_COLECTORA.Cupones(
 	Cupon_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Cupon_Codigo Numeric NOT NULL,
+	Cupon_Codigo nvarchar(80) NOT NULL,
 	Cupon_Fecha_Venc DATETIME NOT NULL,
 	Cupon_Fecha_Consumo DATETIME,
 	Cupon_Nro_Compra Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Compras(Compra_Nro),
@@ -310,15 +323,15 @@ where Provee_Dom is not null
 --MIGRACION USUARIOS
 INSERT INTO POR_COLECTORA.Usuarios
 ( Usuario_Nombre, Usuario_Password )
-SELECT DISTINCT Cli_Nombre, NULL
+SELECT DISTINCT Cli_Dni, Cli_Dni
 FROM gd_esquema.Maestra
 -- hacer el insert en usuarios de proveedores
 */
 
 --MIGRACION TABLA CLIENTES
 INSERT INTO POR_COLECTORA.Clientes
-(Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Telefono, Clie_Mail, Clie_CP, Clie_Fecha_Nac, Clie_Direccion)
-SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Telefono, Cli_Mail, NULL, Cli_Fecha_Nac,
+(Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Telefono, Clie_Mail, Clie_Fecha_Nac, Clie_Direccion)
+SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Telefono, Cli_Mail, Cli_Fecha_Nac,
 				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Cli_Direccion)
 FROM gd_esquema.Maestra
 
@@ -356,10 +369,6 @@ GO
 
 --MIGRACION FUNCIONALIDADxROL
 
---REVISAR TODOS EL JUEVES
---1 no lo dice bien la consigna, pero entiendo que solo el administrador puede modificar roles
---2 y 3 todos los USUARIOS pueden realizar el login (dice la consigna), no se si el administrador cuenta como usuario... (no segun nuestro DER)
---Listado estadistico no lo dice bien, entiendo que solo podria hacerlo el administrador
 INSERT INTO POR_COLECTORA.FuncionalidadxRol(Id_Rol, Id_Func)
 VALUES ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'ABM Rol')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Cliente'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Login y seguridad')),
@@ -373,6 +382,7 @@ VALUES ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrado
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Cliente'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Comprar Oferta')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Proveedor'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Entrega/Consumo de Oferta')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Facturación a Proveedor')),
+	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Login y seguridad')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Listado Estadistico'));
 GO
 
@@ -385,7 +395,7 @@ where Provee_Rubro is not null
 
 --MIGRACION TABLA PROVEEDORES
 INSERT INTO POR_COLECTORA.Proveedores
-( Provee_RS, Provee_Telefono, Provee_CUIT, Provee_Direccion, 
+(Provee_RS, Provee_Telefono, Provee_CUIT, Provee_Direccion, 
   Provee_Rubro)
 SELECT DISTINCT Maestra.Provee_RS, Maestra.Provee_Telefono, Maestra.Provee_CUIT, 
 				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Maestra.Provee_Dom), 
@@ -415,36 +425,38 @@ FROM gd_esquema.Maestra MAESTRA
 where Factura_Nro is not null 
 GROUP BY Factura_Nro, Factura_Fecha, Provee_RS
 
+--MIGRACION CARGAS
+
+INSERT INTO POR_COLECTORA.Cargas
+(Carga_Fecha, Carga_Id_Cliente, Carga_Tipo_Pago, Carga_Monto)
+SELECT DISTINCT Carga_fecha, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni and Cli_Dni is not null),
+				Tipo_Pago_Desc,Carga_Credito 
+FROM gd_esquema.Maestra AS Maestra
+where Carga_Fecha is not null
+
 
 --MIGRACION COMPRAS - Revisar el jueves el matching de compra_oferta
+
 INSERT INTO POR_COLECTORA.Compras
 (Compra_Cliente,Compra_Oferta,Compra_Cantidad,Compra_Fecha,Compra_Id_Factura,Compra_Oferta_Precio)
 SELECT DISTINCT (SELECT Clie_Id FROM POR_COLECTORA.Clientes As Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni), 
 				(SELECT Oferta_id FROM POR_COLECTORA.Ofertas AS Colectora WHERE 
-					Colectora.Oferta_Fecha = Maestra.Oferta_Fecha AND Colectora.Oferta_Fecha_Venc = Maestra.Oferta_Fecha_Venc 
-					AND Colectora.Oferta_Descripcion = Maestra.Oferta_Descripcion AND Colectora.Oferta_Precio = Maestra.Oferta_Precio),
+					Colectora.Oferta_Descripcion = Maestra.Oferta_Descripcion and (select Provee_RS from POR_COLECTORA.Proveedores) =  Maestra.Provee_RS),
 				1,Maestra.Oferta_Fecha_Compra,
 				(SELECT Fact_Id FROM POR_COLECTORA.Facturas AS Colectora WHERE Colectora.Fact_Numero = Maestra.Factura_Nro),
 				Maestra.Oferta_Precio
 FROM gd_esquema.Maestra As Maestra
 where Oferta_Descripcion is not null
 
+
 --MIGRACION CUPONES / REVISAR SI LA FECHA DE VENC ES LA MISMA DE LA FACUTURA O NO
-
+/*
 INSERT INTO POR_COLECTORA.Cupones
-(Cupon_Fecha_Venc, Cupon_Codigo,Cupon_Fecha_Consumo,Cupon_Id_Cliente_Consumidor)
-SELECT DISTINCT Oferta_Fecha_Venc,Oferta_Codigo,NULL,(SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni and Colectora.Clie_Nombre + Colectora.Clie_Apellido = Maestra.Cli_Nombre + Maestra.Cli_Apellido)
+(Cupon_Fecha_Venc, Cupon_Codigo,Cupon_Fecha_Consumo,Cupon_Id_Cliente_Consumidor,Cupon_Nro_Compra)
+SELECT DISTINCT 30,Oferta_Codigo,NULL,(SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni and Colectora.Clie_Nombre + Colectora.Clie_Apellido = Maestra.Cli_Nombre + Maestra.Cli_Apellido)
+				,(select Compra_Nro from POR_COLECTORA.Compras) 
 FROM gd_esquema.Maestra AS Maestra
-
-
---MIGRACION CARGAS
-INSERT INTO POR_COLECTORA.Cargas
-(Carga_Fecha, Carga_Id_Cliente, Carga_Tipo_Pago, Carga_Monto)
-SELECT DISTINCT Carga_fecha, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni and Colectora.Clie_Nombre + Colectora.Clie_Apellido = Maestra.Cli_Nombre + Maestra.Cli_Apellido),
-				Tipo_Pago_Desc,Carga_Credito 
-FROM gd_esquema.Maestra AS Maestra
-where Carga_Fecha is not null
-
+*/
 GO
 
 --FIN MIGRACIONES
@@ -707,13 +719,12 @@ END
 GO
 
 --SP COMPRA OFERTA 
+/*
 CREATE PROCEDURE POR_COLECTORA.sp_comprar_oferta(
 @id_oferta numeric,
 @id_cliente numeric,
 @fecha_compra datetime,
-@cantidad_compra numeric,
-
-@fecha_venc datetime --Revisar esto como se obtendria
+@cantidad_compra numeric
 )
 
 AS
@@ -743,29 +754,26 @@ BEGIN
 			VALUES (@fecha_compra,@id_oferta,@id_cliente,@cantidad_compra,@precio_oferta)
 
 			INSERT INTO POR_COLECTORA.Cupones(Cupon_Codigo,Cupon_Fecha_Venc,Cupon_Fecha_Consumo,Cupon_Nro_Compra,Cupon_Id_Cliente_Consumidor)
-			VALUES (@cupon_codigo,@fecha_venc, NULL, @numero_compra,@id_cliente)
+			VALUES (@cupon_codigo, dateadd(day,30, @fecha_compra), NULL, @numero_compra,@id_cliente)
 		end	
 
 END
 
 GO
-
+*/
 --SP CONSUMO OFERTA 
 CREATE PROCEDURE POR_COLECTORA.sp_consumir_oferta(
 @id_cupon numeric,
 @fecha_actual datetime,
 @id_proveedor numeric
-
-
 )
-
 
 AS
 BEGIN
 
 	if ( (select Cupon_Fecha_Venc from Cupones where Cupon_Codigo = @id_cupon) < @fecha_actual 
 			and ( (select Cupon_Fecha_Consumo from Cupones where Cupon_Codigo = @id_cupon) IS NULL)
-			and ( (select Provee_ID from Prvoeedores P
+			and ( (select Provee_ID from Proveedores P
 					JOIN Ofertas O
 						ON P.Provee_id = O.Oferta_Proveedor
 					JOIN Compras C
