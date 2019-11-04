@@ -26,7 +26,7 @@ namespace FrbaOfertas.AbmCliente
         private void button1_Click(object sender, EventArgs e)
         {
             var connection = DB.getInstance().getConnection();
-            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_alta_ofertas", connection);
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_modificar_cliente", connection);
             query.CommandType = CommandType.StoredProcedure;
             //Obtener cliente loggeado (necesito el ID)
             query.Parameters.Add(new SqlParameter("@nombre", this.txtbox_nombre.Text));

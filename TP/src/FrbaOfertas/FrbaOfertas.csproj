@@ -57,6 +57,18 @@
     <Compile Include="AbmCliente\ModificacionCliente.Designer.cs">
       <DependentUpon>ModificacionCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmProveedor\BajaProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmProveedor\BajaProveedor.Designer.cs">
+      <DependentUpon>BajaProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmProveedor\ModificacionProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmProveedor\ModificacionProveedor.Designer.cs">
+      <DependentUpon>ModificacionProveedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRol\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +138,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente\ModificacionCliente.resx">
       <DependentUpon>ModificacionCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmProveedor\BajaProveedor.resx">
+      <DependentUpon>BajaProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmProveedor\ModificacionProveedor.resx">
+      <DependentUpon>ModificacionProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CargaCredito\CargaCredito.resx">
       <DependentUpon>CargaCredito.cs</DependentUpon>
