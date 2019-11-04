@@ -52,7 +52,7 @@
             this.txtbox_nropiso = new System.Windows.Forms.TextBox();
             this.txtbox_depto = new System.Windows.Forms.TextBox();
             this.txtbox_ciudad = new System.Windows.Forms.TextBox();
-            this.txtbox_codigopostal = new System.Windows.Forms.TextBox();
+            this.txtbox_CP = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.combobox_rubro = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -61,67 +61,60 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 31);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(34, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 17);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Username";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // txtbox_username
             // 
-            this.txtbox_username.Location = new System.Drawing.Point(219, 27);
-            this.txtbox_username.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_username.Location = new System.Drawing.Point(164, 22);
             this.txtbox_username.Name = "txtbox_username";
-            this.txtbox_username.Size = new System.Drawing.Size(132, 22);
+            this.txtbox_username.Size = new System.Drawing.Size(100, 20);
             this.txtbox_username.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(48, 85);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(36, 69);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 17);
+            this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Password";
             // 
             // txtbox_password
             // 
-            this.txtbox_password.Location = new System.Drawing.Point(219, 81);
-            this.txtbox_password.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_password.Location = new System.Drawing.Point(164, 66);
             this.txtbox_password.Name = "txtbox_password";
-            this.txtbox_password.Size = new System.Drawing.Size(132, 22);
+            this.txtbox_password.Size = new System.Drawing.Size(100, 20);
             this.txtbox_password.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(45, 193);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(34, 157);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 17);
+            this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Razón Social";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(48, 235);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(36, 191);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 17);
+            this.label4.Size = new System.Drawing.Size(26, 13);
             this.label4.TabIndex = 5;
             this.label4.Text = "Mail";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(45, 283);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(34, 230);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 17);
+            this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 6;
             this.label5.Text = "Teléfono";
             this.label5.Click += new System.EventHandler(this.label5_Click);
@@ -129,30 +122,27 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(48, 329);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(36, 267);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 17);
+            this.label6.Size = new System.Drawing.Size(60, 13);
             this.label6.TabIndex = 7;
             this.label6.Text = "CUIT (sin -)";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(444, 193);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(333, 157);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(39, 17);
+            this.label7.Size = new System.Drawing.Size(30, 13);
             this.label7.TabIndex = 8;
             this.label7.Text = "Calle";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(444, 329);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(333, 267);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(95, 17);
+            this.label8.Size = new System.Drawing.Size(72, 13);
             this.label8.TabIndex = 9;
             this.label8.Text = "Código Postal";
             this.label8.Click += new System.EventHandler(this.label8_Click);
@@ -160,10 +150,9 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(48, 373);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(36, 303);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(47, 17);
+            this.label9.Size = new System.Drawing.Size(36, 13);
             this.label9.TabIndex = 10;
             this.label9.Text = "Rubro";
             this.label9.Click += new System.EventHandler(this.label9_Click);
@@ -171,129 +160,114 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(45, 426);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(34, 346);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(118, 17);
+            this.label10.Size = new System.Drawing.Size(90, 13);
             this.label10.TabIndex = 11;
             this.label10.Text = "Nombre Contacto";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(444, 235);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Location = new System.Drawing.Point(333, 191);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(62, 17);
+            this.label11.Size = new System.Drawing.Size(47, 13);
             this.label11.TabIndex = 12;
             this.label11.Text = "Nro Piso";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(689, 235);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Location = new System.Drawing.Point(517, 191);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(46, 17);
+            this.label12.Size = new System.Drawing.Size(36, 13);
             this.label12.TabIndex = 13;
             this.label12.Text = "Depto";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(444, 283);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Location = new System.Drawing.Point(333, 230);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(52, 17);
+            this.label13.Size = new System.Drawing.Size(40, 13);
             this.label13.TabIndex = 14;
             this.label13.Text = "Ciudad";
             // 
             // txtbox_RS
             // 
-            this.txtbox_RS.Location = new System.Drawing.Point(219, 190);
-            this.txtbox_RS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_RS.Location = new System.Drawing.Point(164, 154);
             this.txtbox_RS.Name = "txtbox_RS";
-            this.txtbox_RS.Size = new System.Drawing.Size(132, 22);
+            this.txtbox_RS.Size = new System.Drawing.Size(100, 20);
             this.txtbox_RS.TabIndex = 15;
             // 
             // txtbox_mail
             // 
-            this.txtbox_mail.Location = new System.Drawing.Point(219, 231);
-            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_mail.Location = new System.Drawing.Point(164, 188);
             this.txtbox_mail.Name = "txtbox_mail";
-            this.txtbox_mail.Size = new System.Drawing.Size(132, 22);
+            this.txtbox_mail.Size = new System.Drawing.Size(100, 20);
             this.txtbox_mail.TabIndex = 16;
             // 
             // txtbox_telefono
             // 
-            this.txtbox_telefono.Location = new System.Drawing.Point(219, 279);
-            this.txtbox_telefono.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_telefono.Location = new System.Drawing.Point(164, 227);
             this.txtbox_telefono.Name = "txtbox_telefono";
-            this.txtbox_telefono.Size = new System.Drawing.Size(132, 22);
+            this.txtbox_telefono.Size = new System.Drawing.Size(100, 20);
             this.txtbox_telefono.TabIndex = 17;
             // 
             // txtbox_cuit
             // 
-            this.txtbox_cuit.Location = new System.Drawing.Point(219, 325);
-            this.txtbox_cuit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_cuit.Location = new System.Drawing.Point(164, 264);
             this.txtbox_cuit.Name = "txtbox_cuit";
-            this.txtbox_cuit.Size = new System.Drawing.Size(132, 22);
+            this.txtbox_cuit.Size = new System.Drawing.Size(100, 20);
             this.txtbox_cuit.TabIndex = 18;
             // 
             // txtbox_contacto
             // 
-            this.txtbox_contacto.Location = new System.Drawing.Point(219, 422);
-            this.txtbox_contacto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_contacto.Location = new System.Drawing.Point(164, 343);
             this.txtbox_contacto.Name = "txtbox_contacto";
-            this.txtbox_contacto.Size = new System.Drawing.Size(132, 22);
+            this.txtbox_contacto.Size = new System.Drawing.Size(100, 20);
             this.txtbox_contacto.TabIndex = 20;
             // 
             // txtbox_calle
             // 
-            this.txtbox_calle.Location = new System.Drawing.Point(548, 190);
-            this.txtbox_calle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_calle.Location = new System.Drawing.Point(411, 154);
             this.txtbox_calle.Name = "txtbox_calle";
-            this.txtbox_calle.Size = new System.Drawing.Size(343, 22);
+            this.txtbox_calle.Size = new System.Drawing.Size(258, 20);
             this.txtbox_calle.TabIndex = 21;
             // 
             // txtbox_nropiso
             // 
-            this.txtbox_nropiso.Location = new System.Drawing.Point(548, 231);
-            this.txtbox_nropiso.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_nropiso.Location = new System.Drawing.Point(411, 188);
             this.txtbox_nropiso.Name = "txtbox_nropiso";
-            this.txtbox_nropiso.Size = new System.Drawing.Size(132, 22);
+            this.txtbox_nropiso.Size = new System.Drawing.Size(100, 20);
             this.txtbox_nropiso.TabIndex = 22;
             // 
             // txtbox_depto
             // 
-            this.txtbox_depto.Location = new System.Drawing.Point(759, 231);
-            this.txtbox_depto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_depto.Location = new System.Drawing.Point(569, 188);
             this.txtbox_depto.Name = "txtbox_depto";
-            this.txtbox_depto.Size = new System.Drawing.Size(132, 22);
+            this.txtbox_depto.Size = new System.Drawing.Size(100, 20);
             this.txtbox_depto.TabIndex = 23;
             // 
             // txtbox_ciudad
             // 
-            this.txtbox_ciudad.Location = new System.Drawing.Point(548, 279);
-            this.txtbox_ciudad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_ciudad.Location = new System.Drawing.Point(411, 227);
             this.txtbox_ciudad.Name = "txtbox_ciudad";
-            this.txtbox_ciudad.Size = new System.Drawing.Size(343, 22);
+            this.txtbox_ciudad.Size = new System.Drawing.Size(258, 20);
             this.txtbox_ciudad.TabIndex = 24;
             // 
-            // txtbox_codigopostal
+            // txtbox_CP
             // 
-            this.txtbox_codigopostal.Location = new System.Drawing.Point(548, 320);
-            this.txtbox_codigopostal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtbox_codigopostal.Name = "txtbox_codigopostal";
-            this.txtbox_codigopostal.Size = new System.Drawing.Size(343, 22);
-            this.txtbox_codigopostal.TabIndex = 25;
+            this.txtbox_CP.Location = new System.Drawing.Point(411, 260);
+            this.txtbox_CP.Name = "txtbox_CP";
+            this.txtbox_CP.Size = new System.Drawing.Size(258, 20);
+            this.txtbox_CP.TabIndex = 25;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(602, 395);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(452, 321);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(209, 28);
+            this.button1.Size = new System.Drawing.Size(157, 23);
             this.button1.TabIndex = 26;
             this.button1.Text = "REGISTRARME";
             this.button1.UseVisualStyleBackColor = true;
@@ -302,17 +276,17 @@
             // combobox_rubro
             // 
             this.combobox_rubro.FormattingEnabled = true;
-            this.combobox_rubro.Location = new System.Drawing.Point(219, 369);
-            this.combobox_rubro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combobox_rubro.Location = new System.Drawing.Point(164, 300);
             this.combobox_rubro.Name = "combobox_rubro";
-            this.combobox_rubro.Size = new System.Drawing.Size(132, 24);
+            this.combobox_rubro.Size = new System.Drawing.Size(100, 21);
             this.combobox_rubro.TabIndex = 28;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(602, 447);
+            this.button2.Location = new System.Drawing.Point(452, 363);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(209, 23);
+            this.button2.Size = new System.Drawing.Size(157, 19);
             this.button2.TabIndex = 29;
             this.button2.Text = "VOLVER AL MENU LOGIN";
             this.button2.UseVisualStyleBackColor = true;
@@ -320,13 +294,13 @@
             // 
             // RegistroProveedor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(977, 538);
+            this.ClientSize = new System.Drawing.Size(733, 437);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.combobox_rubro);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.txtbox_codigopostal);
+            this.Controls.Add(this.txtbox_CP);
             this.Controls.Add(this.txtbox_ciudad);
             this.Controls.Add(this.txtbox_depto);
             this.Controls.Add(this.txtbox_nropiso);
@@ -351,7 +325,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtbox_username);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "RegistroProveedor";
             this.Text = "RegistroProveedor";
             this.ResumeLayout(false);
@@ -385,7 +358,7 @@
         private System.Windows.Forms.TextBox txtbox_nropiso;
         private System.Windows.Forms.TextBox txtbox_depto;
         private System.Windows.Forms.TextBox txtbox_ciudad;
-        private System.Windows.Forms.TextBox txtbox_codigopostal;
+        private System.Windows.Forms.TextBox txtbox_CP;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox combobox_rubro;
         private System.Windows.Forms.Button button2;
