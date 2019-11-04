@@ -61,5 +61,11 @@ namespace FrbaOfertas.AbmProveedor
             query.ExecuteNonQuery();
             connection.Close();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Login.Login().Show();
+        }
     }
 }
