@@ -45,23 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbmCliente\Form1.cs">
+    <Compile Include="AbmCliente\BajaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmCliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmCliente\BajaCliente.Designer.cs">
+      <DependentUpon>BajaCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmProveedor\AltaProveedor.cs">
+    <Compile Include="AbmCliente\ModificacionCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmProveedor\AltaProveedor.Designer.cs">
-      <DependentUpon>AltaProveedor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AbmProveedor\BajaProveedor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AbmProveedor\BajaProveedor.Designer.cs">
-      <DependentUpon>BajaProveedor.cs</DependentUpon>
+    <Compile Include="AbmCliente\ModificacionCliente.Designer.cs">
+      <DependentUpon>ModificacionCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\Form1.cs">
       <SubType>Form</SubType>
@@ -114,21 +108,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registro\RegistroCliente.cs">
+    <Compile Include="AbmCliente\RegistroCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro\RegistroCliente.Designer.cs">
+    <Compile Include="AbmCliente\RegistroCliente.Designer.cs">
       <DependentUpon>RegistroCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro\RegistroProveedor.cs">
+    <Compile Include="AbmProveedor\RegistroProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro\RegistroProveedor.Designer.cs">
+    <Compile Include="AbmProveedor\RegistroProveedor.Designer.cs">
       <DependentUpon>RegistroProveedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Validaciones.cs" />
-    <EmbeddedResource Include="AbmProveedor\AltaProveedor.resx">
-      <DependentUpon>AltaProveedor.cs</DependentUpon>
+    <EmbeddedResource Include="AbmCliente\BajaCliente.resx">
+      <DependentUpon>BajaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmCliente\ModificacionCliente.resx">
+      <DependentUpon>ModificacionCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CargaCredito\CargaCredito.resx">
       <DependentUpon>CargaCredito.cs</DependentUpon>
@@ -148,10 +145,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Registro\RegistroCliente.resx">
+    <EmbeddedResource Include="AbmCliente\RegistroCliente.resx">
       <DependentUpon>RegistroCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registro\RegistroProveedor.resx">
+    <EmbeddedResource Include="AbmProveedor\RegistroProveedor.resx">
       <DependentUpon>RegistroProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -166,6 +163,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Registro\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

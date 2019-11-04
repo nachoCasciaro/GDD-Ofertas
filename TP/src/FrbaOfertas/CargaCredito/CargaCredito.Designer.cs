@@ -158,7 +158,7 @@
             this.Controls.Add(this.txtbox_monto);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "CargaCredito";
             this.ResumeLayout(false);
             this.PerformLayout();
 
