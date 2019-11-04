@@ -51,6 +51,12 @@
     <Compile Include="AbmCliente\BajaCliente.Designer.cs">
       <DependentUpon>BajaCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmCliente\FiltroBMCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmCliente\FiltroBMCliente.designer.cs">
+      <DependentUpon>FiltroBMCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmCliente\MenuAbmCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +183,9 @@
     <Compile Include="Validaciones.cs" />
     <EmbeddedResource Include="AbmCliente\BajaCliente.resx">
       <DependentUpon>BajaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmCliente\FiltroBMCliente.resx">
+      <DependentUpon>FiltroBMCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente\MenuAbmCliente.resx">
       <DependentUpon>MenuAbmCliente.cs</DependentUpon>

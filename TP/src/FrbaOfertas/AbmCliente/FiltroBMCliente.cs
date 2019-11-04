@@ -16,5 +16,14 @@ namespace FrbaOfertas.AbmCliente
         {
             InitializeComponent();
         }
+
+        private void button_filtrar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+                    }
     }
 }
