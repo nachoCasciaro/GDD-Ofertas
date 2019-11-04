@@ -19,13 +19,17 @@ namespace FrbaOfertas.Login
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
+        {/*
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_login", connection);
             query.CommandType = CommandType.StoredProcedure;
             connection.Open();
             query.ExecuteNonQuery();
             connection.Close();
+          */
+            this.Hide();
+            new Menu_Principal.MenuAdmin().Show();
+
         }
     }
 }

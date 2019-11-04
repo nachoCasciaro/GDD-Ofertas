@@ -51,6 +51,12 @@
     <Compile Include="AbmCliente\BajaCliente.Designer.cs">
       <DependentUpon>BajaCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmCliente\MenuAbmCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmCliente\MenuAbmCliente.Designer.cs">
+      <DependentUpon>MenuAbmCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmCliente\ModificacionCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,12 @@
     <Compile Include="Menu Principal\MenuCliente.Designer.cs">
       <DependentUpon>MenuCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Menu Principal\MenuAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu Principal\MenuAdmin.Designer.cs">
+      <DependentUpon>MenuAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Menu Principal\MenuProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +177,9 @@
     <Compile Include="Validaciones.cs" />
     <EmbeddedResource Include="AbmCliente\BajaCliente.resx">
       <DependentUpon>BajaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmCliente\MenuAbmCliente.resx">
+      <DependentUpon>MenuAbmCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente\ModificacionCliente.resx">
       <DependentUpon>ModificacionCliente.cs</DependentUpon>
@@ -195,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu Principal\MenuCliente.resx">
       <DependentUpon>MenuCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu Principal\MenuAdmin.resx">
+      <DependentUpon>MenuAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu Principal\MenuProveedor.resx">
       <DependentUpon>MenuProveedor.cs</DependentUpon>

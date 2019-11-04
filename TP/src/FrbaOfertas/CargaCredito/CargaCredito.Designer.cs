@@ -157,7 +157,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(275, 339);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(132, 55);
+            this.button2.Size = new System.Drawing.Size(132, 63);
             this.button2.TabIndex = 12;
             this.button2.Text = "VOLVER AL MENU PRINCIPAL";
             this.button2.UseVisualStyleBackColor = true;
@@ -167,7 +167,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 406);
+            this.ClientSize = new System.Drawing.Size(509, 444);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtbox_vencimientotarjeta);
