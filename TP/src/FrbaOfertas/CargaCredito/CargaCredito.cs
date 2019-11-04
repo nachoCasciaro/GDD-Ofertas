@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace FrbaOfertas.CragaCredito
+namespace FrbaOfertas.CargaCredito
 {
-    public partial class Form1 : Form
+    public partial class CargaCredito : Form
     {
-        public Form1()
+        public CargaCredito()
         {
             InitializeComponent();
         }
@@ -43,6 +43,17 @@ namespace FrbaOfertas.CragaCredito
             connection.Open();
             query.ExecuteNonQuery();
             connection.Close();
+        }
+
+        private void Carga_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Menu_Principal.MenuCliente().Show();
         }
     }
 }

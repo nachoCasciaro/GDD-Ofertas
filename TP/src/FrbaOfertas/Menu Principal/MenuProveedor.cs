@@ -10,29 +10,23 @@ using System.Windows.Forms;
 
 namespace FrbaOfertas.Menu_Principal
 {
-    public partial class MenuCliente : Form
+    public partial class MenuProveedor : Form
     {
-        public MenuCliente()
+        public MenuProveedor()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new CargaCredito.CargaCredito().Show();
+            new CrearOferta.CrearOferta().Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new ComprarOferta.Form1().Show();
-
+            //new consumoOferta
         }
 
         private void button3_Click(object sender, EventArgs e)

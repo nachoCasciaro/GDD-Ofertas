@@ -142,6 +142,12 @@
     <Compile Include="Menu Principal\MenuCliente.Designer.cs">
       <DependentUpon>MenuCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Menu Principal\MenuProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu Principal\MenuProveedor.Designer.cs">
+      <DependentUpon>MenuProveedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AbmCliente\RegistroCliente.cs">
@@ -189,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu Principal\MenuCliente.resx">
       <DependentUpon>MenuCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu Principal\MenuProveedor.resx">
+      <DependentUpon>MenuProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

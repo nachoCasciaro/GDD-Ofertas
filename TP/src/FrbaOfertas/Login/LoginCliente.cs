@@ -22,5 +22,11 @@ namespace FrbaOfertas.Login
             this.Hide();
             new AbmCliente.RegistroCliente().Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Menu_Principal.MenuCliente().Show();
+        }
     }
 }

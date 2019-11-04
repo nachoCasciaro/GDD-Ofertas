@@ -1,6 +1,6 @@
-﻿namespace FrbaOfertas.CragaCredito
+﻿namespace FrbaOfertas.CargaCredito
 {
-    partial class Form1
+    partial class CargaCredito
     {
         /// <summary>
         /// Required designer variable.
@@ -39,30 +39,34 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtbox_vencimientotarjeta = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 46);
+            this.label1.Location = new System.Drawing.Point(51, 57);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.Size = new System.Drawing.Size(89, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Monto Carga";
             // 
             // txtbox_monto
             // 
-            this.txtbox_monto.Location = new System.Drawing.Point(153, 43);
+            this.txtbox_monto.Location = new System.Drawing.Point(204, 53);
+            this.txtbox_monto.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_monto.Name = "txtbox_monto";
-            this.txtbox_monto.Size = new System.Drawing.Size(153, 20);
+            this.txtbox_monto.Size = new System.Drawing.Size(203, 22);
             this.txtbox_monto.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 88);
+            this.label2.Location = new System.Drawing.Point(51, 108);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 13);
+            this.label2.Size = new System.Drawing.Size(105, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Forma de Pago";
             // 
@@ -72,18 +76,20 @@
             this.combobox_pago.Items.AddRange(new object[] {
             "Efectivo",
             "Tarjeta"});
-            this.combobox_pago.Location = new System.Drawing.Point(153, 85);
+            this.combobox_pago.Location = new System.Drawing.Point(204, 105);
+            this.combobox_pago.Margin = new System.Windows.Forms.Padding(4);
             this.combobox_pago.Name = "combobox_pago";
-            this.combobox_pago.Size = new System.Drawing.Size(153, 21);
+            this.combobox_pago.Size = new System.Drawing.Size(203, 24);
             this.combobox_pago.TabIndex = 3;
             this.combobox_pago.SelectedIndexChanged += new System.EventHandler(this.combobox_pago_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 130);
+            this.label3.Location = new System.Drawing.Point(51, 160);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.Size = new System.Drawing.Size(105, 17);
             this.label3.TabIndex = 4;
             this.label3.Text = "Tipo de Tarjeta";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -91,17 +97,19 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(38, 168);
+            this.label4.Location = new System.Drawing.Point(51, 207);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(95, 13);
+            this.label4.Size = new System.Drawing.Size(127, 17);
             this.label4.TabIndex = 6;
             this.label4.Text = "Número de Tarjeta";
             // 
             // txtbox_numerotarjeta
             // 
-            this.txtbox_numerotarjeta.Location = new System.Drawing.Point(153, 165);
+            this.txtbox_numerotarjeta.Location = new System.Drawing.Point(204, 203);
+            this.txtbox_numerotarjeta.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_numerotarjeta.Name = "txtbox_numerotarjeta";
-            this.txtbox_numerotarjeta.Size = new System.Drawing.Size(153, 20);
+            this.txtbox_numerotarjeta.Size = new System.Drawing.Size(203, 22);
             this.txtbox_numerotarjeta.TabIndex = 7;
             // 
             // combobox_tipotarjeta
@@ -110,42 +118,57 @@
             this.combobox_tipotarjeta.Items.AddRange(new object[] {
             "Crédito",
             "Débito"});
-            this.combobox_tipotarjeta.Location = new System.Drawing.Point(153, 127);
+            this.combobox_tipotarjeta.Location = new System.Drawing.Point(204, 156);
+            this.combobox_tipotarjeta.Margin = new System.Windows.Forms.Padding(4);
             this.combobox_tipotarjeta.Name = "combobox_tipotarjeta";
-            this.combobox_tipotarjeta.Size = new System.Drawing.Size(153, 21);
+            this.combobox_tipotarjeta.Size = new System.Drawing.Size(203, 24);
             this.combobox_tipotarjeta.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 205);
+            this.label5.Location = new System.Drawing.Point(51, 252);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(149, 13);
+            this.label5.Size = new System.Drawing.Size(197, 17);
             this.label5.TabIndex = 9;
             this.label5.Text = "Fecha de Vencimiento Tarjeta";
             // 
             // txtbox_vencimientotarjeta
             // 
-            this.txtbox_vencimientotarjeta.Location = new System.Drawing.Point(206, 202);
+            this.txtbox_vencimientotarjeta.Location = new System.Drawing.Point(275, 249);
+            this.txtbox_vencimientotarjeta.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_vencimientotarjeta.Name = "txtbox_vencimientotarjeta";
-            this.txtbox_vencimientotarjeta.Size = new System.Drawing.Size(100, 20);
+            this.txtbox_vencimientotarjeta.Size = new System.Drawing.Size(132, 22);
             this.txtbox_vencimientotarjeta.TabIndex = 10;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(206, 260);
+            this.button1.Location = new System.Drawing.Point(274, 295);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.Size = new System.Drawing.Size(133, 28);
             this.button1.TabIndex = 11;
             this.button1.Text = "CARGAR";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // button2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.button2.Location = new System.Drawing.Point(275, 339);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(132, 55);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "VOLVER AL MENU PRINCIPAL";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // CargaCredito
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 330);
+            this.ClientSize = new System.Drawing.Size(500, 406);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtbox_vencimientotarjeta);
             this.Controls.Add(this.label5);
@@ -157,8 +180,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtbox_monto);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "CargaCredito";
             this.Text = "CargaCredito";
+            this.Load += new System.EventHandler(this.Carga_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,5 +202,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtbox_vencimientotarjeta;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
