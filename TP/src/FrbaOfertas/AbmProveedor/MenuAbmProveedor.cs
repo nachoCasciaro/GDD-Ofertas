@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaOfertas.AbmCliente
+namespace FrbaOfertas.AbmProveedor
 {
-    public partial class MenuAbmCliente : Form
+    public partial class MenuAbmProveedor : Form
     {
-        public MenuAbmCliente()
+        public MenuAbmProveedor()
         {
             InitializeComponent();
-        }
-
-        private void MenuAbmCliente_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

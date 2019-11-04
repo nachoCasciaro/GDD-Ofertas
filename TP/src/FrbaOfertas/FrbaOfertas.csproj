@@ -45,12 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbmCliente\BajaCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AbmCliente\BajaCliente.Designer.cs">
-      <DependentUpon>BajaCliente.cs</DependentUpon>
-    </Compile>
     <Compile Include="AbmCliente\FiltroBMCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,11 +63,11 @@
     <Compile Include="AbmCliente\ModificacionCliente.Designer.cs">
       <DependentUpon>ModificacionCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmProveedor\BajaProveedor.cs">
+    <Compile Include="AbmProveedor\MenuAbmProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmProveedor\BajaProveedor.Designer.cs">
-      <DependentUpon>BajaProveedor.cs</DependentUpon>
+    <Compile Include="AbmProveedor\MenuAbmProveedor.Designer.cs">
+      <DependentUpon>MenuAbmProveedor.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmProveedor\ModificacionProveedor.cs">
       <SubType>Form</SubType>
@@ -181,9 +175,6 @@
       <DependentUpon>RegistroProveedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Validaciones.cs" />
-    <EmbeddedResource Include="AbmCliente\BajaCliente.resx">
-      <DependentUpon>BajaCliente.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente\FiltroBMCliente.resx">
       <DependentUpon>FiltroBMCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,8 +184,8 @@
     <EmbeddedResource Include="AbmCliente\ModificacionCliente.resx">
       <DependentUpon>ModificacionCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmProveedor\BajaProveedor.resx">
-      <DependentUpon>BajaProveedor.cs</DependentUpon>
+    <EmbeddedResource Include="AbmProveedor\MenuAbmProveedor.resx">
+      <DependentUpon>MenuAbmProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmProveedor\ModificacionProveedor.resx">
       <DependentUpon>ModificacionProveedor.cs</DependentUpon>
