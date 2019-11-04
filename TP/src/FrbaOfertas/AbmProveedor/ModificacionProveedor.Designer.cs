@@ -49,6 +49,7 @@
             this.txtbox_depto = new System.Windows.Forms.TextBox();
             this.txtbox_cp = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.checkbox_habilitado = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -117,7 +118,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(206, 197);
+            this.label8.Location = new System.Drawing.Point(227, 197);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(36, 13);
             this.label8.TabIndex = 7;
@@ -143,30 +144,30 @@
             // 
             // txtbox_rs
             // 
-            this.txtbox_rs.Location = new System.Drawing.Point(124, 39);
+            this.txtbox_rs.Location = new System.Drawing.Point(142, 39);
             this.txtbox_rs.Name = "txtbox_rs";
-            this.txtbox_rs.Size = new System.Drawing.Size(224, 20);
+            this.txtbox_rs.Size = new System.Drawing.Size(206, 20);
             this.txtbox_rs.TabIndex = 10;
             // 
             // txtbox_mail
             // 
-            this.txtbox_mail.Location = new System.Drawing.Point(80, 65);
+            this.txtbox_mail.Location = new System.Drawing.Point(142, 65);
             this.txtbox_mail.Name = "txtbox_mail";
-            this.txtbox_mail.Size = new System.Drawing.Size(268, 20);
+            this.txtbox_mail.Size = new System.Drawing.Size(206, 20);
             this.txtbox_mail.TabIndex = 11;
             // 
             // txtbox_telefono
             // 
-            this.txtbox_telefono.Location = new System.Drawing.Point(103, 91);
+            this.txtbox_telefono.Location = new System.Drawing.Point(142, 91);
             this.txtbox_telefono.Name = "txtbox_telefono";
-            this.txtbox_telefono.Size = new System.Drawing.Size(245, 20);
+            this.txtbox_telefono.Size = new System.Drawing.Size(206, 20);
             this.txtbox_telefono.TabIndex = 12;
             // 
             // txtbox_cuit
             // 
-            this.txtbox_cuit.Location = new System.Drawing.Point(86, 118);
+            this.txtbox_cuit.Location = new System.Drawing.Point(142, 118);
             this.txtbox_cuit.Name = "txtbox_cuit";
-            this.txtbox_cuit.Size = new System.Drawing.Size(262, 20);
+            this.txtbox_cuit.Size = new System.Drawing.Size(206, 20);
             this.txtbox_cuit.TabIndex = 13;
             // 
             // txtbox_contacto
@@ -178,42 +179,42 @@
             // 
             // txtbox_calle
             // 
-            this.txtbox_calle.Location = new System.Drawing.Point(101, 170);
+            this.txtbox_calle.Location = new System.Drawing.Point(142, 170);
             this.txtbox_calle.Name = "txtbox_calle";
-            this.txtbox_calle.Size = new System.Drawing.Size(247, 20);
+            this.txtbox_calle.Size = new System.Drawing.Size(206, 20);
             this.txtbox_calle.TabIndex = 15;
             // 
             // txtbox_ciudad
             // 
-            this.txtbox_ciudad.Location = new System.Drawing.Point(101, 218);
+            this.txtbox_ciudad.Location = new System.Drawing.Point(142, 218);
             this.txtbox_ciudad.Name = "txtbox_ciudad";
-            this.txtbox_ciudad.Size = new System.Drawing.Size(247, 20);
+            this.txtbox_ciudad.Size = new System.Drawing.Size(206, 20);
             this.txtbox_ciudad.TabIndex = 16;
             // 
             // txtbox_nropiso
             // 
-            this.txtbox_nropiso.Location = new System.Drawing.Point(101, 194);
+            this.txtbox_nropiso.Location = new System.Drawing.Point(142, 194);
             this.txtbox_nropiso.Name = "txtbox_nropiso";
-            this.txtbox_nropiso.Size = new System.Drawing.Size(100, 20);
+            this.txtbox_nropiso.Size = new System.Drawing.Size(79, 20);
             this.txtbox_nropiso.TabIndex = 17;
             // 
             // txtbox_depto
             // 
-            this.txtbox_depto.Location = new System.Drawing.Point(248, 194);
+            this.txtbox_depto.Location = new System.Drawing.Point(269, 194);
             this.txtbox_depto.Name = "txtbox_depto";
-            this.txtbox_depto.Size = new System.Drawing.Size(100, 20);
+            this.txtbox_depto.Size = new System.Drawing.Size(79, 20);
             this.txtbox_depto.TabIndex = 18;
             // 
             // txtbox_cp
             // 
-            this.txtbox_cp.Location = new System.Drawing.Point(126, 244);
+            this.txtbox_cp.Location = new System.Drawing.Point(142, 244);
             this.txtbox_cp.Name = "txtbox_cp";
-            this.txtbox_cp.Size = new System.Drawing.Size(222, 20);
+            this.txtbox_cp.Size = new System.Drawing.Size(206, 20);
             this.txtbox_cp.TabIndex = 19;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(248, 288);
+            this.button1.Location = new System.Drawing.Point(248, 312);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 20;
@@ -221,11 +222,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // checkbox_habilitado
+            // 
+            this.checkbox_habilitado.AutoSize = true;
+            this.checkbox_habilitado.Location = new System.Drawing.Point(141, 279);
+            this.checkbox_habilitado.Name = "checkbox_habilitado";
+            this.checkbox_habilitado.Size = new System.Drawing.Size(73, 17);
+            this.checkbox_habilitado.TabIndex = 21;
+            this.checkbox_habilitado.Text = "Habilitado";
+            this.checkbox_habilitado.UseVisualStyleBackColor = true;
+            // 
             // ModificacionProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 362);
+            this.Controls.Add(this.checkbox_habilitado);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtbox_cp);
             this.Controls.Add(this.txtbox_depto);
@@ -277,5 +289,6 @@
         private System.Windows.Forms.TextBox txtbox_depto;
         private System.Windows.Forms.TextBox txtbox_cp;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkbox_habilitado;
     }
 }
