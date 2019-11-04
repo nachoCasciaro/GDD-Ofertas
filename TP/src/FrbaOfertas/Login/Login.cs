@@ -27,29 +27,23 @@ namespace FrbaOfertas.Login
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
+            new LoginAdmin().Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
-            
+            this.Hide();
+            new LoginCliente().Show();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            new LoginProveedor().Show();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

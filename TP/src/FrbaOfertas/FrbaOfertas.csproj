@@ -118,6 +118,24 @@
     <Compile Include="Login\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\LoginAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\LoginAdmin.Designer.cs">
+      <DependentUpon>LoginAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\LoginCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\LoginCliente.Designer.cs">
+      <DependentUpon>LoginCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\LoginProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\LoginProveedor.Designer.cs">
+      <DependentUpon>LoginProveedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AbmCliente\RegistroCliente.cs">
@@ -153,6 +171,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\LoginAdmin.resx">
+      <DependentUpon>LoginAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\LoginCliente.resx">
+      <DependentUpon>LoginCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\LoginProveedor.resx">
+      <DependentUpon>LoginProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

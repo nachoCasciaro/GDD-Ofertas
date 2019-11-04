@@ -1,4 +1,4 @@
-﻿namespace FrbaOfertas.Registro
+﻿namespace FrbaOfertas.AbmCliente
 {
     partial class RegistroCliente
     {
@@ -276,6 +276,7 @@
             this.button1.TabIndex = 26;
             this.button1.Text = "REGISTRARME";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // RegistroCliente
             // 

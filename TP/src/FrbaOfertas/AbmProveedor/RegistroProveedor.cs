@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace FrbaOfertas.Registro
+namespace FrbaOfertas.AbmProveedor
 {
     public partial class RegistroProveedor : Form
     {

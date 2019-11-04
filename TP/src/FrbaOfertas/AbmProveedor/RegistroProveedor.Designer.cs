@@ -1,4 +1,4 @@
-﻿namespace FrbaOfertas.Registro
+﻿namespace FrbaOfertas.AbmProveedor
 {
     partial class RegistroProveedor
     {

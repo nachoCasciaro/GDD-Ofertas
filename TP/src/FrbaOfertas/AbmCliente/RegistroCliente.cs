@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FrbaOfertas.Registro
+namespace FrbaOfertas.AbmCliente
 {
     public partial class RegistroCliente : Form
     {
@@ -33,6 +33,11 @@ namespace FrbaOfertas.Registro
         }
 
         private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }
