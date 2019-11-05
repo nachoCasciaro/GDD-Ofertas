@@ -852,3 +852,30 @@ AND ((@dni = 0) OR Clie_dni = @dni)
 AND (Clie_Mail LIKE '%' + @mail + '%' OR @nombre LIKE '')
 END
 GO
+
+--SP ALTA ROL
+CREATE PROCEDURE POR_COLECTORA.sp_alta_rol(@nombre NVARCHAR(225))
+AS 
+BEGIN
+	
+	INSERT INTO POR_COLECTORA.Roles (Rol_Nombre)
+	VALUES (@nombre)
+	
+END
+GO
+
+--SP AGREGAR FUNCIONALIDAD A ROL (FUNCIONALIDADxROL)
+--SP ALTA ROL
+CREATE PROCEDURE POR_COLECTORA.sp_agregar_funcionalidad_a_rol(@nombreRol NVARCHAR(225), @func_descripcion NVARCHAR(225))
+AS 
+BEGIN
+	
+	INSERT INTO POR_COLECTORA.FuncionalidadxRol (Id_Rol, Id_Func)
+	VALUES ((SELECT rol_id 
+			FROM POR_COLECTORA.Roles 
+			WHERE Rol_Nombre = @nombreRol), (SELECT Func_Id
+											FROM POR_COLECTORA.Funcionalidades
+											WHERE Func_Descripcion = @func_descripcion))
+	
+END
+GO
