@@ -41,7 +41,9 @@ namespace FrbaOfertas.AbmRol
             query.CommandType = CommandType.StoredProcedure;
 
             query.Parameters.Add(new SqlParameter("@nombre", this.txtbox_nombrerol.Text));
-            //Que onda los valores de los check box (?)
+            
+            //Funcionalidades agregado
+
 
             connection.Open();
             query.ExecuteNonQuery();

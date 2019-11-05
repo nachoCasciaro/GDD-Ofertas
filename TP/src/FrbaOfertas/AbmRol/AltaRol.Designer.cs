@@ -74,17 +74,17 @@
             // 
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Items.AddRange(new object[] {
-            "Login y Seguridad",
+            "Login y seguridad",
             "ABM Rol",
             "Registro de Usuario",
             "ABM Cliente",
             "ABM Proveedor",
             "Cargar Crédito",
             "Comprar Oferta",
-            "Confección y Publicación de Ofertas",
+            "Confección y publicación de Ofertas",
             "Entrega/Consumo de Oferta",
             "Facturación a Proveedor",
-            "Listado Estadístico"});
+            "Listado Estadistico"});
             this.checkedListBox1.Location = new System.Drawing.Point(254, 107);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(220, 184);
