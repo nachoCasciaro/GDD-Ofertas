@@ -16,5 +16,23 @@ namespace FrbaOfertas.AbmProveedor
         {
             InitializeComponent();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Menu_Principal.MenuProveedor().Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new AbmProveedor.FiltroBMProveedor().Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new AbmProveedor.RegistroProveedor().Show();
+        }
     }
 }

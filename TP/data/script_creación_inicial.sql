@@ -146,6 +146,22 @@ DROP PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor_listado
 IF OBJECT_ID ('POR_COLECTORA.sp_filtrar_clientes') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_filtrar_clientes
 
+--DROP FUNCTION EXISTE USUARIO
+IF OBJECT_ID ('POR_COLECTORA.fn_existe_usuario') IS NOT NULL
+DROP FUNCTION POR_COLECTORA.fn_existe_usuario
+
+--DROP SP ALTA USUARIO
+IF OBJECT_ID ('POR_COLECTORA.sp_alta_usuario') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_alta_usuario
+
+--DROP SP ALTA ROL
+IF OBJECT_ID ('POR_COLECTORA.sp_alta_rol') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_alta_rol
+
+--DROP SP ALTA ROL
+IF OBJECT_ID ('POR_COLECTORA.sp_agregar_funcionalidad_a_rol') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_agregar_funcionalidad_a_rol
+
 
 GO
 
@@ -468,22 +484,57 @@ GO
 
 --CREACION DE OBJETOS
 
+CREATE FUNCTION POR_COLECTORA.fn_existe_usuario (@username VARCHAR(250))
+RETURNS BIT 
+AS BEGIN
+	IF ((SELECT COUNT(*) FROM POR_COLECTORA.Usuarios WHERE Usuario_Nombre = @username) = 1)
+		RETURN 1
+	RETURN 0
+END
+GO
+
+CREATE PROCEDURE POR_COLECTORA.sp_alta_usuario(
+@username varchar(250),
+@password varchar(250)
+)
+AS
+BEGIN
+	
+
+	IF ( POR_COLECTORA.fn_existe_usuario(@username) = 0 )
+	BEGIN
+		INSERT INTO POR_COLECTORA.Usuarios(Usuario_Nombre,Usuario_Password) values (@username,HASHBYTES('SHA2_256', @password))
+	END
+	ELSE
+	BEGIN
+		RAISERROR ( 'YA EXISTE UN USUARIO CON ESE NOMBRE',1,1)
+	END
+END
+GO
+
 
 CREATE PROCEDURE POR_COLECTORA.sp_alta_cliente (
-@nombre char(50),
-@apellido char(50),
+@username varchar(250),
+@password varchar(250),
+@nombre varchar(50),
+@apellido varchar(50),
 @dni numeric (18,0),
-@mail char(50),
+@mail varchar(50),
 @telefono numeric(18,0),
-@direCalle char(80),
-@nroPiso numeric(10),
-@depto numeric(5),
-@ciudad char(50),
-@CP char(20),
+@direCalle varchar(80),
+@nroPiso int,
+@depto nvarchar(5),
+@ciudad varchar(50),
+@CP numeric,
 @fechaNacimiento datetime
 )
 AS
 BEGIN
+
+	EXEC POR_COLECTORA.sp_alta_usuario @username, @password
+
+	declare @user_id numeric
+	set @user_id = (select Usuario_Id from Usuarios where Usuario_Nombre = @username)
 
 	IF not exists (select 1 from POR_COLECTORA.Direcciones where Direccion_Calle = @direCalle and Direccion_Nro_Piso = @nroPiso and Direccion_Depto = @depto and Direccion_Ciudad = @ciudad) 
 		BEGIN
@@ -493,8 +544,8 @@ BEGIN
 	declare @dire_id numeric
 	set @dire_id = (select Direccion_Id from Direcciones where Direccion_Calle = @direCalle and Direccion_Nro_Piso = @nroPiso and Direccion_Depto = @depto and Direccion_Ciudad = @ciudad)
 	
-	INSERT INTO POR_COLECTORA.Clientes (Clie_Nombre,Clie_Apellido,Clie_DNI,Clie_Mail,Clie_Telefono,Clie_Direccion,Clie_CP,Clie_Fecha_Nac) 
-	VALUES (@nombre,@apellido,@dni,@mail,@telefono,@dire_id,@CP,@fechaNacimiento)
+	INSERT INTO POR_COLECTORA.Clientes (Clie_Nombre,Clie_Apellido,Clie_DNI,Clie_Mail,Clie_Telefono,Clie_Direccion,Clie_CP,Clie_Fecha_Nac, Clie_Usuario) 
+	VALUES (@nombre,@apellido,@dni,@mail,@telefono,@dire_id,@CP,@fechaNacimiento,@user_id)
 END
 
 GO

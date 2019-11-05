@@ -40,7 +40,7 @@ namespace FrbaOfertas.AbmCliente
 
         private void validarDatos()
         {
-            if (Validaciones.estaVacio(txtbox_user.Text) || Validaciones.estaVacio(txtbox_password.Text) || Validaciones.estaVacio(txtbox_nombre.Text) || Validaciones.estaVacio(txtbox_apellido.Text) || Validaciones.estaVacio(txtbox_dni.Text) || Validaciones.estaVacio(txtbox_mail.Text) || Validaciones.estaVacio(txtbox_telefono.Text) || Validaciones.estaVacio(txtbox_calle.Text) || Validaciones.estaVacio(txtbox_cp.Text) || Validaciones.estaVacio(txtbox_nropiso.Text) || Validaciones.estaVacio(txtbox_depto.Text) || Validaciones.estaVacio(txtbox_ciudad.Text) || Validaciones.estaVacio(txtbox_cp.Text))
+            if (Validaciones.estaVacio(txtbox_user.Text) || Validaciones.estaVacio(txtbox_password.Text) || Validaciones.estaVacio(txtbox_nombre.Text) || Validaciones.estaVacio(txtbox_apellido.Text) || Validaciones.estaVacio(txtbox_dni.Text) || Validaciones.estaVacio(txtbox_mail.Text) || Validaciones.estaVacio(txtbox_telefono.Text) || Validaciones.estaVacio(txtbox_calle.Text) || Validaciones.estaVacio(txtbox_cp.Text) || Validaciones.estaVacio(txtbox_ciudad.Text) || Validaciones.estaVacio(txtbox_cp.Text))
             {
 
                 throw new Exception("Debe completar todos los campos");
@@ -74,18 +74,19 @@ namespace FrbaOfertas.AbmCliente
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_alta_cliente", connection);
             query.CommandType = CommandType.StoredProcedure;
-            //No se si le tengo que pasar el user y password aca o no !!!!!!!!!!!!!!!!!!!!!
+            query.Parameters.Add(new SqlParameter("@username", this.txtbox_user.Text));
+            query.Parameters.Add(new SqlParameter("@password", this.txtbox_password.Text));
             query.Parameters.Add(new SqlParameter("@nombre", this.txtbox_nombre.Text));
             query.Parameters.Add(new SqlParameter("@apellido", this.txtbox_apellido.Text));
             query.Parameters.Add(new SqlParameter("@dni", Convert.ToInt32(this.txtbox_dni.Text)));
             query.Parameters.Add(new SqlParameter("@mail", this.txtbox_mail.Text));
-            query.Parameters.Add(new SqlParameter("@telefono", Convert.ToInt32(txtbox_telefono.Text)));
+            query.Parameters.Add(new SqlParameter("@telefono", Convert.ToInt32(this.txtbox_telefono.Text)));
             query.Parameters.Add(new SqlParameter("@direCalle", this.txtbox_calle.Text));
-            query.Parameters.Add(new SqlParameter("@nroPiso", this.txtbox_nropiso.Text));
+            query.Parameters.Add(new SqlParameter("@nroPiso", Convert.ToInt32(this.txtbox_nropiso.Text)));
             query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
             query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
-            query.Parameters.Add(new SqlParameter("@CP", Convert.ToInt32(txtbox_cp.Text)));
-            query.Parameters.Add(new SqlParameter("@fechaNacimiento", dtm_fecha.Value));
+            query.Parameters.Add(new SqlParameter("@CP", Convert.ToInt32(this.txtbox_cp.Text)));
+            query.Parameters.Add(new SqlParameter("@fechaNacimiento", this.dtm_fecha.Value));
 
             connection.Open();
             query.ExecuteNonQuery();

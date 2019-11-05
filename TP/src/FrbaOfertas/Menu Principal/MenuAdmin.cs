@@ -31,6 +31,7 @@ namespace FrbaOfertas.Menu_Principal
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
+            new AbmProveedor.MenuAbmProveedor().Show();
 
         }
 
@@ -48,11 +49,13 @@ namespace FrbaOfertas.Menu_Principal
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
+            new Facturar.Form1().Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             this.Hide();
+            new ListadoEstadistico.ListadoEstadistico().Show();
         }
     }
 }

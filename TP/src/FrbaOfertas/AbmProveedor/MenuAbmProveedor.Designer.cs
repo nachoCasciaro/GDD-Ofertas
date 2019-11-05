@@ -35,39 +35,46 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(67, 96);
+            this.button1.Location = new System.Drawing.Point(89, 118);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(173, 23);
+            this.button1.Size = new System.Drawing.Size(231, 28);
             this.button1.TabIndex = 0;
             this.button1.Text = "ALTA";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(67, 144);
+            this.button2.Location = new System.Drawing.Point(89, 177);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(173, 23);
+            this.button2.Size = new System.Drawing.Size(231, 28);
             this.button2.TabIndex = 1;
             this.button2.Text = "BAJA/MODIFICACIÓN";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(67, 193);
+            this.button3.Location = new System.Drawing.Point(89, 238);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(173, 23);
+            this.button3.Size = new System.Drawing.Size(231, 28);
             this.button3.TabIndex = 2;
             this.button3.Text = "VOLVER AL MENU PRINCIPAL";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // MenuAbmProveedor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(303, 299);
+            this.ClientSize = new System.Drawing.Size(404, 368);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MenuAbmProveedor";
             this.Text = "MenuAbmProveedor";
             this.ResumeLayout(false);
