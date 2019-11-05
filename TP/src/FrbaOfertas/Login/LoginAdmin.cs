@@ -31,5 +31,12 @@ namespace FrbaOfertas.Login
             new Menu_Principal.MenuAdmin().Show();
 
         }
+
+        private void LoginAdmin_Load(object sender, EventArgs e)
+        {
+            string someValue = "Get the value from wherever you want";
+            textBox1.Text = someValue;
+        }
+
     }
 }

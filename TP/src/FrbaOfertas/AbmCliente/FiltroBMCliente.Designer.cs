@@ -41,11 +41,6 @@
             this.button_baja = new System.Windows.Forms.Button();
             this.button_modificar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaNacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,7 +97,7 @@
             // txtbox_nombre
             // 
             this.txtbox_nombre.Location = new System.Drawing.Point(374, 69);
-            this.txtbox_nombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_nombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_nombre.Name = "txtbox_nombre";
             this.txtbox_nombre.Size = new System.Drawing.Size(231, 22);
             this.txtbox_nombre.TabIndex = 5;
@@ -110,7 +105,7 @@
             // txtbox_apellido
             // 
             this.txtbox_apellido.Location = new System.Drawing.Point(374, 119);
-            this.txtbox_apellido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_apellido.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_apellido.Name = "txtbox_apellido";
             this.txtbox_apellido.Size = new System.Drawing.Size(231, 22);
             this.txtbox_apellido.TabIndex = 6;
@@ -118,7 +113,7 @@
             // txtbox_dni
             // 
             this.txtbox_dni.Location = new System.Drawing.Point(753, 72);
-            this.txtbox_dni.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_dni.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_dni.Name = "txtbox_dni";
             this.txtbox_dni.Size = new System.Drawing.Size(231, 22);
             this.txtbox_dni.TabIndex = 7;
@@ -126,7 +121,7 @@
             // txtbox_mail
             // 
             this.txtbox_mail.Location = new System.Drawing.Point(753, 119);
-            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_mail.Name = "txtbox_mail";
             this.txtbox_mail.Size = new System.Drawing.Size(231, 22);
             this.txtbox_mail.TabIndex = 8;
@@ -134,7 +129,7 @@
             // button_filtrar
             // 
             this.button_filtrar.Location = new System.Drawing.Point(1102, 88);
-            this.button_filtrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_filtrar.Margin = new System.Windows.Forms.Padding(4);
             this.button_filtrar.Name = "button_filtrar";
             this.button_filtrar.Size = new System.Drawing.Size(135, 28);
             this.button_filtrar.TabIndex = 9;
@@ -145,7 +140,7 @@
             // button_baja
             // 
             this.button_baja.Location = new System.Drawing.Point(500, 477);
-            this.button_baja.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_baja.Margin = new System.Windows.Forms.Padding(4);
             this.button_baja.Name = "button_baja";
             this.button_baja.Size = new System.Drawing.Size(135, 28);
             this.button_baja.TabIndex = 10;
@@ -155,24 +150,19 @@
             // button_modificar
             // 
             this.button_modificar.Location = new System.Drawing.Point(770, 477);
-            this.button_modificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_modificar.Margin = new System.Windows.Forms.Padding(4);
             this.button_modificar.Name = "button_modificar";
             this.button_modificar.Size = new System.Drawing.Size(135, 28);
             this.button_modificar.TabIndex = 11;
             this.button_modificar.Text = "MODIFICAR";
             this.button_modificar.UseVisualStyleBackColor = true;
+            this.button_modificar.Click += new System.EventHandler(this.button_modificar_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Cliente,
-            this.Apellido,
-            this.DNI,
-            this.Mail,
-            this.FechaNacimiento});
             this.dataGridView1.Location = new System.Drawing.Point(65, 167);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -180,36 +170,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(1270, 289);
             this.dataGridView1.TabIndex = 12;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Cliente
-            // 
-            this.Cliente.HeaderText = "Nombre ";
-            this.Cliente.Name = "Cliente";
-            this.Cliente.ReadOnly = true;
-            // 
-            // Apellido
-            // 
-            this.Apellido.HeaderText = "Apellido";
-            this.Apellido.Name = "Apellido";
-            this.Apellido.ReadOnly = true;
-            // 
-            // DNI
-            // 
-            this.DNI.HeaderText = "DNI";
-            this.DNI.Name = "DNI";
-            this.DNI.ReadOnly = true;
-            // 
-            // Mail
-            // 
-            this.Mail.HeaderText = "Mail";
-            this.Mail.Name = "Mail";
-            this.Mail.ReadOnly = true;
-            // 
-            // FechaNacimiento
-            // 
-            this.FechaNacimiento.HeaderText = "Fecha de Nacimiento";
-            this.FechaNacimiento.Name = "FechaNacimiento";
-            this.FechaNacimiento.ReadOnly = true;
             // 
             // FiltroBMCliente
             // 
@@ -229,7 +189,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FiltroBMCliente";
             this.Text = "FiltroBMCliente";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -253,10 +213,5 @@
         private System.Windows.Forms.Button button_baja;
         private System.Windows.Forms.Button button_modificar;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DNI;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaNacimiento;
     }
 }

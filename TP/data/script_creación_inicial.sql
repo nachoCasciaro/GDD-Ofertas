@@ -142,6 +142,10 @@ DROP PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor
 IF OBJECT_ID ('POR_COLECTORA.sp_facturar_a_proveedor_listado') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor_listado
 
+--DROP SP FILTRAR CLIENTES
+IF OBJECT_ID ('POR_COLECTORA.sp_filtrar_clientes') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_filtrar_clientes
+
 
 GO
 
@@ -436,7 +440,7 @@ where Carga_Fecha is not null
 
 
 --MIGRACION COMPRAS - Revisar el jueves el matching de compra_oferta
-
+/*
 INSERT INTO POR_COLECTORA.Compras
 (Compra_Cliente,Compra_Oferta,Compra_Cantidad,Compra_Fecha,Compra_Id_Factura,Compra_Oferta_Precio)
 SELECT DISTINCT (SELECT Clie_Id FROM POR_COLECTORA.Clientes As Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni), 
@@ -447,7 +451,7 @@ SELECT DISTINCT (SELECT Clie_Id FROM POR_COLECTORA.Clientes As Colectora WHERE C
 				Maestra.Oferta_Precio
 FROM gd_esquema.Maestra As Maestra
 where Oferta_Descripcion is not null
-
+*/
 
 --MIGRACION CUPONES / REVISAR SI LA FECHA DE VENC ES LA MISMA DE LA FACUTURA O NO
 /*
@@ -823,3 +827,28 @@ END
 
 GO
 
+--SP FILTRO CLIENTES
+CREATE PROCEDURE POR_COLECTORA.sp_filtrar_clientes(
+@nombre NVARCHAR(225),
+@apellido NVARCHAR(225),
+@dni Numeric(18, 0),
+@mail NVARCHAR(250)
+)
+AS 
+BEGIN
+
+SELECT Clie_Id,Clie_Nombre,Clie_Apellido,Clie_DNI,Clie_Mail,Clie_Telefono,
+		(select Direccion_Calle from Direcciones where Direccion_Id = Clie_Direccion),
+		isnull( (select Direccion_Nro_Piso from Direcciones where Direccion_Id = Clie_Direccion),0),
+		isnull( (select Direccion_Depto from Direcciones where Direccion_Id = Clie_Direccion),0),
+		(select Direccion_Ciudad from Direcciones where Direccion_Id = Clie_Direccion),
+		isnull( Clie_CP,0) ,
+		Clie_Fecha_Nac,
+		Clie_Habilitado
+from POR_COLECTORA.Clientes
+where (Clie_nombre LIKE '%' + @nombre + '%' OR @nombre LIKE '')
+AND (Clie_apellido LIKE '%' + @apellido + '%' OR @apellido LIKE '')
+AND ((@dni = 0) OR Clie_dni = @dni)
+AND (Clie_Mail LIKE '%' + @mail + '%' OR @nombre LIKE '')
+END
+GO

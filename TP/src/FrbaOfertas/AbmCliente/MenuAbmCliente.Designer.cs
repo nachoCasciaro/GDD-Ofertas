@@ -35,40 +35,44 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(63, 93);
+            this.button1.Location = new System.Drawing.Point(84, 114);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(177, 23);
+            this.button1.Size = new System.Drawing.Size(236, 28);
             this.button1.TabIndex = 0;
             this.button1.Text = "ALTA";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(63, 143);
+            this.button2.Location = new System.Drawing.Point(84, 176);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(177, 23);
+            this.button2.Size = new System.Drawing.Size(236, 28);
             this.button2.TabIndex = 1;
             this.button2.Text = "BAJA/MODIFICACIÓN";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(63, 192);
+            this.button3.Location = new System.Drawing.Point(84, 236);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(177, 23);
+            this.button3.Size = new System.Drawing.Size(236, 28);
             this.button3.TabIndex = 2;
             this.button3.Text = "VOLVER AL MENU PRINCIPAL";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // MenuAbmCliente
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 315);
+            this.ClientSize = new System.Drawing.Size(419, 388);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MenuAbmCliente";
             this.Text = "MenuAbmCliente";
             this.Load += new System.EventHandler(this.MenuAbmCliente_Load);

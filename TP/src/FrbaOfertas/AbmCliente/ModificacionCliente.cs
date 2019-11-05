@@ -13,10 +13,61 @@ namespace FrbaOfertas.AbmCliente
 {
     public partial class ModificacionCliente : Form
     {
-        public ModificacionCliente()
+        Int32 id;
+        String nombre;
+        String apellido;
+        Int32 dni;        
+        String mail;
+        Int32 telefono;
+        String calle;
+        Int32 nroPiso;
+        String depto;
+        String ciudad;
+        Int32 cp;
+        DateTime fecha;
+        bool habilitado;
+
+        public ModificacionCliente(Int32 id, String nombre, String apellido, Int32 dni, String mail, Int32 telefono,String calle, Int32 nroPiso, String depto, String ciudad,Int32 cp, DateTime fecha,bool habilitado)
+        {
+            InitializeComponent();
+            this.id = id;
+            this.dni = dni;
+            this.apellido = apellido;
+            this.nombre = nombre;
+            this.fecha = fecha;
+            this.mail = mail;
+            this.telefono = telefono;
+            this.calle = calle;
+            this.nroPiso = nroPiso;
+            this.depto = depto;
+            this.cp = cp;
+            this.ciudad = ciudad;
+            this.habilitado = habilitado;
+            if (habilitado)
+                checkbox_habilitado.Checked = true;
+
+        }
+         public ModificacionCliente()
         {
             InitializeComponent();
         }
+
+
+        private void ModificacionCliente_Load(object sender, EventArgs e)
+        {
+            txtbox_dni.Text = dni.ToString();
+            txtbox_nombre.Text = nombre;
+            txtbox_apellido.Text = apellido;
+            dtm_fecha.Value = fecha;
+            txtbox_mail.Text = mail;
+            txtbox_telefono.Text = telefono.ToString();
+            txtbox_calle.Text = calle;
+            txtbox_nropiso.Text = nroPiso.ToString();
+            txtbox_depto.Text = depto;
+            txtbox_cp.Text = cp.ToString();
+            txtbox_ciudad.Text = ciudad;
+        }
+
 
         private void textBox11_TextChanged(object sender, EventArgs e)
         {
