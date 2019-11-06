@@ -162,6 +162,9 @@ DROP PROCEDURE POR_COLECTORA.sp_alta_rol
 IF OBJECT_ID ('POR_COLECTORA.sp_agregar_funcionalidad_a_rol') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_agregar_funcionalidad_a_rol
 
+--DROP SP OFERTAS VIGENTES
+IF OBJECT_ID ('POR_COLECTORA.sp_ofertas_vigentes') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_ofertas_vigentes
 
 GO
 
@@ -934,9 +937,9 @@ GO
 CREATE PROCEDURE POR_COLECTORA.sp_ofertas_vigentes(@fecha DateTime)
 AS
 BEGIN
-	SELECT oferta_descripcion, oferta_id 
+	SELECT oferta_descripcion AS Descripcion, oferta_id AS Codigo, Oferta_Precio AS Precio_Original, Oferta_Precio_Ficticio AS Precio_Oferta
 	FROM POR_COLECTORA.Ofertas
-	WHERE @fecha <= Oferta_Fecha_Venc --No se si hay que chequear que queden ofertas, no me acuerdo si eso era el campo oferta_cantidad
+	WHERE @fecha <= Oferta_Fecha_Venc AND Oferta_Cantidad > 0
 
 END
 GO
