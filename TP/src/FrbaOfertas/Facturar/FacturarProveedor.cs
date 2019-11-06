@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace FrbaOfertas.Facturar
 {
-    public partial class Form1 : Form
+    public partial class FacturarProveedor : Form
     {
-        public Form1()
+        public FacturarProveedor()
         {
             InitializeComponent();
+        }
+
+        private void FacturarProveedor_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
