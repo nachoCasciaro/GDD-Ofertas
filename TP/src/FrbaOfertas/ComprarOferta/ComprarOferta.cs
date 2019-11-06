@@ -43,8 +43,28 @@ namespace FrbaOfertas.ComprarOferta
             return reader;
         }
 
+        private void seleccionarOferta()
+        {
+            String descripcion = Convert.ToString(dataGridView1.SelectedRows[0].Cells[0].Value);
+            Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[1].Value);
+            Double precioOriginal = Convert.ToDouble(dataGridView1.SelectedRows[0].Cells[2].Value);
+            Double precioOferta = Convert.ToDouble(dataGridView1.SelectedRows[0].Cells[3].Value);
+
+            //sp comprar oferta? 
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                this.seleccionarOferta();
+                MessageBox.Show("Oferta comprada con éxito");
+                this.Close();
+            }
+            catch (Exception excepcion)
+            {
+                MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
+            }
 
         }
     }
