@@ -916,7 +916,6 @@ END
 GO
 
 --SP AGREGAR FUNCIONALIDAD A ROL (FUNCIONALIDADxROL)
---SP ALTA ROL
 CREATE PROCEDURE POR_COLECTORA.sp_agregar_funcionalidad_a_rol(@nombreRol NVARCHAR(225), @func_descripcion NVARCHAR(225))
 AS 
 BEGIN
@@ -928,5 +927,16 @@ BEGIN
 											FROM POR_COLECTORA.Funcionalidades
 											WHERE Func_Descripcion = @func_descripcion))
 	
+END
+GO
+
+--SP OFERTAS VIGENTES
+CREATE PROCEDURE POR_COLECTORA.sp_ofertas_vigentes(@fecha DateTime)
+AS
+BEGIN
+	SELECT oferta_descripcion, oferta_id 
+	FROM POR_COLECTORA.Ofertas
+	WHERE @fecha <= Oferta_Fecha_Venc --No se si hay que chequear que queden ofertas, no me acuerdo si eso era el campo oferta_cantidad
+
 END
 GO
