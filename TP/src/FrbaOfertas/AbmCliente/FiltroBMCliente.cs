@@ -53,7 +53,7 @@ namespace FrbaOfertas.AbmCliente
 
             return reader;
         }
-        private void seleccionarCliente()
+        private void seleccionarClienteModificar()
         {
             Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             String nombre = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
@@ -79,7 +79,7 @@ namespace FrbaOfertas.AbmCliente
             {
                 try
                 {
-                    this.seleccionarCliente();
+                    this.seleccionarClienteModificar();
                     this.Close();
                 }
                 catch (Exception excepcion)
@@ -87,6 +87,40 @@ namespace FrbaOfertas.AbmCliente
                     MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
                 }
             }
+        }
+
+        private void button_baja_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    this.seleccionarClienteBaja();
+                    this.Close();
+                }
+                catch (Exception excepcion)
+                {
+                    MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
+                }
+            }
+        }
+
+        private void seleccionarClienteBaja()
+        {
+            Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+            var connection = DB.getInstance().getConnection();
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_baja_cliente", connection);
+            query.CommandType = CommandType.StoredProcedure;
+            query.Parameters.Add(new SqlParameter("@id_clie", id));
+
+            connection.Open();
+            query.ExecuteNonQuery();
+            connection.Close();
+
+            this.Close();
+            new Menu_Principal.MenuAdmin().Show();
+
+
         }
 
 

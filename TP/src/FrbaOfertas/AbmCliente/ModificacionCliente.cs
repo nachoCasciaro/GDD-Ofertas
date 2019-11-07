@@ -45,6 +45,7 @@ namespace FrbaOfertas.AbmCliente
             this.habilitado = habilitado;
             if (habilitado)
                 checkbox_habilitado.Checked = true;
+            Load += new EventHandler(ModificacionCliente_Load);
 
         }
          public ModificacionCliente()
@@ -66,6 +67,7 @@ namespace FrbaOfertas.AbmCliente
             txtbox_depto.Text = depto;
             txtbox_cp.Text = cp.ToString();
             txtbox_ciudad.Text = ciudad;
+            
         }
 
 
@@ -111,7 +113,7 @@ namespace FrbaOfertas.AbmCliente
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_modificar_cliente", connection);
             query.CommandType = CommandType.StoredProcedure;
-            //Obtener cliente loggeado (necesito el ID)
+            query.Parameters.Add(new SqlParameter("@id_clie", this.id));
             query.Parameters.Add(new SqlParameter("@nombre", this.txtbox_nombre.Text));
             query.Parameters.Add(new SqlParameter("@apellido", this.txtbox_apellido.Text));
             query.Parameters.Add(new SqlParameter("@dni", Convert.ToInt32(this.txtbox_dni.Text)));
@@ -123,13 +125,13 @@ namespace FrbaOfertas.AbmCliente
             query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
             query.Parameters.Add(new SqlParameter("@CP", Convert.ToInt32(txtbox_cp.Text)));
             query.Parameters.Add(new SqlParameter("@fechaNacimiento", dtm_fecha.Value));
-            bool habilitado = false;
+            /*bool habilitado = false;
             if (checkbox_habilitado.Checked)
             {
                 habilitado = true;
             }
             query.Parameters.Add(new SqlParameter("@habilitado", habilitado));
-
+            */
             connection.Open();
             query.ExecuteNonQuery();
             connection.Close();

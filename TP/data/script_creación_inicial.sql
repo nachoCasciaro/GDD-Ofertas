@@ -280,7 +280,7 @@ CREATE TABLE POR_COLECTORA.Ofertas(
 	Oferta_Precio Float NOT NULL,
 	Oferta_Precio_Ficticio Float NOT NULL,
 	Oferta_Cantidad Int NOT NULL,
-	Oferta_Restriccion_Compra Int NOT NULL,
+	Oferta_Restriccion_Compra Int,
 	Oferta_Proveedor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id))
 GO
 
@@ -299,7 +299,7 @@ GO
 CREATE TABLE POR_COLECTORA.Cupones(
 	Cupon_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Cupon_Codigo nvarchar(80) NOT NULL,
-	Cupon_Fecha_Venc DATETIME NOT NULL,
+	Cupon_Fecha_Venc DATETIME ,
 	Cupon_Fecha_Consumo DATETIME,
 	Cupon_Nro_Compra Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Compras(Compra_Nro),
 	Cupon_Id_Cliente_Consumidor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id))
@@ -430,7 +430,7 @@ where Maestra.Provee_RS is not null
 INSERT INTO POR_COLECTORA.Ofertas
 (Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio,
 	Oferta_Cantidad, Oferta_Restriccion_Compra,	Oferta_Proveedor)
-SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, 0,
+SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, NULL,
 				(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
 FROM gd_esquema.Maestra As Maestra
 where Oferta_Descripcion is not null
@@ -459,24 +459,24 @@ where Carga_Fecha is not null
 
 
 --MIGRACION COMPRAS - Revisar el jueves el matching de compra_oferta
-/*
+
 INSERT INTO POR_COLECTORA.Compras
 (Compra_Cliente,Compra_Oferta,Compra_Cantidad,Compra_Fecha,Compra_Id_Factura,Compra_Oferta_Precio)
 SELECT DISTINCT (SELECT Clie_Id FROM POR_COLECTORA.Clientes As Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni), 
-				(SELECT Oferta_id FROM POR_COLECTORA.Ofertas AS Colectora WHERE 
-					Colectora.Oferta_Descripcion = Maestra.Oferta_Descripcion and (select Provee_RS from POR_COLECTORA.Proveedores) =  Maestra.Provee_RS),
+				(select top 1 Oferta_Id from POR_COLECTORA.Ofertas As Colectora where Colectora.Oferta_Descripcion = Oferta_Descripcion and
+				(select Provee_RS from POR_COLECTORA.Proveedores where Provee_Id = Oferta_Proveedor) = Provee_RS),
 				1,Maestra.Oferta_Fecha_Compra,
 				(SELECT Fact_Id FROM POR_COLECTORA.Facturas AS Colectora WHERE Colectora.Fact_Numero = Maestra.Factura_Nro),
 				Maestra.Oferta_Precio
 FROM gd_esquema.Maestra As Maestra
 where Oferta_Descripcion is not null
-*/
+
 
 --MIGRACION CUPONES / REVISAR SI LA FECHA DE VENC ES LA MISMA DE LA FACUTURA O NO
 /*
 INSERT INTO POR_COLECTORA.Cupones
 (Cupon_Fecha_Venc, Cupon_Codigo,Cupon_Fecha_Consumo,Cupon_Id_Cliente_Consumidor,Cupon_Nro_Compra)
-SELECT DISTINCT 30,Oferta_Codigo,NULL,(SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni and Colectora.Clie_Nombre + Colectora.Clie_Apellido = Maestra.Cli_Nombre + Maestra.Cli_Apellido)
+SELECT DISTINCT NULL,Oferta_Codigo,NULL,(SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni and Colectora.Clie_Nombre + Colectora.Clie_Apellido = Maestra.Cli_Nombre + Maestra.Cli_Apellido)
 				,(select Compra_Nro from POR_COLECTORA.Compras) 
 FROM gd_esquema.Maestra AS Maestra
 */

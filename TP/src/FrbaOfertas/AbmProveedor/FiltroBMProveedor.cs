@@ -16,5 +16,20 @@ namespace FrbaOfertas.AbmProveedor
         {
             InitializeComponent();
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void FILTRAR_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

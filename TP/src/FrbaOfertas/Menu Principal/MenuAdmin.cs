@@ -38,6 +38,7 @@ namespace FrbaOfertas.Menu_Principal
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
+            new AbmRol.AltaRol().Show();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -49,7 +50,7 @@ namespace FrbaOfertas.Menu_Principal
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Facturar.Form1().Show();
+            new Facturar.FacturarProveedor().Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
