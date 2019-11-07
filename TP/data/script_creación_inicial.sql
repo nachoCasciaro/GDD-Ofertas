@@ -166,6 +166,7 @@ DROP PROCEDURE POR_COLECTORA.sp_agregar_funcionalidad_a_rol
 IF OBJECT_ID ('POR_COLECTORA.sp_ofertas_vigentes') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_ofertas_vigentes
 
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -597,6 +598,8 @@ END
 GO
 
 CREATE PROCEDURE POR_COLECTORA.sp_alta_proveedor (
+@username varchar(250),
+@password varchar(250),
 @razonSocial nvarchar(80),
 @mail nvarchar(50),
 @telefono numeric(18,0),
@@ -606,10 +609,16 @@ CREATE PROCEDURE POR_COLECTORA.sp_alta_proveedor (
 @ciudad nvarchar(80),
 @CP numeric,
 @cuit nvarchar(13),
-@nombreContacto nvarchar(80)
+@nombreContacto nvarchar(80),
+@rubro nvarchar(80)
 )
 AS
 BEGIN
+
+	EXEC POR_COLECTORA.sp_alta_usuario @username, @password
+
+	declare @user_id numeric
+	set @user_id = (select Usuario_Id from Usuarios where Usuario_Nombre = @username)
 
 	IF not exists (select 1 from POR_COLECTORA.Direcciones where Direccion_Calle = @direCalle and Direccion_Nro_Piso = @nroPiso and Direccion_Depto = @depto and Direccion_Ciudad = @ciudad) 
 		BEGIN
@@ -619,8 +628,11 @@ BEGIN
 	declare @dire_id numeric
 	set @dire_id = (select Direccion_Id from Direcciones where Direccion_Calle = @direCalle and Direccion_Nro_Piso = @nroPiso and Direccion_Depto = @depto and Direccion_Ciudad = @ciudad)
 	
-	INSERT INTO POR_COLECTORA.Proveedores(Provee_RS,Provee_Mail,Provee_Telefono,Provee_Direccion,Provee_CP,Provee_CUIT,Provee_Nombre_Contacto) 
-	VALUES (@razonSocial,@mail,@telefono,@dire_id,@CP,@cuit,@nombreContacto)
+	declare @rubro_id numeric
+	set @rubro_id = (select Rubro_Id from POR_COLECTORA.Rubros where Rubro_Detalle = @rubro) 
+
+	INSERT INTO POR_COLECTORA.Proveedores(Provee_RS,Provee_Mail,Provee_Telefono,Provee_Direccion,Provee_CP,Provee_CUIT,Provee_Nombre_Contacto,Provee_Rubro,Provee_Usuario) 
+	VALUES (@razonSocial,@mail,@telefono,@dire_id,@CP,@cuit,@nombreContacto,@rubro_id,@user_id)
 END
 
 GO
@@ -943,3 +955,4 @@ BEGIN
 
 END
 GO
+

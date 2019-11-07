@@ -20,7 +20,7 @@ namespace FrbaOfertas.Login
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AbmProveedor.RegistroProveedor().Show();
+            new AbmProveedor.RegistroProveedor(2).Show();
         }
 
         private void button1_Click(object sender, EventArgs e)

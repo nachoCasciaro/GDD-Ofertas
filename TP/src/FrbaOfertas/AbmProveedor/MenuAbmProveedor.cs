@@ -32,7 +32,7 @@ namespace FrbaOfertas.AbmProveedor
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AbmProveedor.RegistroProveedor().Show();
+            new AbmProveedor.RegistroProveedor(1).Show();
         }
     }
 }

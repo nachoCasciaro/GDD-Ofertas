@@ -38,7 +38,7 @@ namespace FrbaOfertas.AbmCliente
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Menu_Principal.MenuCliente().Show();
+            new Menu_Principal.MenuAdmin().Show();
         }
     }
 }
