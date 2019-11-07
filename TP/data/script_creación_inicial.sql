@@ -519,15 +519,15 @@ GO
 CREATE PROCEDURE POR_COLECTORA.sp_alta_cliente (
 @username varchar(250),
 @password varchar(250),
-@nombre varchar(50),
-@apellido varchar(50),
+@nombre nvarchar(250),
+@apellido nvarchar(250),
 @dni numeric (18,0),
-@mail varchar(50),
+@mail nvarchar(250),
 @telefono numeric(18,0),
-@direCalle varchar(80),
+@direCalle nvarchar(250),
 @nroPiso int,
-@depto nvarchar(5),
-@ciudad varchar(50),
+@depto nvarchar(10),
+@ciudad nvarchar(80),
 @CP numeric,
 @fechaNacimiento datetime
 )
@@ -569,16 +569,16 @@ GO
 
 CREATE PROCEDURE POR_COLECTORA.sp_modificar_cliente (
 @id_clie numeric,
-@nombre char(50),
-@apellido char(50),
+@nombre nvarchar(250),
+@apellido nvarchar(250),
 @dni numeric (18,0),
-@mail char(50),
+@mail nvarchar(250),
 @telefono numeric(18,0),
-@direCalle char(80),
-@nroPiso numeric(10),
-@depto numeric(5),
-@ciudad char(50),
-@CP char(20),
+@direCalle nvarchar(250),
+@nroPiso int,
+@depto nvarchar(10),
+@ciudad nvarchar(80),
+@CP numeric,
 @fechaNacimiento datetime
 )
 AS
@@ -597,16 +597,16 @@ END
 GO
 
 CREATE PROCEDURE POR_COLECTORA.sp_alta_proveedor (
-@razonSocial char(50),
-@mail char(50),
+@razonSocial nvarchar(80),
+@mail nvarchar(50),
 @telefono numeric(18,0),
-@direCalle char(80),
-@nroPiso numeric(10),
-@depto numeric(5),
-@ciudad char(50),
-@CP char(20),
-@cuit numeric(20),
-@nombreContacto char(20)
+@direCalle nvarchar(250),
+@nroPiso int,
+@depto nvarchar(10),
+@ciudad nvarchar(80),
+@CP numeric,
+@cuit nvarchar(13),
+@nombreContacto nvarchar(80)
 )
 AS
 BEGIN
@@ -640,15 +640,15 @@ GO
 
 CREATE PROCEDURE POR_COLECTORA.sp_modificar_proveedor (
 @id_prove numeric,
-@razonSocial char(50),
-@mail char(50),
+@razonSocial nvarchar(80),
+@mail nvarchar(50),
 @telefono numeric(18,0),
-@direCalle char(80),
+@direCalle nvarchar(250),
 @nroPiso numeric(10),
-@depto numeric(5),
-@ciudad char(50),
-@CP char(20),
-@cuit numeric(20),
+@depto nvarchar(10),
+@ciudad nvarchar(80),
+@CP numeric,
+@cuit nvarchar(13),
 @nombreContacto char(20)
 )
 AS
@@ -669,7 +669,7 @@ GO
 CREATE PROCEDURE POR_COLECTORA.sp_carga_credito (
 @id_cliente numeric,
 @fecha_carga datetime, --pasar la de archivo configuracion -> esto lo haces en la interfaz
-@monto int,
+@monto numeric,
 @tipo_tarjeta nvarchar(50),
 @numero_tarjeta numeric,
 @fecha_venc datetime
@@ -756,12 +756,12 @@ GO
 --SP Alta ofertas proveedores 
 CREATE PROCEDURE POR_COLECTORA.sp_alta_ofertas(
 @id_prove numeric,
-@descripcion char(50), 
+@descripcion nvarchar(200), 
 @fecha DateTime, 
 @fecha_venc DateTime, 
-@precio_oferta numeric, 
-@precio_original numeric, 
-@stock numeric, 
+@precio_oferta float, 
+@precio_original float, 
+@stock int, 
 @max_compra numeric)
 
 AS
@@ -797,7 +797,7 @@ BEGIN
 	declare @numero_compra numeric
 	set @numero_compra = (select Compra_Nro from Compras where Compra_Oferta = @id_oferta)
 
-	declare @cupon_codigo nvarchar(50)
+	declare @cupon_codigo nvarchar(80)
 	set @cupon_codigo = SUBSTRING(CONVERT(nvarchar(255), NEWID()), 0, 9)
 	WHILE ((SELECT COUNT(*) FROM Cupones WHERE Cupon_codigo = @cupon_codigo) = 1 --Este while checkearia si el string autogenerado no se repite
 	BEGIN
