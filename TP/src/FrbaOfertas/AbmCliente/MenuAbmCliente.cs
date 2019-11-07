@@ -32,7 +32,7 @@ namespace FrbaOfertas.AbmCliente
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AbmCliente.RegistroCliente().Show();
+            new AbmCliente.RegistroCliente(1).Show();
         }
 
         private void button3_Click(object sender, EventArgs e)

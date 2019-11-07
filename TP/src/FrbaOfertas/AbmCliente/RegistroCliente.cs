@@ -13,8 +13,11 @@ namespace FrbaOfertas.AbmCliente
 {
     public partial class RegistroCliente : Form
     {
-        public RegistroCliente()
+        int esAdminOCliente;
+
+        public RegistroCliente(int esAdminOCliente)
         {
+            this.esAdminOCliente = esAdminOCliente;
             InitializeComponent();
         }
 
@@ -100,6 +103,15 @@ namespace FrbaOfertas.AbmCliente
                 this.validarDatos();
                 this.registrarCliente();
                 this.Close();
+                if (esAdminOCliente == 1)
+                {
+                    new Menu_Principal.MenuAdmin().Show();
+                }
+                else
+                {
+                    new Login.LoginCliente().Show();
+                }
+
             }
             catch (Exception excepcion)
             {
