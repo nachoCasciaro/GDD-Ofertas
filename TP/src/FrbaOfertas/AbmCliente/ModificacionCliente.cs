@@ -67,6 +67,7 @@ namespace FrbaOfertas.AbmCliente
             txtbox_depto.Text = depto;
             txtbox_cp.Text = cp.ToString();
             txtbox_ciudad.Text = ciudad;
+            var connection = DB.getInstance().getConnection();
             
         }
 
@@ -144,6 +145,7 @@ namespace FrbaOfertas.AbmCliente
                 this.validarDatos();
                 this.modificarCliente();
                 this.Close();
+                new Menu_Principal.MenuAdmin().Show();
             }
             catch (Exception excepcion)
             {

@@ -166,6 +166,10 @@ DROP PROCEDURE POR_COLECTORA.sp_agregar_funcionalidad_a_rol
 IF OBJECT_ID ('POR_COLECTORA.sp_ofertas_vigentes') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_ofertas_vigentes
 
+--DROP SP FILTRAR PROVEEDORES
+IF OBJECT_ID ('POR_COLECTORA.sp_filtrar_proveedores') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_filtrar_proveedores
+
 
 GO
 
@@ -661,17 +665,22 @@ CREATE PROCEDURE POR_COLECTORA.sp_modificar_proveedor (
 @ciudad nvarchar(80),
 @CP numeric,
 @cuit nvarchar(13),
-@nombreContacto char(20)
+@nombreContacto char(20),
+@rubro_detalle nvarchar(80)
 )
 AS
 BEGIN
+
+	declare @rubro_id numeric
+	set @rubro_id = (select Rubro_Id from POR_COLECTORA.Rubros where Rubro_Detalle = @rubro_detalle) 
+
 
 	UPDATE POR_COLECTORA.Direcciones
 	SET Direccion_Calle = @direCalle, Direccion_Nro_Piso = @nroPiso, Direccion_Depto = @depto, Direccion_Ciudad = @ciudad
 	WHERE Direccion_Id = (select Provee_Direccion from Proveedores where Provee_Id = @id_prove)
 
 	UPDATE POR_COLECTORA.Proveedores
-	SET Provee_RS = @razonSocial, Provee_Mail = @mail, Provee_Telefono = @telefono, Provee_CP = @CP, Provee_CUIT = @cuit, Provee_Nombre_Contacto = @nombreContacto
+	SET Provee_RS = @razonSocial, Provee_Mail = @mail, Provee_Telefono = @telefono, Provee_CP = @CP, Provee_CUIT = @cuit, Provee_Nombre_Contacto = @nombreContacto, Provee_Rubro = @rubro_id
 	WHERE Provee_Id = @id_prove;
 	
 END
@@ -956,3 +965,27 @@ BEGIN
 END
 GO
 
+--SP FILTRO PROVEEDORES
+CREATE PROCEDURE POR_COLECTORA.sp_filtrar_proveedores(
+@razonSocial NVARCHAR(225),
+@cuit Numeric(11, 0),
+@mail NVARCHAR(250)
+)
+AS 
+BEGIN
+
+SELECT Provee_Id,Provee_RS,Provee_Mail,Provee_Telefono,Provee_CUIT,
+		(select Direccion_Calle from Direcciones where Direccion_Id = Provee_Direccion),
+		isnull( (select Direccion_Nro_Piso from Direcciones where Direccion_Id = Provee_Direccion),0),
+		isnull( (select Direccion_Depto from Direcciones where Direccion_Id = Provee_Direccion),0),
+		(select Direccion_Ciudad from Direcciones where Direccion_Id = Provee_Direccion),
+		isnull( Provee_CP,0) ,
+		(select Rubro_Detalle from Rubros where Rubro_Id = Provee_Rubro),
+		Provee_Nombre_Contacto,
+		Provee_Habilitado
+from POR_COLECTORA.Proveedores
+where (Provee_RS LIKE '%' + @razonSocial + '%' OR @razonSocial LIKE '')
+AND ((@cuit = 0) OR Provee_CUIT = @cuit)
+AND (Provee_Mail LIKE '%' + @mail + '%' OR @mail LIKE '')
+END
+GO

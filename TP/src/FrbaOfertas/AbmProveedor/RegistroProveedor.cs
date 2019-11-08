@@ -83,8 +83,8 @@ namespace FrbaOfertas.AbmProveedor
             query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
             query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
             query.Parameters.Add(new SqlParameter("@CP", Convert.ToInt32(this.txtbox_CP.Text)));
-            query.Parameters.Add(new SqlParameter("@cuit", this.txtbox_ciudad.Text));
-            query.Parameters.Add(new SqlParameter("@nombreContacto", this.txtbox_ciudad.Text));
+            query.Parameters.Add(new SqlParameter("@cuit", this.txtbox_cuit.Text));
+            query.Parameters.Add(new SqlParameter("@nombreContacto", this.txtbox_contacto.Text));
             query.Parameters.Add(new SqlParameter("@rubro", this.combobox_rubro.SelectedItem));
 
 

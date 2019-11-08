@@ -86,7 +86,7 @@
             // txtbox_rs
             // 
             this.txtbox_rs.Location = new System.Drawing.Point(355, 58);
-            this.txtbox_rs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_rs.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_rs.Name = "txtbox_rs";
             this.txtbox_rs.Size = new System.Drawing.Size(313, 22);
             this.txtbox_rs.TabIndex = 4;
@@ -94,7 +94,7 @@
             // txtbox_cuit
             // 
             this.txtbox_cuit.Location = new System.Drawing.Point(785, 56);
-            this.txtbox_cuit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_cuit.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_cuit.Name = "txtbox_cuit";
             this.txtbox_cuit.Size = new System.Drawing.Size(313, 22);
             this.txtbox_cuit.TabIndex = 5;
@@ -102,7 +102,7 @@
             // txtbox_mail
             // 
             this.txtbox_mail.Location = new System.Drawing.Point(355, 102);
-            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_mail.Name = "txtbox_mail";
             this.txtbox_mail.Size = new System.Drawing.Size(313, 22);
             this.txtbox_mail.TabIndex = 6;
@@ -110,7 +110,7 @@
             // FILTRAR
             // 
             this.FILTRAR.Location = new System.Drawing.Point(1150, 78);
-            this.FILTRAR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FILTRAR.Margin = new System.Windows.Forms.Padding(4);
             this.FILTRAR.Name = "FILTRAR";
             this.FILTRAR.Size = new System.Drawing.Size(100, 28);
             this.FILTRAR.TabIndex = 8;
@@ -121,22 +121,24 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(522, 464);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(128, 28);
             this.button1.TabIndex = 9;
             this.button1.Text = "BAJA";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(775, 464);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(129, 28);
             this.button2.TabIndex = 10;
             this.button2.Text = "MODIFICAR";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // dataGridView2
             // 
@@ -167,7 +169,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FiltroBMProveedor";
             this.Text = "FiltroBMProveedor";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();

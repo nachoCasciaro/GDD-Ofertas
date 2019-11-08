@@ -16,6 +16,7 @@ namespace FrbaOfertas.AbmCliente
         public FiltroBMCliente()
         {
             InitializeComponent();
+
         }
 
         private void button_filtrar_Click(object sender, EventArgs e)
@@ -53,6 +54,7 @@ namespace FrbaOfertas.AbmCliente
 
             return reader;
         }
+
         private void seleccionarClienteModificar()
         {
             Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
@@ -119,6 +121,7 @@ namespace FrbaOfertas.AbmCliente
 
             this.Close();
             new Menu_Principal.MenuAdmin().Show();
+
 
 
         }
