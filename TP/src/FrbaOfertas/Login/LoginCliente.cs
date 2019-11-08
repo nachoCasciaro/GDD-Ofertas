@@ -25,8 +25,11 @@ namespace FrbaOfertas.Login
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //sp login
+            //hacer funcion que de acuerdo al username te pase el id del cliente
+            int idCliente = 1;
             this.Hide();
-            new Menu_Principal.MenuCliente().Show();
+            new Menu_Principal.MenuCliente(idCliente).Show();
         }
     }
 }

@@ -14,8 +14,11 @@ namespace FrbaOfertas.EntregarOferta
 {
     public partial class EntregarOferta : Form
     {
-        public EntregarOferta()
+        int idProveedor;
+
+        public EntregarOferta(int idProveedor)
         {
+            this.idProveedor = idProveedor;
             InitializeComponent();
         }
 

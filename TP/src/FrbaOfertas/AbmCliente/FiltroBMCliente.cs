@@ -126,6 +126,11 @@ namespace FrbaOfertas.AbmCliente
 
         }
 
+        private void FiltroBMCliente_Load(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }

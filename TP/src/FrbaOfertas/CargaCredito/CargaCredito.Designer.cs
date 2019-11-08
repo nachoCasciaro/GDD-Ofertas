@@ -37,9 +37,9 @@
             this.txtbox_numerotarjeta = new System.Windows.Forms.TextBox();
             this.combobox_tipotarjeta = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtbox_vencimientotarjeta = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.date_fechaVencimiento = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // label1
@@ -134,14 +134,6 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Fecha de Vencimiento Tarjeta";
             // 
-            // txtbox_vencimientotarjeta
-            // 
-            this.txtbox_vencimientotarjeta.Location = new System.Drawing.Point(275, 249);
-            this.txtbox_vencimientotarjeta.Margin = new System.Windows.Forms.Padding(4);
-            this.txtbox_vencimientotarjeta.Name = "txtbox_vencimientotarjeta";
-            this.txtbox_vencimientotarjeta.Size = new System.Drawing.Size(132, 22);
-            this.txtbox_vencimientotarjeta.TabIndex = 10;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(274, 295);
@@ -163,14 +155,21 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // date_fechaVencimiento
+            // 
+            this.date_fechaVencimiento.Location = new System.Drawing.Point(274, 252);
+            this.date_fechaVencimiento.Name = "date_fechaVencimiento";
+            this.date_fechaVencimiento.Size = new System.Drawing.Size(200, 22);
+            this.date_fechaVencimiento.TabIndex = 13;
+            // 
             // CargaCredito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 444);
+            this.Controls.Add(this.date_fechaVencimiento);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.txtbox_vencimientotarjeta);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.combobox_tipotarjeta);
             this.Controls.Add(this.txtbox_numerotarjeta);
@@ -200,8 +199,8 @@
         private System.Windows.Forms.TextBox txtbox_numerotarjeta;
         private System.Windows.Forms.ComboBox combobox_tipotarjeta;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtbox_vencimientotarjeta;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DateTimePicker date_fechaVencimiento;
     }
 }

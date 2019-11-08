@@ -85,6 +85,7 @@
             this.Controls.Add(this.label1);
             this.Name = "MenuProveedor";
             this.Text = "MenuProveedor";
+            this.Load += new System.EventHandler(this.MenuProveedor_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

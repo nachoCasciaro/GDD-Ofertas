@@ -12,27 +12,35 @@ namespace FrbaOfertas.Menu_Principal
 {
     public partial class MenuProveedor : Form
     {
-        public MenuProveedor()
+        int idProveedor;
+
+        public MenuProveedor(int idProveedor)
         {
+            this.idProveedor = idProveedor;
             InitializeComponent();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new CrearOferta.CrearOferta().Show();
+            new CrearOferta.CrearOferta(idProveedor).Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            //new consumoOferta
+            new EntregarOferta.EntregarOferta(idProveedor).Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
             new Login.Login().Show();
+        }
+
+        private void MenuProveedor_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

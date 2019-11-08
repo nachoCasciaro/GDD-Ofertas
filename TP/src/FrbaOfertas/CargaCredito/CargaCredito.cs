@@ -13,8 +13,11 @@ namespace FrbaOfertas.CargaCredito
 {
     public partial class CargaCredito : Form
     {
-        public CargaCredito()
+        int idCliente;
+
+        public CargaCredito(int idCliente)
         {
+            this.idCliente = idCliente;
             InitializeComponent();
         }
 
@@ -38,7 +41,7 @@ namespace FrbaOfertas.CargaCredito
             query.Parameters.Add(new SqlParameter("@monto", this.txtbox_monto.Text));
             query.Parameters.Add(new SqlParameter("@tipo_tarjeta", this.combobox_tipotarjeta.Text));
             query.Parameters.Add(new SqlParameter("@numero_tarjeta", this.txtbox_numerotarjeta.Text));
-            query.Parameters.Add(new SqlParameter("@fecha_venc", this.txtbox_vencimientotarjeta.Text));//No se de que tipo va la fecha jeje
+            query.Parameters.Add(new SqlParameter("@fecha_venc", this.date_fechaVencimiento.Value));
 
             connection.Open();
             query.ExecuteNonQuery();
@@ -53,7 +56,7 @@ namespace FrbaOfertas.CargaCredito
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Menu_Principal.MenuAdmin().Show();
+            new Menu_Principal.MenuCliente(idCliente).Show();
         }
     }
 }

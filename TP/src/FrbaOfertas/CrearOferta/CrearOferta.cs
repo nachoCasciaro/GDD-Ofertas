@@ -13,8 +13,11 @@ namespace FrbaOfertas.CrearOferta
 {
     public partial class CrearOferta : Form
     {
-        public CrearOferta()
+        int idProveedor;
+
+        public CrearOferta(int idProveedor)
         {
+            this.idProveedor = idProveedor;
             InitializeComponent();
         }
 
@@ -28,10 +31,11 @@ namespace FrbaOfertas.CrearOferta
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_alta_ofertas", connection);
             query.CommandType = CommandType.StoredProcedure;
-            //Obtener proveedor loggeado (necesito el ID)
+
+            query.Parameters.Add(new SqlParameter("@id_prove", Convert.ToInt32(this.idProveedor)));
             query.Parameters.Add(new SqlParameter("@descripcion", this.txtbox_descripcion.Text));
-            query.Parameters.Add(new SqlParameter("@fecha", this.txtbox_fecha.Text)); //No se de que tipo va la fecha jeje
-            query.Parameters.Add(new SqlParameter("@fecha_venc", Convert.ToInt32(this.txtbox_fechavencimiento.Text)));
+            query.Parameters.Add(new SqlParameter("@fecha", this.date_publicacion.Value));
+            query.Parameters.Add(new SqlParameter("@fecha_venc", this.date_vencimiento.Value));
             query.Parameters.Add(new SqlParameter("@precio_oferta", this.txtbox_preciooferta.Text));
             query.Parameters.Add(new SqlParameter("@precio_original", this.txtbox_preciooriginal.Text));
             query.Parameters.Add(new SqlParameter("@stock", this.txtbox_stock.Text));
@@ -40,6 +44,10 @@ namespace FrbaOfertas.CrearOferta
             connection.Open();
             query.ExecuteNonQuery();
             connection.Close();
+
+            MessageBox.Show("Se creó la oferta con éxito");
+            this.Close();
+            new Menu_Principal.MenuProveedor(idProveedor).Show();
         }
     }
 }

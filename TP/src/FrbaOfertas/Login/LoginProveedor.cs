@@ -25,8 +25,10 @@ namespace FrbaOfertas.Login
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //hacer la funcion que le pases el username y te devuelve a que id de proveedor corresponda
+            int idProveedor = 1;
             this.Hide();
-            new Menu_Principal.MenuProveedor().Show();
+            new Menu_Principal.MenuProveedor(idProveedor).Show();
         }
     }
 }

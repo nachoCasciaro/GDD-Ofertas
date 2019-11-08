@@ -12,21 +12,24 @@ namespace FrbaOfertas.Menu_Principal
 {
     public partial class MenuCliente : Form
     {
-        public MenuCliente()
+        int idCliente;
+
+        public MenuCliente(int idCliente)
         {
+            this.idCliente = idCliente;
             InitializeComponent();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new CargaCredito.CargaCredito().Show();
+            new CargaCredito.CargaCredito(idCliente).Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new ComprarOferta.ComprarOferta().Show();
+            new ComprarOferta.ComprarOferta(idCliente).Show();
 
         }
 
@@ -34,6 +37,11 @@ namespace FrbaOfertas.Menu_Principal
         {
             this.Hide();
             new Login.Login().Show();
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }

@@ -193,6 +193,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FiltroBMCliente";
             this.Text = "FiltroBMCliente";
+            this.Load += new System.EventHandler(this.FiltroBMCliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -20,7 +20,7 @@ namespace FrbaOfertas.AbmProveedor
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Menu_Principal.MenuProveedor().Show();
+            new Menu_Principal.MenuAdmin().Show();
         }
 
         private void button2_Click(object sender, EventArgs e)

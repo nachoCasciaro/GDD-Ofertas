@@ -14,8 +14,11 @@ namespace FrbaOfertas.ComprarOferta
 {
     public partial class ComprarOferta : Form
     {
-        public ComprarOferta()
+        int idCliente; 
+
+        public ComprarOferta(int idCliente)
         {
+            this.idCliente = idCliente;
             InitializeComponent();
 
             Load += new EventHandler(ComprarOferta_Load);
@@ -51,6 +54,8 @@ namespace FrbaOfertas.ComprarOferta
             Double precioOferta = Convert.ToDouble(dataGridView1.SelectedRows[0].Cells[3].Value);
 
             //sp comprar oferta? 
+
+            new Menu_Principal.MenuCliente(idCliente).Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
