@@ -989,3 +989,57 @@ AND ((@cuit = 0) OR Provee_CUIT = @cuit)
 AND (Provee_Mail LIKE '%' + @mail + '%' OR @mail LIKE '')
 END
 GO
+
+--SP BAJA ROL
+--Marca el rol como inhabilitado
+CREATE PROCEDURE POR_COLECTORA.sp_baja_rol(@rol numeric)
+AS
+BEGIN
+	UPDATE POR_COLECTORA.Roles set rol_habilitado = 0
+			WHERE rol_id = @rol
+
+END
+
+--NO SE PUEDE ASIGNAR UN ROL DESHABILITADO A UN USUARIO, REVISAR
+
+--SP QUITAR ROL A USUARIOS ASIGNADOS
+CREATE PROCEDURE POR_COLECTORA.sp_quitar_rol_a_usuarios(@rol numeric)
+AS
+BEGIN
+	DELETE FROM POR_COLECTORA.RolxUsuario
+			WHERE id_rol = @rol
+
+END
+
+--SP MODIFICAR NOMBRE ROL
+CREATE PROCEDURE POR_COLECTORA.sp_modificar_nombre_rol(@rol numeric, @nuevo_nombre varchar(30))
+AS
+BEGIN
+	UPDATE POR_COLECTORA.Roles set rol_nombre = @nuevo_nombre
+			WHERE rol_id = @rol --y rol habilitado? O lo dejo cambiar el nombre a un rol deshabilitado? 
+
+END
+
+--SP ELIMINAR FUNCIONALIDAD A ROL
+CREATE PROCEDURE POR_COLECTORA.sp_eliminar_funcionalidad_rol(@rol numeric, @funcionalidad numeric)
+AS
+BEGIN
+	DELETE FROM POR_COLECTORA.FuncionalidadxRol 
+			WHERE id_func = @funcionalidad AND id_rol = @rol
+
+END
+
+--SP HABILITAR ROL 
+CREATE PROCEDURE POR_COLECTORA.sp_habilitar_rol(@rol numeric)
+AS
+BEGIN
+	UPDATE POR_COLECTORA.Roles set rol_habilitado = 1
+			WHERE rol_id = @rol
+
+END
+
+
+
+
+
+
