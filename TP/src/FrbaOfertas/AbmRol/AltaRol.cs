@@ -48,6 +48,8 @@ namespace FrbaOfertas.AbmRol
             connection.Open();
             query.ExecuteNonQuery();
             connection.Close();
+
+            new Menu_Principal.MenuAdmin().Show();
         }
 
         private void button1_Click(object sender, EventArgs e)

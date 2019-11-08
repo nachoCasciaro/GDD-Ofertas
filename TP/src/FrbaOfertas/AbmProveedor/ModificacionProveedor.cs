@@ -73,6 +73,8 @@ namespace FrbaOfertas.AbmProveedor
                 comboBox_rubro.Items.Add(sqlReader["Rubro_Detalle"].ToString());
             }
 
+            comboBox_rubro.SelectedIndex = comboBox_rubro.FindString(rubro);
+
             sqlReader.Close();
 
         }
