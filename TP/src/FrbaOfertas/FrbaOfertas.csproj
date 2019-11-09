@@ -99,6 +99,12 @@
     <Compile Include="AbmRol\MenuAbmRol.Designer.cs">
       <DependentUpon>MenuAbmRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmRol\ModificacionRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\ModificacionRol.Designer.cs">
+      <DependentUpon>ModificacionRol.cs</DependentUpon>
+    </Compile>
     <Compile Include="CargaCredito\CargaCredito.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\MenuAbmRol.resx">
       <DependentUpon>MenuAbmRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\ModificacionRol.resx">
+      <DependentUpon>ModificacionRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CargaCredito\CargaCredito.resx">
       <DependentUpon>CargaCredito.cs</DependentUpon>

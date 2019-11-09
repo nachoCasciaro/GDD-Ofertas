@@ -11,11 +11,16 @@ using System.Data.SqlClient;
 
 namespace FrbaOfertas.AbmRol
 {
-    public partial class BMRol : Form
+    public partial class ModificacionRol : Form
     {
-        public BMRol()
+        public ModificacionRol()
         {
             InitializeComponent();
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -23,16 +28,18 @@ namespace FrbaOfertas.AbmRol
 
         }
 
-        private void BMRol_Load(object sender, System.EventArgs e)
+        private void ModificarRol_Load(object sender, System.EventArgs e)
         {
-            ConfiguradorDataGrid.llenarDataGridConConsulta(this.mostrarRoles(), dataGridView1);
+            ConfiguradorDataGrid.llenarDataGridConConsulta(this.mostrarFuncionalidadesRol(), dataGridView1);
         }
 
-        private SqlDataReader mostrarRoles()
+        private SqlDataReader mostrarFuncionalidadesRol()
         {
             var connection = DB.getInstance().getConnection();
-            SqlCommand command = new SqlCommand("POR_COLECTORA.sp_mostrar_roles", connection);
+            SqlCommand command = new SqlCommand("POR_COLECTORA.sp_mostrar_funcionalidades_rol", connection);
             command.CommandType = CommandType.StoredProcedure;
+
+            //Obtener rol en el que me encuentro
 
             connection.Open();
 

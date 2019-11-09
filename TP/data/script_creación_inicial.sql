@@ -193,6 +193,15 @@ DROP PROCEDURE POR_COLECTORA.sp_eliminar_funcionalidad_rol
 IF OBJECT_ID ('POR_COLECTORA.sp_habilitar_rol') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_habilitar_rol
 
+--DROP SP MOSTRAR ROLES
+IF OBJECT_ID ('POR_COLECTORA.sp_mostrar_roles') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_mostrar_roles
+
+
+--DROP SP MOSTRAR FUNCIONALIDADES ROL
+IF OBJECT_ID ('POR_COLECTORA.sp_mostrar_funcionalidades_rol') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_mostrar_funcionalidades_rol
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -1096,4 +1105,36 @@ BEGIN
 
 END
 GO
+
+--SP MOSTRAR ROLES (PARA BMROL)
+CREATE PROCEDURE POR_COLECTORA.sp_mostrar_roles
+AS
+BEGIN
+
+	SELECT Rol_Nombre AS ROL, Rol_Habilitado AS ESTADO
+	FROM POR_COLECTORA.Roles
+	ORDER BY Rol_Nombre ASC
+
+END
+GO
+
+--SP MOSTRAR FUNCIONALIDADES DE UN ROL
+CREATE PROCEDURE POR_COLECTORA.sp_mostrar_funcionalidades_rol(@rol numeric)
+AS
+BEGIN
+
+	SELECT func_descripcion
+	FROM POR_COLECTORA.FuncionalidadxRol JOIN POR_COLECTORA.Funcionalidades ON id_func = func_id
+	WHERE Id_Rol = @rol
+	ORDER BY Func_Descripcion ASC
+
+END
+GO
+
+
+
+
+
+
+
 
