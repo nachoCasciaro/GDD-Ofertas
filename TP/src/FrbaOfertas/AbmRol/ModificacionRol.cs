@@ -48,5 +48,10 @@ namespace FrbaOfertas.AbmRol
             return reader;
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

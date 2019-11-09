@@ -41,5 +41,58 @@ namespace FrbaOfertas.AbmRol
             return reader;
         }
 
+        private void button1_Click(object sender, EventArgs e) //Boton baja
+        {
+            try
+            {
+                this.darBajaRol();
+                this.Close();
+            }
+            catch (Exception excepcion) //Chequear sp, cuando entraria por el catch?
+            {
+                MessageBox.Show(excepcion.Message, "El rol ya se encuentra inhabilitado", MessageBoxButtons.OK);
+            }
+        }
+
+        private SqlDataReader darBajaRol()
+        {
+            var connection = DB.getInstance().getConnection();
+            SqlCommand command = new SqlCommand("POR_COLECTORA.sp_baja_rol", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            //Obtener rol en el que me encuentro para el sp 
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            return reader;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    this.seleccionarRolModificar();
+                    this.Close();
+                }
+                catch (Exception excepcion)
+                {
+                    MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
+                }
+            }
+        }
+
+        private void seleccionarRolModificar()
+        {
+            //Rol que se esta modificando
+
+            new AbmRol.ModificacionRol().Show();
+
+        }
+
+
     }
 }

@@ -72,7 +72,6 @@ namespace FrbaOfertas.AbmCliente
             bool habilitado = (bool)dataGridView1.SelectedRows[0].Cells[12].Value;
             new AbmCliente.ModificacionCliente(id,nombre,apellido,dni,mail,telefono,calle,nroPiso,depto,ciudad,cp,fecha,habilitado).Show();
 
-
         }
 
         private void button_modificar_Click(object sender, EventArgs e)
