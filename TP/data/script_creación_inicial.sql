@@ -171,6 +171,24 @@ IF OBJECT_ID ('POR_COLECTORA.sp_filtrar_proveedores') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_filtrar_proveedores
 
 
+--DROP SP BAJA ROL
+IF OBJECT_ID ('POR_COLECTORA.sp_baja_rol') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_baja_rol
+
+
+--DROP SP MODIFICAR NOMBRE ROL
+IF OBJECT_ID ('POR_COLECTORA.sp_modificar_nombre_rol') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_modificar_nombre_rol
+
+--DROP SP QUITA ROL USUARIOS
+IF OBJECT_ID ('POR_COLECTORA.sp_quitar_rol_a_usuarios') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_quitar_rol_a_usuarios
+
+--DROP SP ELIMINAR FUNCIONALIDAD ROL
+IF OBJECT_ID ('POR_COLECTORA.sp_eliminar_funcionalidad_rol') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_eliminar_funcionalidad_rol
+
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -999,6 +1017,7 @@ BEGIN
 			WHERE rol_id = @rol
 
 END
+GO
 
 --NO SE PUEDE ASIGNAR UN ROL DESHABILITADO A UN USUARIO, REVISAR
 
@@ -1010,6 +1029,7 @@ BEGIN
 			WHERE id_rol = @rol
 
 END
+GO
 
 --SP MODIFICAR NOMBRE ROL
 CREATE PROCEDURE POR_COLECTORA.sp_modificar_nombre_rol(@rol numeric, @nuevo_nombre varchar(30))
@@ -1019,6 +1039,7 @@ BEGIN
 			WHERE rol_id = @rol --y rol habilitado? O lo dejo cambiar el nombre a un rol deshabilitado? 
 
 END
+GO
 
 --SP ELIMINAR FUNCIONALIDAD A ROL
 CREATE PROCEDURE POR_COLECTORA.sp_eliminar_funcionalidad_rol(@rol numeric, @funcionalidad numeric)
@@ -1028,6 +1049,7 @@ BEGIN
 			WHERE id_func = @funcionalidad AND id_rol = @rol
 
 END
+GO
 
 --SP HABILITAR ROL 
 CREATE PROCEDURE POR_COLECTORA.sp_habilitar_rol(@rol numeric)
@@ -1037,7 +1059,7 @@ BEGIN
 			WHERE rol_id = @rol
 
 END
-
+GO
 
 
 

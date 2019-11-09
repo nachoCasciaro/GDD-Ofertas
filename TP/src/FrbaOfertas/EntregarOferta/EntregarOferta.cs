@@ -40,7 +40,8 @@ namespace FrbaOfertas.EntregarOferta
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_consumir_oferta", connection);
             query.CommandType = CommandType.StoredProcedure;
-            //Obtener proveedor loggeado (necesito el ID)
+
+            query.Parameters.Add(new SqlParameter("@id_prove", Convert.ToInt32(this.idProveedor)));
             query.Parameters.Add(new SqlParameter("@id_cupon", this.txtbox_cupon.Text));
             query.Parameters.Add(new SqlParameter("@fecha_actual", dtm_fechaconsumo.Value)); 
             
