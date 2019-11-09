@@ -189,6 +189,10 @@ IF OBJECT_ID ('POR_COLECTORA.sp_eliminar_funcionalidad_rol') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_eliminar_funcionalidad_rol
 
 
+--DROP SP ELIMINAR HABILITAR ROL
+IF OBJECT_ID ('POR_COLECTORA.sp_habilitar_rol') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_habilitar_rol
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
