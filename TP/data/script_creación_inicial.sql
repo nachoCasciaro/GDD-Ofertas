@@ -1065,7 +1065,35 @@ BEGIN
 END
 GO
 
+--FUNCION OBTENER ID CLIENTE
+CREATE FUNCTION POR_COLECTORA.f_obtener_id_cliente(@usuario numeric)
+RETURNS numeric
+AS
+BEGIN
+	declare @id numeric
 
+	set @id = (SELECT clie_id
+				FROM POR_COLECTORA.Clientes
+				WHERE clie_usuario = @usuario)
 
+	RETURN @id
 
+END
+GO
+
+--FUNCION OBTENER ID PROVEEDOR
+CREATE FUNCTION POR_COLECTORA.f_obtener_id_proveedor(@usuario numeric)
+RETURNS numeric
+AS
+BEGIN
+	declare @id numeric
+
+	set @id = (SELECT provee_id
+				FROM POR_COLECTORA.Proveedores
+				WHERE Provee_Usuario = @usuario)
+
+	RETURN @id
+
+END
+GO
 
