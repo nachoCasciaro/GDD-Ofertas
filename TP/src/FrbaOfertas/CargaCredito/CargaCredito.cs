@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace FrbaOfertas.CargaCredito
 {
@@ -36,8 +37,12 @@ namespace FrbaOfertas.CargaCredito
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_carga_credito", connection);
             query.CommandType = CommandType.StoredProcedure;
-            //Obtener cliente loggeado (necesito el ID)
-            //Obtener la fecha del archivo de config
+
+            query.Parameters.Add(new SqlParameter("@id_cliente", Convert.ToInt32(this.idCliente)));
+            
+             DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["current_date"]);
+            query.Parameters.Add(new SqlParameter("@fecha_carga",fechaActual));
+
             query.Parameters.Add(new SqlParameter("@monto", this.txtbox_monto.Text));
             query.Parameters.Add(new SqlParameter("@tipo_tarjeta", this.combobox_tipotarjeta.Text));
             query.Parameters.Add(new SqlParameter("@numero_tarjeta", this.txtbox_numerotarjeta.Text));

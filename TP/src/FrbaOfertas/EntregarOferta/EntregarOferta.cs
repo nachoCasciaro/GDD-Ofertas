@@ -41,7 +41,7 @@ namespace FrbaOfertas.EntregarOferta
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_consumir_oferta", connection);
             query.CommandType = CommandType.StoredProcedure;
 
-            query.Parameters.Add(new SqlParameter("@id_prove", Convert.ToInt32(this.idProveedor)));
+            query.Parameters.Add(new SqlParameter("@id_proveedor", Convert.ToInt32(this.idProveedor)));
             query.Parameters.Add(new SqlParameter("@id_cupon", this.txtbox_cupon.Text));
             query.Parameters.Add(new SqlParameter("@fecha_actual", dtm_fechaconsumo.Value)); 
             
@@ -51,6 +51,9 @@ namespace FrbaOfertas.EntregarOferta
             connection.Open();
             query.ExecuteNonQuery();
             connection.Close();
+
+            this.Hide();
+            new Menu_Principal.MenuProveedor(idProveedor).Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
