@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.combobox_tipolistado = new System.Windows.Forms.ComboBox();
-            this.Año = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.combobox_semestre = new System.Windows.Forms.ComboBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Año = new System.Windows.Forms.Label();
+            this.combobox_tipolistado = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
@@ -51,98 +51,111 @@
             this.groupBox1.Controls.Add(this.Año);
             this.groupBox1.Controls.Add(this.combobox_tipolistado);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 32);
+            this.groupBox1.Location = new System.Drawing.Point(16, 39);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(406, 101);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(541, 124);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Listado a visualizar";
             // 
-            // label1
+            // combobox_semestre
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tipo de listado";
+            this.combobox_semestre.FormattingEnabled = true;
+            this.combobox_semestre.Location = new System.Drawing.Point(364, 80);
+            this.combobox_semestre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combobox_semestre.Name = "combobox_semestre";
+            this.combobox_semestre.Size = new System.Drawing.Size(132, 24);
+            this.combobox_semestre.TabIndex = 4;
             // 
-            // combobox_tipolistado
+            // numericUpDown1
             // 
-            this.combobox_tipolistado.FormattingEnabled = true;
-            this.combobox_tipolistado.Location = new System.Drawing.Point(160, 25);
-            this.combobox_tipolistado.Name = "combobox_tipolistado";
-            this.combobox_tipolistado.Size = new System.Drawing.Size(213, 21);
-            this.combobox_tipolistado.TabIndex = 1;
-            // 
-            // Año
-            // 
-            this.Año.AutoSize = true;
-            this.Año.Location = new System.Drawing.Point(36, 68);
-            this.Año.Name = "Año";
-            this.Año.Size = new System.Drawing.Size(26, 13);
-            this.Año.TabIndex = 2;
-            this.Año.Text = "Año";
+            this.numericUpDown1.Location = new System.Drawing.Point(111, 81);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(127, 22);
+            this.numericUpDown1.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(216, 68);
+            this.label3.Location = new System.Drawing.Point(288, 84);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 13);
+            this.label3.Size = new System.Drawing.Size(68, 17);
             this.label3.TabIndex = 3;
             this.label3.Text = "Semestre";
             // 
-            // numericUpDown1
+            // Año
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(83, 66);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(95, 20);
-            this.numericUpDown1.TabIndex = 1;
+            this.Año.AutoSize = true;
+            this.Año.Location = new System.Drawing.Point(48, 84);
+            this.Año.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Año.Name = "Año";
+            this.Año.Size = new System.Drawing.Size(33, 17);
+            this.Año.TabIndex = 2;
+            this.Año.Text = "Año";
             // 
-            // combobox_semestre
+            // combobox_tipolistado
             // 
-            this.combobox_semestre.FormattingEnabled = true;
-            this.combobox_semestre.Location = new System.Drawing.Point(273, 65);
-            this.combobox_semestre.Name = "combobox_semestre";
-            this.combobox_semestre.Size = new System.Drawing.Size(100, 21);
-            this.combobox_semestre.TabIndex = 4;
+            this.combobox_tipolistado.FormattingEnabled = true;
+            this.combobox_tipolistado.Location = new System.Drawing.Point(213, 31);
+            this.combobox_tipolistado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combobox_tipolistado.Name = "combobox_tipolistado";
+            this.combobox_tipolistado.Size = new System.Drawing.Size(283, 24);
+            this.combobox_tipolistado.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(48, 34);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Tipo de listado";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(147, 139);
+            this.button1.Location = new System.Drawing.Point(196, 171);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(146, 23);
+            this.button1.Size = new System.Drawing.Size(195, 28);
             this.button1.TabIndex = 1;
             this.button1.Text = "VER LISTADO";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 188);
+            this.dataGridView1.Location = new System.Drawing.Point(16, 231);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(406, 144);
+            this.dataGridView1.Size = new System.Drawing.Size(541, 177);
             this.dataGridView1.TabIndex = 2;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(137, 348);
+            this.button2.Location = new System.Drawing.Point(183, 428);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(174, 23);
+            this.button2.Size = new System.Drawing.Size(232, 28);
             this.button2.TabIndex = 3;
             this.button2.Text = "VOLVER AL MENU PRINCIPAL";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // ListadoEstadistico
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 383);
+            this.ClientSize = new System.Drawing.Size(605, 471);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ListadoEstadistico";
             this.Text = "ListadoEstadistico";
             this.groupBox1.ResumeLayout(false);

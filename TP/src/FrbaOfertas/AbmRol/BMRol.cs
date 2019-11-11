@@ -16,6 +16,7 @@ namespace FrbaOfertas.AbmRol
         public BMRol()
         {
             InitializeComponent();
+            Load += new EventHandler(BMRol_Load);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -90,6 +91,11 @@ namespace FrbaOfertas.AbmRol
             //Rol que se esta modificando
 
             new AbmRol.ModificacionRol().Show();
+
+        }
+
+        private void BMRol_Load_1(object sender, EventArgs e)
+        {
 
         }
 

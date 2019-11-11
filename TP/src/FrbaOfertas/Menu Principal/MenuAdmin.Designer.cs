@@ -122,6 +122,7 @@
             this.Controls.Add(this.button1);
             this.Name = "MenuAdmin";
             this.Text = "MenuCliente";
+            this.Load += new System.EventHandler(this.MenuAdmin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

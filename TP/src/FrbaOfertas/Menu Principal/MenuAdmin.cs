@@ -38,7 +38,7 @@ namespace FrbaOfertas.Menu_Principal
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AbmRol.AltaRol().Show();
+            new AbmRol.MenuAbmRol().Show();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -57,6 +57,11 @@ namespace FrbaOfertas.Menu_Principal
         {
             this.Hide();
             new ListadoEstadistico.ListadoEstadistico().Show();
+        }
+
+        private void MenuAdmin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

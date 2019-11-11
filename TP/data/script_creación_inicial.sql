@@ -202,6 +202,20 @@ DROP PROCEDURE POR_COLECTORA.sp_mostrar_roles
 IF OBJECT_ID ('POR_COLECTORA.sp_mostrar_funcionalidades_rol') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_mostrar_funcionalidades_rol
 
+--DROP SP LOGIN
+IF OBJECT_ID ('POR_COLECTORA.sp_login') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_login
+
+
+--DROP SP OBTENER ID CLIENTE
+IF OBJECT_ID ('POR_COLECTORA.sp_obtener_id_cliente') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_obtener_id_cliente
+
+--DROP SP OBTENER ID PROVEEDOR
+IF OBJECT_ID ('POR_COLECTORA.sp_obtener_id_proveedor') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_obtener_id_proveedor
+
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -228,7 +242,7 @@ GO
 CREATE TABLE POR_COLECTORA.Usuarios(
 	Usuario_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Usuario_Nombre VARCHAR(250) NOT NULL,
-	Usuario_Password VARCHAR(250) NOT NULL,
+	Usuario_Password BINARY(32) NOT NULL,
 	Usuario_Intentos TINYINT NOT NULL DEFAULT 0,
 	Usuario_Habilitado BIT NOT NULL DEFAULT 1)
 GO
@@ -310,6 +324,7 @@ GO
 --CREACIÓN DE TABLA OFERTAS
 CREATE TABLE POR_COLECTORA.Ofertas(
 	Oferta_Id Numeric IDENTITY(1,1) PRIMARY KEY,
+	Oferta_Codigo NVARCHAR(200) NOT NULL,
 	Oferta_Descripcion NVARCHAR(200) NOT NULL,
 	Oferta_Fecha DATETIME NOT NULL,
 	Oferta_Fecha_Venc DATETIME NOT NULL,
@@ -464,9 +479,10 @@ where Maestra.Provee_RS is not null
 
 --MIGRACION TABLA OFERTAS
 INSERT INTO POR_COLECTORA.Ofertas
-(Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio,
+(Oferta_Codigo,Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio,
 	Oferta_Cantidad, Oferta_Restriccion_Compra,	Oferta_Proveedor)
-SELECT DISTINCT Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, NULL,
+SELECT DISTINCT SUBSTRING(Oferta_Codigo,1,10),
+				Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, NULL,
 				(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
 FROM gd_esquema.Maestra As Maestra
 where Oferta_Descripcion is not null
@@ -499,21 +515,26 @@ where Carga_Fecha is not null
 INSERT INTO POR_COLECTORA.Compras
 (Compra_Cliente,Compra_Oferta,Compra_Cantidad,Compra_Fecha,Compra_Id_Factura,Compra_Oferta_Precio)
 SELECT DISTINCT (SELECT Clie_Id FROM POR_COLECTORA.Clientes As Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni), 
-				(select top 1 Oferta_Id from POR_COLECTORA.Ofertas As Colectora where Colectora.Oferta_Descripcion = Oferta_Descripcion and
-				(select Provee_RS from POR_COLECTORA.Proveedores where Provee_Id = Oferta_Proveedor) = Provee_RS),
+				(select Oferta_Id from POR_COLECTORA.Ofertas As Colectora where Colectora.Oferta_Codigo = SUBSTRING(Maestra.Oferta_Codigo,1,10)),
 				1,Maestra.Oferta_Fecha_Compra,
 				(SELECT Fact_Id FROM POR_COLECTORA.Facturas AS Colectora WHERE Colectora.Fact_Numero = Maestra.Factura_Nro),
 				Maestra.Oferta_Precio
 FROM gd_esquema.Maestra As Maestra
-where Oferta_Descripcion is not null
+where Oferta_Descripcion is not null and Factura_Fecha is not null
 
 
 --MIGRACION CUPONES / REVISAR SI LA FECHA DE VENC ES LA MISMA DE LA FACUTURA O NO
 /*
 INSERT INTO POR_COLECTORA.Cupones
 (Cupon_Fecha_Venc, Cupon_Codigo,Cupon_Fecha_Consumo,Cupon_Id_Cliente_Consumidor,Cupon_Nro_Compra)
-SELECT DISTINCT NULL,Oferta_Codigo,NULL,(SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni and Colectora.Clie_Nombre + Colectora.Clie_Apellido = Maestra.Cli_Nombre + Maestra.Cli_Apellido)
-				,(select Compra_Nro from POR_COLECTORA.Compras) 
+SELECT DISTINCT NULL,
+			    CONCAT( Oferta_Codigo, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni)),
+				Maestra.Oferta_Entregado_Fecha,
+				(SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni)
+				,(select Compra_Nro from POR_COLECTORA.Compras where Compra_Fecha = Maestra.Oferta_Fecha_Compra and
+				Compra_Oferta = (select Oferta_Id from POR_COLECTORA.Ofertas  where Oferta_Codigo = SUBSTRING(Oferta_Codigo,1,10))
+				and Compra_Cliente = (SELECT Clie_Id FROM POR_COLECTORA.Clientes WHERE Clie_DNI = Maestra.Cli_Dni)
+				and Compra_Fecha = Oferta_Fecha_Compra) 
 FROM gd_esquema.Maestra AS Maestra
 */
 GO
@@ -1074,25 +1095,28 @@ BEGIN
 END
 GO
 
---FUNCION OBTENER ID CLIENTE
-CREATE FUNCTION POR_COLECTORA.f_obtener_id_cliente(@usuario numeric)
-RETURNS numeric
+--SP OBTENER ID CLIENTE
+CREATE PROCEDURE POR_COLECTORA.sp_obtener_id_cliente(@usuario varchar(250), @resultado int output)
 AS
 BEGIN
-	declare @id numeric
+	declare @idUser numeric
+	set @idUser = (SELECT Usuario_Id
+				FROM POR_COLECTORA.Usuarios
+				WHERE Usuario_Nombre = @usuario)
+	
+	declare @idCliente numeric
 
-	set @id = (SELECT clie_id
+	set @idCliente = (SELECT Clie_Id
 				FROM POR_COLECTORA.Clientes
-				WHERE clie_usuario = @usuario)
+				WHERE Clie_Usuario = @idUser)
 
-	RETURN @id
+	RETURN @idCliente
 
 END
 GO
 
---FUNCION OBTENER ID PROVEEDOR
-CREATE FUNCTION POR_COLECTORA.f_obtener_id_proveedor(@usuario numeric)
-RETURNS numeric
+--SP OBTENER ID PROVEEDOR
+CREATE PROCEDURE POR_COLECTORA.sp_obtener_id_proveedor(@usuario numeric, @resultado int output)
 AS
 BEGIN
 	declare @id numeric
@@ -1132,9 +1156,71 @@ END
 GO
 
 
+CREATE PROCEDURE POR_COLECTORA.sp_login(@user nvarchar(255) , @pass nvarchar(255), @resultado int output)
+AS
+BEGIN
+	
+	DECLARE @hash_pass_almacenada BINARY(32)
+	SET @hash_pass_almacenada = 
+	(SELECT Usuario_Password
+	FROM POR_COLECTORA.Usuarios
+	WHERE Usuario_Nombre = @user)
+
+	DECLARE @hash_pass_ingresada BINARY(32)
+	SET @hash_pass_ingresada = HASHBYTES('SHA2_256',@pass)
+
+	IF @hash_pass_almacenada IS NULL
+		BEGIN
+			SET @resultado = 1 -- El usuario no existe 
+		END
+	ELSE IF @hash_pass_almacenada != @hash_pass_ingresada
+		BEGIN	
+			SET @resultado = 2 -- El usuario existe pero la contraseña es incorrecta
+			UPDATE POR_COLECTORA.Usuarios
+			SET Usuario_Intentos = Usuario_Intentos + 1
+			WHERE Usuario_Nombre = @user
+		END
+	ELSE -- El usuario existe y la contraseña es correcta 
+		IF(	
+			-- Chequeo que el usuario esté habilitado 
+			(SELECT Usuario_Habilitado 
+			FROM POR_COLECTORA.Usuarios	
+			WHERE Usuario_Nombre = @user) = 0
+		)
+			BEGIN
+				-- El usuario está inhabilitado
+				SET @resultado = 3 	
+			END
+		ELSE
+			BEGIN
+				-- El usuario está habilitado
+				SET @resultado = 4 	
+				UPDATE POR_COLECTORA.Usuarios
+				SET Usuario_Intentos = 0 -- Reseteo la cantidad de intentos fallidos a 0
+				WHERE Usuario_Nombre = @user
+			END 
+END
+GO
 
 
+CREATE TRIGGER POR_COLECTORA.tr_inhabilitar_intentos_fallidos
+ON POR_COLECTORA.Usuarios
+FOR UPDATE
+AS
+BEGIN
+	-- Cuando la cantidad de intentos de login incorrectos es 3, inhabilitamos 
+	-- al usuario 
+	UPDATE POR_COLECTORA.Usuarios
+	SET Usuario_Habilitado = 0, Usuario_Intentos = 0
+	WHERE Usuario_Nombre IN (
+					SELECT Usuario_Nombre
+					FROM inserted -- Apunta a una tabla usuarios virtual 
+					WHERE Usuario_Intentos = 3
+					)
+	-- Como ya deshabilitamos al usuario, le reseteamos la cantidad de intentos fallidos
 
+END;
+GO
 
 
 
