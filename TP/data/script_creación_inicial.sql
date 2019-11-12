@@ -776,7 +776,7 @@ GO
 --La pantalla debe permitirnos seleccionar el semestre
 
 --Ofertas que se hayan lanzado en el semestre, o tambien tiene que entrar el vencimiento??
-CREATE PROCEDURE POR_COLECTORA.sp_prov_mas_descuento (@semestre numeric, @anio numeric)
+CREATE PROCEDURE POR_COLECTORA.sp_prov_mas_descuento (@semestre int, @anio int)
 AS
 BEGIN
 
@@ -798,7 +798,7 @@ GO
 
 --TOP 5 de proveedores con mayor facturacion
 --La pantalla debe permitirnos seleccionar el semestre
-CREATE PROCEDURE POR_COLECTORA.sp_prov_mayor_facturacion (@semestre numeric, @anio numeric)
+CREATE PROCEDURE POR_COLECTORA.sp_prov_mayor_facturacion (@semestre int, @anio int)
 AS
 BEGIN
 
