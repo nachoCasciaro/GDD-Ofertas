@@ -62,7 +62,10 @@
             // combobox_semestre
             // 
             this.combobox_semestre.FormattingEnabled = true;
-            this.combobox_semestre.Location = new System.Drawing.Point(373, 80);
+            this.combobox_semestre.Items.AddRange(new object[] {
+            "1",
+            "2"});
+            this.combobox_semestre.Location = new System.Drawing.Point(364, 80);
             this.combobox_semestre.Margin = new System.Windows.Forms.Padding(4);
             this.combobox_semestre.Name = "combobox_semestre";
             this.combobox_semestre.Size = new System.Drawing.Size(132, 24);
@@ -92,10 +95,13 @@
             // combobox_tipolistado
             // 
             this.combobox_tipolistado.FormattingEnabled = true;
-            this.combobox_tipolistado.Location = new System.Drawing.Point(198, 31);
+            this.combobox_tipolistado.Items.AddRange(new object[] {
+            "Proveedores con mayor porcentaje de descuento",
+            "Proveedores con mayor facturación"});
+            this.combobox_tipolistado.Location = new System.Drawing.Point(167, 31);
             this.combobox_tipolistado.Margin = new System.Windows.Forms.Padding(4);
             this.combobox_tipolistado.Name = "combobox_tipolistado";
-            this.combobox_tipolistado.Size = new System.Drawing.Size(283, 24);
+            this.combobox_tipolistado.Size = new System.Drawing.Size(329, 24);
             this.combobox_tipolistado.TabIndex = 1;
             // 
             // label1
