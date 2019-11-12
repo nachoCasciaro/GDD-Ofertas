@@ -15,9 +15,22 @@ namespace FrbaOfertas.ListadoEstadistico
         public ListadoEstadistico()
         {
             InitializeComponent();
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "yyyy";
+            dateTimePicker1.ShowUpDown = true; 
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Año_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ListadoEstadistico_Load(object sender, EventArgs e)
         {
 
         }

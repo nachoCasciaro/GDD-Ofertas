@@ -50,8 +50,8 @@ namespace FrbaOfertas.Login
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_login", connection);
             query.CommandType = CommandType.StoredProcedure;
 
-            query.Parameters.Add(new SqlParameter("@user", this.textBox1.Text));
-            query.Parameters.Add(new SqlParameter("@pass", this.textBox2.Text));
+            query.Parameters.Add(new SqlParameter("@user", this.textBox_usuario.Text));
+            query.Parameters.Add(new SqlParameter("@pass", this.textBox_pass.Text));
             query.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
 
             connection.Open();
@@ -65,7 +65,7 @@ namespace FrbaOfertas.Login
             {
                 this.Hide();
 
-                int idCliente = this.idClienteIngresado(this.textBox1.Text);
+                int idCliente = this.idClienteIngresado(this.textBox_usuario.Text);
 
                 new Menu_Principal.MenuCliente(idCliente).Show();
             }
@@ -82,6 +82,11 @@ namespace FrbaOfertas.Login
             {
                 MessageBox.Show("El usuario ingresado se encuentra inhabilitado, consultar con el administrador");
             }
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

@@ -1160,13 +1160,13 @@ CREATE PROCEDURE POR_COLECTORA.sp_login(@user nvarchar(255) , @pass nvarchar(255
 AS
 BEGIN
 	
-	DECLARE @hash_pass_almacenada BINARY(32)
+	DECLARE @hash_pass_almacenada VARBINARY(32)
 	SET @hash_pass_almacenada = 
 	(SELECT Usuario_Password
 	FROM POR_COLECTORA.Usuarios
 	WHERE Usuario_Nombre = @user)
 
-	DECLARE @hash_pass_ingresada BINARY(32)
+	DECLARE @hash_pass_ingresada VARBINARY(32)
 	SET @hash_pass_ingresada = HASHBYTES('SHA2_256',@pass)
 
 	IF @hash_pass_almacenada IS NULL
