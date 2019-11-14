@@ -532,7 +532,7 @@ SELECT DISTINCT NULL,
 				Maestra.Oferta_Entregado_Fecha,
 				(SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni)
 				,(select Compra_Nro from POR_COLECTORA.Compras where Compra_Fecha = Maestra.Oferta_Fecha_Compra and
-				Compra_Oferta = (select Oferta_Id from POR_COLECTORA.Ofertas  where Oferta_Codigo = SUBSTRING(Oferta_Codigo,1,10))
+				Compra_Oferta = (select Oferta_Id from POR_COLECTORA.Ofertas As Colectora where Colectora.Oferta_Codigo = SUBSTRING(Maestra.Oferta_Codigo,1,10))
 				and Compra_Cliente = (SELECT Clie_Id FROM POR_COLECTORA.Clientes WHERE Clie_DNI = Maestra.Cli_Dni)
 				and Compra_Fecha = Oferta_Fecha_Compra) 
 FROM gd_esquema.Maestra AS Maestra
@@ -850,7 +850,7 @@ END
 GO
 
 --SP COMPRA OFERTA 
-/*
+
 CREATE PROCEDURE POR_COLECTORA.sp_comprar_oferta(
 @id_oferta numeric,
 @id_cliente numeric,
@@ -871,12 +871,7 @@ BEGIN
 	set @numero_compra = (select Compra_Nro from Compras where Compra_Oferta = @id_oferta)
 
 	declare @cupon_codigo nvarchar(80)
-	set @cupon_codigo = SUBSTRING(CONVERT(nvarchar(255), NEWID()), 0, 9)
-	WHILE ((SELECT COUNT(*) FROM Cupones WHERE Cupon_codigo = @cupon_codigo) = 1 --Este while checkearia si el string autogenerado no se repite
-	BEGIN
-		set @cupon_codigo = SUBSTRING(CONVERT(nvarchar(255), NEWID()), 0, 9)
-	ELSE
-		BREAK
+	set @cupon_codigo = CONCAT((select Oferta_Codigo from Ofertas where Oferta_Id = @id_oferta), @id_cliente)
 
 	if ( (select Clie_Saldo from Clientes where Clie_Id = @id_cliente) >= @precio_oferta 
 			and ( (select count(*) from Compras where Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente group by Compra_Cliente) + @cantidad_compra ) <  @cantidad_maxima  )
@@ -891,7 +886,9 @@ BEGIN
 END
 
 GO
-*/
+
+--exec POR_COLECTORA.sp_comprar_oferta(1,1,'2020-03-09 00:00:00.000',2);
+
 --SP CONSUMO OFERTA 
 CREATE PROCEDURE POR_COLECTORA.sp_consumir_oferta(
 @id_cupon numeric,
