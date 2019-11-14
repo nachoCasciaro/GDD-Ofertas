@@ -27,12 +27,6 @@ namespace FrbaOfertas.AbmRol
 
         }
 
-        private void seleccionarFuncionalidad()
-        {
-            String descripcion = Convert.ToString(dataGridView1.SelectedRows[0].Cells[0].Value);
-
-        }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -59,7 +53,19 @@ namespace FrbaOfertas.AbmRol
 
         private void button2_Click(object sender, EventArgs e) //Eliminar funcionalidad
         {
+            Int32 id_func = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+            var connection = DB.getInstance().getConnection();
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_eliminar_funcionalidad_rol", connection);
+            query.CommandType = CommandType.StoredProcedure;
+            query.Parameters.Add(new SqlParameter("@rol", id_rol));
+            query.Parameters.Add(new SqlParameter("@funcionalidad", id_func));
 
+            connection.Open();
+            query.ExecuteNonQuery();
+            connection.Close();
+
+            this.Close();
+            new Menu_Principal.MenuAdmin().Show();
         }
 
         private void button1_Click(object sender, EventArgs e) //Agregar funcionalidad
@@ -96,7 +102,7 @@ namespace FrbaOfertas.AbmRol
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            //Solo cambiar nombre rol? Radiobutton tiene efecto?
         }
 
     }
