@@ -215,7 +215,6 @@ DROP PROCEDURE POR_COLECTORA.sp_obtener_id_cliente
 IF OBJECT_ID ('POR_COLECTORA.sp_obtener_id_proveedor') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_obtener_id_proveedor
 
-
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -988,16 +987,12 @@ END
 GO
 
 --SP AGREGAR FUNCIONALIDAD A ROL (FUNCIONALIDADxROL)
-CREATE PROCEDURE POR_COLECTORA.sp_agregar_funcionalidad_a_rol(@nombreRol NVARCHAR(225), @func_descripcion NVARCHAR(225))
+CREATE PROCEDURE POR_COLECTORA.sp_agregar_funcionalidad_a_rol(@id_rol numeric, @id_funcionalidad numeric)
 AS 
 BEGIN
 	
-	INSERT INTO POR_COLECTORA.FuncionalidadxRol (Id_Rol, Id_Func)
-	VALUES ((SELECT rol_id 
-			FROM POR_COLECTORA.Roles 
-			WHERE Rol_Nombre = @nombreRol), (SELECT Func_Id
-											FROM POR_COLECTORA.Funcionalidades
-											WHERE Func_Descripcion = @func_descripcion))
+	INSERT INTO POR_COLECTORA.FuncionalidadxRol (Id_Rol, Id_Func) --Contemplar caso donde ya tenga la funcionalidad?
+	VALUES (@id_rol, @id_funcionalidad)
 	
 END
 GO
@@ -1131,7 +1126,7 @@ CREATE PROCEDURE POR_COLECTORA.sp_mostrar_roles
 AS
 BEGIN
 
-	SELECT Rol_Nombre AS ROL, Rol_Habilitado AS ESTADO
+	SELECT Rol_Id AS ID, Rol_Nombre AS ROL, Rol_Habilitado AS ESTADO
 	FROM POR_COLECTORA.Roles
 	ORDER BY Rol_Nombre ASC
 
@@ -1143,7 +1138,7 @@ CREATE PROCEDURE POR_COLECTORA.sp_mostrar_funcionalidades_rol(@rol numeric)
 AS
 BEGIN
 
-	SELECT func_descripcion
+	SELECT func_id, func_descripcion
 	FROM POR_COLECTORA.FuncionalidadxRol JOIN POR_COLECTORA.Funcionalidades ON id_func = func_id
 	WHERE Id_Rol = @rol
 	ORDER BY Func_Descripcion ASC
@@ -1217,6 +1212,5 @@ BEGIN
 
 END;
 GO
-
 
 

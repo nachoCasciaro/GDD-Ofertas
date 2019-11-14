@@ -44,33 +44,38 @@ namespace FrbaOfertas.AbmRol
 
         private void button1_Click(object sender, EventArgs e) //Boton baja
         {
-            try
+            if (dataGridView1.SelectedRows.Count > 0)
             {
-                this.darBajaRol();
-                this.Close();
-            }
-            catch (Exception excepcion) //Chequear sp, cuando entraria por el catch?
-            {
-                MessageBox.Show(excepcion.Message, "El rol ya se encuentra inhabilitado", MessageBoxButtons.OK);
+                try
+                {
+                    this.seleccionarRolBaja();
+                    this.Close();
+
+                }
+                catch (Exception excepcion)
+                {
+                    MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
+                }
             }
         }
 
-        private SqlDataReader darBajaRol()
+        private void darBajaRol()
         {
+            Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             var connection = DB.getInstance().getConnection();
             SqlCommand command = new SqlCommand("POR_COLECTORA.sp_baja_rol", connection);
             command.CommandType = CommandType.StoredProcedure;
-
-            //Obtener rol en el que me encuentro para el sp 
+            command.Parameters.Add(new SqlParameter("@rol", id));
 
             connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
 
-            SqlDataReader reader = command.ExecuteReader();
+            this.Close();
+            new Menu_Principal.MenuAdmin().Show();
+        } 
 
-            return reader;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) //Modificacion rol
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
@@ -88,9 +93,9 @@ namespace FrbaOfertas.AbmRol
 
         private void seleccionarRolModificar()
         {
-            //Rol que se esta modificando
+            Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
 
-            new AbmRol.ModificacionRol().Show();
+            new AbmRol.ModificacionRol(id).Show();
 
         }
 
