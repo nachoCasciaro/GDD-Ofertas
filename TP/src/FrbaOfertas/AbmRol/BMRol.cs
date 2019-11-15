@@ -48,7 +48,7 @@ namespace FrbaOfertas.AbmRol
             {
                 try
                 {
-                    this.seleccionarRolBaja();
+                    //this.seleccionarRolBaja();
                     this.Close();
 
                 }

@@ -892,7 +892,8 @@ GO
 CREATE PROCEDURE POR_COLECTORA.sp_consumir_oferta(
 @id_cupon numeric,
 @fecha_actual datetime,
-@id_proveedor numeric
+@id_proveedor numeric,
+@id_cliente numeric
 )
 
 AS
@@ -910,6 +911,8 @@ BEGIN
 					where CU.Cupon_Codigo = @id_cupon) = @id_proveedor) )
 		begin
 			UPDATE POR_COLECTORA.CUPONES SET Cupon_Fecha_Consumo = @fecha_actual WHERE Cupon_codigo = @id_cupon
+			UPDATE POR_COLECTORA.CUPONES SET Cupon_Id_Cliente_Consumidor = @id_cliente WHERE Cupon_codigo = @id_cupon
+
 		end	
 
 END

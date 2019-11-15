@@ -44,9 +44,7 @@ namespace FrbaOfertas.EntregarOferta
             query.Parameters.Add(new SqlParameter("@id_proveedor", Convert.ToInt32(this.idProveedor)));
             query.Parameters.Add(new SqlParameter("@id_cupon", this.txtbox_cupon.Text));
             query.Parameters.Add(new SqlParameter("@fecha_actual", dtm_fechaconsumo.Value)); 
-            
-            //No se le manda el cliente ??? Es requisito en la interfaz, pero no esta en el stored
-            //query.Parameters.Add(new SqlParameter("@", Convert.ToInt32(this.txtbox_fechavencimiento.Text)));
+            query.Parameters.Add(new SqlParameter("@id_cliente", Convert.ToInt32(this.txtbox_cliente.Text)));
 
             connection.Open();
             query.ExecuteNonQuery();

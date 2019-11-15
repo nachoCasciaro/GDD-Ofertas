@@ -57,7 +57,7 @@ namespace FrbaOfertas.Facturar
             {
                 this.validarDatos();
                 ConfiguradorDataGrid.llenarDataGridConConsulta(this.listadoOfertas(), dataGridView1);
-                ConfiguradorDataGrid.llenarDataGridConConsulta(this.importeFactura(), dataGridView2);
+                //ConfiguradorDataGrid.llenarDataGridConConsulta(this.importeFactura(), dataGridView2);
                 this.Close();
             }
             catch (Exception excepcion)
@@ -81,13 +81,15 @@ namespace FrbaOfertas.Facturar
 
             return reader;
         }
-
+        /*
         private SqlDataReader importeFactura()
         {
+            //este sp esta mal, es el de facturar
+            
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_prov_mayor_facturacion", connection);
             query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@semestre", Convert.ToInt16(this.combobox_semestre)));
+            query.Parameters.Add(new SqlParameter("@semestre", Convert.ToInt16(this.co)));
             query.Parameters.Add(new SqlParameter("@anio", this.dtm_año.Value));
 
             connection.Open();
@@ -95,7 +97,8 @@ namespace FrbaOfertas.Facturar
             SqlDataReader reader = query.ExecuteReader();
 
             return reader;
+              
         }
-
+    */
     }
 }
