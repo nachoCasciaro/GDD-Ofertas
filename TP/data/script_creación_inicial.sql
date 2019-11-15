@@ -751,9 +751,6 @@ CREATE PROCEDURE POR_COLECTORA.sp_carga_credito (
 --chau efectivo?
 AS
 BEGIN
-	UPDATE POR_COLECTORA.Clientes
-	SET Clie_Saldo = Clie_Saldo + @monto
-	WHERE Clie_Id = @id_cliente;
 
 	IF not exists (select 1 from POR_COLECTORA.Tarjetas where Tarjeta_Tipo = @tipo_tarjeta and Tarjeta_Fecha_Venc = @tipo_tarjeta and Tarjeta_Id_Cliente = @id_cliente) 
 		BEGIN
@@ -766,6 +763,10 @@ BEGIN
 	
 	INSERT INTO POR_COLECTORA.Cargas(Carga_Fecha,Carga_Id_Cliente,Carga_Monto,Carga_Tipo_Pago,Carga_Id_Tarjeta) 
 	VALUES (@fecha_carga,@id_cliente,@monto,@tipo_tarjeta,@id_tarjeta)
+
+	UPDATE POR_COLECTORA.Clientes
+	SET Clie_Saldo = Clie_Saldo + @monto
+	WHERE Clie_Id = @id_cliente;
 
 END
 

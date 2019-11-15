@@ -59,6 +59,7 @@
             this.txtbox_monto.Name = "txtbox_monto";
             this.txtbox_monto.Size = new System.Drawing.Size(203, 22);
             this.txtbox_monto.TabIndex = 1;
+            this.txtbox_monto.TextChanged += new System.EventHandler(this.txtbox_monto_TextChanged);
             // 
             // label2
             // 
