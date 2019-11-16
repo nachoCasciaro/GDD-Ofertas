@@ -57,8 +57,8 @@ namespace FrbaOfertas.Facturar
             {
                 this.validarDatos();
                 ConfiguradorDataGrid.llenarDataGridConConsulta(this.listadoOfertas(), dataGridView1);
-                //ConfiguradorDataGrid.llenarDataGridConConsulta(this.importeFactura(), dataGridView2);
-                this.Close();
+                this.importeFactura();
+                //this.Close();
             }
             catch (Exception excepcion)
             {
@@ -73,7 +73,7 @@ namespace FrbaOfertas.Facturar
             query.CommandType = CommandType.StoredProcedure;
             query.Parameters.Add(new SqlParameter("@fecha_inicio", this.dtm_inicio.Value));
             query.Parameters.Add(new SqlParameter("@fecha_fin", this.dtm_fin.Value));
-            query.Parameters.Add(new SqlParameter("@proveedor", this.combobox_prov));
+            query.Parameters.Add(new SqlParameter("@proveedor", this.combobox_prov.SelectedItem.ToString()));
 
             connection.Open();
 
@@ -81,24 +81,27 @@ namespace FrbaOfertas.Facturar
 
             return reader;
         }
-        /*
-        private SqlDataReader importeFactura()
+        
+        private void importeFactura()
         {
-            //este sp esta mal, es el de facturar
             
             var connection = DB.getInstance().getConnection();
-            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_prov_mayor_facturacion", connection);
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_facturar_a_proveedor", connection);
             query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@semestre", Convert.ToInt16(this.co)));
-            query.Parameters.Add(new SqlParameter("@anio", this.dtm_año.Value));
+            query.Parameters.Add(new SqlParameter("@fecha_inicio", this.dtm_inicio.Value));
+            query.Parameters.Add(new SqlParameter("@fecha_fin", this.dtm_fin.Value));
+            query.Parameters.Add(new SqlParameter("@proveedor", this.combobox_prov.SelectedItem.ToString()));
+
+            query.Parameters.Add("@resultado", SqlDbType.VarChar,250).Direction = ParameterDirection.Output;
 
             connection.Open();
 
             SqlDataReader reader = query.ExecuteReader();
 
-            return reader;
-              
+            string resultado = query.Parameters["@resultado"].Value.ToString();
+
+            this.textBox1.Text = resultado;
         }
-    */
+    
     }
 }

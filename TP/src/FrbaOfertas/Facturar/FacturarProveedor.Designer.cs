@@ -37,9 +37,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.combobox_prov = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -65,7 +64,7 @@
             // dtm_inicio
             // 
             this.dtm_inicio.Location = new System.Drawing.Point(303, 18);
-            this.dtm_inicio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtm_inicio.Margin = new System.Windows.Forms.Padding(4);
             this.dtm_inicio.Name = "dtm_inicio";
             this.dtm_inicio.Size = new System.Drawing.Size(265, 22);
             this.dtm_inicio.TabIndex = 2;
@@ -73,7 +72,7 @@
             // dtm_fin
             // 
             this.dtm_fin.Location = new System.Drawing.Point(303, 50);
-            this.dtm_fin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtm_fin.Margin = new System.Windows.Forms.Padding(4);
             this.dtm_fin.Name = "dtm_fin";
             this.dtm_fin.Size = new System.Drawing.Size(265, 22);
             this.dtm_fin.TabIndex = 3;
@@ -92,7 +91,7 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(16, 186);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(757, 144);
             this.dataGridView1.TabIndex = 6;
@@ -100,7 +99,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(303, 135);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(184, 28);
             this.button1.TabIndex = 7;
@@ -112,7 +111,7 @@
             // 
             this.combobox_prov.FormattingEnabled = true;
             this.combobox_prov.Location = new System.Drawing.Point(303, 89);
-            this.combobox_prov.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combobox_prov.Margin = new System.Windows.Forms.Padding(4);
             this.combobox_prov.Name = "combobox_prov";
             this.combobox_prov.Size = new System.Drawing.Size(265, 24);
             this.combobox_prov.TabIndex = 8;
@@ -128,21 +127,19 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Importe y número de factura";
             // 
-            // dataGridView2
+            // textBox1
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(209, 337);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(564, 43);
-            this.dataGridView2.TabIndex = 10;
+            this.textBox1.Location = new System.Drawing.Point(223, 348);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(550, 22);
+            this.textBox1.TabIndex = 10;
             // 
             // FacturarProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(789, 526);
-            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.combobox_prov);
             this.Controls.Add(this.button1);
@@ -152,13 +149,12 @@
             this.Controls.Add(this.dtm_inicio);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FacturarProveedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FacturarProveedor";
             this.Load += new System.EventHandler(this.FacturarProveedor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,6 +171,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox combobox_prov;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

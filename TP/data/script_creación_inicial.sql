@@ -928,7 +928,7 @@ BEGIN
 
 	SELECT DISTINCT(Compra_Oferta) AS OFERTA_CODIGO, Oferta_Descripcion AS OFERTA_DESCRIPCION 
 	FROM POR_COLECTORA.Compras JOIN POR_COLECTORA.Ofertas ON Compra_Oferta = Oferta_Id JOIN POR_COLECTORA.Proveedores ON Oferta_Proveedor = Provee_Id
-	WHERE Compra_Fecha >= @fecha_inicio AND Compra_Fecha <= @fecha_fin AND Provee_Id = (SELECT provee_id FROM Proveedores WHERE provee_RS = @proveedor)
+	WHERE Compra_Fecha >= @fecha_inicio AND Compra_Fecha <= @fecha_fin AND Provee_Id = (SELECT pr2.provee_id FROM POR_COLECTORA.Proveedores pr2 WHERE pr2.provee_RS = @proveedor)
 
 END
 
@@ -936,19 +936,23 @@ GO
 
 --SP FACTURACION A PROVEEDOR
 --Importe factura y numero factura
-CREATE PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor(@fecha_inicio DateTime, @fecha_fin DateTime, @proveedor nvarchar(80))
+CREATE PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor(@fecha_inicio DateTime, @fecha_fin DateTime, @proveedor nvarchar(80),@resultado varchar(250) output)
 AS
 BEGIN
 	--Importe factura
 	declare @importe_total numeric
 	set @importe_total = (SELECT SUM(Compra_Oferta_Precio * Compra_Cantidad)
 						FROM Compras JOIN Ofertas ON Compra_Oferta = Oferta_Id JOIN Proveedores ON Oferta_Proveedor = Provee_Id
-						WHERE Compra_Fecha >= @fecha_inicio AND Compra_Fecha <= @fecha_fin AND Provee_Id = (SELECT provee_id FROM Proveedores WHERE provee_RS = @proveedor)) 
+						WHERE Compra_Fecha >= @fecha_inicio AND Compra_Fecha <= @fecha_fin AND Provee_Id = (SELECT pr2.provee_id FROM POR_COLECTORA.Proveedores pr2 WHERE pr2.provee_RS = @proveedor)) 
  
+
 	declare @fact_numero numeric
 	set @fact_numero = (SELECT TOP 1 fact_numero
 						FROM Facturas
 						ORDER BY fact_numero DESC) + 1
+	
+	set @resultado = @importe_total + ' ' + @fact_numero
+	
 
 END
 GO
