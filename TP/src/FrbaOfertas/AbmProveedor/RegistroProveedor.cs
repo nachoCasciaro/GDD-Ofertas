@@ -42,64 +42,139 @@ namespace FrbaOfertas.AbmProveedor
 
         }
 
-        private void validarDatos()
+        private string validarDatos()
         {
-            if (Validaciones.estaVacio(txtbox_RS.Text) || Validaciones.estaVacio(txtbox_CP.Text) || Validaciones.estaVacio(txtbox_contacto.Text) || Validaciones.estaVacio(txtbox_mail.Text) || Validaciones.estaVacio(txtbox_telefono.Text) || Validaciones.estaVacio(txtbox_cuit.Text) || Validaciones.estaVacio(txtbox_calle.Text) || Validaciones.estaVacio(txtbox_nropiso.Text) || Validaciones.estaVacio(txtbox_depto.Text) || Validaciones.estaVacio(txtbox_ciudad.Text))
+            List<string> mensajeError = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(txtbox_username.Text))
+            {
+                mensajeError.Add("Debe especificar un nombre de usuario");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_password.Text))
+            {
+                mensajeError.Add("Debe ingresar una contraseña");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_RS.Text))
+            {
+                mensajeError.Add("Debe completar la razón social");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_mail.Text))
+            {
+                mensajeError.Add("Debe completar el mail");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_telefono.Text))
+            {
+                mensajeError.Add("Debe completar el teléfono");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_cuit.Text))
+            {
+                mensajeError.Add("Debe completar el CUIT");
+            }
+
+            if (combobox_rubro.SelectedIndex == -1)
             {
 
-                throw new Exception("Debe completar todos los campos");
-
+                mensajeError.Add("Debe seleccionar un rubro");
             }
+
+            if (string.IsNullOrWhiteSpace(txtbox_contacto.Text))
+            {
+                mensajeError.Add("Debe completar el nombre de contacto");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_calle.Text))
+            {
+                mensajeError.Add("Debe completar la calle");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_CP.Text))
+            {
+                mensajeError.Add("Debe completar el código postal");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_ciudad.Text))
+            {
+                mensajeError.Add("Debe completar la ciudad");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_depto.Text)) //Departamento se permite NULL?
+            {
+                mensajeError.Add("Debe completar el departamento");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_nropiso.Text)) //Nro piso se permite NULL?
+            {
+                mensajeError.Add("Debe completar el número de piso");
+            }
+
             if (!Validaciones.contieneSoloNumeros(txtbox_CP.Text))
             {
 
-                throw new Exception("El código postal debe contener únicamente números");
+                mensajeError.Add("El código postal debe contener únicamente números");
             }
+
             if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
             {
 
-                throw new Exception("El telefono debe contener únicamente números");
+                mensajeError.Add("El telefono debe contener únicamente números");
             }
+
             if (!Validaciones.tieneFormatoMail(txtbox_mail.Text))
             {
 
-                throw new Exception("Ingrese el mail correctamente");
+                mensajeError.Add("El formato del mail no es correcto");
             }
 
-        }
-
-        private void registrarProveedor()
-        {
-            var connection = DB.getInstance().getConnection();
-            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_alta_proveedor", connection);
-            query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@username", this.txtbox_username.Text));
-            query.Parameters.Add(new SqlParameter("@password", this.txtbox_password.Text));
-            query.Parameters.Add(new SqlParameter("@razonSocial", this.txtbox_RS.Text));
-            query.Parameters.Add(new SqlParameter("@mail", this.txtbox_mail.Text));
-            query.Parameters.Add(new SqlParameter("@telefono", Convert.ToInt32(txtbox_telefono.Text)));
-            query.Parameters.Add(new SqlParameter("@direCalle", this.txtbox_calle.Text));
-            query.Parameters.Add(new SqlParameter("@nroPiso", Convert.ToInt32(this.txtbox_nropiso.Text)));
-            query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
-            query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
-            query.Parameters.Add(new SqlParameter("@CP", Convert.ToInt32(this.txtbox_CP.Text)));
-            query.Parameters.Add(new SqlParameter("@cuit", this.txtbox_cuit.Text));
-            query.Parameters.Add(new SqlParameter("@nombreContacto", this.txtbox_contacto.Text));
-            query.Parameters.Add(new SqlParameter("@rubro", this.combobox_rubro.SelectedItem));
-
-
-            connection.Open();
-            query.ExecuteNonQuery();
-            connection.Close();
-        }
-
-        private void button1_Click(object sender, EventArgs e) //Boton registrarme
-        {
-            try
+            if (!Validaciones.tieneFormatoDeCuit(txtbox_cuit.Text))
             {
-                this.validarDatos();
-                this.registrarProveedor();
-                this.Close();
+
+                mensajeError.Add("El formato del CUIT no es correcto");
+            }
+
+            string mensajeConcat;
+            mensajeConcat = string.Join("\n", mensajeError);
+
+            return mensajeConcat;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string error = this.validarDatos();
+
+            if (error == "")
+            {
+                var connection = DB.getInstance().getConnection();
+                SqlCommand query = new SqlCommand("POR_COLECTORA.sp_alta_proveedor", connection);
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.Add(new SqlParameter("@username", this.txtbox_username.Text));
+                query.Parameters.Add(new SqlParameter("@password", this.txtbox_password.Text));
+                query.Parameters.Add(new SqlParameter("@razonSocial", this.txtbox_RS.Text));
+                query.Parameters.Add(new SqlParameter("@mail", this.txtbox_mail.Text));
+                query.Parameters.Add(new SqlParameter("@telefono", Convert.ToInt32(txtbox_telefono.Text)));
+                query.Parameters.Add(new SqlParameter("@direCalle", this.txtbox_calle.Text));
+                query.Parameters.Add(new SqlParameter("@nroPiso", Convert.ToInt32(this.txtbox_nropiso.Text)));
+                query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
+                query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
+                query.Parameters.Add(new SqlParameter("@CP", Convert.ToInt32(this.txtbox_CP.Text)));
+                query.Parameters.Add(new SqlParameter("@cuit", this.txtbox_cuit.Text));
+                query.Parameters.Add(new SqlParameter("@nombreContacto", this.txtbox_contacto.Text));
+                query.Parameters.Add(new SqlParameter("@rubro", this.combobox_rubro.SelectedItem));
+
+
+                connection.Open();
+                query.ExecuteNonQuery();
+                connection.Close();
+
+                MessageBox.Show("El cliente se registró con éxito.");
+
+                this.Hide();
+
                 if (esAdminOProvee == 1)
                 {
                     new Menu_Principal.MenuAdmin().Show();
@@ -108,10 +183,11 @@ namespace FrbaOfertas.AbmProveedor
                 {
                     new Login.LoginProveedor().Show();
                 }
+
             }
-            catch (Exception excepcion)
+            else
             {
-                MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
+                MessageBox.Show(error);
             }
         }
 
