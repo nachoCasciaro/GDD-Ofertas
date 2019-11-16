@@ -20,14 +20,14 @@ namespace FrbaOfertas.AbmCliente
         String mail;
         Int32 telefono;
         String calle;
-        Int32 nroPiso;
+        String nroPiso;
         String depto;
         String ciudad;
-        Int32 cp;
+        String cp;
         DateTime fecha;
         bool habilitado;
 
-        public ModificacionCliente(Int32 id, String nombre, String apellido, Int32 dni, String mail, Int32 telefono,String calle, Int32 nroPiso, String depto, String ciudad,Int32 cp, DateTime fecha,bool habilitado)
+        public ModificacionCliente(Int32 id, String nombre, String apellido, Int32 dni, String mail, Int32 telefono, String calle, String nroPiso, String depto, String ciudad, String cp, DateTime fecha, bool habilitado)
         {
             InitializeComponent();
             this.id = id;
@@ -63,11 +63,10 @@ namespace FrbaOfertas.AbmCliente
             txtbox_mail.Text = mail;
             txtbox_telefono.Text = telefono.ToString();
             txtbox_calle.Text = calle;
-            txtbox_nropiso.Text = nroPiso.ToString();
+            txtbox_nropiso.Text = nroPiso;
             txtbox_depto.Text = depto;
-            txtbox_cp.Text = cp.ToString();
+            txtbox_cp.Text = cp;
             txtbox_ciudad.Text = ciudad;
-            var connection = DB.getInstance().getConnection();
             
         }
 
@@ -79,17 +78,12 @@ namespace FrbaOfertas.AbmCliente
 
         private void validarDatos()
         {
-            if (Validaciones.estaVacio(txtbox_nombre.Text) || Validaciones.estaVacio(txtbox_apellido.Text) || Validaciones.estaVacio(txtbox_dni.Text) || Validaciones.estaVacio(txtbox_mail.Text) || Validaciones.estaVacio(txtbox_telefono.Text) || Validaciones.estaVacio(txtbox_calle.Text) || Validaciones.estaVacio(txtbox_cp.Text) || Validaciones.estaVacio(txtbox_nropiso.Text) || Validaciones.estaVacio(txtbox_depto.Text) || Validaciones.estaVacio(txtbox_ciudad.Text))
+            if (Validaciones.estaVacio(txtbox_nombre.Text) || Validaciones.estaVacio(txtbox_apellido.Text) || Validaciones.estaVacio(txtbox_dni.Text) || Validaciones.estaVacio(txtbox_mail.Text) || Validaciones.estaVacio(txtbox_telefono.Text) || Validaciones.estaVacio(txtbox_calle.Text) || Validaciones.estaVacio(txtbox_cp.Text) || Validaciones.estaVacio(txtbox_ciudad.Text))
 
             {
 
                 throw new Exception("Debe completar todos los campos");
 
-            }
-            if (!Validaciones.contieneSoloNumeros(txtbox_cp.Text))
-            {
-
-                throw new Exception("El código postal debe contener únicamente números");
             }
             if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
             {
@@ -124,7 +118,7 @@ namespace FrbaOfertas.AbmCliente
             query.Parameters.Add(new SqlParameter("@nroPiso", this.txtbox_nropiso.Text));
             query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
             query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
-            query.Parameters.Add(new SqlParameter("@CP", Convert.ToInt32(txtbox_cp.Text)));
+            query.Parameters.Add(new SqlParameter("@CP", this.txtbox_cp.Text));
             query.Parameters.Add(new SqlParameter("@fechaNacimiento", dtm_fecha.Value));
             /*bool habilitado = false;
             if (checkbox_habilitado.Checked)

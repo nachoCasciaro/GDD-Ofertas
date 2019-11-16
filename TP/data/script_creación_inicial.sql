@@ -232,7 +232,7 @@ GO
 CREATE TABLE POR_COLECTORA.Direcciones(
 	Direccion_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Direccion_Calle NVARCHAR(250) NOT NULL,
-	Direccion_Nro_Piso INT,
+	Direccion_Nro_Piso NVARCHAR(10),
 	Direccion_Depto NVARCHAR(10),
 	Direccion_Ciudad NVARCHAR(80) NOT NULL)
 GO
@@ -255,7 +255,7 @@ CREATE TABLE POR_COLECTORA.Clientes(
 	Clie_Mail NVARCHAR(250) NOT NULL,
 	Clie_Telefono Numeric(18,0) NOT NULL,
 	Clie_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
-	Clie_CP Numeric,
+	Clie_CP NVARCHAR(20),
 	Clie_Fecha_Nac DATETIME NOT NULL,
 	Clie_Habilitado BIT NOT NULL DEFAULT 1,
 	Clie_Saldo Float NOT NULL DEFAULT 200,
@@ -416,7 +416,7 @@ INSERT INTO POR_COLECTORA.Roles
 
 --INSERTO EL USUARIO ADMIN
 
-DECLARE @password [nvarchar](100)
+DECLARE @password [varchar](100)
 SET @password = 'w23e'
 
 INSERT INTO POR_COLECTORA.Usuarios(Usuario_Nombre,Usuario_Password)
@@ -581,10 +581,10 @@ CREATE PROCEDURE POR_COLECTORA.sp_alta_cliente (
 @mail nvarchar(250),
 @telefono numeric(18,0),
 @direCalle nvarchar(250),
-@nroPiso int,
+@nroPiso nvarchar(10),
 @depto nvarchar(10),
 @ciudad nvarchar(80),
-@CP numeric,
+@CP nvarchar(20),
 @fechaNacimiento datetime
 )
 AS
@@ -631,10 +631,10 @@ CREATE PROCEDURE POR_COLECTORA.sp_modificar_cliente (
 @mail nvarchar(250),
 @telefono numeric(18,0),
 @direCalle nvarchar(250),
-@nroPiso int,
+@nroPiso nvarchar(10),
 @depto nvarchar(10),
 @ciudad nvarchar(80),
-@CP numeric,
+@CP nvarchar(20),
 @fechaNacimiento datetime
 )
 AS
@@ -964,11 +964,11 @@ AS
 BEGIN
 
 SELECT Clie_Id,Clie_Nombre,Clie_Apellido,Clie_DNI,Clie_Mail,Clie_Telefono,
-		(select Direccion_Calle from Direcciones where Direccion_Id = Clie_Direccion),
-		isnull( (select Direccion_Nro_Piso from Direcciones where Direccion_Id = Clie_Direccion),0),
-		isnull( (select Direccion_Depto from Direcciones where Direccion_Id = Clie_Direccion),0),
-		(select Direccion_Ciudad from Direcciones where Direccion_Id = Clie_Direccion),
-		isnull( Clie_CP,0) ,
+		(select Direccion_Calle from Direcciones where Direccion_Id = Clie_Direccion) as 'Clie_Direccion',
+		(select Direccion_Nro_Piso from Direcciones where Direccion_Id = Clie_Direccion) as 'Clie_Nro_Piso',
+		(select Direccion_Depto from Direcciones where Direccion_Id = Clie_Direccion) as 'Clie_Depto',
+		(select Direccion_Ciudad from Direcciones where Direccion_Id = Clie_Direccion) as 'Clie_Ciudad',
+		Clie_CP as 'Clie_CP',
 		Clie_Fecha_Nac,
 		Clie_Habilitado
 from POR_COLECTORA.Clientes

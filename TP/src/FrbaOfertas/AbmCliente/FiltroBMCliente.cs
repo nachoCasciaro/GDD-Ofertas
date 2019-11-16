@@ -64,10 +64,10 @@ namespace FrbaOfertas.AbmCliente
             String mail = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
             Int32 telefono = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[5].Value);
             String calle = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
-            Int32 nroPiso = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[7].Value);
+            String nroPiso = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
             String depto = dataGridView1.SelectedRows[0].Cells[8].Value.ToString();
             String ciudad = dataGridView1.SelectedRows[0].Cells[9].Value.ToString();
-            Int32 cp = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[10].Value);
+            String cp = dataGridView1.SelectedRows[0].Cells[10].Value.ToString();
             DateTime fecha = Convert.ToDateTime(dataGridView1.SelectedRows[0].Cells[11].Value);
             bool habilitado = (bool)dataGridView1.SelectedRows[0].Cells[12].Value;
             new AbmCliente.ModificacionCliente(id,nombre,apellido,dni,mail,telefono,calle,nroPiso,depto,ciudad,cp,fecha,habilitado).Show();

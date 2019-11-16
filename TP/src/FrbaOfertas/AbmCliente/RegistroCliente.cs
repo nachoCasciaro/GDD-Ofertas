@@ -105,11 +105,6 @@ namespace FrbaOfertas.AbmCliente
                 mensajeError.Add("Debe completar el número de piso");
             }
 
-            if (!Validaciones.contieneSoloNumeros(txtbox_cp.Text))
-            {
-
-                mensajeError.Add("El código postal debe contener únicamente números");
-            }
             if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
             {
 
@@ -151,10 +146,10 @@ namespace FrbaOfertas.AbmCliente
                 query.Parameters.Add(new SqlParameter("@mail", this.txtbox_mail.Text));
                 query.Parameters.Add(new SqlParameter("@telefono", Convert.ToInt32(this.txtbox_telefono.Text)));
                 query.Parameters.Add(new SqlParameter("@direCalle", this.txtbox_calle.Text));
-                query.Parameters.Add(new SqlParameter("@nroPiso", Convert.ToInt32(this.txtbox_nropiso.Text)));
+                query.Parameters.Add(new SqlParameter("@nroPiso", this.txtbox_nropiso.Text));
                 query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
                 query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
-                query.Parameters.Add(new SqlParameter("@CP", Convert.ToInt32(this.txtbox_cp.Text)));
+                query.Parameters.Add(new SqlParameter("@CP", this.txtbox_cp.Text));
                 query.Parameters.Add(new SqlParameter("@fechaNacimiento", this.dtm_fecha.Value));
 
                 connection.Open();
