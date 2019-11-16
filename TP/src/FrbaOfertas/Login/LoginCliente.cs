@@ -27,10 +27,11 @@ namespace FrbaOfertas.Login
         private int idClienteIngresado(string username)
         {
             var connection = DB.getInstance().getConnection();
-            SqlCommand query = new SqlCommand("POR_COLECTORA.f_obtener_id_cliente", connection);
-            query.CommandType = CommandType.Text;
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_obtener_id_cliente", connection);
+            query.CommandType = CommandType.StoredProcedure;
 
             query.Parameters.Add(new SqlParameter("@user", username));
+    
             query.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
 
             connection.Open();

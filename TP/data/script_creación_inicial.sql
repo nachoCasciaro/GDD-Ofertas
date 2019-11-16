@@ -1091,20 +1091,20 @@ END
 GO
 
 --SP OBTENER ID CLIENTE
-CREATE PROCEDURE POR_COLECTORA.sp_obtener_id_cliente(@usuario varchar(250), @resultado int output)
+CREATE PROCEDURE POR_COLECTORA.sp_obtener_id_cliente(@user varchar(250), @resultado int output)
 AS
 BEGIN
 	declare @idUser numeric
 	set @idUser = (SELECT Usuario_Id
 				FROM POR_COLECTORA.Usuarios
-				WHERE Usuario_Nombre = @usuario)
+				WHERE Usuario_Nombre = @user)
 	
 	declare @idCliente numeric
 
 	set @idCliente = (SELECT Clie_Id
 				FROM POR_COLECTORA.Clientes
 				WHERE Clie_Usuario = @idUser)
-
+    set @resultado = @idCliente
 	RETURN @idCliente
 
 END
@@ -1151,24 +1151,24 @@ END
 GO
 
 
-CREATE PROCEDURE POR_COLECTORA.sp_login(@user nvarchar(255) , @pass nvarchar(255), @resultado int output)
+CREATE PROCEDURE POR_COLECTORA.sp_login(@user nvarchar(255) , @pass varchar(256), @resultado int output)
 AS
 BEGIN
 	
-	DECLARE @hash_pass_almacenada VARBINARY(32)
+	DECLARE @hash_pass_almacenada varchar(256)
 	SET @hash_pass_almacenada = 
 	(SELECT Usuario_Password
 	FROM POR_COLECTORA.Usuarios
 	WHERE Usuario_Nombre = @user)
 
-	DECLARE @hash_pass_ingresada VARBINARY(32)
+	DECLARE @hash_pass_ingresada varchar(256)
 	SET @hash_pass_ingresada = HASHBYTES('SHA2_256',@pass)
 
 	IF @hash_pass_almacenada IS NULL
 		BEGIN
 			SET @resultado = 1 -- El usuario no existe 
 		END
-	ELSE IF @hash_pass_almacenada != @hash_pass_ingresada
+	ELSE IF @hash_pass_almacenada <> @hash_pass_ingresada
 		BEGIN	
 			SET @resultado = 2 -- El usuario existe pero la contraseña es incorrecta
 			UPDATE POR_COLECTORA.Usuarios
