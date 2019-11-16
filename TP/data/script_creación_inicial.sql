@@ -523,19 +523,19 @@ where Oferta_Descripcion is not null and Factura_Fecha is not null
 
 
 --MIGRACION CUPONES / REVISAR SI LA FECHA DE VENC ES LA MISMA DE LA FACUTURA O NO
-/*
 INSERT INTO POR_COLECTORA.Cupones
 (Cupon_Fecha_Venc, Cupon_Codigo,Cupon_Fecha_Consumo,Cupon_Id_Cliente_Consumidor,Cupon_Nro_Compra)
-SELECT DISTINCT NULL,
+SELECT Maestra.Oferta_Fecha_Venc,
 			    CONCAT( Oferta_Codigo, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni)),
-				Maestra.Oferta_Entregado_Fecha,
+				Maestra.Oferta_Fecha_Compra,
 				(SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni)
-				,(select Compra_Nro from POR_COLECTORA.Compras where Compra_Fecha = Maestra.Oferta_Fecha_Compra and
-				Compra_Oferta = (select Oferta_Id from POR_COLECTORA.Ofertas As Colectora where Colectora.Oferta_Codigo = SUBSTRING(Maestra.Oferta_Codigo,1,10))
-				and Compra_Cliente = (SELECT Clie_Id FROM POR_COLECTORA.Clientes WHERE Clie_DNI = Maestra.Cli_Dni)
-				and Compra_Fecha = Oferta_Fecha_Compra) 
+				, (select Compra_Nro from POR_COLECTORA.Compras where
+																Compra_Fecha = Maestra.Oferta_Fecha_Compra
+																and Compra_Oferta = (select Oferta_Id from POR_COLECTORA.Ofertas As Colectora where Colectora.Oferta_Codigo = SUBSTRING(Maestra.Oferta_Codigo,1,10))
+																and Compra_Cliente = (SELECT Clie_Id FROM POR_COLECTORA.Clientes WHERE Clie_DNI = Maestra.Cli_Dni)
+																and Compra_Id_Factura = (select Fact_Id from POR_COLECTORA.Facturas where Maestra.Factura_Nro = Fact_Numero))
 FROM gd_esquema.Maestra AS Maestra
-*/
+where Maestra.Factura_Nro is not null
 GO
 
 --FIN MIGRACIONES
