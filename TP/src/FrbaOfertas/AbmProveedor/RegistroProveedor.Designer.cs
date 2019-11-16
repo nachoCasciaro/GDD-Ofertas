@@ -131,9 +131,9 @@
             this.label6.Location = new System.Drawing.Point(48, 329);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 17);
+            this.label6.Size = new System.Drawing.Size(43, 17);
             this.label6.TabIndex = 7;
-            this.label6.Text = "CUIT (sin -)";
+            this.label6.Text = "CUIT ";
             // 
             // label7
             // 

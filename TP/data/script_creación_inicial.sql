@@ -1111,16 +1111,21 @@ END
 GO
 
 --SP OBTENER ID PROVEEDOR
-CREATE PROCEDURE POR_COLECTORA.sp_obtener_id_proveedor(@usuario numeric, @resultado int output)
+CREATE PROCEDURE POR_COLECTORA.sp_obtener_id_proveedor(@user varchar(250), @resultado int output)
 AS
 BEGIN
-	declare @id numeric
+	declare @idUser numeric
+	set @idUser = (SELECT Usuario_Id
+				FROM POR_COLECTORA.Usuarios
+				WHERE Usuario_Nombre = @user)
+	
+	declare @idProveedor numeric
 
-	set @id = (SELECT provee_id
+	set @idProveedor = (SELECT Provee_Id
 				FROM POR_COLECTORA.Proveedores
-				WHERE Provee_Usuario = @usuario)
-
-	RETURN @id
+				WHERE Provee_Usuario = @idUser)
+    set @resultado = @idProveedor
+	RETURN @idProveedor
 
 END
 GO

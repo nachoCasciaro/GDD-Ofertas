@@ -28,7 +28,7 @@ namespace FrbaOfertas.Login
         {
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_obtener_id_proveedor", connection);
-            query.CommandType = CommandType.Text;
+            query.CommandType = CommandType.StoredProcedure;
 
             query.Parameters.Add(new SqlParameter("@user", username));
             query.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -62,7 +62,6 @@ namespace FrbaOfertas.Login
 
             if (resultado == 4)
             {
-
                 this.Hide();
 
                 int idProveedor = this.idProveedorIngresado(this.textBox1.Text);

@@ -102,16 +102,6 @@ namespace FrbaOfertas.AbmProveedor
                 mensajeError.Add("Debe completar la ciudad");
             }
 
-            if (string.IsNullOrWhiteSpace(txtbox_depto.Text)) //Departamento se permite NULL?
-            {
-                mensajeError.Add("Debe completar el departamento");
-            }
-
-            if (string.IsNullOrWhiteSpace(txtbox_nropiso.Text)) //Nro piso se permite NULL?
-            {
-                mensajeError.Add("Debe completar el número de piso");
-            }
-
             if (!Validaciones.contieneSoloNumeros(txtbox_CP.Text))
             {
 
@@ -171,7 +161,7 @@ namespace FrbaOfertas.AbmProveedor
                 query.ExecuteNonQuery();
                 connection.Close();
 
-                MessageBox.Show("El cliente se registró con éxito.");
+                MessageBox.Show("El proveedor se registró con éxito.");
 
                 this.Hide();
 
