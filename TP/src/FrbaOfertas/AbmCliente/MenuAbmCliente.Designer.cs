@@ -76,6 +76,7 @@
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MenuAbmCliente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuAbmCliente";
             this.Load += new System.EventHandler(this.MenuAbmCliente_Load);
             this.ResumeLayout(false);

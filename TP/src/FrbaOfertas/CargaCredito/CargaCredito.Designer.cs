@@ -182,6 +182,7 @@
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CargaCredito";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CargaCredito";
             this.Load += new System.EventHandler(this.Carga_Load);
             this.ResumeLayout(false);

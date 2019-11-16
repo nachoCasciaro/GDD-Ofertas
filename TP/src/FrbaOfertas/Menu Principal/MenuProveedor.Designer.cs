@@ -84,6 +84,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Name = "MenuProveedor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuProveedor";
             this.Load += new System.EventHandler(this.MenuProveedor_Load);
             this.ResumeLayout(false);

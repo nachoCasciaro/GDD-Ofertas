@@ -121,6 +121,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "MenuAdmin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuCliente";
             this.Load += new System.EventHandler(this.MenuAdmin_Load);
             this.ResumeLayout(false);

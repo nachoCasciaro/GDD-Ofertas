@@ -301,7 +301,7 @@ CREATE TABLE POR_COLECTORA.Proveedores(
 	Provee_Telefono Numeric NOT NULL,
 	Provee_CUIT NVARCHAR(13) UNIQUE,
 	Provee_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
-	Provee_CP Numeric,
+	Provee_CP VARCHAR(20),
 	Provee_Rubro Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Rubros(Rubro_Id),
 	Provee_Nombre_Contacto NVARCHAR(80),
 	Provee_Usuario Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id),
@@ -659,10 +659,10 @@ CREATE PROCEDURE POR_COLECTORA.sp_alta_proveedor (
 @mail nvarchar(50),
 @telefono numeric(18,0),
 @direCalle nvarchar(250),
-@nroPiso int,
+@nroPiso nvarchar(10),
 @depto nvarchar(10),
 @ciudad nvarchar(80),
-@CP numeric,
+@CP nvarchar(20),
 @cuit nvarchar(13),
 @nombreContacto nvarchar(80),
 @rubro nvarchar(80)
@@ -711,12 +711,12 @@ CREATE PROCEDURE POR_COLECTORA.sp_modificar_proveedor (
 @mail nvarchar(50),
 @telefono numeric(18,0),
 @direCalle nvarchar(250),
-@nroPiso numeric(10),
+@nroPiso nvarchar(10),
 @depto nvarchar(10),
 @ciudad nvarchar(80),
-@CP numeric,
+@CP nvarchar(20),
 @cuit nvarchar(13),
-@nombreContacto char(20),
+@nombreContacto nvarchar(80),
 @rubro_detalle nvarchar(80)
 )
 AS
@@ -1022,12 +1022,12 @@ AS
 BEGIN
 
 SELECT Provee_Id,Provee_RS,Provee_Mail,Provee_Telefono,Provee_CUIT,
-		(select Direccion_Calle from Direcciones where Direccion_Id = Provee_Direccion),
-		isnull( (select Direccion_Nro_Piso from Direcciones where Direccion_Id = Provee_Direccion),0),
-		isnull( (select Direccion_Depto from Direcciones where Direccion_Id = Provee_Direccion),0),
-		(select Direccion_Ciudad from Direcciones where Direccion_Id = Provee_Direccion),
-		isnull( Provee_CP,0) ,
-		(select Rubro_Detalle from Rubros where Rubro_Id = Provee_Rubro),
+		(select Direccion_Calle from Direcciones where Direccion_Id = Provee_Direccion) as 'Provee_Direccion',
+		(select Direccion_Nro_Piso from Direcciones where Direccion_Id = Provee_Direccion) as 'Provee_Nro_Piso',
+		(select Direccion_Depto from Direcciones where Direccion_Id = Provee_Direccion) as 'Provee_Depto',
+		(select Direccion_Ciudad from Direcciones where Direccion_Id = Provee_Direccion) as 'Provee_Ciudad',
+		Provee_CP,
+		(select Rubro_Detalle from Rubros where Rubro_Id = Provee_Rubro) as 'Provee_Rubro',
 		Provee_Nombre_Contacto,
 		Provee_Habilitado
 from POR_COLECTORA.Proveedores

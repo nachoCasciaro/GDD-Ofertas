@@ -84,6 +84,7 @@
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FRBA OFERTAS";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);

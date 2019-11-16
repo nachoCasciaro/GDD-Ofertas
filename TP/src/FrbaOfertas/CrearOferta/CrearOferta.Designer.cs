@@ -58,7 +58,7 @@
             // txtbox_descripcion
             // 
             this.txtbox_descripcion.Location = new System.Drawing.Point(193, 39);
-            this.txtbox_descripcion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_descripcion.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_descripcion.Name = "txtbox_descripcion";
             this.txtbox_descripcion.Size = new System.Drawing.Size(259, 22);
             this.txtbox_descripcion.TabIndex = 1;
@@ -126,7 +126,7 @@
             // txtbox_preciooriginal
             // 
             this.txtbox_preciooriginal.Location = new System.Drawing.Point(193, 164);
-            this.txtbox_preciooriginal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_preciooriginal.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_preciooriginal.Name = "txtbox_preciooriginal";
             this.txtbox_preciooriginal.Size = new System.Drawing.Size(259, 22);
             this.txtbox_preciooriginal.TabIndex = 10;
@@ -134,7 +134,7 @@
             // txtbox_preciooferta
             // 
             this.txtbox_preciooferta.Location = new System.Drawing.Point(193, 207);
-            this.txtbox_preciooferta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_preciooferta.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_preciooferta.Name = "txtbox_preciooferta";
             this.txtbox_preciooferta.Size = new System.Drawing.Size(259, 22);
             this.txtbox_preciooferta.TabIndex = 11;
@@ -142,7 +142,7 @@
             // txtbox_stock
             // 
             this.txtbox_stock.Location = new System.Drawing.Point(193, 246);
-            this.txtbox_stock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_stock.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_stock.Name = "txtbox_stock";
             this.txtbox_stock.Size = new System.Drawing.Size(259, 22);
             this.txtbox_stock.TabIndex = 12;
@@ -150,7 +150,7 @@
             // txtbox_maxunidades
             // 
             this.txtbox_maxunidades.Location = new System.Drawing.Point(320, 287);
-            this.txtbox_maxunidades.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_maxunidades.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_maxunidades.Name = "txtbox_maxunidades";
             this.txtbox_maxunidades.Size = new System.Drawing.Size(132, 22);
             this.txtbox_maxunidades.TabIndex = 13;
@@ -158,7 +158,7 @@
             // CREAR
             // 
             this.CREAR.Location = new System.Drawing.Point(353, 347);
-            this.CREAR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CREAR.Margin = new System.Windows.Forms.Padding(4);
             this.CREAR.Name = "CREAR";
             this.CREAR.Size = new System.Drawing.Size(100, 28);
             this.CREAR.TabIndex = 14;
@@ -200,8 +200,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtbox_descripcion);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CrearOferta";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CrearOferta";
             this.Load += new System.EventHandler(this.CrearOferta_Load);
             this.ResumeLayout(false);

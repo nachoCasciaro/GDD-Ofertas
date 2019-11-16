@@ -157,7 +157,7 @@
             // txtbox_rs
             // 
             this.txtbox_rs.Location = new System.Drawing.Point(189, 48);
-            this.txtbox_rs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_rs.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_rs.Name = "txtbox_rs";
             this.txtbox_rs.Size = new System.Drawing.Size(273, 22);
             this.txtbox_rs.TabIndex = 10;
@@ -165,7 +165,7 @@
             // txtbox_mail
             // 
             this.txtbox_mail.Location = new System.Drawing.Point(189, 80);
-            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_mail.Name = "txtbox_mail";
             this.txtbox_mail.Size = new System.Drawing.Size(273, 22);
             this.txtbox_mail.TabIndex = 11;
@@ -173,7 +173,7 @@
             // txtbox_telefono
             // 
             this.txtbox_telefono.Location = new System.Drawing.Point(189, 112);
-            this.txtbox_telefono.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_telefono.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_telefono.Name = "txtbox_telefono";
             this.txtbox_telefono.Size = new System.Drawing.Size(273, 22);
             this.txtbox_telefono.TabIndex = 12;
@@ -181,7 +181,7 @@
             // txtbox_cuit
             // 
             this.txtbox_cuit.Location = new System.Drawing.Point(189, 145);
-            this.txtbox_cuit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_cuit.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_cuit.Name = "txtbox_cuit";
             this.txtbox_cuit.Size = new System.Drawing.Size(273, 22);
             this.txtbox_cuit.TabIndex = 13;
@@ -189,7 +189,7 @@
             // txtbox_contacto
             // 
             this.txtbox_contacto.Location = new System.Drawing.Point(189, 175);
-            this.txtbox_contacto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_contacto.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_contacto.Name = "txtbox_contacto";
             this.txtbox_contacto.Size = new System.Drawing.Size(273, 22);
             this.txtbox_contacto.TabIndex = 14;
@@ -197,7 +197,7 @@
             // txtbox_calle
             // 
             this.txtbox_calle.Location = new System.Drawing.Point(189, 209);
-            this.txtbox_calle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_calle.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_calle.Name = "txtbox_calle";
             this.txtbox_calle.Size = new System.Drawing.Size(273, 22);
             this.txtbox_calle.TabIndex = 15;
@@ -205,7 +205,7 @@
             // txtbox_ciudad
             // 
             this.txtbox_ciudad.Location = new System.Drawing.Point(189, 268);
-            this.txtbox_ciudad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_ciudad.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_ciudad.Name = "txtbox_ciudad";
             this.txtbox_ciudad.Size = new System.Drawing.Size(273, 22);
             this.txtbox_ciudad.TabIndex = 16;
@@ -213,7 +213,7 @@
             // txtbox_nropiso
             // 
             this.txtbox_nropiso.Location = new System.Drawing.Point(189, 239);
-            this.txtbox_nropiso.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_nropiso.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_nropiso.Name = "txtbox_nropiso";
             this.txtbox_nropiso.Size = new System.Drawing.Size(104, 22);
             this.txtbox_nropiso.TabIndex = 17;
@@ -221,7 +221,7 @@
             // txtbox_depto
             // 
             this.txtbox_depto.Location = new System.Drawing.Point(359, 239);
-            this.txtbox_depto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_depto.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_depto.Name = "txtbox_depto";
             this.txtbox_depto.Size = new System.Drawing.Size(104, 22);
             this.txtbox_depto.TabIndex = 18;
@@ -229,7 +229,7 @@
             // txtbox_cp
             // 
             this.txtbox_cp.Location = new System.Drawing.Point(189, 300);
-            this.txtbox_cp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_cp.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_cp.Name = "txtbox_cp";
             this.txtbox_cp.Size = new System.Drawing.Size(273, 22);
             this.txtbox_cp.TabIndex = 19;
@@ -237,7 +237,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(330, 405);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(133, 28);
             this.button1.TabIndex = 20;
@@ -249,7 +249,7 @@
             // 
             this.checkbox_habilitado.AutoSize = true;
             this.checkbox_habilitado.Location = new System.Drawing.Point(369, 362);
-            this.checkbox_habilitado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkbox_habilitado.Margin = new System.Windows.Forms.Padding(4);
             this.checkbox_habilitado.Name = "checkbox_habilitado";
             this.checkbox_habilitado.Size = new System.Drawing.Size(93, 21);
             this.checkbox_habilitado.TabIndex = 21;
@@ -303,8 +303,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ModificacionProveedor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModificacionProveedor";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -45,57 +45,64 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(86, 21);
+            this.label1.Location = new System.Drawing.Point(115, 26);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.Size = new System.Drawing.Size(83, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Fecha Inicio";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(86, 47);
+            this.label2.Location = new System.Drawing.Point(115, 58);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.Size = new System.Drawing.Size(70, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "Fecha Fin";
             // 
             // dtm_inicio
             // 
-            this.dtm_inicio.Location = new System.Drawing.Point(227, 15);
+            this.dtm_inicio.Location = new System.Drawing.Point(303, 18);
+            this.dtm_inicio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtm_inicio.Name = "dtm_inicio";
-            this.dtm_inicio.Size = new System.Drawing.Size(200, 20);
+            this.dtm_inicio.Size = new System.Drawing.Size(265, 22);
             this.dtm_inicio.TabIndex = 2;
             // 
             // dtm_fin
             // 
-            this.dtm_fin.Location = new System.Drawing.Point(227, 41);
+            this.dtm_fin.Location = new System.Drawing.Point(303, 50);
+            this.dtm_fin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtm_fin.Name = "dtm_fin";
-            this.dtm_fin.Size = new System.Drawing.Size(200, 20);
+            this.dtm_fin.Size = new System.Drawing.Size(265, 22);
             this.dtm_fin.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(86, 75);
+            this.label3.Location = new System.Drawing.Point(115, 92);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.Size = new System.Drawing.Size(74, 17);
             this.label3.TabIndex = 4;
             this.label3.Text = "Proveedor";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 151);
+            this.dataGridView1.Location = new System.Drawing.Point(16, 186);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(568, 117);
+            this.dataGridView1.Size = new System.Drawing.Size(757, 144);
             this.dataGridView1.TabIndex = 6;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(227, 110);
+            this.button1.Location = new System.Drawing.Point(303, 135);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 23);
+            this.button1.Size = new System.Drawing.Size(184, 28);
             this.button1.TabIndex = 7;
             this.button1.Text = "FACTURAR";
             this.button1.UseVisualStyleBackColor = true;
@@ -104,34 +111,37 @@
             // combobox_prov
             // 
             this.combobox_prov.FormattingEnabled = true;
-            this.combobox_prov.Location = new System.Drawing.Point(227, 72);
+            this.combobox_prov.Location = new System.Drawing.Point(303, 89);
+            this.combobox_prov.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.combobox_prov.Name = "combobox_prov";
-            this.combobox_prov.Size = new System.Drawing.Size(200, 21);
+            this.combobox_prov.Size = new System.Drawing.Size(265, 24);
             this.combobox_prov.TabIndex = 8;
             this.combobox_prov.SelectedIndexChanged += new System.EventHandler(this.combobox_prov_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 283);
+            this.label4.Location = new System.Drawing.Point(16, 348);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(139, 13);
+            this.label4.Size = new System.Drawing.Size(186, 17);
             this.label4.TabIndex = 9;
             this.label4.Text = "Importe y número de factura";
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(157, 274);
+            this.dataGridView2.Location = new System.Drawing.Point(209, 337);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(423, 35);
+            this.dataGridView2.Size = new System.Drawing.Size(564, 43);
             this.dataGridView2.TabIndex = 10;
             // 
             // FacturarProveedor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 427);
+            this.ClientSize = new System.Drawing.Size(789, 526);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.combobox_prov);
@@ -142,7 +152,9 @@
             this.Controls.Add(this.dtm_inicio);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FacturarProveedor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FacturarProveedor";
             this.Load += new System.EventHandler(this.FacturarProveedor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

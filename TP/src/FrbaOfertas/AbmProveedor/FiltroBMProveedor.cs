@@ -67,10 +67,10 @@ namespace FrbaOfertas.AbmProveedor
             Int32 telefono = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[3].Value);
             String cuit = dataGridView2.SelectedRows[0].Cells[4].Value.ToString();
             String calle = dataGridView2.SelectedRows[0].Cells[5].Value.ToString();
-            Int32 nroPiso = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[6].Value);
+            String nroPiso = dataGridView2.SelectedRows[0].Cells[6].Value.ToString();
             String depto = dataGridView2.SelectedRows[0].Cells[7].Value.ToString();
             String ciudad = dataGridView2.SelectedRows[0].Cells[8].Value.ToString();
-            Int32 cp = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells[9].Value);
+            String cp = dataGridView2.SelectedRows[0].Cells[9].Value.ToString();
             String rubro = dataGridView2.SelectedRows[0].Cells[10].Value.ToString();
             String nombreContacto = dataGridView2.SelectedRows[0].Cells[11].Value.ToString();
             bool habilitado = (bool)dataGridView2.SelectedRows[0].Cells[12].Value;

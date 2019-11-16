@@ -19,15 +19,15 @@ namespace FrbaOfertas.AbmProveedor
         Int32 telefono;
         String cuit;
         String calle;
-        Int32 nroPiso;
+        String nroPiso;
         String depto;
         String ciudad;
-        Int32 cp;
+        String cp;
         String rubro;
         String nombreContacto;
         bool habilitado;
 
-        public ModificacionProveedor(Int32 id, String rs, String mail, Int32 telefono, String cuit, String calle, Int32 nroPiso, String depto, String ciudad, Int32 cp, String rubro, String nombreContacto, bool habilitado)
+        public ModificacionProveedor(Int32 id, String rs, String mail, Int32 telefono, String cuit, String calle, String nroPiso, String depto, String ciudad, String cp, String rubro, String nombreContacto, bool habilitado)
         {
             InitializeComponent();
             this.id = id;
@@ -56,9 +56,9 @@ namespace FrbaOfertas.AbmProveedor
             this.txtbox_telefono.Text = telefono.ToString();
             this.txtbox_cuit.Text = cuit;
             this.txtbox_calle.Text = calle;
-            this.txtbox_nropiso.Text = nroPiso.ToString();
+            this.txtbox_nropiso.Text = nroPiso;
             this.txtbox_depto.Text = depto;
-            this.txtbox_cp.Text = cp.ToString();
+            this.txtbox_cp.Text = cp;
             this.txtbox_ciudad.Text = ciudad;
             this.txtbox_contacto.Text = nombreContacto;
 
@@ -81,7 +81,7 @@ namespace FrbaOfertas.AbmProveedor
 
         private void validarDatos()
         {
-            if (Validaciones.estaVacio(txtbox_rs.Text) || Validaciones.estaVacio(txtbox_cuit.Text) || Validaciones.estaVacio(txtbox_mail.Text) || Validaciones.estaVacio(txtbox_telefono.Text) || Validaciones.estaVacio(txtbox_calle.Text) || Validaciones.estaVacio(txtbox_contacto.Text) || Validaciones.estaVacio(txtbox_nropiso.Text) || Validaciones.estaVacio(txtbox_depto.Text) || Validaciones.estaVacio(txtbox_ciudad.Text) || Validaciones.estaVacio(txtbox_cp.Text))
+            if (Validaciones.estaVacio(txtbox_rs.Text) || Validaciones.estaVacio(txtbox_cuit.Text) || Validaciones.estaVacio(txtbox_mail.Text) || Validaciones.estaVacio(txtbox_telefono.Text) || Validaciones.estaVacio(txtbox_calle.Text) || Validaciones.estaVacio(txtbox_contacto.Text) || Validaciones.estaVacio(txtbox_ciudad.Text) || Validaciones.estaVacio(txtbox_cp.Text))
             {
                 throw new Exception("Debe completar todos los campos");
             }
