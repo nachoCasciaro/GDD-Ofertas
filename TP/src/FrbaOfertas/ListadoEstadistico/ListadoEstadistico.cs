@@ -39,7 +39,7 @@ namespace FrbaOfertas.ListadoEstadistico
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_prov_mas_descuento", connection);
             query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@semestre", Convert.ToInt16(this.combobox_semestre.SelectedValue)));
+            query.Parameters.Add(new SqlParameter("@semestre", Convert.ToInt16(this.combobox_semestre.SelectedItem)));
             query.Parameters.Add(new SqlParameter("@anio", this.dtm_año.Value.Year));
 
             connection.Open();
@@ -54,7 +54,7 @@ namespace FrbaOfertas.ListadoEstadistico
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_prov_mayor_facturacion", connection);
             query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@semestre", Convert.ToInt16(this.combobox_semestre.SelectedValue)));
+            query.Parameters.Add(new SqlParameter("@semestre", Convert.ToInt16(this.combobox_semestre.SelectedItem)));
             query.Parameters.Add(new SqlParameter("@anio", this.dtm_año.Value.Year));
 
             connection.Open();
