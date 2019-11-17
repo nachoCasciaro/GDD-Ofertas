@@ -56,8 +56,14 @@ namespace FrbaOfertas.AbmProveedor
             this.txtbox_telefono.Text = telefono.ToString();
             this.txtbox_cuit.Text = cuit;
             this.txtbox_calle.Text = calle;
-            this.txtbox_nropiso.Text = nroPiso;
-            this.txtbox_depto.Text = depto;
+            if (nroPiso == "0")
+            {
+                txtbox_nropiso.Text = "-";
+            }
+            else
+            {
+                txtbox_nropiso.Text = nroPiso;
+            }
             this.txtbox_cp.Text = cp;
             this.txtbox_ciudad.Text = ciudad;
             this.txtbox_contacto.Text = nombreContacto;
@@ -79,66 +85,131 @@ namespace FrbaOfertas.AbmProveedor
 
         }
 
-        private void validarDatos()
+        private string validarDatos()
         {
-            if (Validaciones.estaVacio(txtbox_rs.Text) || Validaciones.estaVacio(txtbox_cuit.Text) || Validaciones.estaVacio(txtbox_mail.Text) || Validaciones.estaVacio(txtbox_telefono.Text) || Validaciones.estaVacio(txtbox_calle.Text) || Validaciones.estaVacio(txtbox_contacto.Text) || Validaciones.estaVacio(txtbox_ciudad.Text) || Validaciones.estaVacio(txtbox_cp.Text))
+            List<string> mensajeError = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(txtbox_rs.Text))
             {
-                throw new Exception("Debe completar todos los campos");
+                mensajeError.Add("Debe completar la razón social");
             }
+
+            if (string.IsNullOrWhiteSpace(txtbox_mail.Text))
+            {
+                mensajeError.Add("Debe completar el mail");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_telefono.Text))
+            {
+                mensajeError.Add("Debe completar el teléfono");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_cuit.Text))
+            {
+                mensajeError.Add("Debe completar el CUIT");
+            }
+
+            if (comboBox_rubro.SelectedIndex == -1)
+            {
+
+                mensajeError.Add("Debe seleccionar un rubro");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_contacto.Text))
+            {
+                mensajeError.Add("Debe completar el nombre de contacto");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_calle.Text))
+            {
+                mensajeError.Add("Debe completar la calle");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_cp.Text))
+            {
+                mensajeError.Add("Debe completar el código postal");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_ciudad.Text))
+            {
+                mensajeError.Add("Debe completar la ciudad");
+            }
+
+            if (!Validaciones.contieneSoloNumeros(txtbox_cp.Text))
+            {
+                mensajeError.Add("El código postal debe contener únicamente números");
+            }
+
+            if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
+            {
+                mensajeError.Add("El telefono debe contener únicamente números");
+            }
+
+            if (!Validaciones.tieneFormatoMail(txtbox_mail.Text))
+            {
+                mensajeError.Add("El formato del mail no es correcto");
+            }
+
             if (!Validaciones.tieneFormatoDeCuit(txtbox_cuit.Text))
             {
-                throw new Exception("El CUIT ingresado no tiene el formato esperado");
+                mensajeError.Add("El formato del CUIT no es correcto");
             }
+
+            string mensajeConcat;
+            mensajeConcat = string.Join("\n", mensajeError);
+
+            return mensajeConcat;
+
         }
 
-        private void modificarProveedor()
+        void button1_Click(object sender, EventArgs e)
         {
-            var connection = DB.getInstance().getConnection();
-            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_modificar_proveedor", connection);
-            query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@id_prove", this.id));
-            query.Parameters.Add(new SqlParameter("@razonSocial", this.txtbox_rs.Text));
-            query.Parameters.Add(new SqlParameter("@mail", this.txtbox_mail.Text));
-            query.Parameters.Add(new SqlParameter("@telefono", Convert.ToInt32(this.txtbox_telefono.Text)));
-            query.Parameters.Add(new SqlParameter("@direCalle", this.txtbox_calle.Text));
-            query.Parameters.Add(new SqlParameter("@nroPiso", this.txtbox_nropiso.Text));
-            query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
-            query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
-            query.Parameters.Add(new SqlParameter("@CP", this.txtbox_cp.Text));
-            query.Parameters.Add(new SqlParameter("@cuit", this.txtbox_cuit.Text));
-            query.Parameters.Add(new SqlParameter("@nombreContacto", this.txtbox_contacto.Text));
-            query.Parameters.Add(new SqlParameter("@rubro_detalle", this.comboBox_rubro.SelectedItem));
-            /*
-            bool habilitado = false;
-            if (checkbox_habilitado.Checked)
-            {
-                habilitado = true;
-            }
-            query.Parameters.Add(new SqlParameter("@habilitado", habilitado));
-            */
-            connection.Open();
-            query.ExecuteNonQuery();
-            connection.Close();
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
+            string error = this.validarDatos();
+
+            if (error == "")
             {
-                this.validarDatos();
-                this.modificarProveedor();
-                MessageBox.Show("Se modificó el proveedor con éxito");
+                var connection = DB.getInstance().getConnection();
+                SqlCommand query = new SqlCommand("POR_COLECTORA.sp_modificar_proveedor", connection);
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.Add(new SqlParameter("@id_prove", this.id));
+                query.Parameters.Add(new SqlParameter("@razonSocial", this.txtbox_rs.Text));
+                query.Parameters.Add(new SqlParameter("@mail", this.txtbox_mail.Text));
+                query.Parameters.Add(new SqlParameter("@telefono", Convert.ToInt32(this.txtbox_telefono.Text)));
+                query.Parameters.Add(new SqlParameter("@direCalle", this.txtbox_calle.Text));
+                query.Parameters.Add(new SqlParameter("@nroPiso", this.txtbox_nropiso.Text));
+                query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
+                query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
+                query.Parameters.Add(new SqlParameter("@CP", this.txtbox_cp.Text));
+                query.Parameters.Add(new SqlParameter("@cuit", this.txtbox_cuit.Text));
+                query.Parameters.Add(new SqlParameter("@nombreContacto", this.txtbox_contacto.Text));
+                query.Parameters.Add(new SqlParameter("@rubro_detalle", this.comboBox_rubro.SelectedItem));
+
+                connection.Open();
+                query.ExecuteNonQuery();
+                connection.Close();
+
+                MessageBox.Show("Los datos del proveedor fueron modificados con éxito.");
 
                 this.Hide();
+
                 new Menu_Principal.MenuAdmin().Show();
+
             }
-            catch (Exception excepcion)
+            else
             {
-                MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
+                MessageBox.Show(error);
             }
+
+
         }
 
         private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox_rubro_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

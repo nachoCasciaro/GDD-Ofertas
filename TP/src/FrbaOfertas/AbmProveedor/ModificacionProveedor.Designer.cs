@@ -57,189 +57,168 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(64, 52);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(48, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 17);
+            this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Razón Social";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(64, 84);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(48, 68);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 17);
+            this.label2.Size = new System.Drawing.Size(26, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Mail";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(64, 116);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(48, 94);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 17);
+            this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Teléfono";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(64, 149);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(48, 121);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 17);
+            this.label4.Size = new System.Drawing.Size(32, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "CUIT";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(64, 178);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(48, 145);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(118, 17);
+            this.label5.Size = new System.Drawing.Size(90, 13);
             this.label5.TabIndex = 4;
             this.label5.Text = "Nombre Contacto";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(64, 213);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(48, 173);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(39, 17);
+            this.label6.Size = new System.Drawing.Size(30, 13);
             this.label6.TabIndex = 5;
             this.label6.Text = "Calle";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(64, 242);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(48, 197);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(62, 17);
+            this.label7.Size = new System.Drawing.Size(47, 13);
             this.label7.TabIndex = 6;
             this.label7.Text = "Nro Piso";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(303, 242);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(227, 197);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(46, 17);
+            this.label8.Size = new System.Drawing.Size(36, 13);
             this.label8.TabIndex = 7;
             this.label8.Text = "Depto";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(64, 272);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(48, 221);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(52, 17);
+            this.label9.Size = new System.Drawing.Size(40, 13);
             this.label9.TabIndex = 8;
             this.label9.Text = "Ciudad";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(64, 304);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(48, 247);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(95, 17);
+            this.label10.Size = new System.Drawing.Size(72, 13);
             this.label10.TabIndex = 9;
             this.label10.Text = "Código Postal";
             // 
             // txtbox_rs
             // 
-            this.txtbox_rs.Location = new System.Drawing.Point(189, 48);
-            this.txtbox_rs.Margin = new System.Windows.Forms.Padding(4);
+            this.txtbox_rs.Location = new System.Drawing.Point(142, 39);
             this.txtbox_rs.Name = "txtbox_rs";
-            this.txtbox_rs.Size = new System.Drawing.Size(273, 22);
+            this.txtbox_rs.Size = new System.Drawing.Size(206, 20);
             this.txtbox_rs.TabIndex = 10;
             // 
             // txtbox_mail
             // 
-            this.txtbox_mail.Location = new System.Drawing.Point(189, 80);
-            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4);
+            this.txtbox_mail.Location = new System.Drawing.Point(142, 65);
             this.txtbox_mail.Name = "txtbox_mail";
-            this.txtbox_mail.Size = new System.Drawing.Size(273, 22);
+            this.txtbox_mail.Size = new System.Drawing.Size(206, 20);
             this.txtbox_mail.TabIndex = 11;
             // 
             // txtbox_telefono
             // 
-            this.txtbox_telefono.Location = new System.Drawing.Point(189, 112);
-            this.txtbox_telefono.Margin = new System.Windows.Forms.Padding(4);
+            this.txtbox_telefono.Location = new System.Drawing.Point(142, 91);
             this.txtbox_telefono.Name = "txtbox_telefono";
-            this.txtbox_telefono.Size = new System.Drawing.Size(273, 22);
+            this.txtbox_telefono.Size = new System.Drawing.Size(206, 20);
             this.txtbox_telefono.TabIndex = 12;
             // 
             // txtbox_cuit
             // 
-            this.txtbox_cuit.Location = new System.Drawing.Point(189, 145);
-            this.txtbox_cuit.Margin = new System.Windows.Forms.Padding(4);
+            this.txtbox_cuit.Location = new System.Drawing.Point(142, 118);
             this.txtbox_cuit.Name = "txtbox_cuit";
-            this.txtbox_cuit.Size = new System.Drawing.Size(273, 22);
+            this.txtbox_cuit.Size = new System.Drawing.Size(206, 20);
             this.txtbox_cuit.TabIndex = 13;
             // 
             // txtbox_contacto
             // 
-            this.txtbox_contacto.Location = new System.Drawing.Point(189, 175);
-            this.txtbox_contacto.Margin = new System.Windows.Forms.Padding(4);
+            this.txtbox_contacto.Location = new System.Drawing.Point(142, 142);
             this.txtbox_contacto.Name = "txtbox_contacto";
-            this.txtbox_contacto.Size = new System.Drawing.Size(273, 22);
+            this.txtbox_contacto.Size = new System.Drawing.Size(206, 20);
             this.txtbox_contacto.TabIndex = 14;
             // 
             // txtbox_calle
             // 
-            this.txtbox_calle.Location = new System.Drawing.Point(189, 209);
-            this.txtbox_calle.Margin = new System.Windows.Forms.Padding(4);
+            this.txtbox_calle.Location = new System.Drawing.Point(142, 170);
             this.txtbox_calle.Name = "txtbox_calle";
-            this.txtbox_calle.Size = new System.Drawing.Size(273, 22);
+            this.txtbox_calle.Size = new System.Drawing.Size(206, 20);
             this.txtbox_calle.TabIndex = 15;
             // 
             // txtbox_ciudad
             // 
-            this.txtbox_ciudad.Location = new System.Drawing.Point(189, 268);
-            this.txtbox_ciudad.Margin = new System.Windows.Forms.Padding(4);
+            this.txtbox_ciudad.Location = new System.Drawing.Point(142, 218);
             this.txtbox_ciudad.Name = "txtbox_ciudad";
-            this.txtbox_ciudad.Size = new System.Drawing.Size(273, 22);
+            this.txtbox_ciudad.Size = new System.Drawing.Size(206, 20);
             this.txtbox_ciudad.TabIndex = 16;
             // 
             // txtbox_nropiso
             // 
-            this.txtbox_nropiso.Location = new System.Drawing.Point(189, 239);
-            this.txtbox_nropiso.Margin = new System.Windows.Forms.Padding(4);
+            this.txtbox_nropiso.Location = new System.Drawing.Point(142, 194);
             this.txtbox_nropiso.Name = "txtbox_nropiso";
-            this.txtbox_nropiso.Size = new System.Drawing.Size(104, 22);
+            this.txtbox_nropiso.Size = new System.Drawing.Size(79, 20);
             this.txtbox_nropiso.TabIndex = 17;
             // 
             // txtbox_depto
             // 
-            this.txtbox_depto.Location = new System.Drawing.Point(359, 239);
-            this.txtbox_depto.Margin = new System.Windows.Forms.Padding(4);
+            this.txtbox_depto.Location = new System.Drawing.Point(269, 194);
             this.txtbox_depto.Name = "txtbox_depto";
-            this.txtbox_depto.Size = new System.Drawing.Size(104, 22);
+            this.txtbox_depto.Size = new System.Drawing.Size(79, 20);
             this.txtbox_depto.TabIndex = 18;
             // 
             // txtbox_cp
             // 
-            this.txtbox_cp.Location = new System.Drawing.Point(189, 300);
-            this.txtbox_cp.Margin = new System.Windows.Forms.Padding(4);
+            this.txtbox_cp.Location = new System.Drawing.Point(142, 244);
             this.txtbox_cp.Name = "txtbox_cp";
-            this.txtbox_cp.Size = new System.Drawing.Size(273, 22);
+            this.txtbox_cp.Size = new System.Drawing.Size(206, 20);
             this.txtbox_cp.TabIndex = 19;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(330, 405);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(248, 329);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 28);
+            this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 20;
             this.button1.Text = "MODIFICAR";
             this.button1.UseVisualStyleBackColor = true;
@@ -248,10 +227,9 @@
             // checkbox_habilitado
             // 
             this.checkbox_habilitado.AutoSize = true;
-            this.checkbox_habilitado.Location = new System.Drawing.Point(369, 362);
-            this.checkbox_habilitado.Margin = new System.Windows.Forms.Padding(4);
+            this.checkbox_habilitado.Location = new System.Drawing.Point(277, 294);
             this.checkbox_habilitado.Name = "checkbox_habilitado";
-            this.checkbox_habilitado.Size = new System.Drawing.Size(93, 21);
+            this.checkbox_habilitado.Size = new System.Drawing.Size(73, 17);
             this.checkbox_habilitado.TabIndex = 21;
             this.checkbox_habilitado.Text = "Habilitado";
             this.checkbox_habilitado.UseVisualStyleBackColor = true;
@@ -259,9 +237,10 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(64, 335);
+            this.label11.Location = new System.Drawing.Point(48, 272);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 17);
+            this.label11.Size = new System.Drawing.Size(36, 13);
             this.label11.TabIndex = 22;
             this.label11.Text = "Rubro";
             this.label11.Click += new System.EventHandler(this.label11_Click);
@@ -269,16 +248,18 @@
             // comboBox_rubro
             // 
             this.comboBox_rubro.FormattingEnabled = true;
-            this.comboBox_rubro.Location = new System.Drawing.Point(189, 335);
+            this.comboBox_rubro.Location = new System.Drawing.Point(142, 272);
+            this.comboBox_rubro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox_rubro.Name = "comboBox_rubro";
-            this.comboBox_rubro.Size = new System.Drawing.Size(121, 24);
+            this.comboBox_rubro.Size = new System.Drawing.Size(92, 21);
             this.comboBox_rubro.TabIndex = 23;
+            this.comboBox_rubro.SelectedIndexChanged += new System.EventHandler(this.comboBox_rubro_SelectedIndexChanged);
             // 
             // ModificacionProveedor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 446);
+            this.ClientSize = new System.Drawing.Size(408, 362);
             this.Controls.Add(this.comboBox_rubro);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.checkbox_habilitado);
@@ -303,7 +284,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ModificacionProveedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModificacionProveedor";

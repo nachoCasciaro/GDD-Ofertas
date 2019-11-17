@@ -63,8 +63,24 @@ namespace FrbaOfertas.AbmCliente
             txtbox_mail.Text = mail;
             txtbox_telefono.Text = telefono.ToString();
             txtbox_calle.Text = calle;
-            txtbox_nropiso.Text = nroPiso;
-            txtbox_depto.Text = depto;
+            if(nroPiso == "0")
+            {
+                txtbox_nropiso.Text = "-";
+            }
+            else
+            {
+                txtbox_nropiso.Text = nroPiso;
+            }
+
+            if (depto == "0")
+            {
+                txtbox_depto.Text = "-";
+            }
+            else
+            {
+                txtbox_depto.Text = depto;
+            }
+
             txtbox_cp.Text = cp;
             txtbox_ciudad.Text = ciudad;
             
