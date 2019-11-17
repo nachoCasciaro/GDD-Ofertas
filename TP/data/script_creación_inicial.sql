@@ -780,7 +780,12 @@ CREATE PROCEDURE POR_COLECTORA.sp_prov_mas_descuento (@semestre int, @anio int)
 AS
 BEGIN
 
-	SELECT TOP 5 Provee_RS AS RAZON_SOCIAL_PROVEEDOR, Provee_Rubro AS RUBRO, AVG(Oferta_Precio_Ficticio - Oferta_Precio) AS PORCENTAJE_PROMEDIO_OFERTA
+	SELECT TOP 5 Provee_RS AS RAZON_SOCIAL_PROVEEDOR, 
+	(select Rubro_Detalle
+	from Rubros
+	where Rubro_Id = Provee_Rubro)
+	 AS RUBRO, 
+	AVG(Oferta_Precio_Ficticio - Oferta_Precio) AS PORCENTAJE_PROMEDIO_OFERTA
 	FROM POR_COLECTORA.Proveedores JOIN POR_COLECTORA.Ofertas ON Provee_Id = Oferta_Proveedor
 	WHERE YEAR(Oferta_Fecha) = @anio AND 
 								(MONTH(Oferta_Fecha) = (@semestre * 6) 
@@ -802,7 +807,11 @@ CREATE PROCEDURE POR_COLECTORA.sp_prov_mayor_facturacion (@semestre int, @anio i
 AS
 BEGIN
 
-	SELECT TOP 5 Provee_RS AS RAZON_SOCIAL_PROVEEDOR, Provee_Rubro AS RUBRO, AVG(Fact_Importe) AS PROMEDIO_FACTURACION
+	SELECT TOP 5 Provee_RS AS RAZON_SOCIAL_PROVEEDOR,
+	 (select Rubro_Detalle
+	from Rubros
+	where Rubro_Id = Provee_Rubro) AS RUBRO,
+	AVG(Fact_Importe) AS PROMEDIO_FACTURACION
 	FROM POR_COLECTORA.Proveedores JOIN POR_COLECTORA.Facturas o1 ON Provee_Id = Fact_Proveedor_ID
 	WHERE YEAR(Fact_Fecha_Desde) = @anio AND 
 								(MONTH(Fact_Fecha_Desde) = (@semestre * 6) 

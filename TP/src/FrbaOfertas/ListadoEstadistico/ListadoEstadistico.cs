@@ -22,16 +22,49 @@ namespace FrbaOfertas.ListadoEstadistico
             dtm_año.ShowUpDown = true; 
         }
 
+        private string validarDatos()
+        {
+            List<string> mensajeError = new List<string>();
+
+            if (combobox_tipolistado.SelectedIndex == -1)
+            {
+                mensajeError.Add("Debe seleccionar un tipo de listado");
+            }
+
+            if (combobox_semestre.SelectedIndex == -1)
+            {
+                mensajeError.Add("Debe seleccionar un semestre");
+            }
+
+            string mensajeConcat;
+            mensajeConcat = string.Join("\n", mensajeError);
+
+            return mensajeConcat;
+
+        }
+
+
         private void button1_Click(object sender, EventArgs e)
         {
-            if(combobox_tipolistado.SelectedIndex == 0) //Mayor porcentaje desc
+
+            string error = this.validarDatos();
+
+            if (error == "") 
             {
-                ConfiguradorDataGrid.llenarDataGridConConsulta(this.obtenerProveedoresMayorDescuento(), dataGridView1);
+                if (combobox_tipolistado.SelectedIndex == 0) //Mayor porcentaje desc
+                {
+                    ConfiguradorDataGrid.llenarDataGridConConsulta(this.obtenerProveedoresMayorDescuento(), dataGridView1);
+                }
+                else if (combobox_tipolistado.SelectedIndex == 1) //Mayor facturacion
+                {
+                    ConfiguradorDataGrid.llenarDataGridConConsulta(this.obtenerProveedoresMayorFacturacion(), dataGridView1);
+                }
             }
-            else if (combobox_tipolistado.SelectedIndex == 1) //Mayor facturacion
+            else
             {
-                ConfiguradorDataGrid.llenarDataGridConConsulta(this.obtenerProveedoresMayorFacturacion(), dataGridView1);
+                MessageBox.Show(error);
             }
+         
         }
 
         private SqlDataReader obtenerProveedoresMayorDescuento()
