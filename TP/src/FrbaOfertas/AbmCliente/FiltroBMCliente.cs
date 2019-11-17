@@ -97,7 +97,14 @@ namespace FrbaOfertas.AbmCliente
                 try
                 {
                     this.seleccionarClienteBaja();
-                    this.Close();
+
+                    MessageBox.Show("Se dió de baja el cliente con éxito");
+
+                    this.Hide();
+
+                    new Menu_Principal.MenuAdmin().Show();
+
+
                 }
                 catch (Exception excepcion)
                 {
@@ -117,12 +124,6 @@ namespace FrbaOfertas.AbmCliente
             connection.Open();
             query.ExecuteNonQuery();
             connection.Close();
-
-            this.Close();
-            new Menu_Principal.MenuAdmin().Show();
-
-
-
         }
 
         private void FiltroBMCliente_Load(object sender, EventArgs e)

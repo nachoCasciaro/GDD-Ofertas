@@ -55,7 +55,7 @@ namespace FrbaOfertas.ComprarOferta
 
             //sp comprar oferta? 
 
-            new Menu_Principal.MenuCliente(idCliente).Show();
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,7 +64,8 @@ namespace FrbaOfertas.ComprarOferta
             {
                 this.seleccionarOferta();
                 MessageBox.Show("Oferta comprada con éxito");
-                this.Close();
+                this.Hide();
+                new Menu_Principal.MenuCliente(idCliente).Show();
             }
             catch (Exception excepcion)
             {

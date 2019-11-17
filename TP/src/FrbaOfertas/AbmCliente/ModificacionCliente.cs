@@ -160,6 +160,7 @@ namespace FrbaOfertas.AbmCliente
 
             if (error == "")
             {
+<<<<<<< HEAD
                 var connection = DB.getInstance().getConnection();
                 SqlCommand query = new SqlCommand("POR_COLECTORA.sp_modificar_cliente", connection);
                 query.CommandType = CommandType.StoredProcedure;
@@ -181,6 +182,11 @@ namespace FrbaOfertas.AbmCliente
                 connection.Close();
 
                 MessageBox.Show("Los datos del cliente fueron modificados con éxito.");
+=======
+                this.validarDatos();
+                this.modificarCliente();
+                MessageBox.Show("Se modificó el cliente con éxito");
+>>>>>>> 434787e875116386df5baa31db98f3032f4257ed
 
                 this.Hide();
 

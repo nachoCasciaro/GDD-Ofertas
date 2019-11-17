@@ -51,9 +51,9 @@
             this.groupBox1.Controls.Add(this.combobox_tipolistado);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(16, 39);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(541, 124);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -74,7 +74,7 @@
             "1",
             "2"});
             this.combobox_semestre.Location = new System.Drawing.Point(364, 79);
-            this.combobox_semestre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combobox_semestre.Margin = new System.Windows.Forms.Padding(4);
             this.combobox_semestre.Name = "combobox_semestre";
             this.combobox_semestre.Size = new System.Drawing.Size(132, 24);
             this.combobox_semestre.TabIndex = 4;
@@ -107,7 +107,7 @@
             "Proveedores con mayor porcentaje de descuento",
             "Proveedores con mayor facturación"});
             this.combobox_tipolistado.Location = new System.Drawing.Point(167, 31);
-            this.combobox_tipolistado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combobox_tipolistado.Margin = new System.Windows.Forms.Padding(4);
             this.combobox_tipolistado.Name = "combobox_tipolistado";
             this.combobox_tipolistado.Size = new System.Drawing.Size(329, 24);
             this.combobox_tipolistado.TabIndex = 1;
@@ -126,7 +126,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(196, 171);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(195, 28);
             this.button1.TabIndex = 1;
@@ -138,7 +138,7 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(16, 231);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(541, 177);
             this.dataGridView1.TabIndex = 2;
@@ -146,12 +146,13 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(183, 428);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(232, 28);
             this.button2.TabIndex = 3;
             this.button2.Text = "VOLVER AL MENU PRINCIPAL";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // ListadoEstadistico
             // 
@@ -162,7 +163,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ListadoEstadistico";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ListadoEstadistico";

@@ -127,7 +127,9 @@ namespace FrbaOfertas.AbmProveedor
             {
                 this.validarDatos();
                 this.modificarProveedor();
-                this.Close();
+                MessageBox.Show("Se modificó el proveedor con éxito");
+
+                this.Hide();
                 new Menu_Principal.MenuAdmin().Show();
             }
             catch (Exception excepcion)

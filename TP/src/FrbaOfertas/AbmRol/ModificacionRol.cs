@@ -20,6 +20,9 @@ namespace FrbaOfertas.AbmRol
             InitializeComponent();
 
             this.id_rol = rol;
+
+            Load += new EventHandler(ModificarRol_Load);
+
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
@@ -34,6 +37,18 @@ namespace FrbaOfertas.AbmRol
 
         private void ModificarRol_Load(object sender, System.EventArgs e)
         {
+            var connection = DB.getInstance().getConnection();
+            SqlCommand sqlCmd = new SqlCommand("SELECT Rol_Nombre FROM POR_COLECTORA.Roles WHERE Rol_Id = " + id_rol, connection);
+            connection.Open();
+            SqlDataReader sqlReader = sqlCmd.ExecuteReader();
+
+            while (sqlReader.Read())
+            {
+                txtbox_nuevonombre.Text = sqlReader["Rol_Nombre"].ToString();
+            }
+     
+            sqlReader.Close();
+
             ConfiguradorDataGrid.llenarDataGridConConsulta(this.mostrarFuncionalidadesRol(), dataGridView1);
         }
 
@@ -102,7 +117,22 @@ namespace FrbaOfertas.AbmRol
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //Solo cambiar nombre rol? Radiobutton tiene efecto?
+            var connection = DB.getInstance().getConnection();
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_modificar_nombre_rol", connection);
+            query.CommandType = CommandType.StoredProcedure;
+            query.Parameters.Add(new SqlParameter("@rol", id_rol));
+            query.Parameters.Add(new SqlParameter("@nuevo_nombre", txtbox_nuevonombre.Text));
+
+
+            connection.Open();
+            query.ExecuteNonQuery();
+            connection.Close();
+
+            MessageBox.Show("Se modificó el rol con éxito");
+
+            this.Hide();
+
+            new Menu_Principal.MenuAdmin().Show();
         }
 
     }
