@@ -95,7 +95,7 @@ namespace FrbaOfertas.AbmCliente
                 mensajeError.Add("Debe completar la ciudad");
             }
 
-            if (string.IsNullOrWhiteSpace(txtbox_depto.Text)) //Departamento se permite null?? 
+            /*if (string.IsNullOrWhiteSpace(txtbox_depto.Text))  
             {
                 mensajeError.Add("Debe completar el departamento");
             }
@@ -103,7 +103,7 @@ namespace FrbaOfertas.AbmCliente
             if (string.IsNullOrWhiteSpace(txtbox_nropiso.Text))
             {
                 mensajeError.Add("Debe completar el número de piso");
-            }
+            }*/
 
             if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
             {
