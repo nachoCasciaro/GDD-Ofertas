@@ -138,7 +138,10 @@ namespace FrbaOfertas.AbmCliente
             {
                 this.validarDatos();
                 this.modificarCliente();
-                this.Close();
+                MessageBox.Show("Se modificó el cliente con éxito");
+
+                this.Hide();
+
                 new Menu_Principal.MenuAdmin().Show();
             }
             catch (Exception excepcion)

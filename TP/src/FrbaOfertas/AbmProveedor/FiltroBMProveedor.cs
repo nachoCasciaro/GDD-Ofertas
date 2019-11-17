@@ -103,7 +103,11 @@ namespace FrbaOfertas.AbmProveedor
                 try
                 {
                     this.seleccionarProveedorBaja();
-                    this.Close();
+
+                    MessageBox.Show("Se dió de baja el proveedor con éxito");
+
+                    this.Hide();
+                    new Menu_Principal.MenuAdmin().Show();
 
                 }
                 catch (Exception excepcion)
@@ -124,10 +128,6 @@ namespace FrbaOfertas.AbmProveedor
             connection.Open();
             query.ExecuteNonQuery();
             connection.Close();
-
-            this.Close();
-            new Menu_Principal.MenuAdmin().Show();
-
 
         }
 
