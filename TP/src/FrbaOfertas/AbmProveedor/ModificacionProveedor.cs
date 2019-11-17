@@ -56,14 +56,8 @@ namespace FrbaOfertas.AbmProveedor
             this.txtbox_telefono.Text = telefono.ToString();
             this.txtbox_cuit.Text = cuit;
             this.txtbox_calle.Text = calle;
-            if (nroPiso == "0")
-            {
-                txtbox_nropiso.Text = "-";
-            }
-            else
-            {
-                txtbox_nropiso.Text = nroPiso;
-            }
+            this.txtbox_nropiso.Text = nroPiso;
+            this.txtbox_depto.Text = depto;
             this.txtbox_cp.Text = cp;
             this.txtbox_ciudad.Text = ciudad;
             this.txtbox_contacto.Text = nombreContacto;
