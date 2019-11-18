@@ -49,20 +49,47 @@ namespace FrbaOfertas.AbmRol
 
             foreach (object itemChecked in checkedListBox1.CheckedItems)
             {
-                //Obtener id funcionalidad asociado a string funcionalidad
+                //Obtengo el id de la funcionalidad
                 var connection2 = DB.getInstance().getConnection();
-                SqlCommand query2 = new SqlCommand("POR_COLECTORA.sp_agregar_funcionalidad_a_rol", connection2);
-                query2.CommandType = CommandType.StoredProcedure;
-                
-                query2.Parameters.Add(new SqlParameter("@id_rol", "asd")); //id del rol que acabo de crear //TODO revisar esto!
-                query2.Parameters.Add(new SqlParameter("@id_funcionalidad", itemChecked));
-
+                SqlCommand sqlCmd2 = new SqlCommand("SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = " + "'" + itemChecked + "'", connection2);
                 connection2.Open();
-                query2.ExecuteNonQuery();
-                connection2.Close();
+                SqlDataReader sqlReader2 = sqlCmd2.ExecuteReader();
+                Int32 id_funcionalidad = 0;
+
+                while (sqlReader2.Read())
+                {
+                    id_funcionalidad = Convert.ToInt32(sqlReader2["Func_Id"]);
+                }
+
+                sqlReader2.Close();
+
+                //Obtengo el id del rol que acabo de crear y en el que tengo que agregar las funcionalidades
+                var connection4 = DB.getInstance().getConnection();
+                SqlCommand sqlCmd4 = new SqlCommand("SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = " + "'" + this.txtbox_nombrerol.Text + "'", connection4);
+                connection4.Open();
+                SqlDataReader sqlReader4 = sqlCmd4.ExecuteReader();
+                Int32 id_nuevo_rol = 0;
+
+                while (sqlReader4.Read())
+                {
+                    id_nuevo_rol = Convert.ToInt32(sqlReader4["Rol_Id"]);
+                }
+
+                sqlReader4.Close();
+                
+                //Agrego la funcionalidad al nuevo rol
+                var connection3 = DB.getInstance().getConnection();
+                SqlCommand query3 = new SqlCommand("POR_COLECTORA.sp_agregar_funcionalidad_a_rol", connection3);
+                query3.CommandType = CommandType.StoredProcedure;
+                
+                query3.Parameters.Add(new SqlParameter("@id_rol", id_nuevo_rol));
+                query3.Parameters.Add(new SqlParameter("@id_funcionalidad", id_funcionalidad));
+
+                connection3.Open();
+                query3.ExecuteNonQuery();
+                connection3.Close();
 
             }
-
 
             MessageBox.Show("El rol fue creado con éxito.");
 
