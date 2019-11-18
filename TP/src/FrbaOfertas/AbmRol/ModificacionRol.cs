@@ -50,6 +50,20 @@ namespace FrbaOfertas.AbmRol
             sqlReader.Close();
 
             ConfiguradorDataGrid.llenarDataGridConConsulta(this.mostrarFuncionalidadesRol(), dataGridView1);
+
+            //COMBOBOX FUNCIONALIDADES
+            var connection2 = DB.getInstance().getConnection();
+            SqlCommand sqlCmd2 = new SqlCommand("SELECT Func_Descripcion FROM POR_COLECTORA.Funcionalidades JOIN POR_COLECTORA.FuncionalidadxRol ON Func_Id = Id_Func WHERE Id_Func NOT IN (SELECT Id_Func FROM POR_COLECTORA.FuncionalidadxRol WHERE Id_Rol = " + id_rol + ")", connection);
+            connection2.Open();
+            SqlDataReader sqlReader2 = sqlCmd2.ExecuteReader();
+
+            while (sqlReader2.Read())
+            {
+                combobox_funcionalidad.Items.Add(sqlReader2["Func_Descripcion"].ToString());
+            }
+
+            sqlReader2.Close();
+
         }
 
         private SqlDataReader mostrarFuncionalidadesRol()
@@ -83,14 +97,43 @@ namespace FrbaOfertas.AbmRol
             new Menu_Principal.MenuAdmin().Show();
         }
 
+        /*private Int32 obtenerIdFuncionalidad()
+        {
+            var connection2 = DB.getInstance().getConnection();
+            String funcionalidad = Convert.ToString(combobox_funcionalidad.SelectedItem);
+            SqlCommand sqlCmd2 = new SqlCommand("SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion =" + funcionalidad, connection2);
+            connection2.Open();
+            SqlDataReader sqlReader2 = sqlCmd2.ExecuteReader();
+            Int32 id;
+
+            id = Convert.ToInt32(sqlReader2["Func_Id"]);
+
+            sqlReader2.Close();
+            return id;
+
+        }*/
+
         private void button1_Click(object sender, EventArgs e) //Agregar funcionalidad
         {
-            Int32 id_func = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+            var connection2 = DB.getInstance().getConnection();
+            String funcionalidad = Convert.ToString(combobox_funcionalidad.SelectedItem);
+            SqlCommand sqlCmd2 = new SqlCommand("SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion =" + funcionalidad, connection2);
+            connection2.Open();
+            SqlDataReader sqlReader2 = sqlCmd2.ExecuteReader();
+            Int32 id_func = 0;
+
+            while (sqlReader2.Read())
+            {
+                id_func = Convert.ToInt32(sqlReader2["Func_Id"]);
+            }
+
+            sqlReader2.Close();
+
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_agregar_funcionalidad_a_rol", connection);
             query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@rol", id_rol));
-            query.Parameters.Add(new SqlParameter("@funcionalidad", id_func));
+            query.Parameters.Add(new SqlParameter("@id_rol", id_rol));
+            query.Parameters.Add(new SqlParameter("@id_funcionalidad", id_func));
 
             connection.Open();
             query.ExecuteNonQuery();
