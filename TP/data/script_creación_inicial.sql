@@ -903,6 +903,8 @@ BEGIN
 			VALUES (@cupon_codigo, dateadd(day,30, @fecha_compra), NULL, @numero_compra,@id_cliente)
 		end	
 
+	return 0
+
 END
 
 GO

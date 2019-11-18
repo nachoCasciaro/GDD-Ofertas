@@ -46,12 +46,38 @@ namespace FrbaOfertas.ComprarOferta
             return reader;
         }
 
-        private void seleccionarOferta()
+        private int seleccionarOferta()
         {
-            String descripcion = Convert.ToString(dataGridView1.SelectedRows[0].Cells[0].Value);
-            Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[1].Value);
-            Double precioOriginal = Convert.ToDouble(dataGridView1.SelectedRows[0].Cells[2].Value);
-            Double precioOferta = Convert.ToDouble(dataGridView1.SelectedRows[0].Cells[3].Value);
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar la fila completa utilizando la flecha de la izquierda");
+                return -1;
+            } else
+            {
+                String descripcion = Convert.ToString(dataGridView1.SelectedRows[0].Cells[0].Value);
+                Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[1].Value);
+                Double precioOriginal = Convert.ToDouble(dataGridView1.SelectedRows[0].Cells[2].Value);
+                Double precioOferta = Convert.ToDouble(dataGridView1.SelectedRows[0].Cells[3].Value);
+
+                var connection = DB.getInstance().getConnection();
+                SqlCommand query = new SqlCommand("POR_COLECTORA.sp_comprar_oferta", connection);
+                query.CommandType = CommandType.StoredProcedure;
+
+                query.Parameters.Add(new SqlParameter("@id_oferta", id));
+                query.Parameters.Add(new SqlParameter("@id_cliente", idCliente));
+                query.Parameters.Add(new SqlParameter("@fecha_compra", DateTime.Now));
+                query.Parameters.Add(new SqlParameter("@cantidad_compra", 1));
+
+                connection.Open();
+                query.ExecuteNonQuery();
+
+                int resultado = Convert.ToInt32(query.Parameters["@resultado"].Value);
+
+                connection.Close();
+
+
+                return resultado;
+            }
 
             //sp comprar oferta? 
 
@@ -62,10 +88,13 @@ namespace FrbaOfertas.ComprarOferta
         {
             try
             {
-                this.seleccionarOferta();
-                MessageBox.Show("Oferta comprada con éxito");
-                this.Hide();
-                new Menu_Principal.MenuCliente(idCliente).Show();
+                int resultado = this.seleccionarOferta();
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Oferta comprada con éxito");
+                    this.Hide();
+                    new Menu_Principal.MenuCliente(idCliente).Show();
+                }
             }
             catch (Exception excepcion)
             {
