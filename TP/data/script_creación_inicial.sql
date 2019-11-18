@@ -888,7 +888,7 @@ BEGIN
 	set @cantidad_maxima = (select Oferta_Restriccion_Compra from Ofertas where Oferta_Id = @id_oferta)
 
 	declare @numero_compra numeric
-	set @numero_compra = (select Compra_Nro from Compras where Compra_Oferta = @id_oferta)
+	set @numero_compra = (select TOP 1 Compra_Nro from Compras ORDER BY Compra_Nro DESC) + 1
 
 	declare @cupon_codigo nvarchar(80)
 	set @cupon_codigo = CONCAT((select Oferta_Codigo from Ofertas where Oferta_Id = @id_oferta), @id_cliente)
