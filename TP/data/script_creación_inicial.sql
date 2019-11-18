@@ -973,7 +973,7 @@ BEGIN
 						FROM Facturas
 						ORDER BY fact_numero DESC) + 1
 	
-	set @resultado = @importe_total + ' ' + @fact_numero
+	set @resultado = convert(varchar(10),@importe_total) + ' ' + convert(varchar(10),@fact_numero)
 	
 
 END
