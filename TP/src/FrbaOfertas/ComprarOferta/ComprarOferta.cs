@@ -46,7 +46,7 @@ namespace FrbaOfertas.ComprarOferta
             return reader;
         }
 
-        private int seleccionarOferta()
+        private Int32 comprarOferta()
         {
             if (dataGridView1.SelectedRows.Count == 0)
             {
@@ -58,6 +58,7 @@ namespace FrbaOfertas.ComprarOferta
                 Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[1].Value);
                 Double precioOriginal = Convert.ToDouble(dataGridView1.SelectedRows[0].Cells[2].Value);
                 Double precioOferta = Convert.ToDouble(dataGridView1.SelectedRows[0].Cells[3].Value);
+                Int32 resultado = 8; //lo inicializo en cualquier valor distinto de los que debe devolver el stored
 
                 var connection = DB.getInstance().getConnection();
                 SqlCommand query = new SqlCommand("POR_COLECTORA.sp_comprar_oferta", connection);
@@ -67,19 +68,17 @@ namespace FrbaOfertas.ComprarOferta
                 query.Parameters.Add(new SqlParameter("@id_cliente", idCliente));
                 query.Parameters.Add(new SqlParameter("@fecha_compra", DateTime.Now));
                 query.Parameters.Add(new SqlParameter("@cantidad_compra", 1));
+                query.Parameters.Add(new SqlParameter("@resultado_compra", resultado));
 
                 connection.Open();
                 query.ExecuteNonQuery();
 
-                int resultado = Convert.ToInt32(query.Parameters["@resultado"].Value);
+                resultado = Convert.ToInt32(query.Parameters["@resultado_compra"].Value);
 
                 connection.Close();
 
-
                 return resultado;
             }
-
-            //sp comprar oferta? 
 
            
         }
@@ -88,8 +87,23 @@ namespace FrbaOfertas.ComprarOferta
         {
             try
             {
-                int resultado = this.seleccionarOferta();
-                if (resultado == 0)
+                Int32 resultado = this.comprarOferta();
+
+                if (resultado == 1)
+                {
+                    MessageBox.Show("El saldo es insuficiente para comprar esta oferta.");
+                    this.Hide();
+                    new Menu_Principal.MenuCliente(idCliente).Show();
+                }
+
+                else if (resultado == 2)
+                {
+                    MessageBox.Show("Ya compró el máximo permitido de esta oferta");
+                    this.Hide();
+                    new Menu_Principal.MenuCliente(idCliente).Show();
+                }
+
+                else if (resultado == 0)
                 {
                     MessageBox.Show("Oferta comprada con éxito");
                     this.Hide();
