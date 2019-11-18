@@ -50,6 +50,7 @@ namespace FrbaOfertas.AbmRol
             sqlReader.Close();
 
             ConfiguradorDataGrid.llenarDataGridConConsulta(this.mostrarFuncionalidadesRol(), dataGridView1);
+            dataGridView1.Columns[0].Visible = false;
 
             //COMBOBOX FUNCIONALIDADES
             var connection2 = DB.getInstance().getConnection();

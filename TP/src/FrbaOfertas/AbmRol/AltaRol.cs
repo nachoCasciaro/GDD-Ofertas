@@ -49,6 +49,8 @@ namespace FrbaOfertas.AbmRol
             query.ExecuteNonQuery();
             connection.Close();
 
+            MessageBox.Show("El rol fue creado con éxito.");
+
             new Menu_Principal.MenuAdmin().Show();
         }
 

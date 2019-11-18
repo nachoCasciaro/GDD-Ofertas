@@ -27,6 +27,7 @@ namespace FrbaOfertas.AbmRol
         private void BMRol_Load(object sender, System.EventArgs e)
         {
             ConfiguradorDataGrid.llenarDataGridConConsulta(this.mostrarRoles(), dataGridView1);
+            dataGridView1.Columns[0].Visible = false;
         }
 
         private SqlDataReader mostrarRoles()
