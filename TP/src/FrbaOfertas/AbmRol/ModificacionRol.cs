@@ -53,7 +53,7 @@ namespace FrbaOfertas.AbmRol
 
             //COMBOBOX FUNCIONALIDADES
             var connection2 = DB.getInstance().getConnection();
-            SqlCommand sqlCmd2 = new SqlCommand("SELECT Func_Descripcion FROM POR_COLECTORA.Funcionalidades JOIN POR_COLECTORA.FuncionalidadxRol ON Func_Id = Id_Func WHERE Id_Func NOT IN (SELECT Id_Func FROM POR_COLECTORA.FuncionalidadxRol WHERE Id_Rol = " + id_rol + ")", connection);
+            SqlCommand sqlCmd2 = new SqlCommand("SELECT DISTINCT Func_Descripcion FROM POR_COLECTORA.Funcionalidades JOIN POR_COLECTORA.FuncionalidadxRol ON Func_Id = Id_Func WHERE Id_Func NOT IN (SELECT Id_Func FROM POR_COLECTORA.FuncionalidadxRol WHERE Id_Rol = " + id_rol + ")", connection);
             connection2.Open();
             SqlDataReader sqlReader2 = sqlCmd2.ExecuteReader();
 
@@ -117,14 +117,14 @@ namespace FrbaOfertas.AbmRol
         {
             var connection2 = DB.getInstance().getConnection();
             String funcionalidad = Convert.ToString(combobox_funcionalidad.SelectedItem);
-            SqlCommand sqlCmd2 = new SqlCommand("SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion =" + funcionalidad, connection2);
+            SqlCommand sqlCmd2 = new SqlCommand("SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion =" +"'" + funcionalidad + "'", connection2);
             connection2.Open();
             SqlDataReader sqlReader2 = sqlCmd2.ExecuteReader();
             Int32 id_func = 0;
 
             while (sqlReader2.Read())
             {
-                id_func = Convert.ToInt32(sqlReader2["Func_Id"]);
+                id_func = Convert.ToInt32(sqlReader2["Func_Id"].ToString());
             }
 
             sqlReader2.Close();
