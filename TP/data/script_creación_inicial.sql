@@ -846,13 +846,24 @@ CREATE PROCEDURE POR_COLECTORA.sp_alta_ofertas(
 @stock int, 
 @max_compra numeric)
 
+
 AS
 BEGIN
+
+	declare @oferta_codigo nvarchar(50)
+	set @oferta_codigo = SUBSTRING(CONVERT(nvarchar(255), NEWID()), 0, 9)
+	WHILE (SELECT COUNT(*) FROM Ofertas WHERE Oferta_Codigo = @oferta_codigo) = 1 --Este while checkearia si el string autogenerado no se repite
+	BEGIN
+	IF (SELECT COUNT(*) FROM Ofertas WHERE Oferta_Codigo = @oferta_codigo) = 0
+		BREAK
+	ELSE
+		set @oferta_codigo = SUBSTRING(CONVERT(nvarchar(255), NEWID()), 0, 9)
+	END
 	--Chequeo fechas contra el sistema?? 
 	--El proveedor podrá ir cargando ofertas con diferentes fechas, esta fecha debe ser mayor o igual a la fecha actual del sistema.
 
-	INSERT INTO POR_COLECTORA.Ofertas(Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, Oferta_Restriccion_Compra, Oferta_Proveedor) 
-	VALUES (@descripcion, @fecha, @fecha_venc, @precio_original, @precio_oferta, @stock, @max_compra,@id_prove)
+	INSERT INTO POR_COLECTORA.Ofertas(Oferta_Codigo,Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, Oferta_Restriccion_Compra, Oferta_Proveedor) 
+	VALUES (@oferta_codigo,@descripcion, @fecha, @fecha_venc, @precio_original, @precio_oferta, @stock, @max_compra,@id_prove)
 
 END
 
