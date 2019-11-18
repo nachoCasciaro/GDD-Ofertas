@@ -41,13 +41,28 @@ namespace FrbaOfertas.AbmRol
             query.CommandType = CommandType.StoredProcedure;
 
             query.Parameters.Add(new SqlParameter("@nombre", this.txtbox_nombrerol.Text));
-            
-            //Funcionalidades agregado
-
 
             connection.Open();
             query.ExecuteNonQuery();
             connection.Close();
+
+
+            foreach (object itemChecked in checkedListBox1.CheckedItems)
+            {
+                //Obtener id funcionalidad asociado a string funcionalidad
+                var connection2 = DB.getInstance().getConnection();
+                SqlCommand query2 = new SqlCommand("POR_COLECTORA.sp_agregar_funcionalidad_a_rol", connection2);
+                query2.CommandType = CommandType.StoredProcedure;
+
+                query2.Parameters.Add(new SqlParameter("@id_rol", )); //id del rol que acabo de crear
+                query2.Parameters.Add(new SqlParameter("@id_funcionalidad", itemChecked));
+
+                connection2.Open();
+                query2.ExecuteNonQuery();
+                connection2.Close();
+
+            }
+
 
             MessageBox.Show("El rol fue creado con éxito.");
 
