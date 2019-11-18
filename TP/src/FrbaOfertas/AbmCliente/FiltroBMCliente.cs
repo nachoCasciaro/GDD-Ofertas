@@ -88,6 +88,10 @@ namespace FrbaOfertas.AbmCliente
                     MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
                 }
             }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un cliente al cuál desea modificar");
+            }
         }
 
         private void button_baja_Click(object sender, EventArgs e)
@@ -110,6 +114,10 @@ namespace FrbaOfertas.AbmCliente
                 {
                     MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un cliente al cuál desea dar de baja");
             }
         }
 

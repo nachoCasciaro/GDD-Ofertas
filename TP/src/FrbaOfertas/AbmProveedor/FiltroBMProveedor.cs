@@ -93,6 +93,10 @@ namespace FrbaOfertas.AbmProveedor
                     MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
                 }
             }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un proveedor al cuál desea modificar");
+            }
 
         }
 
@@ -114,6 +118,10 @@ namespace FrbaOfertas.AbmProveedor
                 {
                     MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un proveedor al cuál desea dar de baja");
             }
         }
 
