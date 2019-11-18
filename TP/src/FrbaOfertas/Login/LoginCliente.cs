@@ -31,17 +31,23 @@ namespace FrbaOfertas.Login
             query.CommandType = CommandType.StoredProcedure;
 
             query.Parameters.Add(new SqlParameter("@user", username));
-    
+
             query.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
 
             connection.Open();
             query.ExecuteNonQuery();
 
-            int resultado = Convert.ToInt32(query.Parameters["@resultado"].Value);
+            var resultado = (query.Parameters["@resultado"].Value);
 
             connection.Close();
 
-            return resultado;
+            if (resultado != DBNull.Value)
+            {
+                return Convert.ToInt32(resultado);
+            } else
+            {
+                return -1;
+            }
         }
 
 
@@ -68,7 +74,14 @@ namespace FrbaOfertas.Login
 
                 int idCliente = this.idClienteIngresado(this.textBox_usuario.Text);
 
-                new Menu_Principal.MenuCliente(idCliente).Show();
+                if (idCliente != -1) {
+                    new Menu_Principal.MenuCliente(idCliente).Show();
+                } else
+                {
+                    MessageBox.Show("El usuario ingresado no es un cliente");
+                    new LoginCliente().Show();
+                }
+
             }
             else if (resultado == 2)
             {

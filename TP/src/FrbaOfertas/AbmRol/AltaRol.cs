@@ -53,8 +53,8 @@ namespace FrbaOfertas.AbmRol
                 var connection2 = DB.getInstance().getConnection();
                 SqlCommand query2 = new SqlCommand("POR_COLECTORA.sp_agregar_funcionalidad_a_rol", connection2);
                 query2.CommandType = CommandType.StoredProcedure;
-
-                query2.Parameters.Add(new SqlParameter("@id_rol", )); //id del rol que acabo de crear
+                
+                query2.Parameters.Add(new SqlParameter("@id_rol", "asd")); //id del rol que acabo de crear //TODO revisar esto!
                 query2.Parameters.Add(new SqlParameter("@id_funcionalidad", itemChecked));
 
                 connection2.Open();

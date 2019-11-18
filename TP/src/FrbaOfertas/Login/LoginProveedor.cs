@@ -36,11 +36,18 @@ namespace FrbaOfertas.Login
             connection.Open();
             query.ExecuteNonQuery();
 
-            int resultado = Convert.ToInt32(query.Parameters["@resultado"].Value);
+            var resultado = (query.Parameters["@resultado"].Value);
 
             connection.Close();
 
-            return resultado;
+            if (resultado != DBNull.Value)
+            {
+                return Convert.ToInt32(resultado);
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -66,7 +73,15 @@ namespace FrbaOfertas.Login
 
                 int idProveedor = this.idProveedorIngresado(this.textBox1.Text);
 
-                new Menu_Principal.MenuProveedor(idProveedor).Show();
+                if (idProveedor != -1)
+                {
+                    new Menu_Principal.MenuProveedor(idProveedor).Show();
+                }
+                else
+                {
+                    MessageBox.Show("El usuario ingresado no es un proveedor");
+                    new LoginProveedor().Show();
+                }
             }
             else if (resultado == 2)
             {
