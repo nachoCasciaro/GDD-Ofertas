@@ -38,6 +38,7 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.button3 = new System.Windows.Forms.Button();
             this.combobox_funcionalidad = new System.Windows.Forms.ComboBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.Funcionalidades.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -46,10 +47,11 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtbox_nuevonombre);
+            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(25, 29);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(383, 83);
+            this.groupBox1.Size = new System.Drawing.Size(383, 97);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cambiar nombre";
@@ -124,11 +126,11 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(167, 434);
+            this.button3.Location = new System.Drawing.Point(37, 68);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(91, 23);
+            this.button3.Size = new System.Drawing.Size(313, 23);
             this.button3.TabIndex = 4;
-            this.button3.Text = "MODIFICAR";
+            this.button3.Text = "MODIFICAR NOMBRE";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -140,13 +142,23 @@
             this.combobox_funcionalidad.Size = new System.Drawing.Size(170, 21);
             this.combobox_funcionalidad.TabIndex = 5;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(122, 434);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(198, 23);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "VOLVER AL MENU PRINCIPAL";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // ModificacionRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(441, 469);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.combobox_funcionalidad);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -176,5 +188,6 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox combobox_funcionalidad;
+        private System.Windows.Forms.Button button4;
     }
 }
