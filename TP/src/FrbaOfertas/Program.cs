@@ -19,6 +19,7 @@ namespace FrbaOfertas
             Application.Run(new Login.Login());
             //Application.Run(new AbmCliente.MenuAbmCliente());
             //Application.Run(new CargaCredito.CargaCredito(1));
+            //Application.Run(new Menu_Principal.MenuProveedor(1));
         }
     }
 }

@@ -57,6 +57,10 @@ namespace FrbaOfertas.AbmRol
                     MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
                 }
             }
+            else
+            {
+                MessageBox.Show("Debe seleccionar el rol que desea dar de baja");
+            }
         }
 
         private void darBajaRol()
@@ -88,6 +92,10 @@ namespace FrbaOfertas.AbmRol
                 {
                     MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar el rol que desea modificar");
             }
         }
 
