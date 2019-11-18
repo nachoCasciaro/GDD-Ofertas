@@ -490,7 +490,7 @@ where Oferta_Descripcion is not null
 
 INSERT INTO POR_COLECTORA.Facturas
 	(Fact_Numero,Fact_Fecha_Desde,Fact_Fecha_Hasta,Fact_Importe, Fact_Proveedor_ID,Fact_Proveedor_CUIT,Fact_Proveedor_RS )
-SELECT DISTINCT Factura_Nro,NULL,Factura_Fecha,
+SELECT DISTINCT Factura_Nro,min(Oferta_Fecha_Compra),Factura_Fecha,
 	SUM(Oferta_Precio),
 	(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
 	(SELECT Provee_CUIT FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
