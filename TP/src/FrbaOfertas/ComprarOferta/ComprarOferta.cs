@@ -78,5 +78,11 @@ namespace FrbaOfertas.ComprarOferta
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Menu_Principal.MenuCliente(idCliente).Show();
+        }
     }
 }
