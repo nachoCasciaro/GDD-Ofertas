@@ -875,7 +875,8 @@ CREATE PROCEDURE POR_COLECTORA.sp_comprar_oferta(
 @id_oferta numeric,
 @id_cliente numeric,
 @fecha_compra datetime,
-@cantidad_compra numeric
+@cantidad_compra numeric,
+@resultado_compra numeric output
 )
 
 AS
@@ -888,22 +889,34 @@ BEGIN
 	set @cantidad_maxima = (select Oferta_Restriccion_Compra from Ofertas where Oferta_Id = @id_oferta)
 
 	declare @numero_compra numeric
-	set @numero_compra = (select TOP 1 Compra_Nro from Compras ORDER BY Compra_Nro DESC) + 1
+	set @numero_compra = (SELECT TOP 1 Compra_Nro from Compras ORDER BY Compra_Nro DESC) + 1
 
 	declare @cupon_codigo nvarchar(80)
 	set @cupon_codigo = CONCAT((select Oferta_Codigo from Ofertas where Oferta_Id = @id_oferta), @id_cliente)
 
-	if ( (select Clie_Saldo from Clientes where Clie_Id = @id_cliente) >= @precio_oferta 
-			and ( (select count(*) from Compras where Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente group by Compra_Cliente) + @cantidad_compra ) <  @cantidad_maxima  )
+	if((SELECT Clie_Saldo FROM Clientes WHERE Clie_Id = @id_cliente) < (@precio_oferta * @cantidad_compra))
+	BEGIN
+		set @resultado_compra = 1
+	END
+
+	if(((SELECT SUM(Compra_Cantidad) FROM Compras WHERE Compra_Oferta = @id_oferta AND Compra_Cliente = @id_cliente) + @cantidad_compra) >= @cantidad_maxima)
+	BEGIN
+		set @resultado_compra = 2
+	END
+
+	if ((SELECT Clie_Saldo FROM Clientes WHERE Clie_Id = @id_cliente) >= @precio_oferta 
+		AND ((SELECT SUM(Compra_Cantidad) FROM Compras WHERE Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente) + @cantidad_compra) <  @cantidad_maxima)
 		begin
 			INSERT INTO POR_COLECTORA.Compras(Compra_Fecha, Compra_Oferta, Compra_Cliente, Compra_Cantidad, Compra_Oferta_Precio) 
 			VALUES (@fecha_compra,@id_oferta,@id_cliente,@cantidad_compra,@precio_oferta)
 
 			INSERT INTO POR_COLECTORA.Cupones(Cupon_Codigo,Cupon_Fecha_Venc,Cupon_Fecha_Consumo,Cupon_Nro_Compra,Cupon_Id_Cliente_Consumidor)
 			VALUES (@cupon_codigo, dateadd(day,30, @fecha_compra), NULL, @numero_compra,@id_cliente)
+
+			set @resultado_compra = 0
 		end	
 
-	return 0
+	return @resultado_compra
 
 END
 
