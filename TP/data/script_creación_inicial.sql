@@ -899,13 +899,13 @@ BEGIN
 		set @resultado_compra = 1
 	END
 
-	if(((SELECT SUM(Compra_Cantidad) FROM Compras WHERE Compra_Oferta = @id_oferta AND Compra_Cliente = @id_cliente) + @cantidad_compra) >= @cantidad_maxima)
+	if(((SELECT SUM(Compra_Cantidad) FROM Compras WHERE Compra_Oferta = @id_oferta AND Compra_Cliente = @id_cliente) + @cantidad_compra) > @cantidad_maxima)
 	BEGIN
 		set @resultado_compra = 2
 	END
 
 	if ((SELECT Clie_Saldo FROM Clientes WHERE Clie_Id = @id_cliente) >= @precio_oferta 
-		AND ((SELECT SUM(Compra_Cantidad) FROM Compras WHERE Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente) + @cantidad_compra) <  @cantidad_maxima)
+		AND ((SELECT SUM(Compra_Cantidad) FROM Compras WHERE Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente) + @cantidad_compra) <=  @cantidad_maxima)
 		begin
 			INSERT INTO POR_COLECTORA.Compras(Compra_Fecha, Compra_Oferta, Compra_Cliente, Compra_Cantidad, Compra_Oferta_Precio) 
 			VALUES (@fecha_compra,@id_oferta,@id_cliente,@cantidad_compra,@precio_oferta)

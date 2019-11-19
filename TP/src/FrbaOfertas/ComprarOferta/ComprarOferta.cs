@@ -91,7 +91,7 @@ namespace FrbaOfertas.ComprarOferta
 
                 if (resultado == 1)
                 {
-                    MessageBox.Show("El saldo es insuficiente para comprar esta oferta.");
+                    MessageBox.Show("El saldo es insuficiente para realizar la compra.");
                     this.Hide();
                     new Menu_Principal.MenuCliente(idCliente).Show();
                 }
