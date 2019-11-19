@@ -58,7 +58,6 @@ namespace FrbaOfertas.ComprarOferta
                 Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[1].Value);
                 Double precioOriginal = Convert.ToDouble(dataGridView1.SelectedRows[0].Cells[2].Value);
                 Double precioOferta = Convert.ToDouble(dataGridView1.SelectedRows[0].Cells[3].Value);
-                Int32 resultado = 8; //lo inicializo en cualquier valor distinto de los que debe devolver el stored
 
                 var connection = DB.getInstance().getConnection();
                 SqlCommand query = new SqlCommand("POR_COLECTORA.sp_comprar_oferta", connection);
@@ -66,14 +65,17 @@ namespace FrbaOfertas.ComprarOferta
 
                 query.Parameters.Add(new SqlParameter("@id_oferta", id));
                 query.Parameters.Add(new SqlParameter("@id_cliente", idCliente));
-                query.Parameters.Add(new SqlParameter("@fecha_compra", DateTime.Now));
+
+                string setting = ConfigurationManager.AppSettings["current_date"];
+                query.Parameters.Add(new SqlParameter("@fecha_compra", Convert.ToDateTime(setting) ));
+
                 query.Parameters.Add(new SqlParameter("@cantidad_compra", 1));
-                query.Parameters.Add(new SqlParameter("@resultado_compra", resultado));
+                query.Parameters.Add("@resultado_compra", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 connection.Open();
                 query.ExecuteNonQuery();
 
-                resultado = Convert.ToInt32(query.Parameters["@resultado_compra"].Value);
+                Int32 resultado = Convert.ToInt32(query.Parameters["@resultado_compra"].Value);
 
                 connection.Close();
 

@@ -886,7 +886,7 @@ BEGIN
 	set @precio_oferta = (select Oferta_Precio from Ofertas where Oferta_Id = @id_oferta)
 
 	declare @cantidad_maxima numeric
-	set @cantidad_maxima = (select Oferta_Restriccion_Compra from Ofertas where Oferta_Id = @id_oferta)
+	set @cantidad_maxima = (select isnull( Oferta_Restriccion_Compra, 0 ) from Ofertas where Oferta_Id = @id_oferta)
 
 	declare @numero_compra numeric
 	set @numero_compra = (SELECT TOP 1 Compra_Nro from Compras ORDER BY Compra_Nro DESC) + 1
@@ -899,13 +899,13 @@ BEGIN
 		set @resultado_compra = 1
 	END
 
-	if(((SELECT SUM(Compra_Cantidad) FROM Compras WHERE Compra_Oferta = @id_oferta AND Compra_Cliente = @id_cliente) + @cantidad_compra) > @cantidad_maxima)
+	if(((SELECT isnull( SUM(Compra_Cantidad), 0) FROM Compras WHERE Compra_Oferta = @id_oferta AND Compra_Cliente = @id_cliente) + @cantidad_compra) > @cantidad_maxima)
 	BEGIN
 		set @resultado_compra = 2
 	END
 
 	if ((SELECT Clie_Saldo FROM Clientes WHERE Clie_Id = @id_cliente) >= @precio_oferta 
-		AND ((SELECT SUM(Compra_Cantidad) FROM Compras WHERE Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente) + @cantidad_compra) <=  @cantidad_maxima)
+		AND ((SELECT  isnull( SUM(Compra_Cantidad),0) FROM Compras WHERE Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente) + @cantidad_compra) <=  @cantidad_maxima)
 		begin
 			INSERT INTO POR_COLECTORA.Compras(Compra_Fecha, Compra_Oferta, Compra_Cliente, Compra_Cantidad, Compra_Oferta_Precio) 
 			VALUES (@fecha_compra,@id_oferta,@id_cliente,@cantidad_compra,@precio_oferta)
@@ -916,6 +916,7 @@ BEGIN
 			set @resultado_compra = 0
 		end	
 
+	
 	return @resultado_compra
 
 END
