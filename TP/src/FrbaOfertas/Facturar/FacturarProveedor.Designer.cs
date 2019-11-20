@@ -38,6 +38,8 @@
             this.combobox_prov = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,12 +122,12 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 348);
+            this.label4.Location = new System.Drawing.Point(13, 348);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(186, 17);
+            this.label4.Size = new System.Drawing.Size(123, 17);
             this.label4.TabIndex = 9;
-            this.label4.Text = "Importe y número de factura";
+            this.label4.Text = "Importe de factura";
             // 
             // textBox1
             // 
@@ -134,11 +136,29 @@
             this.textBox1.Size = new System.Drawing.Size(550, 22);
             this.textBox1.TabIndex = 10;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 387);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(126, 17);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Número de factura";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(223, 387);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(550, 22);
+            this.textBox2.TabIndex = 12;
+            // 
             // FacturarProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(789, 526);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.combobox_prov);
@@ -172,5 +192,7 @@
         private System.Windows.Forms.ComboBox combobox_prov;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }

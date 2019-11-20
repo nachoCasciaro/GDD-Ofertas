@@ -100,7 +100,10 @@ namespace FrbaOfertas.Facturar
 
             string resultado = query.Parameters["@resultado"].Value.ToString();
 
-            this.textBox1.Text = resultado;
+            string[] resultadoDividido = resultado.Split(' ');
+
+            this.textBox1.Text = "$ " + resultadoDividido[0];
+            this.textBox2.Text = resultadoDividido[1];
         }
     
     }

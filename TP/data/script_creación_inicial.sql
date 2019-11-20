@@ -1031,7 +1031,7 @@ BEGIN
 					where Provee_RS = @proveedor)
 
 	insert into POR_COLECTORA.Facturas(Fact_Numero,Fact_Fecha_Desde,Fact_Fecha_Hasta,Fact_Importe,Fact_Proveedor_ID,Fact_Proveedor_RS,Fact_Proveedor_CUIT)
-	values (@fact_numero,@fecha_inicio,@fecha_inicio,@importe_total,@prove_id,@proveedor,@prove_cuit)
+	values (@fact_numero,@fecha_inicio,@fecha_fin,@importe_total,@prove_id,@proveedor,@prove_cuit)
 	
 	set @resultado = convert(varchar(10),@importe_total) + ' ' + convert(varchar(10),@fact_numero)
 	
