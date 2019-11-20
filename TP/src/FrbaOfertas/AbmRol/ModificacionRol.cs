@@ -149,21 +149,6 @@ namespace FrbaOfertas.AbmRol
             new Menu_Principal.MenuAdmin().Show();
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e) //Habilitar rol
-        {
-            var connection = DB.getInstance().getConnection();
-            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_habilitar_rol", connection);
-            query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@rol", id_rol));
-
-            connection.Open();
-            query.ExecuteNonQuery();
-            connection.Close();
-
-            this.Close();
-            new Menu_Principal.MenuAdmin().Show();
-        }
-
         private void button3_Click(object sender, EventArgs e) //Modificar nombre
         {
             var connection = DB.getInstance().getConnection();
@@ -188,6 +173,23 @@ namespace FrbaOfertas.AbmRol
 
         private void button4_Click(object sender, EventArgs e) //Boton volver al menu principal
         {
+            new Menu_Principal.MenuAdmin().Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var connection = DB.getInstance().getConnection();
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_habilitar_rol", connection);
+            query.CommandType = CommandType.StoredProcedure;
+            query.Parameters.Add(new SqlParameter("@rol", id_rol));
+
+            connection.Open();
+            query.ExecuteNonQuery();
+            connection.Close();
+
+            MessageBox.Show("Se habilitó el rol con éxito.");
+
+            this.Close();
             new Menu_Principal.MenuAdmin().Show();
         }
 

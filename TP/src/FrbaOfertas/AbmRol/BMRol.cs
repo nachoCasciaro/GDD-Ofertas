@@ -49,7 +49,7 @@ namespace FrbaOfertas.AbmRol
             {
                 try
                 {
-                    //this.seleccionarRolBaja();
+                    this.darBajaRol();
                     this.Close();
 
                 }
@@ -75,6 +75,8 @@ namespace FrbaOfertas.AbmRol
             connection.Open();
             command.ExecuteNonQuery();
             connection.Close();
+
+            MessageBox.Show("Se dió de baja el rol con éxito.");
 
             this.Close();
             new Menu_Principal.MenuAdmin().Show();
