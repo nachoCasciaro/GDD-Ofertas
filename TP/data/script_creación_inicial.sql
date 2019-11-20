@@ -962,7 +962,7 @@ GO
 
 --SP CONSUMO OFERTA 
 CREATE PROCEDURE POR_COLECTORA.sp_consumir_oferta(
-@codigo_cupon nvarchar,
+@codigo_cupon nvarchar(80),
 @fecha_consumo datetime,
 @id_proveedor numeric,
 @id_cliente numeric
@@ -990,6 +990,8 @@ BEGIN
 END
 
 GO
+
+--exec POR_COLECTORA.sp_consumir_oferta 'ZZZRAIMYGF82544', '2020-01-23 00:00:00.000', 
 
 --SP FACTURACION A PROVEEDOR
 --Listado ofertas adquiridas por clientes, no me dice que campos mostrar, muestro ID y descripcion
@@ -1309,6 +1311,3 @@ BEGIN
 
 END;
 GO
-
-
-
