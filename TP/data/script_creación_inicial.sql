@@ -886,7 +886,7 @@ BEGIN
 	set @precio_oferta = (select Oferta_Precio from Ofertas where Oferta_Id = @id_oferta)
 
 	declare @cantidad_maxima numeric
-	set @cantidad_maxima = (select isnull( Oferta_Restriccion_Compra, 0 ) from Ofertas where Oferta_Id = @id_oferta)
+	set @cantidad_maxima = (select isnull( Oferta_Restriccion_Compra, 100 ) from Ofertas where Oferta_Id = @id_oferta)
 
 	declare @numero_compra numeric
 	set @numero_compra = (SELECT TOP 1 Compra_Nro from Compras ORDER BY Compra_Nro DESC) + 1
@@ -904,7 +904,7 @@ BEGIN
 		set @resultado_compra = 2
 	END
 
-	if ((SELECT Clie_Saldo FROM Clientes WHERE Clie_Id = @id_cliente) >= @precio_oferta 
+	if ((SELECT Clie_Saldo FROM Clientes WHERE Clie_Id = @id_cliente) >= @precio_oferta * @cantidad_compra
 		AND ((SELECT  isnull( SUM(Compra_Cantidad),0) FROM Compras WHERE Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente) + @cantidad_compra) <=  @cantidad_maxima)
 		begin
 			INSERT INTO POR_COLECTORA.Compras(Compra_Fecha, Compra_Oferta, Compra_Cliente, Compra_Cantidad, Compra_Oferta_Precio) 
@@ -912,6 +912,10 @@ BEGIN
 
 			INSERT INTO POR_COLECTORA.Cupones(Cupon_Codigo,Cupon_Fecha_Venc,Cupon_Fecha_Consumo,Cupon_Nro_Compra,Cupon_Id_Cliente_Consumidor)
 			VALUES (@cupon_codigo, dateadd(day,30, @fecha_compra), NULL, @numero_compra,@id_cliente)
+
+			UPDATE Clientes
+			set Clie_Saldo -= @precio_oferta * @cantidad_compra
+			where Clie_Id = @id_cliente
 
 			set @resultado_compra = 0
 		end	
