@@ -83,21 +83,29 @@ namespace FrbaOfertas.AbmRol
 
         private void button2_Click(object sender, EventArgs e) //Eliminar funcionalidad
         {
-            Int32 id_func = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            var connection = DB.getInstance().getConnection();
-            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_eliminar_funcionalidad_rol", connection);
-            query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@rol", id_rol));
-            query.Parameters.Add(new SqlParameter("@funcionalidad", id_func));
+            if (dataGridView1.SelectedRows.Count > 0) 
+            {
+                Int32 id_func = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+                var connection = DB.getInstance().getConnection();
+                SqlCommand query = new SqlCommand("POR_COLECTORA.sp_eliminar_funcionalidad_rol", connection);
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.Add(new SqlParameter("@rol", id_rol));
+                query.Parameters.Add(new SqlParameter("@funcionalidad", id_func));
 
-            connection.Open();
-            query.ExecuteNonQuery();
-            connection.Close();
+                connection.Open();
+                query.ExecuteNonQuery();
+                connection.Close();
 
-            MessageBox.Show("La funcionalidad se eliminó con éxito.");
+                MessageBox.Show("La funcionalidad se eliminó con éxito.");
 
-            this.Close();
-            new Menu_Principal.MenuAdmin().Show();
+                this.Close();
+                new Menu_Principal.MenuAdmin().Show();
+
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar la funcionalidad que desea eliminar.");
+            }
         }
 
         /*private Int32 obtenerIdFuncionalidad()
@@ -151,28 +159,40 @@ namespace FrbaOfertas.AbmRol
 
         private void button3_Click(object sender, EventArgs e) //Modificar nombre
         {
-            var connection = DB.getInstance().getConnection();
-            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_modificar_nombre_rol", connection);
-            query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@rol", id_rol));
-            query.Parameters.Add(new SqlParameter("@nuevo_nombre", txtbox_nuevonombre.Text));
+
+            if (txtbox_nuevonombre.Text != "")
+            {
+
+                var connection = DB.getInstance().getConnection();
+                SqlCommand query = new SqlCommand("POR_COLECTORA.sp_modificar_nombre_rol", connection);
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.Add(new SqlParameter("@rol", id_rol));
+                query.Parameters.Add(new SqlParameter("@nuevo_nombre", txtbox_nuevonombre.Text));
 
 
-            connection.Open();
-            query.ExecuteNonQuery();
-            connection.Close();
+                connection.Open();
+                query.ExecuteNonQuery();
+                connection.Close();
 
-            MessageBox.Show("El nombre del rol se modificó con éxito.");
+                MessageBox.Show("El nombre del rol se modificó con éxito.");
 
-            this.Close();
+                this.Close();
 
-            new Menu_Principal.MenuAdmin().Show();
+                new Menu_Principal.MenuAdmin().Show();
+
+            }
+            else 
+            {
+                MessageBox.Show("Debe completar el nombre del rol con algún alias.");
+            }
+
 
 
         }
 
         private void button4_Click(object sender, EventArgs e) //Boton volver al menu principal
         {
+            this.Hide();
             new Menu_Principal.MenuAdmin().Show();
         }
 
