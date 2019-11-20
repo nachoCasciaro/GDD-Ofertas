@@ -1014,12 +1014,24 @@ BEGIN
 						FROM Compras JOIN Ofertas ON Compra_Oferta = Oferta_Id JOIN Proveedores ON Oferta_Proveedor = Provee_Id
 						WHERE Compra_Fecha >= @fecha_inicio AND Compra_Fecha <= @fecha_fin AND Provee_Id = (SELECT pr2.provee_id FROM POR_COLECTORA.Proveedores pr2 WHERE pr2.provee_RS = @proveedor)) 
  
-
+	
 	declare @fact_numero numeric
 	set @fact_numero = (SELECT TOP 1 fact_numero
 						FROM Facturas
 						ORDER BY fact_numero DESC) + 1
 
+	declare @prove_id numeric
+	set @prove_id = (select Provee_Id
+					from Proveedores
+					where Provee_RS = @proveedor)
+
+	declare @prove_cuit nvarchar(13)
+	set @prove_cuit = (select Provee_CUIT
+					from Proveedores
+					where Provee_RS = @proveedor)
+
+	insert into POR_COLECTORA.Facturas(Fact_Numero,Fact_Fecha_Desde,Fact_Fecha_Hasta,Fact_Importe,Fact_Proveedor_ID,Fact_Proveedor_RS,Fact_Proveedor_CUIT)
+	values (@fact_numero,@fecha_inicio,@fecha_inicio,@importe_total,@prove_id,@proveedor,@prove_cuit)
 	
 	set @resultado = convert(varchar(10),@importe_total) + ' ' + convert(varchar(10),@fact_numero)
 	
