@@ -21,12 +21,23 @@ namespace FrbaOfertas.AbmCliente
 
         private void button_filtrar_Click(object sender, EventArgs e)
         {
-            ConfiguradorDataGrid.llenarDataGridConConsulta(this.filtrar(), dataGridView1);
+            string error = this.validarDatos();
+
+            if (error == "")
+            {
+                ConfiguradorDataGrid.llenarDataGridConConsulta(this.filtrar(), dataGridView1);
+
+            }
+            else
+            {
+                MessageBox.Show(error);
+            }
 
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
         }
 
         private SqlDataReader filtrar()
@@ -80,8 +91,9 @@ namespace FrbaOfertas.AbmCliente
             {
                 try
                 {
-                    this.seleccionarClienteModificar();
-                    this.Close();
+                        this.seleccionarClienteModificar();
+                        this.Close();
+                    
                 }
                 catch (Exception excepcion)
                 {
@@ -94,6 +106,25 @@ namespace FrbaOfertas.AbmCliente
             }
         }
 
+        private string validarDatos()
+        {
+            List<string> mensajeError = new List<string>();
+
+
+            if (!Validaciones.contieneSoloNumeros(txtbox_dni.Text))
+            {
+
+                mensajeError.Add("El dni debe contener únicamente números");
+            }
+
+
+            string mensajeConcat;
+            mensajeConcat = string.Join("\n", mensajeError);
+
+            return mensajeConcat;
+
+        }
+
         private void button_baja_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
@@ -104,7 +135,7 @@ namespace FrbaOfertas.AbmCliente
 
                     MessageBox.Show("Se dió de baja el cliente con éxito");
 
-                    this.Hide();
+                    this.Close();
 
                     new Menu_Principal.MenuAdmin().Show();
 

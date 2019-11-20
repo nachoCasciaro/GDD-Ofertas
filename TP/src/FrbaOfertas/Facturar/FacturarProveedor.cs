@@ -35,14 +35,28 @@ namespace FrbaOfertas.Facturar
 
         }
 
-        private void validarDatos()
+
+        private string validarDatos()
         {
+            List<string> mensajeError = new List<string>();
+
+
             if (this.dtm_fin.Value < this.dtm_inicio.Value)
             {
 
-                throw new Exception("La fecha de inicio de facturación debe ser anterior a la de fin");
+                mensajeError.Add("La fecha de inicio de facturación debe ser anterior a la de fin.");
+            }
+
+            if (combobox_prov.SelectedIndex <= -1)
+            {
+                mensajeError.Add("Debe seleccionar un proveedor al que desee facturar.");
 
             }
+
+            string mensajeConcat;
+            mensajeConcat = string.Join("\n", mensajeError);
+
+            return mensajeConcat;
 
         }
 
@@ -55,14 +69,24 @@ namespace FrbaOfertas.Facturar
         {
             try
             {
-                this.validarDatos();
-                ConfiguradorDataGrid.llenarDataGridConConsulta(this.listadoOfertas(), dataGridView1);
-                this.importeFactura();
-                //this.Close();
+
+                string error = this.validarDatos();
+
+                if (error == "")
+                {
+
+                    ConfiguradorDataGrid.llenarDataGridConConsulta(this.listadoOfertas(), dataGridView1);
+                    this.importeFactura();
+                    //this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(error);
+                }
             }
             catch (Exception excepcion)
             {
-                MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
+                MessageBox.Show("No existen facturas dentro del período seleccionado para ese proveedor.", "Error", MessageBoxButtons.OK);
             }
         }
 
@@ -104,6 +128,13 @@ namespace FrbaOfertas.Facturar
 
             this.textBox1.Text = "$ " + resultadoDividido[0];
             this.textBox2.Text = resultadoDividido[1];
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            new Menu_Principal.MenuAdmin().Show();
+
         }
     
     }

@@ -43,6 +43,11 @@ namespace FrbaOfertas.AbmProveedor
             this.rubro = rubro;
             this.nombreContacto = nombreContacto;
             this.habilitado = habilitado;
+
+            if (habilitado)
+            {
+                this.checkbox_habilitado.Visible = false;
+            }
             
             Load += new EventHandler(ModificacionProveedor_Load);
         }
