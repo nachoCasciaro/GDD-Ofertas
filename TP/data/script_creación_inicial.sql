@@ -1019,6 +1019,7 @@ BEGIN
 	set @fact_numero = (SELECT TOP 1 fact_numero
 						FROM Facturas
 						ORDER BY fact_numero DESC) + 1
+
 	
 	set @resultado = convert(varchar(10),@importe_total) + ' ' + convert(varchar(10),@fact_numero)
 	
