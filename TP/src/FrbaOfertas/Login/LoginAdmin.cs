@@ -37,7 +37,7 @@ namespace FrbaOfertas.Login
 
             if (resultado == 4)
             {
-                this.Hide();
+                this.Close();
                 new Menu_Principal.MenuAdmin().Show();
             }
             else if (resultado == 2)
@@ -63,6 +63,9 @@ namespace FrbaOfertas.Login
             string someValue = "Get the value from wherever you want";
             textBox1.Text = someValue;
         }
+
+
+        
 
     }
 }

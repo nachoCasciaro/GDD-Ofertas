@@ -434,7 +434,7 @@ GO
 
 --MIGRACION FUNCIONALIDADES
 INSERT INTO POR_COLECTORA.Funcionalidades(Func_Descripcion)
-VALUES	('Login y seguridad'), ('ABM Rol'), ('Registro de Usuario'),
+VALUES	 ('ABM Rol'), 
 		('ABM Cliente'), ('ABM Proveedor'), ('Cargar Crédito'),
 		('Comprar Oferta'), ('Confección y publicación de Ofertas'),
 		('Entrega/Consumo de Oferta'), ('Facturación a Proveedor'), ('Listado Estadistico');
@@ -444,10 +444,6 @@ GO
 
 INSERT INTO POR_COLECTORA.FuncionalidadxRol(Id_Rol, Id_Func)
 VALUES ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'ABM Rol')),
-	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Cliente'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Login y seguridad')),
-	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Proveedor'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Login y seguridad')),
-	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Cliente'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Registro de Usuario')),
-	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Proveedor'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Registro de Usuario')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'ABM Cliente')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'ABM Proveedor')), 
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Cliente'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Cargar Crédito')),
@@ -455,7 +451,6 @@ VALUES ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrado
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Cliente'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Comprar Oferta')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Proveedor'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Entrega/Consumo de Oferta')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Facturación a Proveedor')),
-	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Login y seguridad')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Listado Estadistico'));
 GO
 
@@ -1063,7 +1058,7 @@ from POR_COLECTORA.Clientes
 where (Clie_nombre LIKE '%' + @nombre + '%' OR @nombre LIKE '')
 AND (Clie_apellido LIKE '%' + @apellido + '%' OR @apellido LIKE '')
 AND ((@dni = 0) OR Clie_dni = @dni)
-AND (Clie_Mail LIKE '%' + @mail + '%' OR @nombre LIKE '')
+AND (Clie_Mail LIKE '%' + @mail + '%' OR @mail LIKE '')
 END
 GO
 

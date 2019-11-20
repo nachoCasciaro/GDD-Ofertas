@@ -44,6 +44,11 @@ namespace FrbaOfertas.AbmCliente
             this.ciudad = ciudad;
             this.habilitado = habilitado;
 
+            if (habilitado)
+            {
+                this.checkbox_habilitado.Visible = false;
+            }
+
             Load += new EventHandler(ModificacionCliente_Load);
 
         }
@@ -192,7 +197,7 @@ namespace FrbaOfertas.AbmCliente
 
                 MessageBox.Show("Los datos del cliente fueron modificados con éxito.");
 
-                this.Hide();
+                this.Close();
 
                 new Menu_Principal.MenuAdmin().Show();
 

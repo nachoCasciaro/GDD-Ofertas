@@ -158,7 +158,7 @@ namespace FrbaOfertas.AbmCliente
 
                 MessageBox.Show("El cliente se registró con éxito.");
 
-                this.Hide();
+                this.Close();
 
                 if (esAdminOCliente == 1)
                 {

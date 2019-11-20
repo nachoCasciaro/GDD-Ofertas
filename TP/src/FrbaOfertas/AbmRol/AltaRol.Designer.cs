@@ -79,9 +79,7 @@
             // 
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Items.AddRange(new object[] {
-            "Login y seguridad",
             "ABM Rol",
-            "Registro de Usuario",
             "ABM Cliente",
             "ABM Proveedor",
             "Cargar Crédito",

@@ -105,6 +105,13 @@ namespace FrbaOfertas.Facturar
             this.textBox1.Text = "$ " + resultadoDividido[0];
             this.textBox2.Text = resultadoDividido[1];
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            new Menu_Principal.MenuAdmin().Show();
+
+        }
     
     }
 }

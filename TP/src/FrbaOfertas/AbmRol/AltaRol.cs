@@ -23,14 +23,22 @@ namespace FrbaOfertas.AbmRol
 
         }
 
-        private void validarDatos()
+        private string validarDatos()
         {
+            List<string> mensajeError = new List<string>();
+
+
             if (Validaciones.estaVacio(txtbox_nombrerol.Text))
             {
 
-                throw new Exception("Debe completar todos los campos");
+                mensajeError.Add("Debe completar el nombre del rol.");
 
             }
+
+            string mensajeConcat;
+            mensajeConcat = string.Join("\n", mensajeError);
+
+            return mensajeConcat;
 
         }
 
@@ -100,9 +108,16 @@ namespace FrbaOfertas.AbmRol
         {
             try
             {
-                this.validarDatos();
-                this.crearRol();
-                this.Close();
+                string error = this.validarDatos();
+                if (error == "")
+                {
+                    this.crearRol();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(error);
+                }
             }
             catch (Exception excepcion)
             {
