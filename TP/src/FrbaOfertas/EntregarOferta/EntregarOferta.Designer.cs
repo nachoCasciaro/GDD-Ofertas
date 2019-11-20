@@ -63,14 +63,14 @@
             this.label3.Location = new System.Drawing.Point(77, 206);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 17);
+            this.label3.Size = new System.Drawing.Size(68, 17);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Cliente";
+            this.label3.Text = "ID Cliente";
             // 
             // dtm_fechaconsumo
             // 
             this.dtm_fechaconsumo.Location = new System.Drawing.Point(256, 98);
-            this.dtm_fechaconsumo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtm_fechaconsumo.Margin = new System.Windows.Forms.Padding(4);
             this.dtm_fechaconsumo.MaxDate = new System.DateTime(2019, 12, 31, 0, 0, 0, 0);
             this.dtm_fechaconsumo.MinDate = new System.DateTime(1920, 1, 1, 0, 0, 0, 0);
             this.dtm_fechaconsumo.Name = "dtm_fechaconsumo";
@@ -80,7 +80,7 @@
             // txtbox_cupon
             // 
             this.txtbox_cupon.Location = new System.Drawing.Point(256, 153);
-            this.txtbox_cupon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_cupon.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_cupon.Name = "txtbox_cupon";
             this.txtbox_cupon.Size = new System.Drawing.Size(265, 22);
             this.txtbox_cupon.TabIndex = 4;
@@ -88,7 +88,7 @@
             // txtbox_cliente
             // 
             this.txtbox_cliente.Location = new System.Drawing.Point(256, 202);
-            this.txtbox_cliente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_cliente.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_cliente.Name = "txtbox_cliente";
             this.txtbox_cliente.Size = new System.Drawing.Size(265, 22);
             this.txtbox_cliente.TabIndex = 5;
@@ -96,7 +96,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(340, 279);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(183, 28);
             this.button1.TabIndex = 6;
@@ -116,7 +116,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "EntregarOferta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EntregarOferta";

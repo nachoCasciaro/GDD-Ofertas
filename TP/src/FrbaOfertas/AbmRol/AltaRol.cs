@@ -109,5 +109,10 @@ namespace FrbaOfertas.AbmRol
                 MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
             }
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

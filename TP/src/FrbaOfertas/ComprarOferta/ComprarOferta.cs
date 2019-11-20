@@ -69,7 +69,7 @@ namespace FrbaOfertas.ComprarOferta
                 string setting = ConfigurationManager.AppSettings["current_date"];
                 query.Parameters.Add(new SqlParameter("@fecha_compra", Convert.ToDateTime(setting) ));
 
-                query.Parameters.Add(new SqlParameter("@cantidad_compra", 1));
+                query.Parameters.Add(new SqlParameter("@cantidad_compra", numericCantidad.Value));
                 query.Parameters.Add("@resultado_compra", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 connection.Open();
@@ -100,17 +100,26 @@ namespace FrbaOfertas.ComprarOferta
 
                 else if (resultado == 2)
                 {
-                    MessageBox.Show("Ya compró el máximo permitido de esta oferta");
+                    MessageBox.Show("Ya compró el máximo permitido de esta oferta.");
+                    this.Hide();
+                    new Menu_Principal.MenuCliente(idCliente).Show();
+                }
+
+                else if (resultado == 3)
+                {
+                    MessageBox.Show("No hay stock suficiente para realizar la compra.");
                     this.Hide();
                     new Menu_Principal.MenuCliente(idCliente).Show();
                 }
 
                 else if (resultado == 0)
                 {
-                    MessageBox.Show("Oferta comprada con éxito");
+                    MessageBox.Show("Oferta comprada con éxito.");
                     this.Hide();
                     new Menu_Principal.MenuCliente(idCliente).Show();
                 }
+
+
             }
             catch (Exception excepcion)
             {

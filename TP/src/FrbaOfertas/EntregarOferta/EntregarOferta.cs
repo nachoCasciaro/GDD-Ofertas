@@ -42,8 +42,8 @@ namespace FrbaOfertas.EntregarOferta
             query.CommandType = CommandType.StoredProcedure;
 
             query.Parameters.Add(new SqlParameter("@id_proveedor", Convert.ToInt32(this.idProveedor)));
-            query.Parameters.Add(new SqlParameter("@id_cupon", this.txtbox_cupon.Text));
-            query.Parameters.Add(new SqlParameter("@fecha_actual", dtm_fechaconsumo.Value)); 
+            query.Parameters.Add(new SqlParameter("@codigo_cupon", this.txtbox_cupon.Text));
+            query.Parameters.Add(new SqlParameter("@fecha_consumo", dtm_fechaconsumo.Value)); 
             query.Parameters.Add(new SqlParameter("@id_cliente", Convert.ToInt32(this.txtbox_cliente.Text)));
 
             connection.Open();

@@ -891,8 +891,10 @@ BEGIN
 	declare @numero_compra numeric
 	set @numero_compra = (SELECT TOP 1 Compra_Nro from Compras ORDER BY Compra_Nro DESC) + 1
 
+
+	declare @numeroCupon numeric
 	declare @cupon_codigo nvarchar(80)
-	set @cupon_codigo = CONCAT((select Oferta_Codigo from Ofertas where Oferta_Id = @id_oferta), @id_cliente)
+
 
 	if((SELECT Clie_Saldo FROM Clientes WHERE Clie_Id = @id_cliente) < (@precio_oferta * @cantidad_compra))
 	BEGIN
@@ -904,18 +906,45 @@ BEGIN
 		set @resultado_compra = 2
 	END
 
+	if( @cantidad_compra > (select Oferta_Cantidad from Ofertas where Oferta_Id = @id_oferta)  )
+	BEGIN
+		set @resultado_compra = 3
+	END
+
 	if ((SELECT Clie_Saldo FROM Clientes WHERE Clie_Id = @id_cliente) >= @precio_oferta * @cantidad_compra
-		AND ((SELECT  isnull( SUM(Compra_Cantidad),0) FROM Compras WHERE Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente) + @cantidad_compra) <=  @cantidad_maxima)
+		AND ((SELECT  isnull( SUM(Compra_Cantidad),0) FROM Compras WHERE Compra_Oferta = @id_oferta and Compra_Cliente = @id_cliente) + @cantidad_compra) <=  @cantidad_maxima
+		AND @cantidad_compra <= (select Oferta_Cantidad from Ofertas where Oferta_Id = @id_oferta))
 		begin
 			INSERT INTO POR_COLECTORA.Compras(Compra_Fecha, Compra_Oferta, Compra_Cliente, Compra_Cantidad, Compra_Oferta_Precio) 
 			VALUES (@fecha_compra,@id_oferta,@id_cliente,@cantidad_compra,@precio_oferta)
 
-			INSERT INTO POR_COLECTORA.Cupones(Cupon_Codigo,Cupon_Fecha_Venc,Cupon_Fecha_Consumo,Cupon_Nro_Compra,Cupon_Id_Cliente_Consumidor)
-			VALUES (@cupon_codigo, dateadd(day,30, @fecha_compra), NULL, @numero_compra,@id_cliente)
+			DECLARE @i INT = 0;
+
+			WHILE @i < @cantidad_compra
+			BEGIN
+				
+				
+				set @numeroCupon = (select count(*) from Cupones) + 1
+						
+				set @cupon_codigo = CONCAT((select Oferta_Codigo from Ofertas where Oferta_Id = @id_oferta), @numeroCupon)
+
+
+				INSERT INTO POR_COLECTORA.Cupones(Cupon_Codigo,Cupon_Fecha_Venc,Cupon_Fecha_Consumo,Cupon_Nro_Compra,Cupon_Id_Cliente_Consumidor)
+				VALUES (@cupon_codigo, dateadd(day,30, @fecha_compra), NULL, @numero_compra,@id_cliente)
+
+				SET @i += 1
+			END
+
+
+			
 
 			UPDATE Clientes
 			set Clie_Saldo -= @precio_oferta * @cantidad_compra
 			where Clie_Id = @id_cliente
+
+			UPDATE Ofertas
+			set Oferta_Cantidad -= @cantidad_compra
+			where Oferta_Id = @id_oferta 
 
 			set @resultado_compra = 0
 		end	
@@ -931,8 +960,8 @@ GO
 
 --SP CONSUMO OFERTA 
 CREATE PROCEDURE POR_COLECTORA.sp_consumir_oferta(
-@id_cupon numeric,
-@fecha_actual datetime,
+@codigo_cupon nvarchar,
+@fecha_consumo datetime,
 @id_proveedor numeric,
 @id_cliente numeric
 )
@@ -940,8 +969,8 @@ CREATE PROCEDURE POR_COLECTORA.sp_consumir_oferta(
 AS
 BEGIN
 
-	if ( (select Cupon_Fecha_Venc from Cupones where Cupon_Codigo = @id_cupon) < @fecha_actual 
-			and ( (select Cupon_Fecha_Consumo from Cupones where Cupon_Codigo = @id_cupon) IS NULL)
+	if ( (select Cupon_Fecha_Venc from Cupones where Cupon_Codigo = @codigo_cupon) >= @fecha_consumo 
+			and ( (select Cupon_Fecha_Consumo from Cupones where Cupon_Codigo = @codigo_cupon) IS NULL)
 			and ( (select Provee_ID from Proveedores P
 					JOIN Ofertas O
 						ON P.Provee_id = O.Oferta_Proveedor
@@ -949,10 +978,10 @@ BEGIN
 						ON O.Oferta_Id = C.Compra_Oferta
 					JOIN Cupones CU
 						ON C.Compra_Nro = CU.Cupon_Nro_Compra
-					where CU.Cupon_Codigo = @id_cupon) = @id_proveedor) )
+					where CU.Cupon_Codigo = @codigo_cupon) = @id_proveedor) )
 		begin
-			UPDATE POR_COLECTORA.CUPONES SET Cupon_Fecha_Consumo = @fecha_actual WHERE Cupon_codigo = @id_cupon
-			UPDATE POR_COLECTORA.CUPONES SET Cupon_Id_Cliente_Consumidor = @id_cliente WHERE Cupon_codigo = @id_cupon
+			UPDATE POR_COLECTORA.CUPONES SET Cupon_Fecha_Consumo = @fecha_consumo WHERE Cupon_codigo = @codigo_cupon
+			UPDATE POR_COLECTORA.CUPONES SET Cupon_Id_Cliente_Consumidor = @id_cliente WHERE Cupon_codigo = @codigo_cupon
 
 		end	
 

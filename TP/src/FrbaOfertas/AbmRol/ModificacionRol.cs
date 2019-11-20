@@ -97,7 +97,7 @@ namespace FrbaOfertas.AbmRol
             MessageBox.Show("La funcionalidad se eliminó con éxito.");
 
             this.Close();
-            //new Menu_Principal.MenuAdmin().Show();
+            new Menu_Principal.MenuAdmin().Show();
         }
 
         /*private Int32 obtenerIdFuncionalidad()
@@ -146,7 +146,7 @@ namespace FrbaOfertas.AbmRol
 
             this.Close();
 
-            //new Menu_Principal.MenuAdmin().Show();
+            new Menu_Principal.MenuAdmin().Show();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e) //Habilitar rol
@@ -161,7 +161,7 @@ namespace FrbaOfertas.AbmRol
             connection.Close();
 
             this.Close();
-            //new Menu_Principal.MenuAdmin().Show();
+            new Menu_Principal.MenuAdmin().Show();
         }
 
         private void button3_Click(object sender, EventArgs e) //Modificar nombre
@@ -179,7 +179,10 @@ namespace FrbaOfertas.AbmRol
 
             MessageBox.Show("El nombre del rol se modificó con éxito.");
 
-            this.Hide();
+            this.Close();
+
+            new Menu_Principal.MenuAdmin().Show();
+
 
         }
 
