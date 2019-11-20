@@ -39,6 +39,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,7 +87,7 @@
             // txtbox_rs
             // 
             this.txtbox_rs.Location = new System.Drawing.Point(355, 58);
-            this.txtbox_rs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_rs.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_rs.Name = "txtbox_rs";
             this.txtbox_rs.Size = new System.Drawing.Size(313, 22);
             this.txtbox_rs.TabIndex = 4;
@@ -94,7 +95,7 @@
             // txtbox_cuit
             // 
             this.txtbox_cuit.Location = new System.Drawing.Point(785, 57);
-            this.txtbox_cuit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_cuit.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_cuit.Name = "txtbox_cuit";
             this.txtbox_cuit.Size = new System.Drawing.Size(313, 22);
             this.txtbox_cuit.TabIndex = 5;
@@ -102,15 +103,15 @@
             // txtbox_mail
             // 
             this.txtbox_mail.Location = new System.Drawing.Point(355, 102);
-            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_mail.Name = "txtbox_mail";
             this.txtbox_mail.Size = new System.Drawing.Size(313, 22);
             this.txtbox_mail.TabIndex = 6;
             // 
             // FILTRAR
             // 
-            this.FILTRAR.Location = new System.Drawing.Point(1149, 78);
-            this.FILTRAR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FILTRAR.Location = new System.Drawing.Point(1149, 57);
+            this.FILTRAR.Margin = new System.Windows.Forms.Padding(4);
             this.FILTRAR.Name = "FILTRAR";
             this.FILTRAR.Size = new System.Drawing.Size(100, 28);
             this.FILTRAR.TabIndex = 8;
@@ -121,7 +122,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(523, 464);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(128, 28);
             this.button1.TabIndex = 9;
@@ -132,7 +133,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(775, 464);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(129, 28);
             this.button2.TabIndex = 10;
@@ -154,11 +155,22 @@
             this.dataGridView2.TabIndex = 13;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1149, 102);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(100, 28);
+            this.button3.TabIndex = 14;
+            this.button3.Text = "LIMPIAR";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // FiltroBMProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1365, 510);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -170,7 +182,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FiltroBMProveedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FiltroBMProveedor";
@@ -193,5 +205,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button button3;
     }
 }

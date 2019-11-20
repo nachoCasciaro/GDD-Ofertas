@@ -1089,7 +1089,7 @@ GO
 --SP FILTRO PROVEEDORES
 CREATE PROCEDURE POR_COLECTORA.sp_filtrar_proveedores(
 @razonSocial NVARCHAR(225),
-@cuit Numeric(11, 0),
+@cuit nvarchar(13),
 @mail NVARCHAR(250)
 )
 AS 
@@ -1106,7 +1106,7 @@ SELECT Provee_Id,Provee_RS,Provee_Mail,Provee_Telefono,Provee_CUIT,
 		Provee_Habilitado
 from POR_COLECTORA.Proveedores
 where (Provee_RS LIKE '%' + @razonSocial + '%' OR @razonSocial LIKE '')
-AND ((@cuit = 0) OR Provee_CUIT = @cuit)
+AND ((@cuit = '') OR Provee_CUIT = @cuit)
 AND (Provee_Mail LIKE '%' + @mail + '%' OR @mail LIKE '')
 END
 GO

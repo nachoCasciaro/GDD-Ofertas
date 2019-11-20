@@ -41,6 +41,7 @@
             this.button_baja = new System.Windows.Forms.Button();
             this.button_modificar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,7 +98,7 @@
             // txtbox_nombre
             // 
             this.txtbox_nombre.Location = new System.Drawing.Point(373, 69);
-            this.txtbox_nombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_nombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_nombre.Name = "txtbox_nombre";
             this.txtbox_nombre.Size = new System.Drawing.Size(231, 22);
             this.txtbox_nombre.TabIndex = 5;
@@ -105,7 +106,7 @@
             // txtbox_apellido
             // 
             this.txtbox_apellido.Location = new System.Drawing.Point(373, 119);
-            this.txtbox_apellido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_apellido.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_apellido.Name = "txtbox_apellido";
             this.txtbox_apellido.Size = new System.Drawing.Size(231, 22);
             this.txtbox_apellido.TabIndex = 6;
@@ -113,7 +114,7 @@
             // txtbox_dni
             // 
             this.txtbox_dni.Location = new System.Drawing.Point(753, 71);
-            this.txtbox_dni.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_dni.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_dni.Name = "txtbox_dni";
             this.txtbox_dni.Size = new System.Drawing.Size(231, 22);
             this.txtbox_dni.TabIndex = 7;
@@ -121,15 +122,15 @@
             // txtbox_mail
             // 
             this.txtbox_mail.Location = new System.Drawing.Point(753, 119);
-            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_mail.Name = "txtbox_mail";
             this.txtbox_mail.Size = new System.Drawing.Size(231, 22);
             this.txtbox_mail.TabIndex = 8;
             // 
             // button_filtrar
             // 
-            this.button_filtrar.Location = new System.Drawing.Point(1101, 89);
-            this.button_filtrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_filtrar.Location = new System.Drawing.Point(1101, 65);
+            this.button_filtrar.Margin = new System.Windows.Forms.Padding(4);
             this.button_filtrar.Name = "button_filtrar";
             this.button_filtrar.Size = new System.Drawing.Size(135, 28);
             this.button_filtrar.TabIndex = 9;
@@ -140,7 +141,7 @@
             // button_baja
             // 
             this.button_baja.Location = new System.Drawing.Point(500, 478);
-            this.button_baja.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_baja.Margin = new System.Windows.Forms.Padding(4);
             this.button_baja.Name = "button_baja";
             this.button_baja.Size = new System.Drawing.Size(135, 28);
             this.button_baja.TabIndex = 10;
@@ -151,7 +152,7 @@
             // button_modificar
             // 
             this.button_modificar.Location = new System.Drawing.Point(771, 478);
-            this.button_modificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_modificar.Margin = new System.Windows.Forms.Padding(4);
             this.button_modificar.Name = "button_modificar";
             this.button_modificar.Size = new System.Drawing.Size(135, 28);
             this.button_modificar.TabIndex = 11;
@@ -173,11 +174,22 @@
             this.dataGridView1.TabIndex = 12;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1101, 113);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(135, 28);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "LIMPIAR";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FiltroBMCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1369, 529);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button_modificar);
             this.Controls.Add(this.button_baja);
@@ -191,7 +203,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FiltroBMCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FiltroBMCliente";
@@ -217,5 +229,6 @@
         private System.Windows.Forms.Button button_baja;
         private System.Windows.Forms.Button button_modificar;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button1;
     }
 }

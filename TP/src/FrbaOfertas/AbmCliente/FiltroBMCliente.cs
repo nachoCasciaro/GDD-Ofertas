@@ -139,6 +139,14 @@ namespace FrbaOfertas.AbmCliente
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            txtbox_nombre.Text = "";
+            txtbox_mail.Text = "";
+            txtbox_apellido.Text = "";
+            txtbox_dni.Text = "";
+        }
+
 
     }
 }

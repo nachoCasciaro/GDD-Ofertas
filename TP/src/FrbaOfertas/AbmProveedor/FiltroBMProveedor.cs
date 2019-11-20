@@ -44,11 +44,11 @@ namespace FrbaOfertas.AbmProveedor
 
             if (txtbox_cuit.Text == "")
             {
-                command.Parameters.Add(new SqlParameter("@cuit", Convert.ToInt32(0)));
+                command.Parameters.Add(new SqlParameter("@cuit", ""));
             }
             else
             {
-                command.Parameters.Add(new SqlParameter("@cuit", Convert.ToInt32(txtbox_cuit.Text)));
+                command.Parameters.Add(new SqlParameter("@cuit", txtbox_cuit.Text));
             }
             command.Parameters.Add(new SqlParameter("@mail", txtbox_mail.Text));
 
@@ -137,6 +137,13 @@ namespace FrbaOfertas.AbmProveedor
             query.ExecuteNonQuery();
             connection.Close();
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            txtbox_cuit.Text = "";
+            txtbox_mail.Text = "";
+            txtbox_rs.Text = "";
         }
 
     }
