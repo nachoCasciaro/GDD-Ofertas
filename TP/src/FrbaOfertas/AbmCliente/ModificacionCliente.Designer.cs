@@ -137,7 +137,7 @@
             // txtbox_depto
             // 
             this.txtbox_depto.Location = new System.Drawing.Point(388, 260);
-            this.txtbox_depto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_depto.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_depto.Name = "txtbox_depto";
             this.txtbox_depto.Size = new System.Drawing.Size(93, 22);
             this.txtbox_depto.TabIndex = 8;
@@ -145,7 +145,7 @@
             // txtbox_calle
             // 
             this.txtbox_calle.Location = new System.Drawing.Point(216, 225);
-            this.txtbox_calle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_calle.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_calle.Name = "txtbox_calle";
             this.txtbox_calle.Size = new System.Drawing.Size(265, 22);
             this.txtbox_calle.TabIndex = 9;
@@ -153,7 +153,7 @@
             // txtbox_telefono
             // 
             this.txtbox_telefono.Location = new System.Drawing.Point(217, 186);
-            this.txtbox_telefono.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_telefono.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_telefono.Name = "txtbox_telefono";
             this.txtbox_telefono.Size = new System.Drawing.Size(265, 22);
             this.txtbox_telefono.TabIndex = 10;
@@ -161,7 +161,7 @@
             // txtbox_mail
             // 
             this.txtbox_mail.Location = new System.Drawing.Point(217, 151);
-            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_mail.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_mail.Name = "txtbox_mail";
             this.txtbox_mail.Size = new System.Drawing.Size(265, 22);
             this.txtbox_mail.TabIndex = 11;
@@ -169,7 +169,7 @@
             // txtbox_dni
             // 
             this.txtbox_dni.Location = new System.Drawing.Point(217, 114);
-            this.txtbox_dni.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_dni.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_dni.Name = "txtbox_dni";
             this.txtbox_dni.Size = new System.Drawing.Size(265, 22);
             this.txtbox_dni.TabIndex = 12;
@@ -177,7 +177,7 @@
             // txtbox_apellido
             // 
             this.txtbox_apellido.Location = new System.Drawing.Point(217, 79);
-            this.txtbox_apellido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_apellido.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_apellido.Name = "txtbox_apellido";
             this.txtbox_apellido.Size = new System.Drawing.Size(265, 22);
             this.txtbox_apellido.TabIndex = 13;
@@ -185,7 +185,7 @@
             // txtbox_nombre
             // 
             this.txtbox_nombre.Location = new System.Drawing.Point(217, 42);
-            this.txtbox_nombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_nombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_nombre.Name = "txtbox_nombre";
             this.txtbox_nombre.Size = new System.Drawing.Size(265, 22);
             this.txtbox_nombre.TabIndex = 14;
@@ -193,7 +193,7 @@
             // txtbox_nropiso
             // 
             this.txtbox_nropiso.Location = new System.Drawing.Point(217, 260);
-            this.txtbox_nropiso.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_nropiso.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_nropiso.Name = "txtbox_nropiso";
             this.txtbox_nropiso.Size = new System.Drawing.Size(91, 22);
             this.txtbox_nropiso.TabIndex = 15;
@@ -231,7 +231,7 @@
             // txtbox_ciudad
             // 
             this.txtbox_ciudad.Location = new System.Drawing.Point(216, 292);
-            this.txtbox_ciudad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_ciudad.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_ciudad.Name = "txtbox_ciudad";
             this.txtbox_ciudad.Size = new System.Drawing.Size(265, 22);
             this.txtbox_ciudad.TabIndex = 20;
@@ -239,7 +239,7 @@
             // txtbox_cp
             // 
             this.txtbox_cp.Location = new System.Drawing.Point(216, 322);
-            this.txtbox_cp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbox_cp.Margin = new System.Windows.Forms.Padding(4);
             this.txtbox_cp.Name = "txtbox_cp";
             this.txtbox_cp.Size = new System.Drawing.Size(265, 22);
             this.txtbox_cp.TabIndex = 21;
@@ -248,7 +248,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(351, 450);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(133, 28);
             this.button1.TabIndex = 22;
@@ -259,7 +259,7 @@
             // dtm_fecha
             // 
             this.dtm_fecha.Location = new System.Drawing.Point(217, 354);
-            this.dtm_fecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtm_fecha.Margin = new System.Windows.Forms.Padding(4);
             this.dtm_fecha.MaxDate = new System.DateTime(2019, 12, 31, 0, 0, 0, 0);
             this.dtm_fecha.MinDate = new System.DateTime(1920, 1, 1, 0, 0, 0, 0);
             this.dtm_fecha.Name = "dtm_fecha";
@@ -269,12 +269,12 @@
             // checkbox_habilitado
             // 
             this.checkbox_habilitado.AutoSize = true;
-            this.checkbox_habilitado.Location = new System.Drawing.Point(217, 405);
-            this.checkbox_habilitado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkbox_habilitado.Location = new System.Drawing.Point(388, 401);
+            this.checkbox_habilitado.Margin = new System.Windows.Forms.Padding(4);
             this.checkbox_habilitado.Name = "checkbox_habilitado";
-            this.checkbox_habilitado.Size = new System.Drawing.Size(93, 21);
+            this.checkbox_habilitado.Size = new System.Drawing.Size(90, 21);
             this.checkbox_habilitado.TabIndex = 24;
-            this.checkbox_habilitado.Text = "Habilitado";
+            this.checkbox_habilitado.Text = "Habilitar?";
             this.checkbox_habilitado.UseVisualStyleBackColor = true;
             // 
             // ModificacionCliente
@@ -306,7 +306,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ModificacionCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModificacionCliente";

@@ -635,7 +635,8 @@ CREATE PROCEDURE POR_COLECTORA.sp_modificar_cliente (
 @depto nvarchar(10),
 @ciudad nvarchar(80),
 @CP nvarchar(20),
-@fechaNacimiento datetime
+@fechaNacimiento datetime,
+@habilitar bit
 )
 AS
 BEGIN
@@ -645,7 +646,7 @@ BEGIN
 	WHERE Direccion_Id = (select Clie_Direccion from Clientes where Clie_Id = @id_clie)
 
 	UPDATE POR_COLECTORA.Clientes
-	SET Clie_Nombre = @nombre, Clie_Apellido = @apellido, Clie_DNI = @dni, Clie_Mail = @mail, Clie_Telefono = @telefono, Clie_CP = @CP, Clie_Fecha_Nac = @fechaNacimiento
+	SET Clie_Nombre = @nombre, Clie_Apellido = @apellido, Clie_DNI = @dni, Clie_Mail = @mail, Clie_Telefono = @telefono, Clie_CP = @CP, Clie_Fecha_Nac = @fechaNacimiento, Clie_Habilitado = @habilitar
 	WHERE Clie_Id = @id_clie;
 	
 END
@@ -717,7 +718,8 @@ CREATE PROCEDURE POR_COLECTORA.sp_modificar_proveedor (
 @CP nvarchar(20),
 @cuit nvarchar(13),
 @nombreContacto nvarchar(80),
-@rubro_detalle nvarchar(80)
+@rubro_detalle nvarchar(80),
+@habilitar bit
 )
 AS
 BEGIN
@@ -731,7 +733,7 @@ BEGIN
 	WHERE Direccion_Id = (select Provee_Direccion from Proveedores where Provee_Id = @id_prove)
 
 	UPDATE POR_COLECTORA.Proveedores
-	SET Provee_RS = @razonSocial, Provee_Mail = @mail, Provee_Telefono = @telefono, Provee_CP = @CP, Provee_CUIT = @cuit, Provee_Nombre_Contacto = @nombreContacto, Provee_Rubro = @rubro_id
+	SET Provee_RS = @razonSocial, Provee_Mail = @mail, Provee_Telefono = @telefono, Provee_CP = @CP, Provee_CUIT = @cuit, Provee_Nombre_Contacto = @nombreContacto, Provee_Rubro = @rubro_id, Provee_Habilitado = @habilitar
 	WHERE Provee_Id = @id_prove;
 	
 END

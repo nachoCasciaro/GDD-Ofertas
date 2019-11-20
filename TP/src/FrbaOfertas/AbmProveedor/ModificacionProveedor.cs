@@ -42,10 +42,8 @@ namespace FrbaOfertas.AbmProveedor
             this.cp = cp;
             this.rubro = rubro;
             this.nombreContacto = nombreContacto;
-            if (habilitado)
-            {
-                checkbox_habilitado.Checked = true;
-            }
+            this.habilitado = habilitado;
+            
             Load += new EventHandler(ModificacionProveedor_Load);
         }
 
@@ -178,6 +176,17 @@ namespace FrbaOfertas.AbmProveedor
                 query.Parameters.Add(new SqlParameter("@cuit", this.txtbox_cuit.Text));
                 query.Parameters.Add(new SqlParameter("@nombreContacto", this.txtbox_contacto.Text));
                 query.Parameters.Add(new SqlParameter("@rubro_detalle", this.comboBox_rubro.SelectedItem));
+
+                if (this.checkbox_habilitado.Checked)
+                {
+                 query.Parameters.Add(new SqlParameter("@habilitar", true));
+
+                }
+                else
+                {
+                    query.Parameters.Add(new SqlParameter("@habilitar", habilitado));
+                }
+
 
                 connection.Open();
                 query.ExecuteNonQuery();
