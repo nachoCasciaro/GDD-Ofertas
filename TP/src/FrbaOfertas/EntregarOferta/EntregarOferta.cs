@@ -35,7 +35,7 @@ namespace FrbaOfertas.EntregarOferta
 
         }
 
-        private void entregarOferta()
+        private int entregarOferta()
         {
             var connection = DB.getInstance().getConnection();
             SqlCommand query = new SqlCommand("POR_COLECTORA.sp_consumir_oferta", connection);
@@ -46,21 +46,62 @@ namespace FrbaOfertas.EntregarOferta
             query.Parameters.Add(new SqlParameter("@fecha_consumo", dtm_fechaconsumo.Value)); 
             query.Parameters.Add(new SqlParameter("@id_cliente", Convert.ToInt32(this.txtbox_cliente.Text)));
 
+            query.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
+
             connection.Open();
             query.ExecuteNonQuery();
+
+            Int32 resultado = Convert.ToInt32(query.Parameters["@resultado"].Value);
+
+
             connection.Close();
+
+            return resultado;
 
             this.Hide();
             new Menu_Principal.MenuProveedor(idProveedor).Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
+
         {
             try
             {
                 this.validarDatos();
-                this.entregarOferta();
-                this.Close();
+                int resultado = this.entregarOferta();
+
+                if (resultado == -1)
+                {
+                    MessageBox.Show("El cupon que desea dar de baja se encuentra vencido.");
+                    this.Hide();
+                    new Menu_Principal.MenuProveedor(idProveedor).Show();
+
+                }
+
+                if (resultado == -2)
+                {
+                    MessageBox.Show("El cupon ya fue dado de baja anteriormente.");
+                    this.Hide();
+                    new Menu_Principal.MenuProveedor(idProveedor).Show();
+
+                }
+
+                if (resultado == -3)
+                {
+                    MessageBox.Show("No podes dar de baja un cupon que corresponde a una oferta de otro proveedor.");
+                    this.Hide();
+                    new Menu_Principal.MenuProveedor(idProveedor).Show();
+
+                }
+
+                if (resultado == 0)
+                {
+                    MessageBox.Show("El cupón fué dado de baja con éxito.");
+                    this.Hide();
+                    new Menu_Principal.MenuProveedor(idProveedor).Show();
+
+                }
+
             }
             catch (Exception excepcion)
             {

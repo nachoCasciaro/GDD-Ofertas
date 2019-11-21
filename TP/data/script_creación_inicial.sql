@@ -960,11 +960,35 @@ CREATE PROCEDURE POR_COLECTORA.sp_consumir_oferta(
 @codigo_cupon nvarchar(80),
 @fecha_consumo datetime,
 @id_proveedor numeric,
-@id_cliente numeric
+@id_cliente numeric,
+@resultado int output
 )
 
 AS
 BEGIN
+
+	if( (select Cupon_Fecha_Venc from Cupones where Cupon_Codigo = @codigo_cupon) < @fecha_consumo )
+	begin
+		set @resultado = -1
+	end
+
+	if ( (select Cupon_Fecha_Consumo from Cupones where Cupon_Codigo = @codigo_cupon) IS  NOT NULL )
+	BEGIN
+		set @resultado = -2
+	END
+
+	if ( (select Provee_ID from Proveedores P
+					JOIN Ofertas O
+						ON P.Provee_id = O.Oferta_Proveedor
+					JOIN Compras C
+						ON O.Oferta_Id = C.Compra_Oferta
+					JOIN Cupones CU
+						ON C.Compra_Nro = CU.Cupon_Nro_Compra
+					where CU.Cupon_Codigo = @codigo_cupon) <> @id_proveedor) 
+	begin
+		set @resultado = -3
+	end
+	
 
 	if ( (select Cupon_Fecha_Venc from Cupones where Cupon_Codigo = @codigo_cupon) >= @fecha_consumo 
 			and ( (select Cupon_Fecha_Consumo from Cupones where Cupon_Codigo = @codigo_cupon) IS NULL)
@@ -980,8 +1004,10 @@ BEGIN
 			UPDATE POR_COLECTORA.CUPONES SET Cupon_Fecha_Consumo = @fecha_consumo WHERE Cupon_codigo = @codigo_cupon
 			UPDATE POR_COLECTORA.CUPONES SET Cupon_Id_Cliente_Consumidor = @id_cliente WHERE Cupon_codigo = @codigo_cupon
 
+			set @resultado = 0
 		end	
 
+	 return @resultado
 END
 
 GO
