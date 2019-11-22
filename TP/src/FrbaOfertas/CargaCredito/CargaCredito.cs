@@ -39,26 +39,51 @@ namespace FrbaOfertas.CargaCredito
 
             if (error == "")
             {
-                var connection = DB.getInstance().getConnection();
-                SqlCommand query = new SqlCommand("POR_COLECTORA.sp_carga_credito", connection);
-                query.CommandType = CommandType.StoredProcedure;
+                if (combobox_pago.SelectedItem.ToString() != "Efectivo")
+                {
+                    var connection = DB.getInstance().getConnection();
+                    SqlCommand query = new SqlCommand("POR_COLECTORA.sp_carga_credito", connection);
+                    query.CommandType = CommandType.StoredProcedure;
 
-                query.Parameters.Add(new SqlParameter("@id_cliente", Convert.ToInt32(this.idCliente)));
+                    query.Parameters.Add(new SqlParameter("@id_cliente", Convert.ToInt32(this.idCliente)));
 
-                DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["current_date"]);
-                query.Parameters.Add(new SqlParameter("@fecha_carga", fechaActual));
+                    DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["current_date"]);
+                    query.Parameters.Add(new SqlParameter("@fecha_carga", fechaActual));
 
-                query.Parameters.Add(new SqlParameter("@monto", this.txtbox_monto.Text));
-                query.Parameters.Add(new SqlParameter("@tipo_tarjeta", this.combobox_tipotarjeta.Text));
-                query.Parameters.Add(new SqlParameter("@numero_tarjeta", this.txtbox_numerotarjeta.Text));
-                query.Parameters.Add(new SqlParameter("@fecha_venc", this.date_fechaVencimiento.Value));
+                    query.Parameters.Add(new SqlParameter("@monto", this.txtbox_monto.Text));
+                    query.Parameters.Add(new SqlParameter("@tipo_tarjeta", this.combobox_tipotarjeta.Text));
+                    query.Parameters.Add(new SqlParameter("@numero_tarjeta", this.txtbox_numerotarjeta.Text));
+                    query.Parameters.Add(new SqlParameter("@fecha_venc", this.date_fechaVencimiento.Value));
 
-                connection.Open();
-                query.ExecuteNonQuery();
-                connection.Close();
-                MessageBox.Show("La carga se realizó con éxito.");
-                this.Hide();
-                new Menu_Principal.MenuCliente(idCliente).Show();
+                    connection.Open();
+                    query.ExecuteNonQuery();
+                    connection.Close();
+                    MessageBox.Show("La carga se realizó con éxito.");
+                    this.Hide();
+                    new Menu_Principal.MenuCliente(idCliente).Show();
+
+                }
+                else
+                {
+                    var connection = DB.getInstance().getConnection();
+                    SqlCommand query = new SqlCommand("POR_COLECTORA.sp_carga_credito_efectivo", connection);
+                    query.CommandType = CommandType.StoredProcedure;
+
+                    query.Parameters.Add(new SqlParameter("@id_cliente", Convert.ToInt32(this.idCliente)));
+
+                    DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["current_date"]);
+                    query.Parameters.Add(new SqlParameter("@fecha_carga", fechaActual));
+
+                    query.Parameters.Add(new SqlParameter("@monto", this.txtbox_monto.Text));
+
+                    connection.Open();
+                    query.ExecuteNonQuery();
+                    connection.Close();
+                    MessageBox.Show("La carga se realizó con éxito.");
+                    this.Hide();
+                    new Menu_Principal.MenuCliente(idCliente).Show();
+
+                }
             }
             else
             {
@@ -85,32 +110,56 @@ namespace FrbaOfertas.CargaCredito
 
                 mensajeError.Add("Debe seleccionar una forma de pago.");
             }
-            if (combobox_tipotarjeta.SelectedIndex == -1)
+            else 
             {
-                mensajeError.Add("Debe seleccionar un tipo de tarjeta.");
-            }
-            if (string.IsNullOrWhiteSpace(txtbox_numerotarjeta.Text))
-            {
-                mensajeError.Add("Debe completar el numero de la tarjeta.");
-            }
+                if (combobox_pago.SelectedItem.ToString() == "Tarjeta")
+                {
+                    if (combobox_tipotarjeta.SelectedIndex == -1)
+                    {
+                        mensajeError.Add("Debe seleccionar un tipo de tarjeta.");
+                    }
+                    if (string.IsNullOrWhiteSpace(txtbox_numerotarjeta.Text))
+                    {
+                        mensajeError.Add("Debe completar el numero de la tarjeta.");
+                    }
 
+                    if (!Validaciones.contieneSoloNumeros(txtbox_numerotarjeta.Text))
+                    {
+                        mensajeError.Add("El numero de la tarjeta deben ser solo numeros");
+                    }
+
+                    string setting = ConfigurationManager.AppSettings["current_date"];
+                    DateTime fechaSistema = Convert.ToDateTime(setting);
+                    int value = DateTime.Compare(date_fechaVencimiento.Value, fechaSistema);
+                    if (value < 0)
+                    {
+                        mensajeError.Add("La fecha de vencimiento de la tarjeta tiene que ser mayor o igual a la actual");
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(txtbox_numerotarjeta.Text))
+                    {
+                        mensajeError.Add("Debe dejar vacío el numero de tarjeta si desea realizar una carga en efectivo.");
+                    }
+
+                    if (combobox_tipotarjeta.SelectedIndex == -1)
+                    {
+                        mensajeError.Add("Debe seleccionar No aplica en el tipo de tarjeta.");
+                    }
+
+                }
+
+            }
+           
 
             if (!Validaciones.contieneSoloNumeros(txtbox_monto.Text))
             {
 
                 mensajeError.Add("El monto de carga debe contener solo numeros.");
             }
-            if (!Validaciones.contieneSoloNumeros(txtbox_numerotarjeta.Text))
-            {
-                mensajeError.Add("El numero de la tarjeta deben ser solo numeros");
-            }
-            string setting = ConfigurationManager.AppSettings["current_date"];
-            DateTime fechaSistema = Convert.ToDateTime(setting);
-            int value = DateTime.Compare(date_fechaVencimiento.Value,fechaSistema);
-            if ( value < 0)
-            {
-                mensajeError.Add("La fecha de vencimiento de la tarjeta tiene que ser mayor o igual a la actual");
-            }
+            
+           
 
             string mensajeConcat;
              mensajeConcat = string.Join("\n", mensajeError);

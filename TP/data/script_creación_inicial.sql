@@ -769,6 +769,29 @@ END
 
 GO
 
+CREATE PROCEDURE POR_COLECTORA.sp_carga_credito_efectivo (
+@id_cliente numeric,
+@fecha_carga datetime, --pasar la de archivo configuracion -> esto lo haces en la interfaz
+@monto numeric
+)
+AS
+BEGIN
+
+	
+	INSERT INTO POR_COLECTORA.Cargas(Carga_Fecha,Carga_Id_Cliente,Carga_Monto,Carga_Tipo_Pago) 
+	VALUES (@fecha_carga,@id_cliente,@monto,'Efectivo')
+
+	UPDATE POR_COLECTORA.Clientes
+	SET Clie_Saldo = Clie_Saldo + @monto
+	WHERE Clie_Id = @id_cliente;
+
+END
+
+GO
+
+
+
+
 --TOP 5 de proveedores con mayor porcentaje de descuento ofrecido en sus ofertas en forma descendente por monto
 --La pantalla debe permitirnos seleccionar el semestre
 

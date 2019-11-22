@@ -118,7 +118,8 @@
             this.combobox_tipotarjeta.FormattingEnabled = true;
             this.combobox_tipotarjeta.Items.AddRange(new object[] {
             "Crédito",
-            "Débito"});
+            "Débito",
+            "No aplica"});
             this.combobox_tipotarjeta.Location = new System.Drawing.Point(204, 156);
             this.combobox_tipotarjeta.Margin = new System.Windows.Forms.Padding(4);
             this.combobox_tipotarjeta.Name = "combobox_tipotarjeta";
