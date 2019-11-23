@@ -48,83 +48,91 @@ namespace FrbaOfertas.AbmProveedor
 
             if (string.IsNullOrWhiteSpace(txtbox_username.Text))
             {
-                mensajeError.Add("Debe especificar un nombre de usuario");
+                mensajeError.Add("Debe especificar un nombre de usuario.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_password.Text))
             {
-                mensajeError.Add("Debe ingresar una contraseña");
+                mensajeError.Add("Debe ingresar una contraseña.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_RS.Text))
             {
-                mensajeError.Add("Debe completar la razón social");
+                mensajeError.Add("Debe completar la razón social.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_mail.Text))
             {
-                mensajeError.Add("Debe completar el mail");
+                mensajeError.Add("Debe completar el mail.");
+            }
+            else
+            {
+                if (!Validaciones.tieneFormatoMail(txtbox_mail.Text))
+                {
+
+                    mensajeError.Add("El formato del mail no es correcto.");
+                }
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_telefono.Text))
             {
-                mensajeError.Add("Debe completar el teléfono");
+                mensajeError.Add("Debe completar el teléfono.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_cuit.Text))
             {
-                mensajeError.Add("Debe completar el CUIT");
+                mensajeError.Add("Debe completar el CUIT.");
+            }
+            else
+            {
+                if (!Validaciones.tieneFormatoDeCuit(txtbox_cuit.Text))
+                {
+
+                    mensajeError.Add("El formato del CUIT no es correcto. Ejemplo: 20-30483921-1 ");
+                }
             }
 
             if (combobox_rubro.SelectedIndex == -1)
             {
 
-                mensajeError.Add("Debe seleccionar un rubro");
+                mensajeError.Add("Debe seleccionar un rubro.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_contacto.Text))
             {
-                mensajeError.Add("Debe completar el nombre de contacto");
+                mensajeError.Add("Debe completar el nombre de contacto.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_calle.Text))
             {
-                mensajeError.Add("Debe completar la calle");
+                mensajeError.Add("Debe completar la calle.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_CP.Text))
             {
-                mensajeError.Add("Debe completar el código postal");
+                mensajeError.Add("Debe completar el código postal.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_ciudad.Text))
             {
-                mensajeError.Add("Debe completar la ciudad");
+                mensajeError.Add("Debe completar la ciudad.");
             }
 
             if (!Validaciones.contieneSoloNumeros(txtbox_CP.Text))
             {
 
-                mensajeError.Add("El código postal debe contener únicamente números");
+                mensajeError.Add("El código postal debe contener únicamente números.");
             }
 
             if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
             {
 
-                mensajeError.Add("El telefono debe contener únicamente números");
+                mensajeError.Add("El telefono debe contener únicamente números.");
             }
 
-            if (!Validaciones.tieneFormatoMail(txtbox_mail.Text))
-            {
+            
 
-                mensajeError.Add("El formato del mail no es correcto");
-            }
-
-            if (!Validaciones.tieneFormatoDeCuit(txtbox_cuit.Text))
-            {
-
-                mensajeError.Add("El formato del CUIT no es correcto");
-            }
+            
 
             string mensajeConcat;
             mensajeConcat = string.Join("\n", mensajeError);

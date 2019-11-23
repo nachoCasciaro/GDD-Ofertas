@@ -9,52 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace FrbaOfertas.Login
+namespace FrbaOfertas.Pantallas_Login_y_Menu_Nuevas
 {
-    public partial class LoginCliente : Form
+    public partial class Login2 : Form
     {
-        public LoginCliente()
+        public Login2()
         {
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            new AbmCliente.RegistroCliente(2).Show();
-        }
-
-        private int idClienteIngresado(string username)
-        {
-            var connection = DB.getInstance().getConnection();
-            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_obtener_id_cliente", connection);
-            query.CommandType = CommandType.StoredProcedure;
-
-            query.Parameters.Add(new SqlParameter("@user", username));
-
-            query.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
-
-            connection.Open();
-            query.ExecuteNonQuery();
-
-            var resultado = (query.Parameters["@resultado"].Value);
-
-            connection.Close();
-
-            if (resultado != DBNull.Value)
-            {
-                return Convert.ToInt32(resultado);
-            } else
-            {
-                return -1;
-            }
-        }
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             string error = this.validarDatos();
-
 
             if (error == "")
             {
@@ -62,8 +28,8 @@ namespace FrbaOfertas.Login
                 SqlCommand query = new SqlCommand("POR_COLECTORA.sp_login", connection);
                 query.CommandType = CommandType.StoredProcedure;
 
-                query.Parameters.Add(new SqlParameter("@user", this.textBox_usuario.Text));
-                query.Parameters.Add(new SqlParameter("@pass", this.textBox_pass.Text));
+                query.Parameters.Add(new SqlParameter("@user", this.textBox1.Text));
+                query.Parameters.Add(new SqlParameter("@pass", this.textBox2.Text));
                 query.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 connection.Open();
@@ -75,20 +41,8 @@ namespace FrbaOfertas.Login
 
                 if (resultado == 4)
                 {
-                    this.Hide();
-
-                    int idCliente = this.idClienteIngresado(this.textBox_usuario.Text);
-
-                    if (idCliente != -1)
-                    {
-                        new Menu_Principal.MenuCliente(idCliente).Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("El usuario ingresado no es un cliente");
-                        new LoginCliente().Show();
-                    }
-
+                    this.Close();
+                    new Pantallas_Login_y_Menu_Nuevas.MenuAdmin2(1);
                 }
                 else if (resultado == 2)
                 {
@@ -104,19 +58,11 @@ namespace FrbaOfertas.Login
                     MessageBox.Show("El usuario ingresado se encuentra inhabilitado, consultar con el administrador");
                 }
 
-
             }
             else
             {
                 MessageBox.Show(error);
             }
-
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private string validarDatos()
@@ -124,12 +70,12 @@ namespace FrbaOfertas.Login
             List<string> mensajeError = new List<string>();
 
 
-            if (string.IsNullOrWhiteSpace(textBox_usuario.Text))
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
 
                 mensajeError.Add("Debe completar el username.");
             }
-            if (string.IsNullOrWhiteSpace(textBox_pass.Text))
+            if (string.IsNullOrWhiteSpace(textBox2.Text))
             {
 
                 mensajeError.Add("Debe completar la password.");
@@ -142,6 +88,5 @@ namespace FrbaOfertas.Login
             return mensajeConcat;
 
         }
-
     }
 }

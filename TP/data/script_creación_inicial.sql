@@ -215,6 +215,25 @@ DROP PROCEDURE POR_COLECTORA.sp_obtener_id_cliente
 IF OBJECT_ID ('POR_COLECTORA.sp_obtener_id_proveedor') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_obtener_id_proveedor
 
+--DROP SP CARGA CREDITO EFECTIVO
+IF OBJECT_ID ('POR_COLECTORA.sp_carga_credito_efectivo') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_carga_credito_efectivo
+
+
+--DROP SP ROL POSEE FUNCIONALIDAD
+IF OBJECT_ID ('POR_COLECTORA.sp_rol_posee_funcionalidad') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_rol_posee_funcionalidad
+
+--DROP SP CAMBIAR CONTRASEÑA USER
+IF OBJECT_ID ('POR_COLECTORA.sp_cambiar_contraseña_user') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_cambiar_contraseña_user
+
+
+--DROP SP BAJA USUARIO
+IF OBJECT_ID ('POR_COLECTORA.sp_baja_usuario') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_baja_usuario
+
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -412,7 +431,7 @@ FROM gd_esquema.Maestra
 --MIGRACION TABLA ROLES
 INSERT INTO POR_COLECTORA.Roles
 ( Rol_Nombre )
- VALUES ('Administrador'),('Cliente'),('Proveedor')
+ VALUES ('Administrador General'),('Cliente'),('Proveedor')
 
 --INSERTO EL USUARIO ADMIN
 
@@ -426,7 +445,7 @@ GO
 --INSERTO EL USUARIO ADMIN EN ROLxUSUARIO
 
 DECLARE @codigo_rol_administrador [NUMERIC]
-SET @codigo_rol_administrador= (SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador')
+SET @codigo_rol_administrador= (SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador General')
 
 INSERT INTO POR_COLECTORA.RolxUsuario(Id_Usuario, Id_Rol)
 VALUES ((SELECT Usuario_Id FROM POR_COLECTORA.Usuarios WHERE Usuario_Nombre = 'admin'), @codigo_rol_administrador)
@@ -443,15 +462,19 @@ GO
 --MIGRACION FUNCIONALIDADxROL
 
 INSERT INTO POR_COLECTORA.FuncionalidadxRol(Id_Rol, Id_Func)
-VALUES ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'ABM Rol')),
-	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'ABM Cliente')),
-	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'ABM Proveedor')), 
+VALUES ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador General'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'ABM Rol')),
+	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador General'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'ABM Cliente')),
+	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador General'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'ABM Proveedor')), 
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Cliente'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Cargar Crédito')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Proveedor'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Confección y publicación de Ofertas')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Cliente'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Comprar Oferta')),
 	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Proveedor'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Entrega/Consumo de Oferta')),
-	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Facturación a Proveedor')),
-	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Listado Estadistico'));
+	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador General'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Facturación a Proveedor')),
+	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador General'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Cargar Crédito')),
+	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador General'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Confección y publicación de Ofertas')),
+	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador General'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Comprar Oferta')),
+	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador General'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Entrega/Consumo de Oferta')),
+	   ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador General'), (SELECT Func_Id FROM POR_COLECTORA.Funcionalidades WHERE Func_Descripcion = 'Listado Estadistico'));
 GO
 
 --MIGRACION TABLA RUBROS
@@ -566,6 +589,19 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE POR_COLECTORA.sp_baja_usuario(
+@username varchar(250)
+)
+AS
+BEGIN
+	
+	update POR_COLECTORA.Usuarios
+	set Usuario_Habilitado = 0
+	where Usuario_Nombre = @username
+
+END
+GO
+
 
 CREATE PROCEDURE POR_COLECTORA.sp_alta_cliente (
 @username varchar(250),
@@ -600,6 +636,9 @@ BEGIN
 	
 	INSERT INTO POR_COLECTORA.Clientes (Clie_Nombre,Clie_Apellido,Clie_DNI,Clie_Mail,Clie_Telefono,Clie_Direccion,Clie_CP,Clie_Fecha_Nac, Clie_Usuario) 
 	VALUES (@nombre,@apellido,@dni,@mail,@telefono,@dire_id,@CP,@fechaNacimiento,@user_id)
+
+	INSERT INTO POR_COLECTORA.RolxUsuario(Id_Rol,Id_Usuario)
+	VALUES (2,@user_id)
 END
 
 GO
@@ -684,6 +723,10 @@ BEGIN
 
 	INSERT INTO POR_COLECTORA.Proveedores(Provee_RS,Provee_Mail,Provee_Telefono,Provee_Direccion,Provee_CP,Provee_CUIT,Provee_Nombre_Contacto,Provee_Rubro,Provee_Usuario) 
 	VALUES (@razonSocial,@mail,@telefono,@dire_id,@CP,@cuit,@nombreContacto,@rubro_id,@user_id)
+
+	INSERT INTO POR_COLECTORA.RolxUsuario(Id_Rol,Id_Usuario)
+	VALUES (3,@user_id)
+
 END
 
 GO
@@ -883,7 +926,7 @@ BEGIN
 	--El proveedor podrá ir cargando ofertas con diferentes fechas, esta fecha debe ser mayor o igual a la fecha actual del sistema.
 
 	INSERT INTO POR_COLECTORA.Ofertas(Oferta_Codigo,Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, Oferta_Restriccion_Compra, Oferta_Proveedor) 
-	VALUES (@oferta_codigo,@descripcion, @fecha, @fecha_venc, @precio_original, @precio_oferta, @stock, @max_compra,@id_prove)
+	VALUES (@oferta_codigo,@descripcion, @fecha, @fecha_venc, @precio_oferta, @precio_original, @stock, @max_compra,@id_prove)
 
 END
 
@@ -1059,7 +1102,7 @@ BEGIN
 	--Importe factura
 	declare @importe_total numeric
 	set @importe_total = (SELECT SUM(Compra_Oferta_Precio * Compra_Cantidad)
-						FROM Compras JOIN Ofertas ON Compra_Oferta = Oferta_Id JOIN Proveedores ON Oferta_Proveedor = Provee_Id
+						FROM POR_COLECTORA.Compras JOIN POR_COLECTORA.Ofertas ON (Compra_Oferta = Oferta_Id) JOIN POR_COLECTORA.Proveedores ON (Oferta_Proveedor = Provee_Id)
 						WHERE Compra_Fecha >= @fecha_inicio AND Compra_Fecha <= @fecha_fin AND Provee_Id = (SELECT pr2.provee_id FROM POR_COLECTORA.Proveedores pr2 WHERE pr2.provee_RS = @proveedor)) 
  
 	
@@ -1083,6 +1126,11 @@ BEGIN
 	
 	set @resultado = convert(varchar(10),@importe_total) + ' ' + convert(varchar(10),@fact_numero)
 	
+	update Compras
+	set Compra_Id_Factura = (select Fact_Id from Facturas where Fact_Numero = @fact_numero)
+	where Compra_Nro in (select c2.Compra_Nro FROM Compras c2 JOIN Ofertas ON c2.Compra_Oferta = Oferta_Id JOIN Proveedores ON Oferta_Proveedor = Provee_Id
+						WHERE c2.Compra_Fecha >= @fecha_inicio AND c2.Compra_Fecha <= @fecha_fin AND Provee_Id = (SELECT pr2.provee_id FROM POR_COLECTORA.Proveedores pr2 WHERE pr2.provee_RS = @proveedor)) 
+
 
 END
 GO
@@ -1289,6 +1337,26 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE POR_COLECTORA.sp_rol_posee_funcionalidad(@rol numeric,@func_descrip nvarchar(80) ,@resultado bit output)
+AS
+BEGIN
+
+	if ( @func_descrip in (select Func_Descripcion from FuncionalidadxRol join Funcionalidades on (Id_Func = Func_Id) where Id_Rol = @rol))
+	begin
+		set @resultado = 1
+	end
+
+	else
+	begin
+		set @resultado = 0
+	end
+
+	return @resultado
+							
+
+END
+GO
+
 
 CREATE PROCEDURE POR_COLECTORA.sp_login(@user nvarchar(255) , @pass varchar(256), @resultado int output)
 AS
@@ -1353,5 +1421,36 @@ BEGIN
 					)
 	-- Como ya deshabilitamos al usuario, le reseteamos la cantidad de intentos fallidos
 
-END;
+END
+GO
+
+
+CREATE TRIGGER POR_COLECTORA.tr_quitar_rol_inhabilitado_a_usuarios
+ON POR_COLECTORA.Roles
+FOR UPDATE
+AS
+BEGIN
+
+	DELETE POR_COLECTORA.RolxUsuario	
+	WHERE Id_Rol IN (
+					SELECT Rol_Id
+					FROM inserted )
+
+
+
+END
+GO
+
+CREATE PROCEDURE POR_COLECTORA.sp_cambiar_contraseña_user(@id_user numeric,@new_pass varchar(80))
+AS
+BEGIN
+	
+	declare @new_hash_pass 	BINARY(32)
+	set @new_hash_pass = HASHBYTES('SHA2_256', @new_pass)
+
+	update POR_COLECTORA.Usuarios
+	set Usuario_Password = @new_hash_pass
+	where Usuario_Id = @id_user
+							
+END
 GO

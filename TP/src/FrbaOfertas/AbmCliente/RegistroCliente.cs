@@ -47,80 +47,79 @@ namespace FrbaOfertas.AbmCliente
 
             if (string.IsNullOrWhiteSpace(txtbox_user.Text))
             {
-                mensajeError.Add("Debe especificar un nombre de usuario");
+                mensajeError.Add("Debe especificar un nombre de usuario.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_password.Text))
             {
-                mensajeError.Add("Debe ingresar una contraseña");
+                mensajeError.Add("Debe ingresar una contraseña.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_nombre.Text)) 
             {
-                mensajeError.Add("Debe completar el nombre");
+                mensajeError.Add("Debe completar el nombre.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_apellido.Text))
             {
-                mensajeError.Add("Debe completar el apellido");
+                mensajeError.Add("Debe completar el apellido.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_dni.Text))
             {
-                mensajeError.Add("Debe completar el dni");
-            } 
-            
-            if (string.IsNullOrWhiteSpace(txtbox_mail.Text)) 
+                mensajeError.Add("Debe completar el dni.");
+            }
+            else
             {
-                mensajeError.Add("Debe completar el mail");
+                if (!Validaciones.contieneSoloNumeros(txtbox_dni.Text))
+                {
+
+                    mensajeError.Add("El dni debe contener únicamente números.");
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(txtbox_mail.Text))
+            {
+                mensajeError.Add("Debe completar el mail.");
+            }
+            else
+            {
+                if (!Validaciones.tieneFormatoMail(txtbox_mail.Text))
+                {
+
+                    mensajeError.Add("El formato del mail no es correcto.");
+                }
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_telefono.Text))
             {
-                mensajeError.Add("Debe completar el teléfono");
+                mensajeError.Add("Debe completar el teléfono.");
+            }
+            else
+            {
+                if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
+                {
+
+                    mensajeError.Add("El telefono debe contener únicamente números.");
+                }
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_calle.Text))
             {
-                mensajeError.Add("Debe completar la calle");
+                mensajeError.Add("Debe completar la calle.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_cp.Text))
             {
-                mensajeError.Add("Debe completar el código postal");
+                mensajeError.Add("Debe completar el código postal.");
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_ciudad.Text))
             {
-                mensajeError.Add("Debe completar la ciudad");
+                mensajeError.Add("Debe completar la ciudad.");
             }
 
-            /*if (string.IsNullOrWhiteSpace(txtbox_depto.Text))  
-            {
-                mensajeError.Add("Debe completar el departamento");
-            }
-
-            if (string.IsNullOrWhiteSpace(txtbox_nropiso.Text))
-            {
-                mensajeError.Add("Debe completar el número de piso");
-            }*/
-
-            if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
-            {
-
-                mensajeError.Add("El telefono debe contener únicamente números");
-            }
-            if (!Validaciones.contieneSoloNumeros(txtbox_dni.Text))
-            {
-
-                throw new Exception("El dni debe contener únicamente números");
-            }
-            if (!Validaciones.tieneFormatoMail(txtbox_mail.Text))
-            {
-
-                mensajeError.Add("El formato del mail no es correcto");
-            }
-
+            
             string mensajeConcat;
             mensajeConcat = string.Join("\n", mensajeError);
 
@@ -178,34 +177,7 @@ namespace FrbaOfertas.AbmCliente
 
         }
 
-        /*private void button1_Click(object sender, EventArgs e) //Boton registrarme
-        {
-            try
-            {
-                this.registrarCliente();
-                this.Close();
-                if (esAdminOCliente == 1)
-                {
-                    new Menu_Principal.MenuAdmin().Show();
-                }
-                else
-                {
-                    new Login.LoginCliente().Show();
-                }
-
-            }
-            catch (Exception excepcion)
-            {
-                MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
-            }
-        }*/ //Comento el metodo viejo por si hay algo mal en el nuevo
-
-        /*private void button2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            new Login.Login().Show();
-        }*/ //Comento porque CREO que no esta y no se usa
-
+      
         private void textBox12_TextChanged(object sender, EventArgs e)
         {
 

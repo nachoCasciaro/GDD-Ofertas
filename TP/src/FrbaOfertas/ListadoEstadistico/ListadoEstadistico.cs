@@ -54,10 +54,19 @@ namespace FrbaOfertas.ListadoEstadistico
                 if (combobox_tipolistado.SelectedIndex == 0) //Mayor porcentaje desc
                 {
                     ConfiguradorDataGrid.llenarDataGridConConsulta(this.obtenerProveedoresMayorDescuento(), dataGridView1);
+                    string fi = dataGridView1.RowCount.ToString();
+                    if (dataGridView1.RowCount <= 1)
+                    {
+                        MessageBox.Show("En el año y semestre seleccionados ningún proveedor realizó ofertas.");
+                    }
                 }
                 else if (combobox_tipolistado.SelectedIndex == 1) //Mayor facturacion
                 {
                     ConfiguradorDataGrid.llenarDataGridConConsulta(this.obtenerProveedoresMayorFacturacion(), dataGridView1);
+                    if (dataGridView1.RowCount <= 1)
+                    {
+                        MessageBox.Show("En el año y semestre seleccionados ningún proveedor facturó.");
+                    }
                 }
             }
             else

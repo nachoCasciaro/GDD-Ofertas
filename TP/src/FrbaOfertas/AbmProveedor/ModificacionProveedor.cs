@@ -95,15 +95,36 @@ namespace FrbaOfertas.AbmProveedor
             {
                 mensajeError.Add("Debe completar el mail");
             }
+            else
+            {
+                if (!Validaciones.tieneFormatoMail(txtbox_mail.Text))
+                {
+                    mensajeError.Add("El formato del mail no es correcto");
+                }
+            }
 
             if (string.IsNullOrWhiteSpace(txtbox_telefono.Text))
             {
                 mensajeError.Add("Debe completar el teléfono");
             }
+            else
+            {
+                if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
+                {
+                    mensajeError.Add("El telefono debe contener únicamente números");
+                }
+            }
 
             if (string.IsNullOrWhiteSpace(txtbox_cuit.Text))
             {
                 mensajeError.Add("Debe completar el CUIT");
+            }
+            else
+            {
+                if (!Validaciones.tieneFormatoDeCuit(txtbox_cuit.Text))
+                {
+                    mensajeError.Add("El formato del CUIT no es correcto");
+                }
             }
 
             if (comboBox_rubro.SelectedIndex == -1)
@@ -126,31 +147,19 @@ namespace FrbaOfertas.AbmProveedor
             {
                 mensajeError.Add("Debe completar el código postal");
             }
+            else
+            {
+                if (!Validaciones.contieneSoloNumeros(txtbox_cp.Text))
+                {
+                    mensajeError.Add("El código postal debe contener únicamente números");
+                }
+            }
 
             if (string.IsNullOrWhiteSpace(txtbox_ciudad.Text))
             {
                 mensajeError.Add("Debe completar la ciudad");
             }
 
-            if (!Validaciones.contieneSoloNumeros(txtbox_cp.Text))
-            {
-                mensajeError.Add("El código postal debe contener únicamente números");
-            }
-
-            if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
-            {
-                mensajeError.Add("El telefono debe contener únicamente números");
-            }
-
-            if (!Validaciones.tieneFormatoMail(txtbox_mail.Text))
-            {
-                mensajeError.Add("El formato del mail no es correcto");
-            }
-
-            if (!Validaciones.tieneFormatoDeCuit(txtbox_cuit.Text))
-            {
-                mensajeError.Add("El formato del CUIT no es correcto");
-            }
 
             string mensajeConcat;
             mensajeConcat = string.Join("\n", mensajeError);

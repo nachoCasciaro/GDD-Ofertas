@@ -98,15 +98,39 @@ namespace FrbaOfertas.AbmCliente
             {
                 mensajeError.Add("Debe completar el dni");
             }
+            else
+            {
+                if (!Validaciones.contieneSoloNumeros(txtbox_dni.Text))
+                {
+
+                    mensajeError.Add("El dni debe contener únicamente números");
+                }
+            }
 
             if (string.IsNullOrWhiteSpace(txtbox_mail.Text))
             {
                 mensajeError.Add("Debe completar el mail");
             }
+            else
+            {
+                if (!Validaciones.tieneFormatoMail(txtbox_mail.Text))
+                {
+
+                    mensajeError.Add("El formato del mail no es correcto");
+                }
+            }
 
             if (string.IsNullOrWhiteSpace(txtbox_telefono.Text))
             {
                 mensajeError.Add("Debe completar el teléfono");
+            }
+            else
+            {
+                if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
+                {
+
+                    mensajeError.Add("El telefono debe contener únicamente números");
+                }
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_calle.Text))
@@ -123,33 +147,8 @@ namespace FrbaOfertas.AbmCliente
             {
                 mensajeError.Add("Debe completar la ciudad");
             }
-
-            /*if (string.IsNullOrWhiteSpace(txtbox_depto.Text))  
-            {
-                mensajeError.Add("Debe completar el departamento");
-            }
-
-            if (string.IsNullOrWhiteSpace(txtbox_nropiso.Text))
-            {
-                mensajeError.Add("Debe completar el número de piso");
-            }*/
-
-            if (!Validaciones.contieneSoloNumeros(txtbox_telefono.Text))
-            {
-
-                mensajeError.Add("El telefono debe contener únicamente números");
-            }
-            if (!Validaciones.contieneSoloNumeros(txtbox_dni.Text))
-            {
-
-                throw new Exception("El dni debe contener únicamente números");
-            }
-            if (!Validaciones.tieneFormatoMail(txtbox_mail.Text))
-            {
-
-                mensajeError.Add("El formato del mail no es correcto");
-            }
-
+                     
+           
             string mensajeConcat;
             mensajeConcat = string.Join("\n", mensajeError);
 

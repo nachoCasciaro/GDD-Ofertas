@@ -105,6 +105,18 @@
     <Compile Include="AbmRol\ModificacionRol.Designer.cs">
       <DependentUpon>ModificacionRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="BM Usuario\MenuBMUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BM Usuario\MenuBMUsuario.Designer.cs">
+      <DependentUpon>MenuBMUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CambiarPassword\CambiarContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CambiarPassword\CambiarContraseña.Designer.cs">
+      <DependentUpon>CambiarContraseña.cs</DependentUpon>
+    </Compile>
     <Compile Include="CargaCredito\CargaCredito.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +185,18 @@
     <Compile Include="Login\LoginProveedor.Designer.cs">
       <DependentUpon>LoginProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pantallas Login y Menu Nuevas\Login2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas Login y Menu Nuevas\Login2.Designer.cs">
+      <DependentUpon>Login2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas Login y Menu Nuevas\MenuPpal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas Login y Menu Nuevas\MenuPpal.Designer.cs">
+      <DependentUpon>MenuPpal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Menu Principal\MenuCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +229,7 @@
     <Compile Include="AbmProveedor\RegistroProveedor.Designer.cs">
       <DependentUpon>RegistroProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils.cs" />
     <Compile Include="Validaciones.cs" />
     <EmbeddedResource Include="AbmCliente\FiltroBMCliente.resx">
       <DependentUpon>FiltroBMCliente.cs</DependentUpon>
@@ -236,6 +261,12 @@
     <EmbeddedResource Include="AbmRol\ModificacionRol.resx">
       <DependentUpon>ModificacionRol.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BM Usuario\MenuBMUsuario.resx">
+      <DependentUpon>MenuBMUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CambiarPassword\CambiarContraseña.resx">
+      <DependentUpon>CambiarContraseña.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CargaCredito\CargaCredito.resx">
       <DependentUpon>CargaCredito.cs</DependentUpon>
     </EmbeddedResource>
@@ -265,6 +296,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginProveedor.resx">
       <DependentUpon>LoginProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas Login y Menu Nuevas\Login2.resx">
+      <DependentUpon>Login2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas Login y Menu Nuevas\MenuPpal.resx">
+      <DependentUpon>MenuPpal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu Principal\MenuCliente.resx">
       <DependentUpon>MenuCliente.cs</DependentUpon>
