@@ -13,8 +13,11 @@ namespace FrbaOfertas.Menu_Principal
 {
     public partial class MenuAdmin : Form
     {
-        public MenuAdmin()
+        int idAdminLogueado;
+
+        public MenuAdmin(int idAdminLogueado)
         {
+            this.idAdminLogueado = idAdminLogueado;
             InitializeComponent();
             Load += new EventHandler(MenuAdmin_Load);
 
@@ -195,6 +198,12 @@ namespace FrbaOfertas.Menu_Principal
         {
             MessageBox.Show("Debe acceder como proveedor para poder utilizar esta función.");
 
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new CambiarContraseña(idAdminLogueado, this).Show();
         }
 
 

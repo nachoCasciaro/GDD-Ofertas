@@ -50,6 +50,26 @@ namespace FrbaOfertas.Login
             }
         }
 
+        private int idUserIngresado(string username)
+        {
+            var connection2 = DB.getInstance().getConnection();
+            SqlCommand query2 = new SqlCommand("POR_COLECTORA.sp_obtener_id_user", connection2);
+            query2.CommandType = CommandType.StoredProcedure;
+
+            query2.Parameters.Add(new SqlParameter("@user", username));
+            query2.Parameters.Add("@idUser", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+            connection2.Open();
+            query2.ExecuteNonQuery();
+
+            int id = Convert.ToInt32(query2.Parameters["@idUser"].Value);
+
+            connection2.Close();
+
+            return Convert.ToInt32(id);
+
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -79,9 +99,11 @@ namespace FrbaOfertas.Login
 
                     int idCliente = this.idClienteIngresado(this.textBox_usuario.Text);
 
+                    int idUser = this.idUserIngresado(this.textBox_usuario.Text);
+
                     if (idCliente != -1)
                     {
-                        new Menu_Principal.MenuCliente(idCliente).Show();
+                        new Menu_Principal.MenuCliente(idCliente,idUser).Show();
                     }
                     else
                     {

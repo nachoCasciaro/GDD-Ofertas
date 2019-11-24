@@ -33,12 +33,6 @@ namespace FrbaOfertas.AbmRol
 
         }
 
-        private void button3_Click(object sender, EventArgs e) //Volver al menu principal
-        {
-            this.Hide();
-            new Menu_Principal.MenuAdmin().Show();
-        }
-
         private void button3_Click_1(object sender, EventArgs e)
         {
             this.Hide();

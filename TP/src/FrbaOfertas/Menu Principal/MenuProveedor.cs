@@ -15,10 +15,12 @@ namespace FrbaOfertas.Menu_Principal
     public partial class MenuProveedor : Form
     {
         int idProveedor;
+        int idUserLogueado;
 
-        public MenuProveedor(int idProveedor)
+        public MenuProveedor(int idProveedor, int idUserLogueado)
         {
             this.idProveedor = idProveedor;
+            this.idUserLogueado = idUserLogueado;
             InitializeComponent();
             Load += new EventHandler(MenuProveedor_Load);
 
@@ -195,6 +197,12 @@ namespace FrbaOfertas.Menu_Principal
         {
             this.Hide();
             new Facturar.FacturarProveedor(this).Show();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new CambiarContraseña(idUserLogueado, this).Show();
         }
     }
 }

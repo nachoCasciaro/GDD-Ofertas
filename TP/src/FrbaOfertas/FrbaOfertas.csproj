@@ -111,10 +111,10 @@
     <Compile Include="BM Usuario\MenuBMUsuario.Designer.cs">
       <DependentUpon>MenuBMUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="CambiarPassword\CambiarContraseña.cs">
+    <Compile Include="CambiarContraseña\CambiarContraseña.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CambiarPassword\CambiarContraseña.Designer.cs">
+    <Compile Include="CambiarContraseña\CambiarContraseña.Designer.cs">
       <DependentUpon>CambiarContraseña.cs</DependentUpon>
     </Compile>
     <Compile Include="CargaCredito\CargaCredito.cs">
@@ -148,12 +148,6 @@
     </Compile>
     <Compile Include="Facturar\FacturarProveedor.Designer.cs">
       <DependentUpon>FacturarProveedor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="ListadoEstadistico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
@@ -252,7 +246,7 @@
     <EmbeddedResource Include="BM Usuario\MenuBMUsuario.resx">
       <DependentUpon>MenuBMUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CambiarPassword\CambiarContraseña.resx">
+    <EmbeddedResource Include="CambiarContraseña\CambiarContraseña.resx">
       <DependentUpon>CambiarContraseña.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CargaCredito\CargaCredito.resx">

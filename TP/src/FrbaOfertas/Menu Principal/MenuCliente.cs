@@ -15,10 +15,12 @@ namespace FrbaOfertas.Menu_Principal
     public partial class MenuCliente : Form
     {
         int idCliente;
+        int idUserLogueado;
 
-        public MenuCliente(int idCliente)
+        public MenuCliente(int idCliente, int idUserLogueado)
         {
             this.idCliente = idCliente;
+            this.idUserLogueado = idUserLogueado;
             InitializeComponent();
             Load += new EventHandler(MenuCliente_Load);
 
@@ -199,6 +201,12 @@ namespace FrbaOfertas.Menu_Principal
         {
             this.Hide();
             new AbmRol.MenuAbmRol(this).Show();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new CambiarContraseña(idUserLogueado, this).Show();
         }
     }
 }

@@ -233,6 +233,10 @@ DROP PROCEDURE POR_COLECTORA.sp_cambiar_contraseña_user
 IF OBJECT_ID ('POR_COLECTORA.sp_baja_usuario') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_baja_usuario
 
+--DROP SP OBTENER ID USER
+IF OBJECT_ID ('POR_COLECTORA.sp_obtener_id_user') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_obtener_id_user
+
 
 GO
 
@@ -1271,6 +1275,22 @@ BEGIN
 
 END
 GO
+
+--SP OBTENER ID USER
+CREATE PROCEDURE POR_COLECTORA.sp_obtener_id_user(@user varchar(250), @idUser numeric output)
+AS
+BEGIN
+
+	set @idUser = (SELECT Usuario_Id
+				FROM POR_COLECTORA.Usuarios
+				WHERE Usuario_Nombre = @user)
+	
+	RETURN @idUser
+
+END
+GO
+
+
 
 --SP OBTENER ID CLIENTE
 CREATE PROCEDURE POR_COLECTORA.sp_obtener_id_cliente(@user varchar(250), @resultado int output)

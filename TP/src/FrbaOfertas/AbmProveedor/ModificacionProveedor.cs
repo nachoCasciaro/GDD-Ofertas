@@ -213,7 +213,7 @@ namespace FrbaOfertas.AbmProveedor
 
                 this.Hide();
 
-                new Menu_Principal.MenuAdmin().Show();
+                this.parent.Show();
 
             }
             else
