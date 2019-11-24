@@ -42,7 +42,7 @@ namespace FrbaOfertas.AbmRol
         private void ModificarRol_Load(object sender, System.EventArgs e)
         {
             var connection = DB.getInstance().getConnection();
-            SqlCommand sqlCmd = new SqlCommand("SELECT Rol_Nombre FROM POR_COLECTORA.Roles WHERE Rol_Id = " + id_rol, connection);
+            SqlCommand sqlCmd = new SqlCommand("SELECT Rol_Nombre FROM POR_COLECTORA.Roles WHERE Rol_Id = " + "'" + id_rol + "'", connection);
             connection.Open();
             SqlDataReader sqlReader = sqlCmd.ExecuteReader();
 
@@ -58,7 +58,7 @@ namespace FrbaOfertas.AbmRol
 
             //COMBOBOX FUNCIONALIDADES
             var connection2 = DB.getInstance().getConnection();
-            SqlCommand sqlCmd2 = new SqlCommand("SELECT DISTINCT Func_Descripcion FROM POR_COLECTORA.Funcionalidades JOIN POR_COLECTORA.FuncionalidadxRol ON Func_Id = Id_Func WHERE Id_Func NOT IN (SELECT Id_Func FROM POR_COLECTORA.FuncionalidadxRol WHERE Id_Rol = " + id_rol + ")", connection);
+            SqlCommand sqlCmd2 = new SqlCommand("SELECT DISTINCT Func_Descripcion FROM POR_COLECTORA.Funcionalidades JOIN POR_COLECTORA.FuncionalidadxRol ON Func_Id = Id_Func WHERE Id_Rol = " + "'" + id_rol + "'" + " AND Id_Func NOT IN (SELECT Id_Func FROM POR_COLECTORA.FuncionalidadxRol WHERE Id_Rol = " + "'" + id_rol + "'" + ")", connection);
             connection2.Open();
             SqlDataReader sqlReader2 = sqlCmd2.ExecuteReader();
 
