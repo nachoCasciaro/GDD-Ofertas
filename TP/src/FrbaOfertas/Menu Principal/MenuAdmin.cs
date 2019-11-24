@@ -206,6 +206,12 @@ namespace FrbaOfertas.Menu_Principal
             new CambiarContraseña(idAdminLogueado, this).Show();
         }
 
+        private void button12_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new BM_Usuario.MenuBMUsuario(this).Show();
+        }
+
 
 
 

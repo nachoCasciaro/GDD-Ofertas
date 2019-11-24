@@ -238,6 +238,10 @@ IF OBJECT_ID ('POR_COLECTORA.sp_obtener_id_user') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_obtener_id_user
 
 
+--DROP SP MOSTRAR USUARIOS
+IF OBJECT_ID ('POR_COLECTORA.sp_mostrar_usuarios') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_mostrar_usuarios
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -1172,6 +1176,17 @@ BEGIN
 	
 	INSERT INTO POR_COLECTORA.Roles (Rol_Nombre)
 	VALUES (@nombre)
+	
+END
+GO
+
+--SP ALTA ROL
+CREATE PROCEDURE POR_COLECTORA.sp_mostrar_usuarios
+AS 
+BEGIN
+	
+	SELECT Usuario_Id,Usuario_Nombre,Usuario_Habilitado
+	FROM POR_COLECTORA.Usuarios
 	
 END
 GO
