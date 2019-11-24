@@ -398,8 +398,7 @@ CREATE TABLE POR_COLECTORA.Cargas(
 	Carga_Id_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
 	Carga_Tipo_Pago nvarchar(20), --Es el tipo de tarjeta
 	Carga_Monto NUMERIC NOT NULL,
-	Carga_Id_Tarjeta Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Tarjetas(Tarjeta_Id),
-	Carga_Medio_Pago VARCHAR(8))
+	Carga_Id_Tarjeta Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Tarjetas(Tarjeta_Id))
 GO
 
 --			FIN CREACION TABLAS
