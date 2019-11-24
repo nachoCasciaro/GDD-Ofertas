@@ -13,8 +13,11 @@ namespace FrbaOfertas.Facturar
 {
     public partial class FacturarProveedor : Form
     {
-        public FacturarProveedor()
+        Form parent;
+
+        public FacturarProveedor(Form parent)
         {
+            this.parent = parent;
             InitializeComponent();
             Load += new EventHandler(FacturarProveedor_Load);
         }
@@ -133,8 +136,7 @@ namespace FrbaOfertas.Facturar
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
-            new Menu_Principal.MenuAdmin().Show();
-
+            this.parent.Show();
         }
     
     }

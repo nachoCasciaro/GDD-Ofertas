@@ -12,8 +12,11 @@ namespace FrbaOfertas.AbmCliente
 {
     public partial class MenuAbmCliente : Form
     {
-        public MenuAbmCliente()
+        Form parent;
+
+        public MenuAbmCliente(Form parent)
         {
+            this.parent = parent;
             InitializeComponent();
         }
 
@@ -38,7 +41,7 @@ namespace FrbaOfertas.AbmCliente
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
-            new Menu_Principal.MenuAdmin().Show();
+            this.parent.Show();
         }
     }
 }

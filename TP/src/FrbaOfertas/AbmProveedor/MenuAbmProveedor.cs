@@ -12,15 +12,18 @@ namespace FrbaOfertas.AbmProveedor
 {
     public partial class MenuAbmProveedor : Form
     {
-        public MenuAbmProveedor()
+        Form parent;
+
+        public MenuAbmProveedor(Form parent)
         {
+            this.parent = parent;
             InitializeComponent();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Menu_Principal.MenuAdmin().Show();
+            this.parent.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)

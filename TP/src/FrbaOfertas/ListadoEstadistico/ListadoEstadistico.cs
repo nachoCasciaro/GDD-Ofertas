@@ -14,8 +14,11 @@ namespace FrbaOfertas.ListadoEstadistico
 {
     public partial class ListadoEstadistico : Form
     {
-        public ListadoEstadistico()
+        Form parent;
+
+        public ListadoEstadistico(Form parent)
         {
+            this.parent = parent;
             InitializeComponent();
             dtm_año.Format = DateTimePickerFormat.Custom;
             dtm_año.CustomFormat = "yyyy";
@@ -124,7 +127,8 @@ namespace FrbaOfertas.ListadoEstadistico
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Menu_Principal.MenuAdmin().Show();
+            this.parent.Show();
+
         }
     }
 }

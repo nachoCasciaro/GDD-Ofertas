@@ -16,6 +16,8 @@ namespace FrbaOfertas.Menu_Principal
         public MenuAdmin()
         {
             InitializeComponent();
+            Load += new EventHandler(MenuAdmin_Load);
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -26,20 +28,20 @@ namespace FrbaOfertas.Menu_Principal
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AbmCliente.MenuAbmCliente().Show();
+            new AbmCliente.MenuAbmCliente(this).Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AbmProveedor.MenuAbmProveedor().Show();
+            new AbmProveedor.MenuAbmProveedor(this).Show();
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AbmRol.MenuAbmRol().Show();
+            new AbmRol.MenuAbmRol(this).Show();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -51,13 +53,13 @@ namespace FrbaOfertas.Menu_Principal
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Facturar.FacturarProveedor().Show();
+            new Facturar.FacturarProveedor(this).Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new ListadoEstadistico.ListadoEstadistico().Show();
+            new ListadoEstadistico.ListadoEstadistico(this).Show();
         }
 
         private void MenuAdmin_Load(object sender, EventArgs e)
@@ -174,7 +176,29 @@ namespace FrbaOfertas.Menu_Principal
 
         private void button8_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Debe acceder como cliente para poder utilizar esta función.");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Debe acceder como cliente para poder utilizar esta función.");
 
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Debe acceder como proveedor para poder utilizar esta función.");
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Debe acceder como proveedor para poder utilizar esta función.");
+
+        }
+
+
+
+
     }
 }

@@ -12,8 +12,11 @@ namespace FrbaOfertas.AbmRol
 {
     public partial class MenuAbmRol : Form
     {
-        public MenuAbmRol()
+        Form parent;
+
+        public MenuAbmRol(Form parent)
         {
+            this.parent = parent;
             InitializeComponent();
         }
 
@@ -39,7 +42,7 @@ namespace FrbaOfertas.AbmRol
         private void button3_Click_1(object sender, EventArgs e)
         {
             this.Hide();
-            new Menu_Principal.MenuAdmin().Show();
+            this.parent.Show();
         }
 
     }

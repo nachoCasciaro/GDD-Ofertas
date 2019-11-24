@@ -120,6 +120,7 @@
             this.button7.TabIndex = 7;
             this.button7.Text = "CARGA CRÉDITO";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
@@ -139,6 +140,7 @@
             this.button9.TabIndex = 9;
             this.button9.Text = "CONFECCIÓN Y PUBLICACIÓN DE OFERTAS";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
@@ -148,6 +150,7 @@
             this.button10.TabIndex = 10;
             this.button10.Text = "ENTREGA DE OFERTA";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // MenuAdmin
             // 
@@ -167,7 +170,7 @@
             this.Controls.Add(this.button1);
             this.Name = "MenuAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MenuCliente";
+            this.Text = "MenuAdmin";
             this.Load += new System.EventHandler(this.MenuAdmin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
