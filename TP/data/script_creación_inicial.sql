@@ -242,6 +242,12 @@ DROP PROCEDURE POR_COLECTORA.sp_obtener_id_user
 IF OBJECT_ID ('POR_COLECTORA.sp_mostrar_usuarios') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_mostrar_usuarios
 
+
+--DROP SP CLIENTE ESTA HABILITADO
+IF OBJECT_ID ('POR_COLECTORA.sp_cliente_esta_habilitado') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_cliente_esta_habilitado
+
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -1376,6 +1382,26 @@ AS
 BEGIN
 
 	if ( @func_descrip in (select Func_Descripcion from FuncionalidadxRol join Funcionalidades on (Id_Func = Func_Id) where Id_Rol = @rol))
+	begin
+		set @resultado = 1
+	end
+
+	else
+	begin
+		set @resultado = 0
+	end
+
+	return @resultado
+							
+
+END
+GO
+
+CREATE PROCEDURE POR_COLECTORA.sp_cliente_esta_habilitado(@idCliente numeric, @resultado bit output)
+AS
+BEGIN
+
+	if ( (select Clie_Habilitado from POR_COLECTORA.Clientes where Clie_Id = @idCliente ) = 1)
 	begin
 		set @resultado = 1
 	end
