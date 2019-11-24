@@ -155,28 +155,28 @@
     <Compile Include="ListadoEstadistico\ListadoEstadistico.Designer.cs">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\Login.cs">
+    <Compile Include="Login y seguridad\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\Login.Designer.cs">
+    <Compile Include="Login y seguridad\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\LoginAdmin.cs">
+    <Compile Include="Login y seguridad\LoginAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\LoginAdmin.Designer.cs">
+    <Compile Include="Login y seguridad\LoginAdmin.Designer.cs">
       <DependentUpon>LoginAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\LoginCliente.cs">
+    <Compile Include="Login y seguridad\LoginCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\LoginCliente.Designer.cs">
+    <Compile Include="Login y seguridad\LoginCliente.Designer.cs">
       <DependentUpon>LoginCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\LoginProveedor.cs">
+    <Compile Include="Login y seguridad\LoginProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\LoginProveedor.Designer.cs">
+    <Compile Include="Login y seguridad\LoginProveedor.Designer.cs">
       <DependentUpon>LoginProveedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Menu Principal\MenuCliente.cs">
@@ -267,16 +267,16 @@
     <EmbeddedResource Include="ListadoEstadistico\ListadoEstadistico.resx">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\Login.resx">
+    <EmbeddedResource Include="Login y seguridad\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\LoginAdmin.resx">
+    <EmbeddedResource Include="Login y seguridad\LoginAdmin.resx">
       <DependentUpon>LoginAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\LoginCliente.resx">
+    <EmbeddedResource Include="Login y seguridad\LoginCliente.resx">
       <DependentUpon>LoginCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\LoginProveedor.resx">
+    <EmbeddedResource Include="Login y seguridad\LoginProveedor.resx">
       <DependentUpon>LoginProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu Principal\MenuCliente.resx">

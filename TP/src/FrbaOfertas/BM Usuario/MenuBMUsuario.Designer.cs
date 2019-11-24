@@ -90,6 +90,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox1);
             this.Name = "MenuBMUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuBMUsuario";
             this.Load += new System.EventHandler(this.MenuBMUsuario_Load);
             this.groupBox1.ResumeLayout(false);
