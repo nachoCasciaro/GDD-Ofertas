@@ -14,11 +14,13 @@ namespace FrbaOfertas.ComprarOferta
 {
     public partial class ComprarOferta : Form
     {
-        int idCliente; 
+        int idCliente;
+        Form parent;
 
-        public ComprarOferta(int idCliente)
+        public ComprarOferta(int idCliente, Form parent)
         {
             this.idCliente = idCliente;
+            this.parent = parent;
             InitializeComponent();
 
             Load += new EventHandler(ComprarOferta_Load);
@@ -95,28 +97,28 @@ namespace FrbaOfertas.ComprarOferta
                 {
                     MessageBox.Show("El saldo es insuficiente para realizar la compra.");
                     this.Hide();
-                    new Menu_Principal.MenuCliente(idCliente).Show();
+                    this.parent.Show();
                 }
 
                 else if (resultado == 2)
                 {
                     MessageBox.Show("Ya compró el máximo permitido de esta oferta.");
                     this.Hide();
-                    new Menu_Principal.MenuCliente(idCliente).Show();
+                    this.parent.Show();
                 }
 
                 else if (resultado == 3)
                 {
                     MessageBox.Show("No hay stock suficiente para realizar la compra.");
                     this.Hide();
-                    new Menu_Principal.MenuCliente(idCliente).Show();
+                    this.parent.Show();
                 }
 
                 else if (resultado == 0)
                 {
                     MessageBox.Show("Oferta comprada con éxito.");
                     this.Hide();
-                    new Menu_Principal.MenuCliente(idCliente).Show();
+                    this.parent.Show();
                 }
 
 
@@ -136,7 +138,7 @@ namespace FrbaOfertas.ComprarOferta
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Menu_Principal.MenuCliente(idCliente).Show();
+            this.parent.Show();
         }
     }
 }

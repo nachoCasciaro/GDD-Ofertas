@@ -13,11 +13,11 @@ namespace FrbaOfertas.AbmProveedor
 {
     public partial class RegistroProveedor : Form
     {
-        int esAdminOProvee;
+        Form parent;
 
-        public RegistroProveedor(int esAdminOProvee)
+        public RegistroProveedor(Form parent)
         {
-            this.esAdminOProvee = esAdminOProvee;
+            this.parent = parent;
             InitializeComponent();
             Load += new EventHandler(RegistroProveedor_Load);
         }
@@ -173,14 +173,7 @@ namespace FrbaOfertas.AbmProveedor
 
                 this.Hide();
 
-                if (esAdminOProvee == 1)
-                {
-                    new Menu_Principal.MenuAdmin().Show();
-                }
-                else
-                {
-                    new Login.LoginProveedor().Show();
-                }
+                this.parent.Show();
 
             }
             else

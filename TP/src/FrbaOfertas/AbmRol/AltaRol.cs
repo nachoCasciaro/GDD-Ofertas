@@ -13,9 +13,12 @@ namespace FrbaOfertas.AbmRol
 {
     public partial class AltaRol : Form
     {
-        public AltaRol()
+        Form parent;
+
+        public AltaRol(Form parent)
         {
             InitializeComponent();
+            this.parent = parent;
         }
 
         private void AltaRol_Load(object sender, EventArgs e)
@@ -101,7 +104,7 @@ namespace FrbaOfertas.AbmRol
 
             MessageBox.Show("El rol fue creado con éxito.");
 
-            new Menu_Principal.MenuAdmin().Show();
+            this.parent.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)

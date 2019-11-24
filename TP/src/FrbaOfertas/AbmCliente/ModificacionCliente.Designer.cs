@@ -261,7 +261,7 @@
             this.dtm_fecha.Location = new System.Drawing.Point(217, 354);
             this.dtm_fecha.Margin = new System.Windows.Forms.Padding(4);
             this.dtm_fecha.MaxDate = new System.DateTime(2019, 12, 31, 0, 0, 0, 0);
-            this.dtm_fecha.MinDate = new System.DateTime(1920, 1, 1, 0, 0, 0, 0);
+            this.dtm_fecha.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtm_fecha.Name = "dtm_fecha";
             this.dtm_fecha.Size = new System.Drawing.Size(265, 22);
             this.dtm_fecha.TabIndex = 23;

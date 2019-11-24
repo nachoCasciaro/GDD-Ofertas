@@ -13,9 +13,12 @@ namespace FrbaOfertas.AbmRol
 {
     public partial class BMRol : Form
     {
-        public BMRol()
+        Form parent;
+
+        public BMRol(Form parent)
         {
             InitializeComponent();
+            this.parent = parent;
             Load += new EventHandler(BMRol_Load);
         }
 
@@ -79,7 +82,7 @@ namespace FrbaOfertas.AbmRol
             MessageBox.Show("Se dió de baja el rol con éxito.");
 
             this.Close();
-            new Menu_Principal.MenuAdmin().Show();
+            this.parent.Show();
         } 
 
         private void button2_Click(object sender, EventArgs e) //Modificacion rol
@@ -106,7 +109,7 @@ namespace FrbaOfertas.AbmRol
         {
             Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
 
-            new AbmRol.ModificacionRol(id).Show();
+            new AbmRol.ModificacionRol(id,parent).Show();
 
         }
 

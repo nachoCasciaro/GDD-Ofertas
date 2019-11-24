@@ -13,8 +13,11 @@ namespace FrbaOfertas.AbmProveedor
 {
     public partial class FiltroBMProveedor : Form
     {
-        public FiltroBMProveedor()
+        Form parent;
+
+        public FiltroBMProveedor(Form parent)
         {
+            this.parent = parent;
             InitializeComponent();
         }
 
@@ -74,7 +77,7 @@ namespace FrbaOfertas.AbmProveedor
             String rubro = dataGridView2.SelectedRows[0].Cells[10].Value.ToString();
             String nombreContacto = dataGridView2.SelectedRows[0].Cells[11].Value.ToString();
             bool habilitado = (bool)dataGridView2.SelectedRows[0].Cells[12].Value;
-            new AbmProveedor.ModificacionProveedor(id, rs, mail, telefono, cuit, calle, nroPiso, depto, ciudad, cp, rubro, nombreContacto, habilitado).Show();
+            new AbmProveedor.ModificacionProveedor(id, rs, mail, telefono, cuit, calle, nroPiso, depto, ciudad, cp, rubro, nombreContacto, habilitado,parent).Show();
 
 
         }
@@ -111,7 +114,7 @@ namespace FrbaOfertas.AbmProveedor
                     MessageBox.Show("Se dió de baja el proveedor con éxito");
 
                     this.Hide();
-                    new Menu_Principal.MenuAdmin().Show();
+                    this.parent.Show();
 
                 }
                 catch (Exception excepcion)

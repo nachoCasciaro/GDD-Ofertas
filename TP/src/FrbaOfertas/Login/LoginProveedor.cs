@@ -21,7 +21,7 @@ namespace FrbaOfertas.Login
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AbmProveedor.RegistroProveedor(2).Show();
+            new AbmProveedor.RegistroProveedor(this).Show();
         }
 
         private int idProveedorIngresado(string username)

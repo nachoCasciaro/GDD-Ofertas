@@ -26,8 +26,9 @@ namespace FrbaOfertas.AbmProveedor
         String rubro;
         String nombreContacto;
         bool habilitado;
+        Form parent;
 
-        public ModificacionProveedor(Int32 id, String rs, String mail, Int32 telefono, String cuit, String calle, String nroPiso, String depto, String ciudad, String cp, String rubro, String nombreContacto, bool habilitado)
+        public ModificacionProveedor(Int32 id, String rs, String mail, Int32 telefono, String cuit, String calle, String nroPiso, String depto, String ciudad, String cp, String rubro, String nombreContacto, bool habilitado, Form parent)
         {
             InitializeComponent();
             this.id = id;
@@ -48,7 +49,9 @@ namespace FrbaOfertas.AbmProveedor
             {
                 this.checkbox_habilitado.Visible = false;
             }
-            
+
+            this.parent = parent;
+
             Load += new EventHandler(ModificacionProveedor_Load);
         }
 

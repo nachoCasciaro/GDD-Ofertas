@@ -14,24 +14,34 @@ namespace FrbaOfertas.EntregarOferta
 {
     public partial class EntregarOferta : Form
     {
+        Form parent;
         int idProveedor;
 
-        public EntregarOferta(int idProveedor)
+        public EntregarOferta(int idProveedor, Form parent)
         {
             this.idProveedor = idProveedor;
+            this.parent = parent;
             InitializeComponent();
         }
 
-        private void validarDatos()
+        private string validarDatos()
         {
-            if (Validaciones.estaVacio(txtbox_cupon.Text) || Validaciones.estaVacio(txtbox_cliente.Text))
+            List<string> mensajeError = new List<string>();
+
+            if (Validaciones.estaVacio(txtbox_cupon.Text))
             {
-
-                throw new Exception("Debe completar todos los campos");
-
+                mensajeError.Add("Debe completar el código del cupón.");
             }
-            
-            //Validacion codigo cupon? (Que exista alguno con ese codigo o algo asi?)
+
+            if (Validaciones.estaVacio(txtbox_cliente.Text))
+            {
+                mensajeError.Add("Debe completar el código del cliente.");
+            }
+
+            string mensajeConcat;
+            mensajeConcat = string.Join("\n", mensajeError);
+
+            return mensajeConcat;
 
         }
 
@@ -59,7 +69,7 @@ namespace FrbaOfertas.EntregarOferta
             return resultado;
 
             this.Hide();
-            new Menu_Principal.MenuProveedor(idProveedor).Show();
+            this.parent.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -67,45 +77,53 @@ namespace FrbaOfertas.EntregarOferta
         {
             try
             {
-                this.validarDatos();
-                int resultado = this.entregarOferta();
-
-                if (resultado == -1)
+                string error = this.validarDatos();
+                if (error == "")
                 {
-                    MessageBox.Show("El cupon que desea dar de baja se encuentra vencido.");
-                    this.Hide();
-                    new Menu_Principal.MenuProveedor(idProveedor).Show();
+                    int resultado = this.entregarOferta();
 
+                    if (resultado == -1)
+                    {
+                        MessageBox.Show("El cupon que desea dar de baja se encuentra vencido.");
+                        this.Hide();
+                        this.parent.Show();
+
+                    }
+
+                    if (resultado == -2)
+                    {
+                        MessageBox.Show("El cupon ya fue dado de baja anteriormente.");
+                        this.Hide();
+                        this.parent.Show();
+
+                    }
+
+                    if (resultado == -3)
+                    {
+                        MessageBox.Show("No podes dar de baja un cupon que corresponde a una oferta de otro proveedor.");
+                        this.Hide();
+                        this.parent.Show();
+
+                    }
+
+                    if (resultado == 0)
+                    {
+                        MessageBox.Show("El cupón fué dado de baja con éxito.");
+                        this.Hide();
+                        this.parent.Show();
+
+                    }
                 }
-
-                if (resultado == -2)
+                else
                 {
-                    MessageBox.Show("El cupon ya fue dado de baja anteriormente.");
-                    this.Hide();
-                    new Menu_Principal.MenuProveedor(idProveedor).Show();
-
+                    MessageBox.Show(error);
                 }
-
-                if (resultado == -3)
-                {
-                    MessageBox.Show("No podes dar de baja un cupon que corresponde a una oferta de otro proveedor.");
-                    this.Hide();
-                    new Menu_Principal.MenuProveedor(idProveedor).Show();
-
-                }
-
-                if (resultado == 0)
-                {
-                    MessageBox.Show("El cupón fué dado de baja con éxito.");
-                    this.Hide();
-                    new Menu_Principal.MenuProveedor(idProveedor).Show();
-
-                }
+               
 
             }
             catch (Exception excepcion)
             {
-                MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
+                MessageBox.Show("El código de cupón ingresado no existe", "Error", MessageBoxButtons.OK);
             }
         }
     }

@@ -15,10 +15,12 @@ namespace FrbaOfertas.CargaCredito
     public partial class CargaCredito : Form
     {
         int idCliente;
+        Form parent;
 
-        public CargaCredito(int idCliente)
+        public CargaCredito(int idCliente, Form parent)
         {
             this.idCliente = idCliente;
+            this.parent = parent;
             InitializeComponent();
         }
 
@@ -60,7 +62,8 @@ namespace FrbaOfertas.CargaCredito
                     connection.Close();
                     MessageBox.Show("La carga se realizó con éxito.");
                     this.Hide();
-                    new Menu_Principal.MenuCliente(idCliente).Show();
+
+                    this.parent.Show();
 
                 }
                 else
@@ -81,7 +84,7 @@ namespace FrbaOfertas.CargaCredito
                     connection.Close();
                     MessageBox.Show("La carga se realizó con éxito.");
                     this.Hide();
-                    new Menu_Principal.MenuCliente(idCliente).Show();
+                    this.parent.Show();
 
                 }
             }
@@ -171,7 +174,7 @@ namespace FrbaOfertas.CargaCredito
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Menu_Principal.MenuCliente(idCliente).Show();
+            this.parent.Show();
         }
 
         private void txtbox_monto_TextChanged(object sender, EventArgs e)

@@ -121,10 +121,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(523, 464);
+            this.button1.Location = new System.Drawing.Point(504, 452);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 28);
+            this.button1.Size = new System.Drawing.Size(137, 48);
             this.button1.TabIndex = 9;
             this.button1.Text = "BAJA";
             this.button1.UseVisualStyleBackColor = true;
@@ -132,10 +132,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(775, 464);
+            this.button2.Location = new System.Drawing.Point(748, 451);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(129, 28);
+            this.button2.Size = new System.Drawing.Size(137, 49);
             this.button2.TabIndex = 10;
             this.button2.Text = "MODIFICACIÓN";
             this.button2.UseVisualStyleBackColor = true;

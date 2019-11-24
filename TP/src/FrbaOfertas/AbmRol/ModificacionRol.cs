@@ -14,12 +14,16 @@ namespace FrbaOfertas.AbmRol
     public partial class ModificacionRol : Form
     {
         Int32 id_rol;
+        Form parent;
 
-        public ModificacionRol(Int32 rol)
+
+        public ModificacionRol(Int32 rol, Form parent)
         {
             InitializeComponent();
 
             this.id_rol = rol;
+
+            this.parent = parent;
 
             Load += new EventHandler(ModificarRol_Load);
 
@@ -99,7 +103,7 @@ namespace FrbaOfertas.AbmRol
                 MessageBox.Show("La funcionalidad se eliminó con éxito.");
 
                 this.Close();
-                new Menu_Principal.MenuAdmin().Show();
+                this.parent.Show();
 
             }
             else
@@ -154,7 +158,7 @@ namespace FrbaOfertas.AbmRol
 
             this.Close();
 
-            new Menu_Principal.MenuAdmin().Show();
+            this.parent.Show();
         }
 
         private void button3_Click(object sender, EventArgs e) //Modificar nombre
@@ -178,7 +182,7 @@ namespace FrbaOfertas.AbmRol
 
                 this.Close();
 
-                new Menu_Principal.MenuAdmin().Show();
+                this.parent.Show();
 
             }
             else 
@@ -193,7 +197,7 @@ namespace FrbaOfertas.AbmRol
         private void button4_Click(object sender, EventArgs e) //Boton volver al menu principal
         {
             this.Hide();
-            new Menu_Principal.MenuAdmin().Show();
+            this.parent.Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -210,7 +214,7 @@ namespace FrbaOfertas.AbmRol
             MessageBox.Show("Se habilitó el rol con éxito.");
 
             this.Close();
-            new Menu_Principal.MenuAdmin().Show();
+            this.parent.Show();
         }
 
     }

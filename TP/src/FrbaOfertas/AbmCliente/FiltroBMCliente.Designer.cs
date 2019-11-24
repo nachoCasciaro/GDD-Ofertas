@@ -140,10 +140,10 @@
             // 
             // button_baja
             // 
-            this.button_baja.Location = new System.Drawing.Point(500, 478);
+            this.button_baja.Location = new System.Drawing.Point(550, 469);
             this.button_baja.Margin = new System.Windows.Forms.Padding(4);
             this.button_baja.Name = "button_baja";
-            this.button_baja.Size = new System.Drawing.Size(135, 28);
+            this.button_baja.Size = new System.Drawing.Size(141, 47);
             this.button_baja.TabIndex = 10;
             this.button_baja.Text = "BAJA";
             this.button_baja.UseVisualStyleBackColor = true;
@@ -151,10 +151,10 @@
             // 
             // button_modificar
             // 
-            this.button_modificar.Location = new System.Drawing.Point(771, 478);
+            this.button_modificar.Location = new System.Drawing.Point(761, 469);
             this.button_modificar.Margin = new System.Windows.Forms.Padding(4);
             this.button_modificar.Name = "button_modificar";
-            this.button_modificar.Size = new System.Drawing.Size(135, 28);
+            this.button_modificar.Size = new System.Drawing.Size(141, 48);
             this.button_modificar.TabIndex = 11;
             this.button_modificar.Text = "MODIFICACIÓN";
             this.button_modificar.UseVisualStyleBackColor = true;

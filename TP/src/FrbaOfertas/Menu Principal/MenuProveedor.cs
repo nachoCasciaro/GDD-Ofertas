@@ -27,13 +27,13 @@ namespace FrbaOfertas.Menu_Principal
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new CrearOferta.CrearOferta(idProveedor).Show();
+            new CrearOferta.CrearOferta(idProveedor,this).Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new EntregarOferta.EntregarOferta(idProveedor).Show();
+            new EntregarOferta.EntregarOferta(idProveedor,this).Show();
         }
 
         private void button3_Click(object sender, EventArgs e)

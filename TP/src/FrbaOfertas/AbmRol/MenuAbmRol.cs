@@ -23,13 +23,13 @@ namespace FrbaOfertas.AbmRol
         private void button1_Click(object sender, EventArgs e) //Alta rol
         {
             this.Hide();
-            new AbmRol.AltaRol().Show();
+            new AbmRol.AltaRol(this).Show();
         }
 
         private void button2_Click(object sender, EventArgs e) //Baja modificacion rol
         {
             this.Hide();
-            new AbmRol.BMRol().Show();
+            new AbmRol.BMRol(this).Show();
 
         }
 

@@ -29,13 +29,13 @@ namespace FrbaOfertas.AbmProveedor
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AbmProveedor.FiltroBMProveedor().Show();
+            new AbmProveedor.FiltroBMProveedor(this).Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new AbmProveedor.RegistroProveedor(1).Show();
+            new AbmProveedor.RegistroProveedor(this).Show();
         }
     }
 }

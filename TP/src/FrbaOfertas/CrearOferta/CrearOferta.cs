@@ -13,11 +13,13 @@ namespace FrbaOfertas.CrearOferta
 {
     public partial class CrearOferta : Form
     {
+        Form parent;
         int idProveedor;
 
-        public CrearOferta(int idProveedor)
+        public CrearOferta(int idProveedor, Form parent)
         {
             this.idProveedor = idProveedor;
+            this.parent = parent;
             InitializeComponent();
         }
 
@@ -51,7 +53,7 @@ namespace FrbaOfertas.CrearOferta
 
                 MessageBox.Show("Se creó la oferta con éxito");
                 this.Close();
-                new Menu_Principal.MenuProveedor(idProveedor).Show();
+                this.parent.Show();
             }
             else
             {
@@ -127,16 +129,6 @@ namespace FrbaOfertas.CrearOferta
                     mensajeError.Add("El máximo unidades por compra por cliente debe contener únicamente números.");
                 }
             }
-
-            
-
-
-
-
-
-
-
-
 
             string mensajeConcat;
             mensajeConcat = string.Join("\n", mensajeError);

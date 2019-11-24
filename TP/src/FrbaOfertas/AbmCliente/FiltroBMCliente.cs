@@ -95,7 +95,7 @@ namespace FrbaOfertas.AbmCliente
                 try
                 {
                         this.seleccionarClienteModificar();
-                        this.Close();
+                        this.Hide();
                     
                 }
                 catch (Exception excepcion)
@@ -138,7 +138,7 @@ namespace FrbaOfertas.AbmCliente
 
                     MessageBox.Show("Se dió de baja el cliente con éxito");
 
-                    this.Close();
+                    this.Hide();
 
                     this.parent.Show();
 
