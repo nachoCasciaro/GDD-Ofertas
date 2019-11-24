@@ -27,20 +27,20 @@ namespace FrbaOfertas.AbmCliente
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
-            new AbmCliente.FiltroBMCliente().Show();
+            this.Hide();
+            new AbmCliente.FiltroBMCliente(this).Show();
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
-            new AbmCliente.RegistroCliente(1).Show();
+            this.Hide();
+            new AbmCliente.RegistroCliente(this).Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             this.parent.Show();
         }
     }

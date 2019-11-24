@@ -13,8 +13,11 @@ namespace FrbaOfertas.AbmCliente
 {
     public partial class FiltroBMCliente : Form
     {
-        public FiltroBMCliente()
+        Form parent;
+
+        public FiltroBMCliente(Form parent)
         {
+            this.parent = parent;
             InitializeComponent();
 
         }
@@ -81,7 +84,7 @@ namespace FrbaOfertas.AbmCliente
             String cp = dataGridView1.SelectedRows[0].Cells[10].Value.ToString();
             DateTime fecha = Convert.ToDateTime(dataGridView1.SelectedRows[0].Cells[11].Value);
             bool habilitado = (bool)dataGridView1.SelectedRows[0].Cells[12].Value;
-            new AbmCliente.ModificacionCliente(id,nombre,apellido,dni,mail,telefono,calle,nroPiso,depto,ciudad,cp,fecha,habilitado).Show();
+            new AbmCliente.ModificacionCliente(id,nombre,apellido,dni,mail,telefono,calle,nroPiso,depto,ciudad,cp,fecha,habilitado,parent).Show();
 
         }
 
@@ -137,7 +140,7 @@ namespace FrbaOfertas.AbmCliente
 
                     this.Close();
 
-                    new Menu_Principal.MenuAdmin().Show();
+                    this.parent.Show();
 
 
                 }

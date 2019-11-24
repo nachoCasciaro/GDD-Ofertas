@@ -26,8 +26,9 @@ namespace FrbaOfertas.AbmCliente
         String cp;
         DateTime fecha;
         bool habilitado;
+        Form parent;
 
-        public ModificacionCliente(Int32 id, String nombre, String apellido, Int32 dni, String mail, Int32 telefono, String calle, String nroPiso, String depto, String ciudad, String cp, DateTime fecha, bool habilitado)
+        public ModificacionCliente(Int32 id, String nombre, String apellido, Int32 dni, String mail, Int32 telefono, String calle, String nroPiso, String depto, String ciudad, String cp, DateTime fecha, bool habilitado, Form parent)
         {
             InitializeComponent();
             this.id = id;
@@ -48,6 +49,8 @@ namespace FrbaOfertas.AbmCliente
             {
                 this.checkbox_habilitado.Visible = false;
             }
+
+            this.parent = parent;
 
             Load += new EventHandler(ModificacionCliente_Load);
 
@@ -198,7 +201,7 @@ namespace FrbaOfertas.AbmCliente
 
                 this.Close();
 
-                new Menu_Principal.MenuAdmin().Show();
+                this.parent.Show();
 
             }
             else
