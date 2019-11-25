@@ -257,6 +257,10 @@ DROP PROCEDURE POR_COLECTORA.sp_user_es_admin
 IF OBJECT_ID ('POR_COLECTORA.sp_proveedor_esta_habilitado') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_proveedor_esta_habilitado
 
+--DROP SP EXISTE PROVEEDOR
+IF OBJECT_ID ('POR_COLECTORA.sp_existe_proveedor') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_existe_proveedor
+
 
 GO
 
@@ -1463,6 +1467,27 @@ AS
 BEGIN
 
 	if ( @func_descrip in (select Func_Descripcion from FuncionalidadxRol join Funcionalidades on (Id_Func = Func_Id) where Id_Rol = @rol))
+	begin
+		set @resultado = 1
+	end
+
+	else
+	begin
+		set @resultado = 0
+	end
+
+	return @resultado
+							
+
+END
+GO
+
+
+CREATE PROCEDURE POR_COLECTORA.sp_existe_proveedor(@idProvee numeric ,@resultado bit output)
+AS
+BEGIN
+
+	if ( @idProvee in (select Provee_Id from POR_COLECTORA.Proveedores))
 	begin
 		set @resultado = 1
 	end

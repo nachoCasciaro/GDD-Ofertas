@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace FrbaOfertas.CrearOferta
 {
@@ -20,17 +21,45 @@ namespace FrbaOfertas.CrearOferta
             InitializeComponent();
         }
 
+        private bool existeProveedor(int idProveedor)
+        {
+            var connection = DB.getInstance().getConnection();
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_existe_proveedor", connection);
+            query.CommandType = CommandType.StoredProcedure;
+            query.Parameters.Add(new SqlParameter("@idProvee", idProveedor));
+            query.Parameters.Add("@resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+
+            connection.Open();
+
+            SqlDataReader reader = query.ExecuteReader();
+
+            bool resultado = Convert.ToBoolean(query.Parameters["@resultado"].Value);
+
+            return resultado;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
                 MessageBox.Show("Debe completar el id del proveedor.");
             }
+
             else
             {
+                
                 int idProve = Convert.ToInt32(textBox1.Text);
-                this.Hide();
-                new CrearOferta( idProve, parent).Show();
+
+                if (this.existeProveedor(idProve))
+                {
+                    this.Hide();
+                    new CrearOferta(idProve, parent).Show();
+                }
+                else
+                {
+                    MessageBox.Show("El id ingresado no corresponde a un proveedor existente, inténtelo de nuevo.");
+                }
+                
             }
         }
     }
