@@ -575,6 +575,69 @@ UPDATE POR_COLECTORA.Clientes
 SET Clie_Saldo += (select sum(Carga_Monto) from POR_COLECTORA.Cargas)
 WHERE Clie_DNI = 83183632
 
+
+--LE CREO UN USUARIO A CADA CLIENTE 
+
+DECLARE cursor_clientes CURSOR FOR
+SELECT Clie_Nombre,Clie_Apellido,Clie_DNI
+FROM POR_COLECTORA.Clientes
+
+DECLARE @nombre nvarchar(250)
+DECLARE @apellido nvarchar(250)
+DECLARE @dni Numeric(18,0)
+OPEN cursor_clientes
+FETCH NEXT FROM cursor_clientes INTO @nombre,@apellido,@dni
+
+WHILE @@FETCH_STATUS = 0
+	BEGIN
+
+	declare @hash_pass BINARY(32)
+	set @hash_pass = HASHBYTES('SHA2_256',CAST(@dni AS varchar(18)))
+	
+	INSERT INTO POR_COLECTORA.Usuarios (Usuario_Nombre,Usuario_Password)
+	VALUES (@nombre + '_' + @apellido, @hash_pass)
+
+	UPDATE POR_COLECTORA.Clientes
+	SET Clie_Usuario = (select Usuario_Id from POR_COLECTORA.Usuarios where Usuario_Nombre = (@nombre + '_' + @apellido) )
+	where Clie_DNI = @dni
+
+	FETCH NEXT FROM cursor_clientes INTO @nombre,@apellido,@dni
+	END
+CLOSE cursor_clientes
+DEALLOCATE cursor_clientes
+GO
+
+--LE CREO UN USUARIO A CADA PROVEEDOR
+
+DECLARE cursor_proveedores CURSOR FOR
+SELECT Provee_RS,Provee_CUIT
+FROM POR_COLECTORA.Proveedores
+
+DECLARE @rs nvarchar(80)
+DECLARE @cuit NVARCHAR(13)
+
+OPEN cursor_proveedores
+FETCH NEXT FROM cursor_proveedores INTO @rs,@cuit
+
+WHILE @@FETCH_STATUS = 0
+	BEGIN
+
+	declare @hash_pass BINARY(32)
+	set @hash_pass = HASHBYTES('SHA2_256',cast(@cuit as varchar(13)) )
+	
+	INSERT INTO POR_COLECTORA.Usuarios (Usuario_Nombre,Usuario_Password)
+	VALUES (@rs, @hash_pass)
+
+	UPDATE POR_COLECTORA.Proveedores
+	SET Provee_Usuario = (select Usuario_Id from POR_COLECTORA.Usuarios where Usuario_Nombre = @rs )
+	where Provee_CUIT = @cuit
+
+
+	FETCH NEXT FROM cursor_proveedores INTO @rs,@cuit
+	END
+CLOSE cursor_proveedores
+DEALLOCATE cursor_proveedores
+
 GO
 
 --FIN MIGRACIONES
