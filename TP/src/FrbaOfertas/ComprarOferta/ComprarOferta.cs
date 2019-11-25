@@ -127,7 +127,6 @@ namespace FrbaOfertas.ComprarOferta
                     this.parent.Show();
                 }
 
-
             }
             catch (Exception excepcion)
             {

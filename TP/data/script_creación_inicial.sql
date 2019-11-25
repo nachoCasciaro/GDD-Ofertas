@@ -262,6 +262,16 @@ IF OBJECT_ID ('POR_COLECTORA.sp_existe_proveedor') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_existe_proveedor
 
 
+--DROP SP USER POSEE ROL CLIENTE
+IF OBJECT_ID ('POR_COLECTORA.sp_user_posee_rol_cliente') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_user_posee_rol_cliente
+
+
+--DROP SP USER POSEE ROL PROVEEDOR
+IF OBJECT_ID ('POR_COLECTORA.sp_user_posee_rol_proveedor') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_user_posee_rol_proveedor
+
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -1556,6 +1566,46 @@ AS
 BEGIN
 
 	if ( 1 in (select Id_Rol from RolxUsuario where Id_Usuario = @idUsuario ))
+	begin
+		set @resultado = 1
+	end
+
+	else
+	begin
+		set @resultado = 0
+	end
+
+	return @resultado
+							
+
+END
+GO
+
+CREATE PROCEDURE POR_COLECTORA.sp_user_posee_rol_cliente(@idUsuario numeric,@resultado bit output)
+AS
+BEGIN
+
+	if ( 2 in (select Id_Rol from RolxUsuario where Id_Usuario = @idUsuario ))
+	begin
+		set @resultado = 1
+	end
+
+	else
+	begin
+		set @resultado = 0
+	end
+
+	return @resultado
+							
+
+END
+GO
+
+CREATE PROCEDURE POR_COLECTORA.sp_user_posee_rol_proveedor(@idUsuario numeric,@resultado bit output)
+AS
+BEGIN
+
+	if ( 3 in (select Id_Rol from RolxUsuario where Id_Usuario = @idUsuario ))
 	begin
 		set @resultado = 1
 	end

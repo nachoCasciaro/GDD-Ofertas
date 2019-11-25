@@ -43,18 +43,41 @@ namespace FrbaOfertas.Menu_Principal
             return resultado;
         }
 
+        private bool chequearTieneRol()
+        {
+            var connection = DB.getInstance().getConnection();
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_user_posee_rol_proveedor", connection);
+            query.CommandType = CommandType.StoredProcedure;
+            query.Parameters.Add(new SqlParameter("@idUsuario", idUserLogueado));
+            query.Parameters.Add("@resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+
+            connection.Open();
+
+            SqlDataReader reader = query.ExecuteReader();
+
+            bool resultado = Convert.ToBoolean(query.Parameters["@resultado"].Value);
+
+            return resultado;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             bool estaHabilitado = this.chequearHabilitacion();
 
-            if (estaHabilitado)
+            bool poseeRolProveedor = this.chequearTieneRol();
+
+            if (estaHabilitado && poseeRolProveedor)
             {
                 this.Hide();
                 new CrearOferta.CrearOferta(idProveedor, this).Show();
             }
-            else
+            else if (!estaHabilitado)
             {
                 MessageBox.Show("Estás inhabilitado por lo que no podes acceder a esta función.");
+            }
+            else if (!poseeRolProveedor)
+            {
+                MessageBox.Show("Ya no posees el rol proveedor, comunicarse con el administrador.");
             }
            
         }
