@@ -42,7 +42,7 @@ namespace FrbaOfertas.AbmRol
         private void ModificarRol_Load(object sender, System.EventArgs e)
         {
             var connection = DB.getInstance().getConnection();
-            SqlCommand sqlCmd = new SqlCommand("SELECT Rol_Nombre FROM POR_COLECTORA.Roles WHERE Rol_Id = " + "'" + id_rol + "'", connection);
+            SqlCommand sqlCmd = new SqlCommand("SELECT Rol_Nombre FROM POR_COLECTORA.Roles WHERE Rol_Id = "+ id_rol , connection);
             connection.Open();
             SqlDataReader sqlReader = sqlCmd.ExecuteReader();
 
@@ -58,7 +58,7 @@ namespace FrbaOfertas.AbmRol
 
             //COMBOBOX FUNCIONALIDADES
             var connection2 = DB.getInstance().getConnection();
-            SqlCommand sqlCmd2 = new SqlCommand("SELECT DISTINCT Func_Descripcion FROM POR_COLECTORA.Funcionalidades JOIN POR_COLECTORA.FuncionalidadxRol ON Func_Id = Id_Func WHERE Id_Rol = " + "'" + id_rol + "'" + " AND Id_Func NOT IN (SELECT Id_Func FROM POR_COLECTORA.FuncionalidadxRol WHERE Id_Rol = " + "'" + id_rol + "'" + ")", connection);
+            SqlCommand sqlCmd2 = new SqlCommand("SELECT DISTINCT Func_Descripcion FROM POR_COLECTORA.Funcionalidades JOIN POR_COLECTORA.FuncionalidadxRol ON Func_Id = Id_Func WHERE Id_Func NOT IN (SELECT Id_Func FROM POR_COLECTORA.FuncionalidadxRol WHERE Id_Rol = " + "'" + id_rol + "'" + ")", connection);
             connection2.Open();
             SqlDataReader sqlReader2 = sqlCmd2.ExecuteReader();
 
@@ -144,21 +144,30 @@ namespace FrbaOfertas.AbmRol
 
             sqlReader2.Close();
 
-            var connection = DB.getInstance().getConnection();
-            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_agregar_funcionalidad_a_rol", connection);
-            query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@id_rol", id_rol));
-            query.Parameters.Add(new SqlParameter("@id_funcionalidad", id_func));
+            if (combobox_funcionalidad.SelectedIndex > -1)
+            {
+                var connection = DB.getInstance().getConnection();
+                SqlCommand query = new SqlCommand("POR_COLECTORA.sp_agregar_funcionalidad_a_rol", connection);
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.Add(new SqlParameter("@id_rol", id_rol));
+                query.Parameters.Add(new SqlParameter("@id_funcionalidad", id_func));
 
-            connection.Open();
-            query.ExecuteNonQuery();
-            connection.Close();
+                connection.Open();
+                query.ExecuteNonQuery();
+                connection.Close();
 
-            MessageBox.Show("La funcionalidad se agregó con éxito.");
+                MessageBox.Show("La funcionalidad se agregó con éxito.");
 
-            this.Close();
+                this.Close();
 
-            this.parent.Show();
+                this.parent.Show();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar la funcionalidad que desea agregar al rol.");
+            }
+
+           
         }
 
         private void button3_Click(object sender, EventArgs e) //Modificar nombre

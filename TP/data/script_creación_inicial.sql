@@ -567,6 +567,14 @@ SELECT Maestra.Oferta_Fecha_Venc,
 																and Compra_Id_Factura = (select Fact_Id from POR_COLECTORA.Facturas where Maestra.Factura_Nro = Fact_Numero))
 FROM gd_esquema.Maestra AS Maestra
 where Maestra.Factura_Nro is not null
+
+
+--ACTUALIZO EL SALDO DEL ÚNICO CLIENTE QUE REALIZÓ CARGAS
+
+UPDATE POR_COLECTORA.Clientes
+SET Clie_Saldo += (select sum(Carga_Monto) from POR_COLECTORA.Cargas)
+WHERE Clie_DNI = 83183632
+
 GO
 
 --FIN MIGRACIONES
