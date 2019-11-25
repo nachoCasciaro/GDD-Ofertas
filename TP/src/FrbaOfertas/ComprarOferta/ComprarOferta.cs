@@ -48,12 +48,12 @@ namespace FrbaOfertas.ComprarOferta
             return reader;
         }
 
-        private Int32 comprarOferta()
+        private string comprarOferta()
         {
             if (dataGridView1.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Debe seleccionar la fila completa utilizando la flecha de la izquierda");
-                return -1;
+                return "-1";
+                
             } else
             {
                 String descripcion = Convert.ToString(dataGridView1.SelectedRows[0].Cells[0].Value);
@@ -72,12 +72,13 @@ namespace FrbaOfertas.ComprarOferta
                 query.Parameters.Add(new SqlParameter("@fecha_compra", Convert.ToDateTime(setting) ));
 
                 query.Parameters.Add(new SqlParameter("@cantidad_compra", numericCantidad.Value));
-                query.Parameters.Add("@resultado_compra", SqlDbType.Int).Direction = ParameterDirection.Output;
+                query.Parameters.Add("@resultado_compra", SqlDbType.VarChar,250).Direction = ParameterDirection.Output;
 
                 connection.Open();
                 query.ExecuteNonQuery();
 
-                Int32 resultado = Convert.ToInt32(query.Parameters["@resultado_compra"].Value);
+                string resultado = query.Parameters["@resultado_compra"].Value.ToString();
+
 
                 connection.Close();
 
@@ -91,32 +92,37 @@ namespace FrbaOfertas.ComprarOferta
         {
             try
             {
-                Int32 resultado = this.comprarOferta();
+                string resultado = this.comprarOferta();
 
-                if (resultado == 1)
+                string[] resultadoDividido = resultado.Split(' ');
+
+                string resultadoCompra = resultadoDividido[0];
+                string nroCompra = resultadoDividido[1];
+
+                if (resultadoCompra == "1")
                 {
                     MessageBox.Show("El saldo es insuficiente para realizar la compra.");
                     this.Hide();
                     this.parent.Show();
                 }
 
-                else if (resultado == 2)
+                else if (resultadoCompra == "2")
                 {
                     MessageBox.Show("Ya compró el máximo permitido de esta oferta.");
                     this.Hide();
                     this.parent.Show();
                 }
 
-                else if (resultado == 3)
+                else if (resultadoCompra == "3")
                 {
                     MessageBox.Show("No hay stock suficiente para realizar la compra.");
                     this.Hide();
                     this.parent.Show();
                 }
 
-                else if (resultado == 0)
+                else if (resultadoCompra == "0")
                 {
-                    MessageBox.Show("Oferta comprada con éxito.");
+                    MessageBox.Show("Oferta comprada con éxito, su número de compra es: " + nroCompra);
                     this.Hide();
                     this.parent.Show();
                 }
@@ -125,7 +131,7 @@ namespace FrbaOfertas.ComprarOferta
             }
             catch (Exception excepcion)
             {
-                MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Debe seleccionar la fila completa utilizando la flecha de la izquierda", "Error", MessageBoxButtons.OK);
             }
 
         }

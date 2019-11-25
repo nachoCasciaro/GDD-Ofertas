@@ -145,23 +145,17 @@ namespace FrbaOfertas.AbmProveedor
             {
                 mensajeError.Add("Debe completar la calle");
             }
+           
+            if (string.IsNullOrWhiteSpace(txtbox_ciudad.Text))
+            {
+                mensajeError.Add("Debe completar la ciudad");
+            }
 
             if (string.IsNullOrWhiteSpace(txtbox_cp.Text))
             {
                 mensajeError.Add("Debe completar el código postal");
             }
-            else
-            {
-                if (!Validaciones.contieneSoloNumeros(txtbox_cp.Text))
-                {
-                    mensajeError.Add("El código postal debe contener únicamente números");
-                }
-            }
-
-            if (string.IsNullOrWhiteSpace(txtbox_ciudad.Text))
-            {
-                mensajeError.Add("Debe completar la ciudad");
-            }
+            
 
 
             string mensajeConcat;
@@ -232,6 +226,21 @@ namespace FrbaOfertas.AbmProveedor
         private void comboBox_rubro_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            txtbox_rs.Text = "";
+            txtbox_cuit.Text = "";
+            txtbox_cp.Text = "";
+            txtbox_calle.Text = "";
+            txtbox_ciudad.Text = "";
+            txtbox_mail.Text = "";
+            txtbox_nropiso.Text = "";
+            txtbox_telefono.Text = "";
+            txtbox_depto.Text = "";
+            txtbox_contacto.Text = "";
+            comboBox_rubro.ResetText();
         }
     }
 }

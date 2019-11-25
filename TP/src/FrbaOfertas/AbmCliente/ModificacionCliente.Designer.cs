@@ -52,6 +52,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dtm_fecha = new System.Windows.Forms.DateTimePicker();
             this.checkbox_habilitado = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -60,9 +61,9 @@
             this.label1.Location = new System.Drawing.Point(49, 46);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 17);
+            this.label1.Size = new System.Drawing.Size(67, 17);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre";
+            this.label1.Text = "Nombre *";
             // 
             // label2
             // 
@@ -70,9 +71,9 @@
             this.label2.Location = new System.Drawing.Point(49, 82);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 17);
+            this.label2.Size = new System.Drawing.Size(67, 17);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Apellido";
+            this.label2.Text = "Apellido *";
             // 
             // label3
             // 
@@ -80,9 +81,9 @@
             this.label3.Location = new System.Drawing.Point(49, 118);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 17);
+            this.label3.Size = new System.Drawing.Size(40, 17);
             this.label3.TabIndex = 2;
-            this.label3.Text = "DNI";
+            this.label3.Text = "DNI *";
             // 
             // label4
             // 
@@ -90,9 +91,9 @@
             this.label4.Location = new System.Drawing.Point(49, 155);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 17);
+            this.label4.Size = new System.Drawing.Size(42, 17);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Mail";
+            this.label4.Text = "Mail *";
             // 
             // label5
             // 
@@ -100,9 +101,9 @@
             this.label5.Location = new System.Drawing.Point(49, 190);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 17);
+            this.label5.Size = new System.Drawing.Size(73, 17);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Teléfono";
+            this.label5.Text = "Teléfono *";
             // 
             // label6
             // 
@@ -110,9 +111,9 @@
             this.label6.Location = new System.Drawing.Point(49, 229);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(39, 17);
+            this.label6.Size = new System.Drawing.Size(48, 17);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Calle";
+            this.label6.Text = "Calle *";
             // 
             // label7
             // 
@@ -204,9 +205,9 @@
             this.label9.Location = new System.Drawing.Point(49, 295);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(52, 17);
+            this.label9.Size = new System.Drawing.Size(61, 17);
             this.label9.TabIndex = 16;
-            this.label9.Text = "Ciudad";
+            this.label9.Text = "Ciudad *";
             // 
             // label10
             // 
@@ -214,9 +215,9 @@
             this.label10.Location = new System.Drawing.Point(49, 327);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(95, 17);
+            this.label10.Size = new System.Drawing.Size(104, 17);
             this.label10.TabIndex = 17;
-            this.label10.Text = "Código Postal";
+            this.label10.Text = "Código Postal *";
             // 
             // label11
             // 
@@ -224,9 +225,9 @@
             this.label11.Location = new System.Drawing.Point(49, 363);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(141, 17);
+            this.label11.Size = new System.Drawing.Size(150, 17);
             this.label11.TabIndex = 18;
-            this.label11.Text = "Fecha de Nacimiento";
+            this.label11.Text = "Fecha de Nacimiento *";
             // 
             // txtbox_ciudad
             // 
@@ -277,11 +278,23 @@
             this.checkbox_habilitado.Text = "Habilitar?";
             this.checkbox_habilitado.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(52, 450);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(133, 28);
+            this.button2.TabIndex = 25;
+            this.button2.Text = "LIMPIAR";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // ModificacionCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(547, 494);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.checkbox_habilitado);
             this.Controls.Add(this.dtm_fecha);
             this.Controls.Add(this.button1);
@@ -341,5 +354,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DateTimePicker dtm_fecha;
         private System.Windows.Forms.CheckBox checkbox_habilitado;
+        private System.Windows.Forms.Button button2;
     }
 }

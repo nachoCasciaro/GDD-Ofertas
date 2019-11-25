@@ -109,15 +109,17 @@ namespace FrbaOfertas.AbmCliente
                 mensajeError.Add("Debe completar la calle.");
             }
 
+            if (string.IsNullOrWhiteSpace(txtbox_ciudad.Text))
+            {
+                mensajeError.Add("Debe completar la ciudad.");
+            }
+
             if (string.IsNullOrWhiteSpace(txtbox_cp.Text))
             {
                 mensajeError.Add("Debe completar el código postal.");
             }
 
-            if (string.IsNullOrWhiteSpace(txtbox_ciudad.Text))
-            {
-                mensajeError.Add("Debe completar la ciudad.");
-            }
+
 
             
             string mensajeConcat;
@@ -174,6 +176,23 @@ namespace FrbaOfertas.AbmCliente
         private void textBox12_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            txtbox_user.Text = "";
+            txtbox_password.Text = "";
+            txtbox_nombre.Text = "";
+            txtbox_dni.Text = "";
+            txtbox_cp.Text = "";
+            txtbox_calle.Text = "";
+            txtbox_apellido.Text = "";
+            txtbox_ciudad.Text = "";
+            txtbox_mail.Text = "";
+            txtbox_nropiso.Text = "";
+            txtbox_telefono.Text = "";
+            txtbox_depto.Text = "";
+            dtm_fecha.ResetText();
         }
     }
 }

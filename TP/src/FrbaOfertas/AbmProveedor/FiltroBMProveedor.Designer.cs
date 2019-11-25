@@ -115,7 +115,7 @@
             this.FILTRAR.Name = "FILTRAR";
             this.FILTRAR.Size = new System.Drawing.Size(100, 28);
             this.FILTRAR.TabIndex = 8;
-            this.FILTRAR.Text = "FILTRAR";
+            this.FILTRAR.Text = "BUSCAR";
             this.FILTRAR.UseVisualStyleBackColor = true;
             this.FILTRAR.Click += new System.EventHandler(this.FILTRAR_Click);
             // 

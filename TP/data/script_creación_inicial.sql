@@ -305,7 +305,7 @@ CREATE TABLE POR_COLECTORA.Clientes(
 	Clie_CP NVARCHAR(20),
 	Clie_Fecha_Nac DATETIME NOT NULL,
 	Clie_Habilitado BIT NOT NULL DEFAULT 1,
-	Clie_Saldo Float NOT NULL DEFAULT 200,
+	Clie_Saldo Numeric(18,0) NOT NULL DEFAULT 200,
 	Clie_Usuario Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id))
 GO
 
@@ -615,6 +615,12 @@ WHILE @@FETCH_STATUS = 0
 	SET Clie_Usuario = (select Usuario_Id from POR_COLECTORA.Usuarios where Usuario_Nombre = (@nombre + '_' + @apellido) )
 	where Clie_DNI = @dni
 
+	declare @idUser numeric
+	set @idUser = (select Usuario_Id from POR_COLECTORA.Usuarios where Usuario_Nombre = (@nombre + '_' + @apellido))
+
+	INSERT INTO POR_COLECTORA.RolxUsuario (Id_Rol,Id_Usuario)
+	VALUES (2,@idUser)
+
 	FETCH NEXT FROM cursor_clientes INTO @nombre,@apellido,@dni
 	END
 CLOSE cursor_clientes
@@ -646,6 +652,11 @@ WHILE @@FETCH_STATUS = 0
 	SET Provee_Usuario = (select Usuario_Id from POR_COLECTORA.Usuarios where Usuario_Nombre = @rs )
 	where Provee_CUIT = @cuit
 
+	declare @idUser numeric
+	set @idUser = (select Usuario_Id from POR_COLECTORA.Usuarios where Usuario_Nombre = @rs)
+
+	INSERT INTO POR_COLECTORA.RolxUsuario (Id_Rol,Id_Usuario)
+	VALUES (3,@idUser)
 
 	FETCH NEXT FROM cursor_proveedores INTO @rs,@cuit
 	END
@@ -1037,7 +1048,7 @@ CREATE PROCEDURE POR_COLECTORA.sp_comprar_oferta(
 @id_cliente numeric,
 @fecha_compra datetime,
 @cantidad_compra numeric,
-@resultado_compra numeric output
+@resultado_compra varchar(250) output
 )
 
 AS
@@ -1096,9 +1107,6 @@ BEGIN
 				SET @i += 1
 			END
 
-
-			
-
 			UPDATE Clientes
 			set Clie_Saldo -= @precio_oferta * @cantidad_compra
 			where Clie_Id = @id_cliente
@@ -1110,8 +1118,8 @@ BEGIN
 			set @resultado_compra = 0
 		end	
 
+	set @resultado_compra = convert(varchar(1),@resultado_compra) + ' ' + convert(varchar(248),@numero_compra) 
 	
-	return @resultado_compra
 
 END
 
@@ -1646,6 +1654,7 @@ BEGIN
 
 END
 GO
+
 
 CREATE PROCEDURE POR_COLECTORA.sp_cambiar_contraseña_user(@id_user numeric,@new_pass varchar(80))
 AS

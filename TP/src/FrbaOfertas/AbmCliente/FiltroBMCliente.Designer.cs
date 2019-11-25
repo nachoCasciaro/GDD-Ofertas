@@ -134,7 +134,7 @@
             this.button_filtrar.Name = "button_filtrar";
             this.button_filtrar.Size = new System.Drawing.Size(135, 28);
             this.button_filtrar.TabIndex = 9;
-            this.button_filtrar.Text = "FILTRAR";
+            this.button_filtrar.Text = "BUSCAR";
             this.button_filtrar.UseVisualStyleBackColor = true;
             this.button_filtrar.Click += new System.EventHandler(this.button_filtrar_Click);
             // 
