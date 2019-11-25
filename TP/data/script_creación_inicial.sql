@@ -27,247 +27,305 @@ GO
 --			INICIO DROPEO TABLAS/PROCEDURES/SCHEMA
 
 --DROP TABLA CLIENTES
+
 IF OBJECT_ID('POR_COLECTORA.Clientes', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Clientes
 
 --DROP TABLA USUARIOS
+
 IF OBJECT_ID('POR_COLECTORA.Usuarios', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Usuarios
 
 --DROP TABLA DIRECCIONES
+
 IF OBJECT_ID('POR_COLECTORA.Direcciones', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Direcciones
 
 --DROP TABLA ROLES
+
 IF OBJECT_ID('POR_COLECTORA.Roles', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Roles
 
 --DROP TABLA ROLXUSUARIO
+
 IF OBJECT_ID('POR_COLECTORA.RolxUsuario', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.RolxUsuario
 
 --DROP TABLA FUNCIONALIDADES
+
 IF OBJECT_ID('POR_COLECTORA.Funcionalidades', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Funcionalidades
 
 --DROP TABLA FUNCIONALIDADXROL
+
 IF OBJECT_ID('POR_COLECTORA.FuncionalidadxRol', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.FuncionalidadxRol
 
 --DROP TABLA RUBROS
+
 IF OBJECT_ID('POR_COLECTORA.Rubros', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Rubros
 
 --DROP TABLA PROVEEDORES
+
 IF OBJECT_ID('POR_COLECTORA.Proveedores', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Proveedores
 
 --DROP TABLA FACTURAS
+
 IF OBJECT_ID('POR_COLECTORA.Facturas', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Facturas
 
 --DROP TABLA OFERTAS
+
 IF OBJECT_ID('POR_COLECTORA.Ofertas', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Ofertas
 
 --DROP TABLA COMPRAS
+
 IF OBJECT_ID('POR_COLECTORA.Compras', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Compras
 
 --DROP TABLA CUPONES
+
 IF OBJECT_ID('POR_COLECTORA.Cupones', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Cupones
 
 --DROP TABLA TARJETAS
+
 IF OBJECT_ID('POR_COLECTORA.Tarjetas', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Tarjetas
 
 --DROP TABLA CARGAS
+
 IF OBJECT_ID('POR_COLECTORA.Cargas', 'U') IS NOT NULL
 DROP TABLE POR_COLECTORA.Cargas
 
 --DROP SP ALTA CLIENTE
+
 IF OBJECT_ID ('POR_COLECTORA.sp_alta_cliente') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_alta_cliente
 
 --DROP SP BAJA CLIENTE
+
 IF OBJECT_ID ('POR_COLECTORA.sp_baja_cliente') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_baja_cliente
 
 --DROP SP MODIFICAR CLIENTE
+
 IF OBJECT_ID ('POR_COLECTORA.sp_modificar_cliente') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_modificar_cliente
 
 --DROP SP ALTA PROVEEDOR
+
 IF OBJECT_ID ('POR_COLECTORA.sp_alta_proveedor') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_alta_proveedor
 
 --DROP SP BAJA PROVEEDOR
+
 IF OBJECT_ID ('POR_COLECTORA.sp_baja_proveedor') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_baja_proveedor
 
 --DROP SP MODIFICAR PROVEEDOR
+
 IF OBJECT_ID ('POR_COLECTORA.sp_modificar_proveedor') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_modificar_proveedor
 
 --DROP SP CARGA CREDITO
+
 IF OBJECT_ID ('POR_COLECTORA.sp_carga_credito') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_carga_credito
 
 --DROP SP LISTADO PROVEEDORES MAS DESCUENTO
+
 IF OBJECT_ID ('POR_COLECTORA.sp_prov_mas_descuento') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_prov_mas_descuento
 
 --DROP SP ALTA OFERTAS
+
 IF OBJECT_ID ('POR_COLECTORA.sp_alta_ofertas') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_alta_ofertas
 
 --DROP SP LISTADO PROVEEDORES MAYOR FACTURACION
+
 IF OBJECT_ID ('POR_COLECTORA.sp_prov_mayor_facturacion') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_prov_mayor_facturacion
 
 --DROP SP COMPRAR OFERTA
+
 IF OBJECT_ID ('POR_COLECTORA.sp_comprar_oferta') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_comprar_oferta
 
 --DROP SP CONSUMIR OFERTA
+
 IF OBJECT_ID ('POR_COLECTORA.sp_consumir_oferta') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_consumir_oferta
 
 --DROP SP FACTURAR A PROVEEDOR
+
 IF OBJECT_ID ('POR_COLECTORA.sp_facturar_a_proveedor') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor
 
 --DROP SP FACTURAR A PROVEEDOR LISTADO
+
 IF OBJECT_ID ('POR_COLECTORA.sp_facturar_a_proveedor_listado') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor_listado
 
 --DROP SP FILTRAR CLIENTES
+
 IF OBJECT_ID ('POR_COLECTORA.sp_filtrar_clientes') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_filtrar_clientes
 
 --DROP FUNCTION EXISTE USUARIO
+
 IF OBJECT_ID ('POR_COLECTORA.fn_existe_usuario') IS NOT NULL
 DROP FUNCTION POR_COLECTORA.fn_existe_usuario
 
 --DROP SP ALTA USUARIO
+
 IF OBJECT_ID ('POR_COLECTORA.sp_alta_usuario') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_alta_usuario
 
 --DROP SP ALTA ROL
+
 IF OBJECT_ID ('POR_COLECTORA.sp_alta_rol') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_alta_rol
 
---DROP SP ALTA ROL
+--DROP SP AGREGAR FUNCIONALIDAD A ROL
+
 IF OBJECT_ID ('POR_COLECTORA.sp_agregar_funcionalidad_a_rol') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_agregar_funcionalidad_a_rol
 
 --DROP SP OFERTAS VIGENTES
+
 IF OBJECT_ID ('POR_COLECTORA.sp_ofertas_vigentes') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_ofertas_vigentes
 
 --DROP SP FILTRAR PROVEEDORES
+
 IF OBJECT_ID ('POR_COLECTORA.sp_filtrar_proveedores') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_filtrar_proveedores
 
 
 --DROP SP BAJA ROL
+
 IF OBJECT_ID ('POR_COLECTORA.sp_baja_rol') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_baja_rol
 
 
 --DROP SP MODIFICAR NOMBRE ROL
+
 IF OBJECT_ID ('POR_COLECTORA.sp_modificar_nombre_rol') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_modificar_nombre_rol
 
 --DROP SP QUITA ROL USUARIOS
+
 IF OBJECT_ID ('POR_COLECTORA.sp_quitar_rol_a_usuarios') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_quitar_rol_a_usuarios
 
 --DROP SP ELIMINAR FUNCIONALIDAD ROL
+
 IF OBJECT_ID ('POR_COLECTORA.sp_eliminar_funcionalidad_rol') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_eliminar_funcionalidad_rol
 
 
 --DROP SP ELIMINAR HABILITAR ROL
+
 IF OBJECT_ID ('POR_COLECTORA.sp_habilitar_rol') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_habilitar_rol
 
 --DROP SP MOSTRAR ROLES
+
 IF OBJECT_ID ('POR_COLECTORA.sp_mostrar_roles') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_mostrar_roles
 
 
 --DROP SP MOSTRAR FUNCIONALIDADES ROL
+
 IF OBJECT_ID ('POR_COLECTORA.sp_mostrar_funcionalidades_rol') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_mostrar_funcionalidades_rol
 
 --DROP SP LOGIN
+
 IF OBJECT_ID ('POR_COLECTORA.sp_login') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_login
 
 
 --DROP SP OBTENER ID CLIENTE
+
 IF OBJECT_ID ('POR_COLECTORA.sp_obtener_id_cliente') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_obtener_id_cliente
 
 --DROP SP OBTENER ID PROVEEDOR
+
 IF OBJECT_ID ('POR_COLECTORA.sp_obtener_id_proveedor') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_obtener_id_proveedor
 
 --DROP SP CARGA CREDITO EFECTIVO
+
 IF OBJECT_ID ('POR_COLECTORA.sp_carga_credito_efectivo') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_carga_credito_efectivo
 
 
 --DROP SP ROL POSEE FUNCIONALIDAD
+
 IF OBJECT_ID ('POR_COLECTORA.sp_rol_posee_funcionalidad') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_rol_posee_funcionalidad
 
 --DROP SP CAMBIAR CONTRASEÑA USER
+
 IF OBJECT_ID ('POR_COLECTORA.sp_cambiar_contraseña_user') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_cambiar_contraseña_user
 
 
 --DROP SP BAJA USUARIO
+
 IF OBJECT_ID ('POR_COLECTORA.sp_baja_usuario') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_baja_usuario
 
 --DROP SP OBTENER ID USER
+
 IF OBJECT_ID ('POR_COLECTORA.sp_obtener_id_user') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_obtener_id_user
 
 
 --DROP SP MOSTRAR USUARIOS
+
 IF OBJECT_ID ('POR_COLECTORA.sp_mostrar_usuarios') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_mostrar_usuarios
 
 
 --DROP SP CLIENTE ESTA HABILITADO
+
 IF OBJECT_ID ('POR_COLECTORA.sp_cliente_esta_habilitado') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_cliente_esta_habilitado
 
 
 --DROP SP USER ES ADMIN
+
 IF OBJECT_ID ('POR_COLECTORA.sp_user_es_admin') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_user_es_admin
 
 
 --DROP SP PROVEEDOR ESTA HABILITADO
+
 IF OBJECT_ID ('POR_COLECTORA.sp_proveedor_esta_habilitado') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_proveedor_esta_habilitado
 
 --DROP SP EXISTE PROVEEDOR
+
 IF OBJECT_ID ('POR_COLECTORA.sp_existe_proveedor') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_existe_proveedor
 
 
 --DROP SP USER POSEE ROL CLIENTE
+
 IF OBJECT_ID ('POR_COLECTORA.sp_user_posee_rol_cliente') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_user_posee_rol_cliente
 
 
 --DROP SP USER POSEE ROL PROVEEDOR
+
 IF OBJECT_ID ('POR_COLECTORA.sp_user_posee_rol_proveedor') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_user_posee_rol_proveedor
 
@@ -286,15 +344,17 @@ GO
 --			INICIO CREACION TABLAS
 
 --CREACIÓN DE TABLA DIRECCIONES
+
 CREATE TABLE POR_COLECTORA.Direcciones(
 	Direccion_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Direccion_Calle NVARCHAR(250) NOT NULL,
-	Direccion_Nro_Piso NVARCHAR(10),
-	Direccion_Depto NVARCHAR(10),
-	Direccion_Ciudad NVARCHAR(80) NOT NULL)
+	Direccion_Nro_Piso NVARCHAR(50),
+	Direccion_Depto NVARCHAR(50),
+	Direccion_Ciudad NVARCHAR(250) NOT NULL)
 GO
 
 --CREACIÓN DE TABLA USUARIOS
+
 CREATE TABLE POR_COLECTORA.Usuarios(
 	Usuario_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Usuario_Nombre VARCHAR(250) NOT NULL,
@@ -304,6 +364,7 @@ CREATE TABLE POR_COLECTORA.Usuarios(
 GO
 
 --CREACIÓN DE TABLA CLIENTES
+
 CREATE TABLE POR_COLECTORA.Clientes(
 	Clie_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Clie_Nombre NVARCHAR(250) NOT NULL,
@@ -312,7 +373,7 @@ CREATE TABLE POR_COLECTORA.Clientes(
 	Clie_Mail NVARCHAR(250) NOT NULL,
 	Clie_Telefono Numeric(18,0) NOT NULL,
 	Clie_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
-	Clie_CP NVARCHAR(20),
+	Clie_CP NVARCHAR(50),
 	Clie_Fecha_Nac DATETIME NOT NULL,
 	Clie_Habilitado BIT NOT NULL DEFAULT 1,
 	Clie_Saldo Numeric(18,0) NOT NULL DEFAULT 200,
@@ -320,92 +381,102 @@ CREATE TABLE POR_COLECTORA.Clientes(
 GO
 
 --CREACIÓN DE TABLA ROLES
+
 CREATE TABLE POR_COLECTORA.Roles(
 	Rol_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Rol_Nombre VARCHAR(30) NOT NULL,
+	Rol_Nombre NVARCHAR(50) NOT NULL,
 	Rol_Habilitado BIT NOT NULL DEFAULT 1)
 GO
 
 --CREACIÓN DE TABLA ROLxUSUARIO
+
 CREATE TABLE POR_COLECTORA.RolxUsuario(
 	Id_Rol Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Roles(Rol_Id),
 	Id_Usuario Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id))
 GO
 
 --CREACIÓN DE TABLA FUNCIONALIDADES
+
 CREATE TABLE POR_COLECTORA.Funcionalidades(
 	Func_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Func_Descripcion VARCHAR(80) NOT NULL)
+	Func_Descripcion NVARCHAR(250) NOT NULL)
 GO
 
 --CREACIÓN DE TABLA FUNCIONALIDADxROL
+
 CREATE TABLE POR_COLECTORA.FuncionalidadxRol(
 	Id_Rol Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Roles(Rol_Id),
 	Id_Func Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Funcionalidades(Func_Id))
 GO
 
 --CREACIÓN DE TABLA RUBROS
+
 CREATE TABLE POR_COLECTORA.Rubros(
 	Rubro_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Rubro_Detalle NVARCHAR(50) NOT NULL)
 GO
 
 --CREACIÓN DE TABLA PROVEEDORES
+
 CREATE TABLE POR_COLECTORA.Proveedores(
 	Provee_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Provee_RS NVARCHAR(80) UNIQUE NOT NULL,
-	Provee_Mail NVARCHAR(50),
+	Provee_RS NVARCHAR(250) UNIQUE NOT NULL,
+	Provee_Mail NVARCHAR(250),
 	Provee_Telefono Numeric NOT NULL,
 	Provee_CUIT NVARCHAR(13) UNIQUE NOT NULL,
 	Provee_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
-	Provee_CP VARCHAR(20),
+	Provee_CP NVARCHAR(50),
 	Provee_Rubro Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Rubros(Rubro_Id),
-	Provee_Nombre_Contacto NVARCHAR(80),
+	Provee_Nombre_Contacto NVARCHAR(250),
 	Provee_Usuario Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Usuarios(Usuario_Id),
 	Provee_Habilitado BIT NOT NULL DEFAULT 1)
 GO
 
 --CREACIÓN DE TABLA FACTURAS
+
 CREATE TABLE POR_COLECTORA.Facturas(
 	Fact_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Fact_Numero Numeric NOT NULL,
-	Fact_Fecha_Desde DATETIME,
+	Fact_Fecha_Desde DATETIME NOT NULL,
 	Fact_Fecha_Hasta DATETIME NOT NULL,
-	Fact_Importe Float NOT NULL,
+	Fact_Importe numeric NOT NULL,
 	Fact_Proveedor_ID Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id),
 	Fact_Proveedor_CUIT NVARCHAR(13) NOT NULL,
-	Fact_Proveedor_RS NVARCHAR(80) NOT NULL)
+	Fact_Proveedor_RS NVARCHAR(250) NOT NULL)
 GO
 
 --CREACIÓN DE TABLA OFERTAS
+
 CREATE TABLE POR_COLECTORA.Ofertas(
 	Oferta_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Oferta_Codigo NVARCHAR(200) NOT NULL,
-	Oferta_Descripcion NVARCHAR(200) NOT NULL,
+	Oferta_Codigo NVARCHAR(250) NOT NULL,
+	Oferta_Descripcion NVARCHAR(250) NOT NULL,
 	Oferta_Fecha DATETIME NOT NULL,
 	Oferta_Fecha_Venc DATETIME NOT NULL,
-	Oferta_Precio Float NOT NULL,
-	Oferta_Precio_Ficticio Float NOT NULL,
-	Oferta_Cantidad Int NOT NULL,
-	Oferta_Restriccion_Compra Int,
+	Oferta_Precio numeric NOT NULL,
+	Oferta_Precio_Ficticio numeric NOT NULL,
+	Oferta_Cantidad numeric NOT NULL,
+	Oferta_Restriccion_Compra numeric,
 	Oferta_Proveedor Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Proveedores(Provee_Id))
 GO
 
 --CREACIÓN DE TABLA COMPRAS
+
 CREATE TABLE POR_COLECTORA.Compras(
 	Compra_Nro Numeric IDENTITY(1,1) PRIMARY KEY,
 	Compra_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
 	Compra_Oferta Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Ofertas(Oferta_Id),
-	Compra_Cantidad Int NOT NULL,
+	Compra_Cantidad numeric NOT NULL,
 	Compra_Fecha DATETIME NOT NULL,
 	Compra_Id_Factura Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Facturas(Fact_Id),
-	Compra_Oferta_Precio Float NOT NULL)
+	Compra_Oferta_Precio numeric NOT NULL)
 GO
 
 --CREACIÓN DE TABLA CUPONES
+
 CREATE TABLE POR_COLECTORA.Cupones(
 	Cupon_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Cupon_Codigo nvarchar(80) NOT NULL,
+	Cupon_Codigo nvarchar(250) NOT NULL,
 	Cupon_Fecha_Venc DATETIME ,
 	Cupon_Fecha_Consumo DATETIME,
 	Cupon_Nro_Compra Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Compras(Compra_Nro),
@@ -413,6 +484,7 @@ CREATE TABLE POR_COLECTORA.Cupones(
 GO
 
 --CREACIÓN DE TABLA TARJETAS
+
 CREATE TABLE POR_COLECTORA.Tarjetas(
 	Tarjeta_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Tarjeta_Numero Numeric NOT NULL,
@@ -422,12 +494,13 @@ CREATE TABLE POR_COLECTORA.Tarjetas(
 GO
 
 --CREACIÓN DE TABLA CARGAS
+
 CREATE TABLE POR_COLECTORA.Cargas(
 	Carga_Id Numeric IDENTITY(1,1) PRIMARY KEY,
 	Carga_Fecha DATETIME NOT NULL,
 	Carga_Id_Cliente Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Clientes(Clie_Id),
-	Carga_Tipo_Pago nvarchar(20), --Es el tipo de tarjeta
-	Carga_Monto NUMERIC NOT NULL,
+	Carga_Tipo_Pago nvarchar(50) NOT NULL, 
+	Carga_Monto NUMERIC(18,0) NOT NULL,
 	Carga_Id_Tarjeta Numeric FOREIGN KEY REFERENCES POR_COLECTORA.Tarjetas(Tarjeta_Id))
 GO
 
@@ -437,6 +510,7 @@ GO
 --			COMIENZO MIGRACION TABLAS
 
 --MIGRACION DIRECCIONES
+
 INSERT INTO POR_COLECTORA.Direcciones
 ( Direccion_Calle,Direccion_Ciudad)
 SELECT DISTINCT Cli_Direccion, Cli_Ciudad
@@ -448,16 +522,8 @@ SELECT DISTINCT Provee_Dom, Provee_Ciudad
 FROM gd_esquema.Maestra
 where Provee_Dom is not null
 
-/*
---MIGRACION USUARIOS
-INSERT INTO POR_COLECTORA.Usuarios
-( Usuario_Nombre, Usuario_Password )
-SELECT DISTINCT Cli_Dni, Cli_Dni
-FROM gd_esquema.Maestra
--- hacer el insert en usuarios de proveedores
-*/
-
 --MIGRACION TABLA CLIENTES
+
 INSERT INTO POR_COLECTORA.Clientes
 (Clie_Nombre, Clie_Apellido, Clie_DNI, Clie_Telefono, Clie_Mail, Clie_Fecha_Nac, Clie_Direccion)
 SELECT DISTINCT Cli_Nombre, Cli_Apellido, Cli_Dni, Cli_Telefono, Cli_Mail, Cli_Fecha_Nac,
@@ -466,13 +532,14 @@ FROM gd_esquema.Maestra
 
 
 --MIGRACION TABLA ROLES
+
 INSERT INTO POR_COLECTORA.Roles
 ( Rol_Nombre )
  VALUES ('Administrador General'),('Cliente'),('Proveedor')
 
 --INSERTO EL USUARIO ADMIN
 
-DECLARE @password [varchar](100)
+DECLARE @password [varchar](250)
 SET @password = 'w23e'
 
 INSERT INTO POR_COLECTORA.Usuarios(Usuario_Nombre,Usuario_Password)
@@ -481,7 +548,7 @@ GO
 
 --INSERTO EL USUARIO ADMIN EN ROLxUSUARIO
 
-DECLARE @codigo_rol_administrador [NUMERIC]
+DECLARE @codigo_rol_administrador numeric
 SET @codigo_rol_administrador= (SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrador General')
 
 INSERT INTO POR_COLECTORA.RolxUsuario(Id_Usuario, Id_Rol)
@@ -489,6 +556,7 @@ VALUES ((SELECT Usuario_Id FROM POR_COLECTORA.Usuarios WHERE Usuario_Nombre = 'a
 GO
 
 --MIGRACION FUNCIONALIDADES
+
 INSERT INTO POR_COLECTORA.Funcionalidades(Func_Descripcion)
 VALUES	 ('ABM Rol'), 
 		('ABM Cliente'), ('ABM Proveedor'), ('Cargar Crédito'),
@@ -515,6 +583,7 @@ VALUES ((SELECT Rol_Id FROM POR_COLECTORA.Roles WHERE Rol_Nombre = 'Administrado
 GO
 
 --MIGRACION TABLA RUBROS
+
 INSERT INTO POR_COLECTORA.Rubros
 (Rubro_Detalle)
 SELECT DISTINCT Provee_Rubro
@@ -522,9 +591,9 @@ FROM gd_esquema.Maestra
 where Provee_Rubro is not null
 
 --MIGRACION TABLA PROVEEDORES
+
 INSERT INTO POR_COLECTORA.Proveedores
-(Provee_RS, Provee_Telefono, Provee_CUIT, Provee_Direccion, 
-  Provee_Rubro)
+(Provee_RS, Provee_Telefono, Provee_CUIT, Provee_Direccion, Provee_Rubro)
 SELECT DISTINCT Maestra.Provee_RS, Maestra.Provee_Telefono, Maestra.Provee_CUIT, 
 				(SELECT Direccion_Id FROM POR_COLECTORA.Direcciones WHERE Direccion_Calle = Maestra.Provee_Dom), 
 				(SELECT Rubro_Id FROM POR_COLECTORA.Rubros WHERE Rubro_Detalle = Maestra.Provee_Rubro)
@@ -532,61 +601,63 @@ FROM gd_esquema.Maestra as Maestra
 where Maestra.Provee_RS is not null
 
 --MIGRACION TABLA OFERTAS
+
 INSERT INTO POR_COLECTORA.Ofertas
 (Oferta_Codigo,Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio,
-	Oferta_Cantidad, Oferta_Restriccion_Compra,	Oferta_Proveedor)
-SELECT DISTINCT SUBSTRING(Oferta_Codigo,1,10),
-				Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, NULL,
-				(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
+	Oferta_Cantidad, Oferta_Proveedor)
+SELECT DISTINCT SUBSTRING(Maestra.Oferta_Codigo,1,10),
+				Maestra.Oferta_Descripcion, Maestra.Oferta_Fecha, Maestra.Oferta_Fecha_Venc, Maestra.Oferta_Precio, Maestra.Oferta_Precio_Ficticio, Maestra.Oferta_Cantidad,
+				(SELECT Colectora.Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
 FROM gd_esquema.Maestra As Maestra
-where Oferta_Descripcion is not null
+where Maestra.Oferta_Descripcion is not null
 
 --MIGRACION FACTURAS
 
 INSERT INTO POR_COLECTORA.Facturas
 	(Fact_Numero,Fact_Fecha_Desde,Fact_Fecha_Hasta,Fact_Importe, Fact_Proveedor_ID,Fact_Proveedor_CUIT,Fact_Proveedor_RS )
-SELECT DISTINCT Factura_Nro,min(Oferta_Fecha_Compra),Factura_Fecha,
-	SUM(Oferta_Precio),
-	(SELECT Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
-	(SELECT Provee_CUIT FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
-	(SELECT Provee_RS FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
-FROM gd_esquema.Maestra MAESTRA
-where Factura_Nro is not null 
-GROUP BY Factura_Nro, Factura_Fecha, Provee_RS
+SELECT DISTINCT Maestra.Factura_Nro,min(Maestra.Oferta_Fecha_Compra),Maestra.Factura_Fecha,
+	SUM(Maestra.Oferta_Precio),
+	(SELECT Colectora.Provee_Id FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
+	(SELECT Colectora.Provee_CUIT FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS),
+	(SELECT Colectora.Provee_RS FROM POR_COLECTORA.Proveedores As Colectora WHERE Colectora.Provee_RS = Maestra.Provee_RS)
+FROM gd_esquema.Maestra Maestra
+where Maestra.Factura_Nro is not null 
+GROUP BY Maestra.Factura_Nro, Maestra.Factura_Fecha, Maestra.Provee_RS
 
 --MIGRACION CARGAS
 
 INSERT INTO POR_COLECTORA.Cargas
 (Carga_Fecha, Carga_Id_Cliente, Carga_Tipo_Pago, Carga_Monto)
-SELECT DISTINCT Carga_fecha, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni and Cli_Dni is not null),
-				Tipo_Pago_Desc,Carga_Credito 
+SELECT DISTINCT Maestra.Carga_fecha, (SELECT Colectora.Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni and Maestra.Cli_Dni is not null),
+				Maestra.Tipo_Pago_Desc,Maestra.Carga_Credito 
 FROM gd_esquema.Maestra AS Maestra
-where Carga_Fecha is not null
+where Maestra.Carga_Fecha is not null
 
 
---MIGRACION COMPRAS - Revisar el jueves el matching de compra_oferta
+--MIGRACION COMPRAS 
 
 INSERT INTO POR_COLECTORA.Compras
 (Compra_Cliente,Compra_Oferta,Compra_Cantidad,Compra_Fecha,Compra_Id_Factura,Compra_Oferta_Precio)
-SELECT DISTINCT (SELECT Clie_Id FROM POR_COLECTORA.Clientes As Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni), 
-				(select Oferta_Id from POR_COLECTORA.Ofertas As Colectora where Colectora.Oferta_Codigo = SUBSTRING(Maestra.Oferta_Codigo,1,10)),
+SELECT DISTINCT (SELECT Colectora.Clie_Id FROM POR_COLECTORA.Clientes As Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni), 
+				(select Colectora.Oferta_Id from POR_COLECTORA.Ofertas As Colectora where Colectora.Oferta_Codigo = SUBSTRING(Maestra.Oferta_Codigo,1,10)),
 				1,Maestra.Oferta_Fecha_Compra,
-				(SELECT Fact_Id FROM POR_COLECTORA.Facturas AS Colectora WHERE Colectora.Fact_Numero = Maestra.Factura_Nro),
+				(SELECT Colectora.Fact_Id FROM POR_COLECTORA.Facturas AS Colectora WHERE Colectora.Fact_Numero = Maestra.Factura_Nro),
 				Maestra.Oferta_Precio
 FROM gd_esquema.Maestra As Maestra
-where Oferta_Descripcion is not null and Factura_Fecha is not null
+where Maestra.Oferta_Descripcion is not null and Maestra.Factura_Fecha is not null
 
 
---MIGRACION CUPONES / REVISAR SI LA FECHA DE VENC ES LA MISMA DE LA FACUTURA O NO
+--MIGRACION CUPONES 
+
 INSERT INTO POR_COLECTORA.Cupones
 (Cupon_Fecha_Venc, Cupon_Codigo,Cupon_Fecha_Consumo,Cupon_Id_Cliente_Consumidor,Cupon_Nro_Compra)
 SELECT Maestra.Oferta_Fecha_Venc,
 			    CONCAT( Oferta_Codigo, (SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni)),
 				Maestra.Oferta_Fecha_Compra,
-				(SELECT Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni)
-				, (select Compra_Nro from POR_COLECTORA.Compras where
+				(SELECT Colectora.Clie_Id FROM POR_COLECTORA.Clientes AS Colectora WHERE Colectora.Clie_DNI = Maestra.Cli_Dni),
+				(select Compra_Nro from POR_COLECTORA.Compras where
 																Compra_Fecha = Maestra.Oferta_Fecha_Compra
-																and Compra_Oferta = (select Oferta_Id from POR_COLECTORA.Ofertas As Colectora where Colectora.Oferta_Codigo = SUBSTRING(Maestra.Oferta_Codigo,1,10))
+																and Compra_Oferta = (select Colectora.Oferta_Id from POR_COLECTORA.Ofertas As Colectora where Colectora.Oferta_Codigo = SUBSTRING(Maestra.Oferta_Codigo,1,10))
 																and Compra_Cliente = (SELECT Clie_Id FROM POR_COLECTORA.Clientes WHERE Clie_DNI = Maestra.Cli_Dni)
 																and Compra_Id_Factura = (select Fact_Id from POR_COLECTORA.Facturas where Maestra.Factura_Nro = Fact_Numero))
 FROM gd_esquema.Maestra AS Maestra
@@ -643,7 +714,7 @@ DECLARE cursor_proveedores CURSOR FOR
 SELECT Provee_RS,Provee_CUIT
 FROM POR_COLECTORA.Proveedores
 
-DECLARE @rs nvarchar(80)
+DECLARE @rs nvarchar(250)
 DECLARE @cuit NVARCHAR(13)
 
 OPEN cursor_proveedores
@@ -731,10 +802,10 @@ CREATE PROCEDURE POR_COLECTORA.sp_alta_cliente (
 @mail nvarchar(250),
 @telefono numeric(18,0),
 @direCalle nvarchar(250),
-@nroPiso nvarchar(10),
-@depto nvarchar(10),
-@ciudad nvarchar(80),
-@CP nvarchar(20),
+@nroPiso nvarchar(50),
+@depto nvarchar(50),
+@ciudad nvarchar(250),
+@CP nvarchar(50),
 @fechaNacimiento datetime
 )
 AS
@@ -784,10 +855,10 @@ CREATE PROCEDURE POR_COLECTORA.sp_modificar_cliente (
 @mail nvarchar(250),
 @telefono numeric(18,0),
 @direCalle nvarchar(250),
-@nroPiso nvarchar(10),
-@depto nvarchar(10),
-@ciudad nvarchar(80),
-@CP nvarchar(20),
+@nroPiso nvarchar(50),
+@depto nvarchar(50),
+@ciudad nvarchar(250),
+@CP nvarchar(50),
 @fechaNacimiento datetime,
 @habilitar bit
 )
@@ -809,17 +880,17 @@ GO
 CREATE PROCEDURE POR_COLECTORA.sp_alta_proveedor (
 @username varchar(250),
 @password varchar(250),
-@razonSocial nvarchar(80),
-@mail nvarchar(50),
+@razonSocial nvarchar(250),
+@mail nvarchar(250),
 @telefono numeric(18,0),
 @direCalle nvarchar(250),
-@nroPiso nvarchar(10),
-@depto nvarchar(10),
-@ciudad nvarchar(80),
-@CP nvarchar(20),
+@nroPiso nvarchar(50),
+@depto nvarchar(50),
+@ciudad nvarchar(250),
+@CP nvarchar(50),
 @cuit nvarchar(13),
-@nombreContacto nvarchar(80),
-@rubro nvarchar(80)
+@nombreContacto nvarchar(250),
+@rubro nvarchar(50)
 )
 AS
 BEGIN
@@ -865,17 +936,17 @@ GO
 
 CREATE PROCEDURE POR_COLECTORA.sp_modificar_proveedor (
 @id_prove numeric,
-@razonSocial nvarchar(80),
-@mail nvarchar(50),
+@razonSocial nvarchar(250),
+@mail nvarchar(250),
 @telefono numeric(18,0),
 @direCalle nvarchar(250),
-@nroPiso nvarchar(10),
-@depto nvarchar(10),
-@ciudad nvarchar(80),
-@CP nvarchar(20),
+@nroPiso nvarchar(50),
+@depto nvarchar(50),
+@ciudad nvarchar(250),
+@CP nvarchar(50),
 @cuit nvarchar(13),
-@nombreContacto nvarchar(80),
-@rubro_detalle nvarchar(80),
+@nombreContacto nvarchar(250),
+@rubro_detalle nvarchar(50),
 @habilitar bit
 )
 AS
@@ -899,15 +970,13 @@ GO
 
 CREATE PROCEDURE POR_COLECTORA.sp_carga_credito (
 @id_cliente numeric,
-@fecha_carga datetime, --pasar la de archivo configuracion -> esto lo haces en la interfaz
+@fecha_carga datetime, 
 @monto numeric,
 @tipo_tarjeta nvarchar(50),
 @numero_tarjeta numeric,
 @fecha_venc datetime
 )
 
---en el enunciado dice que el usuario elija el tipo de pago: tarjeta de credito o debito, 
---chau efectivo?
 AS
 BEGIN
 
@@ -933,7 +1002,7 @@ GO
 
 CREATE PROCEDURE POR_COLECTORA.sp_carga_credito_efectivo (
 @id_cliente numeric,
-@fecha_carga datetime, --pasar la de archivo configuracion -> esto lo haces en la interfaz
+@fecha_carga datetime, 
 @monto numeric
 )
 AS
@@ -957,7 +1026,6 @@ GO
 --TOP 5 de proveedores con mayor porcentaje de descuento ofrecido en sus ofertas en forma descendente por monto
 --La pantalla debe permitirnos seleccionar el semestre
 
---Ofertas que se hayan lanzado en el semestre, o tambien tiene que entrar el vencimiento??
 CREATE PROCEDURE POR_COLECTORA.sp_prov_mas_descuento (@semestre int, @anio int)
 AS
 BEGIN
@@ -1020,30 +1088,28 @@ GO
 --SP Alta ofertas proveedores 
 CREATE PROCEDURE POR_COLECTORA.sp_alta_ofertas(
 @id_prove numeric,
-@descripcion nvarchar(200), 
+@descripcion nvarchar(250), 
 @fecha DateTime, 
 @fecha_venc DateTime, 
-@precio_oferta float, 
-@precio_original float, 
-@stock int, 
+@precio_oferta numeric, 
+@precio_original numeric, 
+@stock numeric, 
 @max_compra numeric)
 
 
 AS
 BEGIN
 
-	declare @oferta_codigo nvarchar(50)
-	set @oferta_codigo = SUBSTRING(CONVERT(nvarchar(255), NEWID()), 0, 9)
+	declare @oferta_codigo nvarchar(250)
+	set @oferta_codigo = SUBSTRING(CONVERT(nvarchar(250), NEWID()), 0, 9)
 	WHILE (SELECT COUNT(*) FROM Ofertas WHERE Oferta_Codigo = @oferta_codigo) = 1 --Este while checkearia si el string autogenerado no se repite
 	BEGIN
 	IF (SELECT COUNT(*) FROM Ofertas WHERE Oferta_Codigo = @oferta_codigo) = 0
 		BREAK
 	ELSE
-		set @oferta_codigo = SUBSTRING(CONVERT(nvarchar(255), NEWID()), 0, 9)
+		set @oferta_codigo = SUBSTRING(CONVERT(nvarchar(250), NEWID()), 0, 9)
 	END
-	--Chequeo fechas contra el sistema?? 
-	--El proveedor podrá ir cargando ofertas con diferentes fechas, esta fecha debe ser mayor o igual a la fecha actual del sistema.
-
+	
 	INSERT INTO POR_COLECTORA.Ofertas(Oferta_Codigo,Oferta_Descripcion, Oferta_Fecha, Oferta_Fecha_Venc, Oferta_Precio, Oferta_Precio_Ficticio, Oferta_Cantidad, Oferta_Restriccion_Compra, Oferta_Proveedor) 
 	VALUES (@oferta_codigo,@descripcion, @fecha, @fecha_venc, @precio_oferta, @precio_original, @stock, @max_compra,@id_prove)
 
@@ -1075,7 +1141,7 @@ BEGIN
 
 
 	declare @numeroCupon numeric
-	declare @cupon_codigo nvarchar(80)
+	declare @cupon_codigo nvarchar(250)
 
 
 	if((SELECT Clie_Saldo FROM Clientes WHERE Clie_Id = @id_cliente) < (@precio_oferta * @cantidad_compra))
@@ -1135,11 +1201,10 @@ END
 
 GO
 
---exec POR_COLECTORA.sp_comprar_oferta(1,1,'2020-03-09 00:00:00.000',2);
 
 --SP CONSUMO OFERTA 
 CREATE PROCEDURE POR_COLECTORA.sp_consumir_oferta(
-@codigo_cupon nvarchar(80),
+@codigo_cupon nvarchar(250),
 @fecha_consumo datetime,
 @id_proveedor numeric,
 @id_cliente numeric,
@@ -1194,11 +1259,10 @@ END
 
 GO
 
---exec POR_COLECTORA.sp_consumir_oferta 'ZZZRAIMYGF82544', '2020-01-23 00:00:00.000', 
 
 --SP FACTURACION A PROVEEDOR
---Listado ofertas adquiridas por clientes, no me dice que campos mostrar, muestro ID y descripcion
-CREATE PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor_listado(@fecha_inicio DateTime, @fecha_fin DateTime, @proveedor nvarchar(80))
+--Listado ofertas adquiridas por clientes
+CREATE PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor_listado(@fecha_inicio DateTime, @fecha_fin DateTime, @proveedor nvarchar(250))
 AS
 BEGIN
 
@@ -1212,7 +1276,7 @@ GO
 
 --SP FACTURACION A PROVEEDOR
 --Importe factura y numero factura
-CREATE PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor(@fecha_inicio DateTime, @fecha_fin DateTime, @proveedor nvarchar(80),@resultado varchar(250) output)
+CREATE PROCEDURE POR_COLECTORA.sp_facturar_a_proveedor(@fecha_inicio DateTime, @fecha_fin DateTime, @proveedor nvarchar(250),@resultado varchar(250) output)
 AS
 BEGIN
 	--Importe factura
@@ -1240,7 +1304,7 @@ BEGIN
 	insert into POR_COLECTORA.Facturas(Fact_Numero,Fact_Fecha_Desde,Fact_Fecha_Hasta,Fact_Importe,Fact_Proveedor_ID,Fact_Proveedor_RS,Fact_Proveedor_CUIT)
 	values (@fact_numero,@fecha_inicio,@fecha_fin,@importe_total,@prove_id,@proveedor,@prove_cuit)
 	
-	set @resultado = convert(varchar(10),@importe_total) + ' ' + convert(varchar(10),@fact_numero)
+	set @resultado = convert(varchar(18),@importe_total) + ' ' + convert(varchar(18),@fact_numero)
 	
 	update Compras
 	set Compra_Id_Factura = (select Fact_Id from Facturas where Fact_Numero = @fact_numero)
@@ -1253,8 +1317,8 @@ GO
 
 --SP FILTRO CLIENTES
 CREATE PROCEDURE POR_COLECTORA.sp_filtrar_clientes(
-@nombre NVARCHAR(225),
-@apellido NVARCHAR(225),
+@nombre NVARCHAR(250),
+@apellido NVARCHAR(250),
 @dni Numeric(18, 0),
 @mail NVARCHAR(250)
 )
@@ -1278,7 +1342,7 @@ END
 GO
 
 --SP ALTA ROL
-CREATE PROCEDURE POR_COLECTORA.sp_alta_rol(@nombre NVARCHAR(225))
+CREATE PROCEDURE POR_COLECTORA.sp_alta_rol(@nombre NVARCHAR(50))
 AS 
 BEGIN
 	
@@ -1323,7 +1387,7 @@ GO
 
 --SP FILTRO PROVEEDORES
 CREATE PROCEDURE POR_COLECTORA.sp_filtrar_proveedores(
-@razonSocial NVARCHAR(225),
+@razonSocial NVARCHAR(250),
 @cuit nvarchar(13),
 @mail NVARCHAR(250)
 )
@@ -1370,7 +1434,7 @@ END
 GO
 
 --SP MODIFICAR NOMBRE ROL
-CREATE PROCEDURE POR_COLECTORA.sp_modificar_nombre_rol(@rol numeric, @nuevo_nombre varchar(30))
+CREATE PROCEDURE POR_COLECTORA.sp_modificar_nombre_rol(@rol numeric, @nuevo_nombre varchar(50))
 AS
 BEGIN
 	UPDATE POR_COLECTORA.Roles set rol_nombre = @nuevo_nombre
@@ -1480,7 +1544,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE POR_COLECTORA.sp_rol_posee_funcionalidad(@rol numeric,@func_descrip nvarchar(80) ,@resultado bit output)
+CREATE PROCEDURE POR_COLECTORA.sp_rol_posee_funcionalidad(@rol numeric,@func_descrip nvarchar(250) ,@resultado bit output)
 AS
 BEGIN
 
@@ -1622,17 +1686,17 @@ END
 GO
 
 
-CREATE PROCEDURE POR_COLECTORA.sp_login(@user nvarchar(255) , @pass varchar(256), @resultado int output)
+CREATE PROCEDURE POR_COLECTORA.sp_login(@user nvarchar(250) , @pass varchar(250), @resultado int output)
 AS
 BEGIN
 	
-	DECLARE @hash_pass_almacenada varchar(256)
+	DECLARE @hash_pass_almacenada varchar(250)
 	SET @hash_pass_almacenada = 
 	(SELECT Usuario_Password
 	FROM POR_COLECTORA.Usuarios
 	WHERE Usuario_Nombre = @user)
 
-	DECLARE @hash_pass_ingresada varchar(256)
+	DECLARE @hash_pass_ingresada varchar(250)
 	SET @hash_pass_ingresada = HASHBYTES('SHA2_256',@pass)
 
 	IF @hash_pass_almacenada IS NULL
@@ -1706,7 +1770,7 @@ END
 GO
 
 
-CREATE PROCEDURE POR_COLECTORA.sp_cambiar_contraseña_user(@id_user numeric,@new_pass varchar(80))
+CREATE PROCEDURE POR_COLECTORA.sp_cambiar_contraseña_user(@id_user numeric,@new_pass varchar(250))
 AS
 BEGIN
 	

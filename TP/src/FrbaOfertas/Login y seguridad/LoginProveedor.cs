@@ -18,10 +18,41 @@ namespace FrbaOfertas.Login
             InitializeComponent();
         }
 
+        private bool chequearRolProveedorEstaHabilitado()
+        {
+            var connection = DB.getInstance().getConnection();
+            SqlCommand sqlCmd = new SqlCommand("select Rol_Habilitado from POR_COLECTORA.Roles where Rol_Id = 3", connection);
+            connection.Open();
+            SqlDataReader sqlReader = sqlCmd.ExecuteReader();
+            bool estaHabilitado = true;
+
+            while (sqlReader.Read())
+            {
+                estaHabilitado = Convert.ToBoolean(sqlReader["Rol_Habilitado"].ToString());
+            }
+
+            sqlReader.Close();
+
+            return estaHabilitado;
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new AbmProveedor.RegistroProveedor(this).Show();
+           
+            bool estaHabilitado = this.chequearRolProveedorEstaHabilitado();
+
+            if (estaHabilitado)
+            {
+                this.Hide();
+                new AbmProveedor.RegistroProveedor(this).Show();
+            }
+            else
+            {
+                MessageBox.Show("El rol se encuentra inhabilitado por lo que no se te puede asignar a tu usuario.");
+                this.Close();
+                new Login().Show();
+            }
         }
 
         private int idProveedorIngresado(string username)

@@ -119,9 +119,7 @@ namespace FrbaOfertas.AbmCliente
                 mensajeError.Add("Debe completar el código postal.");
             }
 
-
-
-            
+          
             string mensajeConcat;
             mensajeConcat = string.Join("\n", mensajeError);
 
