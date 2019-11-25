@@ -248,6 +248,10 @@ IF OBJECT_ID ('POR_COLECTORA.sp_cliente_esta_habilitado') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_cliente_esta_habilitado
 
 
+--DROP SP USER ES ADMIN
+IF OBJECT_ID ('POR_COLECTORA.sp_user_es_admin') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_user_es_admin
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -1473,6 +1477,26 @@ AS
 BEGIN
 
 	if ( (select Clie_Habilitado from POR_COLECTORA.Clientes where Clie_Id = @idCliente ) = 1)
+	begin
+		set @resultado = 1
+	end
+
+	else
+	begin
+		set @resultado = 0
+	end
+
+	return @resultado
+							
+
+END
+GO
+
+CREATE PROCEDURE POR_COLECTORA.sp_user_es_admin(@idUsuario numeric,@resultado bit output)
+AS
+BEGIN
+
+	if ( 1 in (select Id_Rol from RolxUsuario where Id_Usuario = @idUsuario ))
 	begin
 		set @resultado = 1
 	end

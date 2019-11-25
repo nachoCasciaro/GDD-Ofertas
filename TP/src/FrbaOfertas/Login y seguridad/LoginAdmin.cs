@@ -38,6 +38,23 @@ namespace FrbaOfertas.Login
 
         }
 
+        private bool esAdmin(int idUser)
+        {
+            var connection = DB.getInstance().getConnection();
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_user_es_admin", connection);
+            query.CommandType = CommandType.StoredProcedure;
+            query.Parameters.Add(new SqlParameter("@idUsuario", idUser));
+            query.Parameters.Add("@resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+
+            connection.Open();
+
+            SqlDataReader reader = query.ExecuteReader();
+
+            bool resultado = Convert.ToBoolean(query.Parameters["@resultado"].Value);
+
+            return resultado;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             string error = this.validarDatos();
@@ -60,12 +77,21 @@ namespace FrbaOfertas.Login
                 connection.Close();
 
                 if (resultado == 4)
-                {                  
+                { 
+                    
                     int idUser = this.idUserIngresado(this.textBox1.Text);
 
-                    this.Close();
-                    new Menu_Principal.MenuAdmin(idUser).Show();
-                    
+                    if (this.esAdmin(idUser))
+                    {
+                        this.Close();
+                        new Menu_Principal.MenuAdmin(idUser).Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No posees el rol de administrador general, ingrese a su rol correspondiente.");
+                        new Login().Show();
+                    }
+                                     
                 }
                 else if (resultado == 2)
                 {

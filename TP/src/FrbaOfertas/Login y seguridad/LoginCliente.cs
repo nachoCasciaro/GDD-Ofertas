@@ -103,6 +103,7 @@ namespace FrbaOfertas.Login
 
                     if (idCliente != -1)
                     {
+                        this.Hide();
                         new Menu_Principal.MenuCliente(idCliente,idUser).Show();
                     }
                     else
