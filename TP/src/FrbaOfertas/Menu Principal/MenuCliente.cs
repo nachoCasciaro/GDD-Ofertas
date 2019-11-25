@@ -54,7 +54,7 @@ namespace FrbaOfertas.Menu_Principal
             }
             else
             {
-                MessageBox.Show("Estas inhabilitado por lo que no podes acceder a esta función.");
+                MessageBox.Show("Estás inhabilitado por lo que no podes acceder a esta función.");
             }
             
 
@@ -72,7 +72,7 @@ namespace FrbaOfertas.Menu_Principal
             }
             else
             {
-                MessageBox.Show("Estas inhabilitado por lo que no podes acceder a esta función.");
+                MessageBox.Show("Estás inhabilitado por lo que no podes acceder a esta función.");
             }
             
             

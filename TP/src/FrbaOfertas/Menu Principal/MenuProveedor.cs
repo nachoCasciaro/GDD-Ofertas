@@ -26,10 +26,37 @@ namespace FrbaOfertas.Menu_Principal
 
         }
 
+        private bool chequearHabilitacion()
+        {
+            var connection = DB.getInstance().getConnection();
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_proveedor_esta_habilitado", connection);
+            query.CommandType = CommandType.StoredProcedure;
+            query.Parameters.Add(new SqlParameter("@idProveedor", idProveedor));
+            query.Parameters.Add("@resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+
+            connection.Open();
+
+            SqlDataReader reader = query.ExecuteReader();
+
+            bool resultado = Convert.ToBoolean(query.Parameters["@resultado"].Value);
+
+            return resultado;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new CrearOferta.CrearOferta(idProveedor,this).Show();
+            bool estaHabilitado = this.chequearHabilitacion();
+
+            if (estaHabilitado)
+            {
+                this.Hide();
+                new CrearOferta.CrearOferta(idProveedor, this).Show();
+            }
+            else
+            {
+                MessageBox.Show("Estás inhabilitado por lo que no podes acceder a esta función.");
+            }
+           
         }
 
         private void button1_Click(object sender, EventArgs e)

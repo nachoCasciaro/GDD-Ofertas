@@ -252,6 +252,12 @@ DROP PROCEDURE POR_COLECTORA.sp_cliente_esta_habilitado
 IF OBJECT_ID ('POR_COLECTORA.sp_user_es_admin') IS NOT NULL
 DROP PROCEDURE POR_COLECTORA.sp_user_es_admin
 
+
+--DROP SP PROVEEDOR ESTA HABILITADO
+IF OBJECT_ID ('POR_COLECTORA.sp_proveedor_esta_habilitado') IS NOT NULL
+DROP PROCEDURE POR_COLECTORA.sp_proveedor_esta_habilitado
+
+
 GO
 
 IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'POR_COLECTORA')
@@ -333,10 +339,10 @@ GO
 --CREACIÓN DE TABLA PROVEEDORES
 CREATE TABLE POR_COLECTORA.Proveedores(
 	Provee_Id Numeric IDENTITY(1,1) PRIMARY KEY,
-	Provee_RS NVARCHAR(80) NOT NULL,
+	Provee_RS NVARCHAR(80) UNIQUE NOT NULL,
 	Provee_Mail NVARCHAR(50),
 	Provee_Telefono Numeric NOT NULL,
-	Provee_CUIT NVARCHAR(13) UNIQUE,
+	Provee_CUIT NVARCHAR(13) UNIQUE NOT NULL,
 	Provee_Direccion Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Direcciones(Direccion_Id),
 	Provee_CP VARCHAR(20),
 	Provee_Rubro Numeric NOT NULL FOREIGN KEY REFERENCES POR_COLECTORA.Rubros(Rubro_Id),
@@ -1477,6 +1483,26 @@ AS
 BEGIN
 
 	if ( (select Clie_Habilitado from POR_COLECTORA.Clientes where Clie_Id = @idCliente ) = 1)
+	begin
+		set @resultado = 1
+	end
+
+	else
+	begin
+		set @resultado = 0
+	end
+
+	return @resultado
+							
+
+END
+GO
+
+CREATE PROCEDURE POR_COLECTORA.sp_proveedor_esta_habilitado(@idProveedor numeric, @resultado bit output)
+AS
+BEGIN
+
+	if ( (select Provee_Habilitado from POR_COLECTORA.Proveedores where Provee_Mail = @idProveedor ) = 1)
 	begin
 		set @resultado = 1
 	end
