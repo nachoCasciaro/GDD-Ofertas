@@ -190,7 +190,9 @@ namespace FrbaOfertas.Menu_Principal
 
         private void button9_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Debe acceder como proveedor para poder utilizar esta función.");
+
+            this.Hide();
+            new CrearOferta.IndicarProveedorReferenciaOferta(this).Show();
 
         }
 

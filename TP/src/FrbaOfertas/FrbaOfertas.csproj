@@ -136,6 +136,12 @@
     <Compile Include="CrearOferta\CrearOferta.Designer.cs">
       <DependentUpon>CrearOferta.cs</DependentUpon>
     </Compile>
+    <Compile Include="CrearOferta\IndicarProveedorReferenciaOferta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrearOferta\IndicarProveedorReferenciaOferta.Designer.cs">
+      <DependentUpon>IndicarProveedorReferenciaOferta.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB.cs" />
     <Compile Include="EntregarOferta\EntregarOferta.cs">
       <SubType>Form</SubType>
@@ -257,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CrearOferta\CrearOferta.resx">
       <DependentUpon>CrearOferta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrearOferta\IndicarProveedorReferenciaOferta.resx">
+      <DependentUpon>IndicarProveedorReferenciaOferta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EntregarOferta\EntregarOferta.resx">
       <DependentUpon>EntregarOferta.cs</DependentUpon>

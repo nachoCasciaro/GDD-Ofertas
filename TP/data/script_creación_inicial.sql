@@ -1502,7 +1502,7 @@ CREATE PROCEDURE POR_COLECTORA.sp_proveedor_esta_habilitado(@idProveedor numeric
 AS
 BEGIN
 
-	if ( (select Provee_Habilitado from POR_COLECTORA.Proveedores where Provee_Mail = @idProveedor ) = 1)
+	if ( (select Provee_Habilitado from POR_COLECTORA.Proveedores where Provee_Id = @idProveedor ) = 1)
 	begin
 		set @resultado = 1
 	end
