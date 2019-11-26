@@ -45,28 +45,33 @@ namespace FrbaOfertas.AbmCliente
 
         private SqlDataReader filtrar()
         {
-            var connection = DB.getInstance().getConnection();
-            SqlCommand command = new SqlCommand("POR_COLECTORA.sp_filtrar_clientes", connection);
-            command.CommandType = CommandType.StoredProcedure;
+
+                var connection = DB.getInstance().getConnection();
+                SqlCommand command = new SqlCommand("POR_COLECTORA.sp_filtrar_clientes", connection);
+                command.CommandType = CommandType.StoredProcedure;
 
 
-            command.Parameters.Add(new SqlParameter("@nombre", txtbox_nombre.Text));
-            command.Parameters.Add(new SqlParameter("@apellido", txtbox_apellido.Text));
-            if (txtbox_dni.Text == "")
-            {
-                command.Parameters.Add(new SqlParameter("@dni", Convert.ToInt32(0)));
-            }
-            else
-            {
-                command.Parameters.Add(new SqlParameter("@dni", Convert.ToInt32(txtbox_dni.Text)));
-            }
-            command.Parameters.Add(new SqlParameter("@mail", txtbox_mail.Text));
+                command.Parameters.Add(new SqlParameter("@nombre", txtbox_nombre.Text));
+                command.Parameters.Add(new SqlParameter("@apellido", txtbox_apellido.Text));
+                if (txtbox_dni.Text == "")
+                {
+                    command.Parameters.Add(new SqlParameter("@dni", Convert.ToInt32(0)));
+                }
+                else
+                {
+                    command.Parameters.Add(new SqlParameter("@dni", Convert.ToInt32(txtbox_dni.Text)));
+                }
+                command.Parameters.Add(new SqlParameter("@mail", txtbox_mail.Text));
 
-            connection.Open();
+                connection.Open();
 
-            SqlDataReader reader = command.ExecuteReader();
+                SqlDataReader reader = command.ExecuteReader();
 
-            return reader;
+                return reader;
+
+            
+
+
         }
 
         private void seleccionarClienteModificar()
@@ -157,15 +162,23 @@ namespace FrbaOfertas.AbmCliente
 
         private void seleccionarClienteBaja()
         {
-            Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            var connection = DB.getInstance().getConnection();
-            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_baja_cliente", connection);
-            query.CommandType = CommandType.StoredProcedure;
-            query.Parameters.Add(new SqlParameter("@id_clie", id));
+            try
+            {
+                Int32 id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+                var connection = DB.getInstance().getConnection();
+                SqlCommand query = new SqlCommand("POR_COLECTORA.sp_baja_cliente", connection);
+                query.CommandType = CommandType.StoredProcedure;
+                query.Parameters.Add(new SqlParameter("@id_clie", id));
 
-            connection.Open();
-            query.ExecuteNonQuery();
-            connection.Close();
+                connection.Open();
+                query.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception excepcion)
+            {
+                MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
+            }
+           
         }
 
         private void FiltroBMCliente_Load(object sender, EventArgs e)
@@ -179,6 +192,12 @@ namespace FrbaOfertas.AbmCliente
             txtbox_mail.Text = "";
             txtbox_apellido.Text = "";
             txtbox_dni.Text = "";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.parent.Show();
         }
 
 

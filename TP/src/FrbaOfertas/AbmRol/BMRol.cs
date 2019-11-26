@@ -118,6 +118,12 @@ namespace FrbaOfertas.AbmRol
 
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.parent.Show();
+        }
+
 
     }
 }

@@ -25,32 +25,37 @@ namespace FrbaOfertas
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string error = this.validarDatos();
-
-            if (error == "")
+            try
             {
-                var connection = DB.getInstance().getConnection();
-                SqlCommand query = new SqlCommand("POR_COLECTORA.sp_cambiar_contraseña_user", connection);
-                query.CommandType = CommandType.StoredProcedure;
-                query.Parameters.Add(new SqlParameter("@id_user", this.idUser));
-                query.Parameters.Add(new SqlParameter("@new_pass", textBox1.Text));
+                string error = this.validarDatos();
 
-                connection.Open();
-                query.ExecuteNonQuery();
-                connection.Close();
+                if (error == "")
+                {
+                    var connection = DB.getInstance().getConnection();
+                    SqlCommand query = new SqlCommand("POR_COLECTORA.sp_cambiar_contraseña_user", connection);
+                    query.CommandType = CommandType.StoredProcedure;
+                    query.Parameters.Add(new SqlParameter("@id_user", this.idUser));
+                    query.Parameters.Add(new SqlParameter("@new_pass", textBox1.Text));
 
-                MessageBox.Show("Contraseña modificada con éxito.");
+                    connection.Open();
+                    query.ExecuteNonQuery();
+                    connection.Close();
 
-                this.Close();
-                this.parent.Show();
+                    MessageBox.Show("Contraseña modificada con éxito.");
+
+                    this.Close();
+                    this.parent.Show();
+                }
+                else
+                {
+                    MessageBox.Show(error);
+                }
             }
-            else
+            catch (Exception excepcion)
             {
-                MessageBox.Show(error);
+                MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
             }
-
-
-           
+                    
         }
 
         private string validarDatos()
@@ -67,6 +72,17 @@ namespace FrbaOfertas
 
             return mensajeConcat;
 
+        }
+
+        private void CambiarContraseña_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.parent.Show();
         }
     }
 }

@@ -45,5 +45,15 @@ namespace FrbaOfertas.Login
             new LoginProveedor().Show();
         }
 
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
     }
 }

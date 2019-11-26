@@ -62,5 +62,11 @@ namespace FrbaOfertas.CrearOferta
                 
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.parent.Show();
+        }
     }
 }

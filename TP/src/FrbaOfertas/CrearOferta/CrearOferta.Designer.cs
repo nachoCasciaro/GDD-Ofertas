@@ -43,6 +43,7 @@
             this.CREAR = new System.Windows.Forms.Button();
             this.date_publicacion = new System.Windows.Forms.DateTimePicker();
             this.date_vencimiento = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -157,10 +158,10 @@
             // 
             // CREAR
             // 
-            this.CREAR.Location = new System.Drawing.Point(353, 347);
+            this.CREAR.Location = new System.Drawing.Point(310, 330);
             this.CREAR.Margin = new System.Windows.Forms.Padding(4);
             this.CREAR.Name = "CREAR";
-            this.CREAR.Size = new System.Drawing.Size(100, 28);
+            this.CREAR.Size = new System.Drawing.Size(143, 47);
             this.CREAR.TabIndex = 14;
             this.CREAR.Text = "CREAR";
             this.CREAR.UseVisualStyleBackColor = true;
@@ -180,11 +181,23 @@
             this.date_vencimiento.Size = new System.Drawing.Size(260, 22);
             this.date_vencimiento.TabIndex = 16;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(38, 330);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(143, 47);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "VOLVER AL MENU PRINCIPAL";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // CrearOferta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(506, 412);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.date_vencimiento);
             this.Controls.Add(this.date_publicacion);
             this.Controls.Add(this.CREAR);
@@ -227,5 +240,6 @@
         private System.Windows.Forms.Button CREAR;
         private System.Windows.Forms.DateTimePicker date_publicacion;
         private System.Windows.Forms.DateTimePicker date_vencimiento;
+        private System.Windows.Forms.Button button1;
     }
 }

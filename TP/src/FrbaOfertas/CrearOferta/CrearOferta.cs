@@ -30,35 +30,44 @@ namespace FrbaOfertas.CrearOferta
 
         private void CREAR_Click(object sender, EventArgs e)
         {
-            string error = this.validarDatos();
-
-            if (error == "")
+            try
             {
-                var connection = DB.getInstance().getConnection();
-                SqlCommand query = new SqlCommand("POR_COLECTORA.sp_alta_ofertas", connection);
-                query.CommandType = CommandType.StoredProcedure;
+                string error = this.validarDatos();
 
-                query.Parameters.Add(new SqlParameter("@id_prove", Convert.ToInt32(this.idProveedor)));
-                query.Parameters.Add(new SqlParameter("@descripcion", this.txtbox_descripcion.Text));
-                query.Parameters.Add(new SqlParameter("@fecha", this.date_publicacion.Value));
-                query.Parameters.Add(new SqlParameter("@fecha_venc", this.date_vencimiento.Value));
-                query.Parameters.Add(new SqlParameter("@precio_oferta", Convert.ToDecimal(this.txtbox_preciooferta.Text)));
-                query.Parameters.Add(new SqlParameter("@precio_original", Convert.ToDecimal(this.txtbox_preciooriginal.Text)));
-                query.Parameters.Add(new SqlParameter("@stock", Convert.ToInt32(this.txtbox_stock.Text)));
-                query.Parameters.Add(new SqlParameter("@max_compra", Convert.ToInt32(this.txtbox_maxunidades.Text)));
+                if (error == "")
+                {
+                    var connection = DB.getInstance().getConnection();
+                    SqlCommand query = new SqlCommand("POR_COLECTORA.sp_alta_ofertas", connection);
+                    query.CommandType = CommandType.StoredProcedure;
 
-                connection.Open();
-                query.ExecuteNonQuery();
-                connection.Close();
+                    query.Parameters.Add(new SqlParameter("@id_prove", Convert.ToInt32(this.idProveedor)));
+                    query.Parameters.Add(new SqlParameter("@descripcion", this.txtbox_descripcion.Text));
+                    query.Parameters.Add(new SqlParameter("@fecha", this.date_publicacion.Value));
+                    query.Parameters.Add(new SqlParameter("@fecha_venc", this.date_vencimiento.Value));
+                    query.Parameters.Add(new SqlParameter("@precio_oferta", Convert.ToDecimal(this.txtbox_preciooferta.Text)));
+                    query.Parameters.Add(new SqlParameter("@precio_original", Convert.ToDecimal(this.txtbox_preciooriginal.Text)));
+                    query.Parameters.Add(new SqlParameter("@stock", Convert.ToInt32(this.txtbox_stock.Text)));
+                    query.Parameters.Add(new SqlParameter("@max_compra", Convert.ToInt32(this.txtbox_maxunidades.Text)));
 
-                MessageBox.Show("Se creó la oferta con éxito");
-                this.Close();
-                this.parent.Show();
+                    connection.Open();
+                    query.ExecuteNonQuery();
+                    connection.Close();
+
+                    MessageBox.Show("Se creó la oferta con éxito");
+                    this.Close();
+                    this.parent.Show();
+                }
+                else
+                {
+                    MessageBox.Show(error);
+                }
+
             }
-            else
+            catch (Exception excepcion)
             {
-                MessageBox.Show(error);
+                MessageBox.Show("Debe seleccionar la fila completa utilizando la flecha de la izquierda", "Error", MessageBoxButtons.OK);
             }
+
           
         }
 
@@ -135,6 +144,12 @@ namespace FrbaOfertas.CrearOferta
 
             return mensajeConcat;
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.parent.Show();
         }
     }
 }

@@ -162,52 +162,61 @@ namespace FrbaOfertas.AbmCliente
         void button1_Click(object sender, EventArgs e)
         {
 
-            string error = this.validarDatos();
-
-            if (error == "")
+            try
             {
-                var connection = DB.getInstance().getConnection();
-                SqlCommand query = new SqlCommand("POR_COLECTORA.sp_modificar_cliente", connection);
-                query.CommandType = CommandType.StoredProcedure;
-                query.Parameters.Add(new SqlParameter("@id_clie", this.id));
-                query.Parameters.Add(new SqlParameter("@nombre", this.txtbox_nombre.Text));
-                query.Parameters.Add(new SqlParameter("@apellido", this.txtbox_apellido.Text));
-                query.Parameters.Add(new SqlParameter("@dni", Convert.ToInt32(this.txtbox_dni.Text)));
-                query.Parameters.Add(new SqlParameter("@mail", this.txtbox_mail.Text));
-                query.Parameters.Add(new SqlParameter("@telefono", Convert.ToInt32(txtbox_telefono.Text)));
-                query.Parameters.Add(new SqlParameter("@direCalle", this.txtbox_calle.Text));
-                query.Parameters.Add(new SqlParameter("@nroPiso", this.txtbox_nropiso.Text));
-                query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
-                query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
-                query.Parameters.Add(new SqlParameter("@CP", this.txtbox_cp.Text));
-                query.Parameters.Add(new SqlParameter("@fechaNacimiento", dtm_fecha.Value));
+                string error = this.validarDatos();
 
-
-                if (this.checkbox_habilitado.Checked)
+                if (error == "")
                 {
-                    query.Parameters.Add(new SqlParameter("@habilitar", true));
+                    var connection = DB.getInstance().getConnection();
+                    SqlCommand query = new SqlCommand("POR_COLECTORA.sp_modificar_cliente", connection);
+                    query.CommandType = CommandType.StoredProcedure;
+                    query.Parameters.Add(new SqlParameter("@id_clie", this.id));
+                    query.Parameters.Add(new SqlParameter("@nombre", this.txtbox_nombre.Text));
+                    query.Parameters.Add(new SqlParameter("@apellido", this.txtbox_apellido.Text));
+                    query.Parameters.Add(new SqlParameter("@dni", Convert.ToInt32(this.txtbox_dni.Text)));
+                    query.Parameters.Add(new SqlParameter("@mail", this.txtbox_mail.Text));
+                    query.Parameters.Add(new SqlParameter("@telefono", Convert.ToInt32(txtbox_telefono.Text)));
+                    query.Parameters.Add(new SqlParameter("@direCalle", this.txtbox_calle.Text));
+                    query.Parameters.Add(new SqlParameter("@nroPiso", this.txtbox_nropiso.Text));
+                    query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
+                    query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
+                    query.Parameters.Add(new SqlParameter("@CP", this.txtbox_cp.Text));
+                    query.Parameters.Add(new SqlParameter("@fechaNacimiento", dtm_fecha.Value));
+
+
+                    if (this.checkbox_habilitado.Checked)
+                    {
+                        query.Parameters.Add(new SqlParameter("@habilitar", true));
+
+                    }
+                    else
+                    {
+                        query.Parameters.Add(new SqlParameter("@habilitar", habilitado));
+                    }
+
+                    connection.Open();
+                    query.ExecuteNonQuery();
+                    connection.Close();
+
+                    MessageBox.Show("Los datos del cliente fueron modificados con éxito.");
+
+                    this.Close();
+
+                    this.parent.Show();
 
                 }
                 else
                 {
-                    query.Parameters.Add(new SqlParameter("@habilitar", habilitado));
+                    MessageBox.Show(error);
                 }
 
-                connection.Open();
-                query.ExecuteNonQuery();
-                connection.Close();
-
-                MessageBox.Show("Los datos del cliente fueron modificados con éxito.");
-
-                this.Close();
-
-                this.parent.Show();
-
-            }
-            else
+            }           
+            catch (Exception excepcion)
             {
-                MessageBox.Show(error);
+                MessageBox.Show("Ya existe un cliente con ese dni.", "Error", MessageBoxButtons.OK);
             }
+
 
 
         }

@@ -36,63 +36,71 @@ namespace FrbaOfertas.CargaCredito
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            string error = this.validarDatos();
-
-            if (error == "")
+            try
             {
-                if (combobox_pago.SelectedItem.ToString() != "Efectivo")
+                string error = this.validarDatos();
+
+                if (error == "")
                 {
-                    var connection = DB.getInstance().getConnection();
-                    SqlCommand query = new SqlCommand("POR_COLECTORA.sp_carga_credito", connection);
-                    query.CommandType = CommandType.StoredProcedure;
+                    if (combobox_pago.SelectedItem.ToString() != "Efectivo")
+                    {
+                        var connection = DB.getInstance().getConnection();
+                        SqlCommand query = new SqlCommand("POR_COLECTORA.sp_carga_credito", connection);
+                        query.CommandType = CommandType.StoredProcedure;
 
-                    query.Parameters.Add(new SqlParameter("@id_cliente", Convert.ToInt32(this.idCliente)));
+                        query.Parameters.Add(new SqlParameter("@id_cliente", Convert.ToInt32(this.idCliente)));
 
-                    DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["current_date"]);
-                    query.Parameters.Add(new SqlParameter("@fecha_carga", fechaActual));
+                        DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["current_date"]);
+                        query.Parameters.Add(new SqlParameter("@fecha_carga", fechaActual));
 
-                    query.Parameters.Add(new SqlParameter("@monto", this.txtbox_monto.Text));
-                    query.Parameters.Add(new SqlParameter("@tipo_tarjeta", this.combobox_tipotarjeta.Text));
-                    query.Parameters.Add(new SqlParameter("@numero_tarjeta", this.txtbox_numerotarjeta.Text));
-                    query.Parameters.Add(new SqlParameter("@fecha_venc", this.date_fechaVencimiento.Value));
+                        query.Parameters.Add(new SqlParameter("@monto", this.txtbox_monto.Text));
+                        query.Parameters.Add(new SqlParameter("@tipo_tarjeta", this.combobox_tipotarjeta.Text));
+                        query.Parameters.Add(new SqlParameter("@numero_tarjeta", this.txtbox_numerotarjeta.Text));
+                        query.Parameters.Add(new SqlParameter("@fecha_venc", this.date_fechaVencimiento.Value));
 
-                    connection.Open();
-                    query.ExecuteNonQuery();
-                    connection.Close();
-                    MessageBox.Show("La carga se realizó con éxito.");
-                    this.Hide();
+                        connection.Open();
+                        query.ExecuteNonQuery();
+                        connection.Close();
+                        MessageBox.Show("La carga se realizó con éxito.");
+                        this.Hide();
 
-                    this.parent.Show();
+                        this.parent.Show();
 
+                    }
+                    else
+                    {
+                        var connection = DB.getInstance().getConnection();
+                        SqlCommand query = new SqlCommand("POR_COLECTORA.sp_carga_credito_efectivo", connection);
+                        query.CommandType = CommandType.StoredProcedure;
+
+                        query.Parameters.Add(new SqlParameter("@id_cliente", Convert.ToInt32(this.idCliente)));
+
+                        DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["current_date"]);
+                        query.Parameters.Add(new SqlParameter("@fecha_carga", fechaActual));
+
+                        query.Parameters.Add(new SqlParameter("@monto", this.txtbox_monto.Text));
+
+                        connection.Open();
+                        query.ExecuteNonQuery();
+                        connection.Close();
+                        MessageBox.Show("La carga se realizó con éxito.");
+                        this.Hide();
+                        this.parent.Show();
+
+                    }
                 }
                 else
                 {
-                    var connection = DB.getInstance().getConnection();
-                    SqlCommand query = new SqlCommand("POR_COLECTORA.sp_carga_credito_efectivo", connection);
-                    query.CommandType = CommandType.StoredProcedure;
-
-                    query.Parameters.Add(new SqlParameter("@id_cliente", Convert.ToInt32(this.idCliente)));
-
-                    DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["current_date"]);
-                    query.Parameters.Add(new SqlParameter("@fecha_carga", fechaActual));
-
-                    query.Parameters.Add(new SqlParameter("@monto", this.txtbox_monto.Text));
-
-                    connection.Open();
-                    query.ExecuteNonQuery();
-                    connection.Close();
-                    MessageBox.Show("La carga se realizó con éxito.");
-                    this.Hide();
-                    this.parent.Show();
-
+                    MessageBox.Show(error);
                 }
+
             }
-            else
+            catch (Exception excepcion)
             {
-                MessageBox.Show(error);
+                MessageBox.Show(excepcion.Message, "Error", MessageBoxButtons.OK);
             }
 
+            
             
         }
 
