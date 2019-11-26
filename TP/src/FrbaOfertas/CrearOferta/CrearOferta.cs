@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace FrbaOfertas.CrearOferta
 {
@@ -83,6 +84,15 @@ namespace FrbaOfertas.CrearOferta
             if (date_vencimiento.Value < date_publicacion.Value)
             {
                 mensajeError.Add("La fecha de vencimiento tiene que ser mayor o igual a la de publicación.");
+            }
+
+
+            DateTime fechaActual = Convert.ToDateTime(ConfigurationManager.AppSettings["current_date"]);
+
+
+            if (date_publicacion.Value < fechaActual )
+            {
+                mensajeError.Add("La fecha de publicación tiene que ser mayor o igual a la fecha de hoy."); //fecha de hoy se refiere a la fecha del archivo de configuracion
             }
 
             if (string.IsNullOrWhiteSpace(txtbox_preciooriginal.Text))
