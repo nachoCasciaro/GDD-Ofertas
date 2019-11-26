@@ -141,6 +141,27 @@ namespace FrbaOfertas.AbmProveedor
 
         }
 
+        private bool sePudoCrearUsuario()
+        {
+            var connection = DB.getInstance().getConnection();
+            SqlCommand query = new SqlCommand("POR_COLECTORA.sp_alta_usuario", connection);
+            query.CommandType = CommandType.StoredProcedure;
+
+            query.Parameters.Add(new SqlParameter("@username", this.txtbox_username.Text));
+            query.Parameters.Add(new SqlParameter("@password", this.txtbox_password.Text));
+
+            query.Parameters.Add("@resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+
+            connection.Open();
+            query.ExecuteNonQuery();
+
+            bool resultado = Convert.ToBoolean(query.Parameters["@resultado"].Value);
+
+            connection.Close();
+
+            return resultado;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -149,33 +170,43 @@ namespace FrbaOfertas.AbmProveedor
 
                 if (error == "")
                 {
-                    var connection = DB.getInstance().getConnection();
-                    SqlCommand query = new SqlCommand("POR_COLECTORA.sp_alta_proveedor", connection);
-                    query.CommandType = CommandType.StoredProcedure;
-                    query.Parameters.Add(new SqlParameter("@username", this.txtbox_username.Text));
-                    query.Parameters.Add(new SqlParameter("@password", this.txtbox_password.Text));
-                    query.Parameters.Add(new SqlParameter("@razonSocial", this.txtbox_RS.Text));
-                    query.Parameters.Add(new SqlParameter("@mail", this.txtbox_mail.Text));
-                    query.Parameters.Add(new SqlParameter("@telefono", Convert.ToInt32(txtbox_telefono.Text)));
-                    query.Parameters.Add(new SqlParameter("@direCalle", this.txtbox_calle.Text));
-                    query.Parameters.Add(new SqlParameter("@nroPiso", this.txtbox_nropiso.Text));
-                    query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
-                    query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
-                    query.Parameters.Add(new SqlParameter("@CP", this.txtbox_CP.Text));
-                    query.Parameters.Add(new SqlParameter("@cuit", this.txtbox_cuit.Text));
-                    query.Parameters.Add(new SqlParameter("@nombreContacto", this.txtbox_contacto.Text));
-                    query.Parameters.Add(new SqlParameter("@rubro", this.combobox_rubro.SelectedItem));
+                    bool usuarioCreadoConExito = this.sePudoCrearUsuario();
+
+                    if (usuarioCreadoConExito)
+                    {
+                        var connection = DB.getInstance().getConnection();
+                        SqlCommand query = new SqlCommand("POR_COLECTORA.sp_alta_proveedor", connection);
+                        query.CommandType = CommandType.StoredProcedure;
+                        query.Parameters.Add(new SqlParameter("@username", this.txtbox_username.Text));
+                        query.Parameters.Add(new SqlParameter("@razonSocial", this.txtbox_RS.Text));
+                        query.Parameters.Add(new SqlParameter("@mail", this.txtbox_mail.Text));
+                        query.Parameters.Add(new SqlParameter("@telefono", Convert.ToInt32(txtbox_telefono.Text)));
+                        query.Parameters.Add(new SqlParameter("@direCalle", this.txtbox_calle.Text));
+                        query.Parameters.Add(new SqlParameter("@nroPiso", this.txtbox_nropiso.Text));
+                        query.Parameters.Add(new SqlParameter("@depto", this.txtbox_depto.Text));
+                        query.Parameters.Add(new SqlParameter("@ciudad", this.txtbox_ciudad.Text));
+                        query.Parameters.Add(new SqlParameter("@CP", this.txtbox_CP.Text));
+                        query.Parameters.Add(new SqlParameter("@cuit", this.txtbox_cuit.Text));
+                        query.Parameters.Add(new SqlParameter("@nombreContacto", this.txtbox_contacto.Text));
+                        query.Parameters.Add(new SqlParameter("@rubro", this.combobox_rubro.SelectedItem));
 
 
-                    connection.Open();
-                    query.ExecuteNonQuery();
-                    connection.Close();
+                        connection.Open();
+                        query.ExecuteNonQuery();
+                        connection.Close();
 
-                    MessageBox.Show("El proveedor se registró con éxito.");
+                        MessageBox.Show("El proveedor se registró con éxito.");
 
-                    this.Hide();
+                        this.Hide();
 
-                    this.parent.Show();
+                        this.parent.Show();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ya existe un usuario con ese username, intente con otro.");
+                    }
+
 
                 }
                 else

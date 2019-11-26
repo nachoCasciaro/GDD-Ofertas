@@ -137,9 +137,17 @@ namespace FrbaOfertas.Login
                         new Menu_Principal.MenuCliente(idCliente,idUser).Show();
                     }
                     else
-                    {
-                        MessageBox.Show("El usuario ingresado no es un cliente");
-                        new LoginCliente().Show();
+                    {                       
+                        if (MessageBox.Show("El usuario ingresado no es un cliente, desea registrarse y poder serlo?", "Confirma", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            this.Hide();
+                            new RegistroClientesYProveedoresConUsuario.NuevoCliente(this, this.textBox_usuario.Text).Show(); ;
+                        }
+                        else
+                        {
+                            new LoginCliente().Show();
+                        }
+
                     }
 
                 }
@@ -200,6 +208,11 @@ namespace FrbaOfertas.Login
         {
             this.Close();
             new Login().Show();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

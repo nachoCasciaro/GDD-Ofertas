@@ -762,7 +762,8 @@ GO
 
 CREATE PROCEDURE POR_COLECTORA.sp_alta_usuario(
 @username varchar(250),
-@password varchar(250)
+@password varchar(250),
+@resultado bit output
 )
 AS
 BEGIN
@@ -771,10 +772,11 @@ BEGIN
 	IF ( POR_COLECTORA.fn_existe_usuario(@username) = 0 )
 	BEGIN
 		INSERT INTO POR_COLECTORA.Usuarios(Usuario_Nombre,Usuario_Password) values (@username,HASHBYTES('SHA2_256', @password))
+		set @resultado = 1
 	END
 	ELSE
 	BEGIN
-		RAISERROR ( 'YA EXISTE UN USUARIO CON ESE NOMBRE',1,1)
+		set @resultado = 0
 	END
 END
 GO
@@ -794,8 +796,7 @@ GO
 
 
 CREATE PROCEDURE POR_COLECTORA.sp_alta_cliente (
-@username varchar(250),
-@password varchar(250),
+@username nvarchar(250),
 @nombre nvarchar(250),
 @apellido nvarchar(250),
 @dni numeric (18,0),
@@ -810,8 +811,6 @@ CREATE PROCEDURE POR_COLECTORA.sp_alta_cliente (
 )
 AS
 BEGIN
-
-	EXEC POR_COLECTORA.sp_alta_usuario @username, @password
 
 	declare @user_id numeric
 	set @user_id = (select Usuario_Id from Usuarios where Usuario_Nombre = @username)
@@ -879,7 +878,6 @@ GO
 
 CREATE PROCEDURE POR_COLECTORA.sp_alta_proveedor (
 @username varchar(250),
-@password varchar(250),
 @razonSocial nvarchar(250),
 @mail nvarchar(250),
 @telefono numeric(18,0),
@@ -894,8 +892,6 @@ CREATE PROCEDURE POR_COLECTORA.sp_alta_proveedor (
 )
 AS
 BEGIN
-
-	EXEC POR_COLECTORA.sp_alta_usuario @username, @password
 
 	declare @user_id numeric
 	set @user_id = (select Usuario_Id from Usuarios where Usuario_Nombre = @username)

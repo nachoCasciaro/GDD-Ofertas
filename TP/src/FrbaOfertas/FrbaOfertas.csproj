@@ -217,6 +217,18 @@
     <Compile Include="AbmProveedor\RegistroProveedor.Designer.cs">
       <DependentUpon>RegistroProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegistroClientesYProveedoresConUsuario\NuevoCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistroClientesYProveedoresConUsuario\NuevoCliente.Designer.cs">
+      <DependentUpon>NuevoCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistroClientesYProveedoresConUsuario\NuevoProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistroClientesYProveedoresConUsuario\NuevoProveedor.Designer.cs">
+      <DependentUpon>NuevoProveedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils.cs" />
     <Compile Include="Validaciones.cs" />
     <EmbeddedResource Include="AbmCliente\FiltroBMCliente.resx">
@@ -311,6 +323,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmProveedor\RegistroProveedor.resx">
       <DependentUpon>RegistroProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistroClientesYProveedoresConUsuario\NuevoCliente.resx">
+      <DependentUpon>NuevoCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistroClientesYProveedoresConUsuario\NuevoProveedor.resx">
+      <DependentUpon>NuevoProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

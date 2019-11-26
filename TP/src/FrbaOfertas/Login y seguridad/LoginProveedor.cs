@@ -137,8 +137,15 @@ namespace FrbaOfertas.Login
                     }
                     else
                     {
-                        MessageBox.Show("El usuario ingresado no es un proveedor");
-                        new LoginProveedor().Show();
+                        if (MessageBox.Show("El usuario ingresado no es un proveedor, desea registrarse y poder serlo?", "Confirma", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            this.Hide();
+                            new RegistroClientesYProveedoresConUsuario.NuevoProveedor(this, this.textBox1.Text).Show(); ;
+                        }
+                        else
+                        {
+                            new LoginProveedor().Show();
+                        }
                     }
                 }
                 else if (resultado == 2)
